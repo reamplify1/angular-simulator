@@ -18,7 +18,6 @@ interface IAdmin extends IUser {
 
 export const status: 'loading' | 'success' | 'error' = 'loading';
 
-
 // 5. Создать переменную textFormat, которая может быть только: 'uppercase', 'lowercase', 'capitalize'".
 
 type TextFormat = 'uppercase' | 'lowercase' | 'capitalize';
