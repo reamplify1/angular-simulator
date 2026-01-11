@@ -19,11 +19,23 @@ type Status = 'loading' | 'success' | 'error';
 
 export const status: Status = 'loading';
 
+enum StatusOptions {
+  loading = 'loading',
+  success = 'success',
+  error = 'error'
+}
+
 // 5. Создать переменную textFormat, которая может быть только: 'uppercase', 'lowercase', 'capitalize'".
 
 type TextFormat = 'uppercase' | 'lowercase' | 'capitalize';
 
 const textFormat: TextFormat = 'uppercase';
+
+enum FormatOptions {
+  uppercase = 'uppercase',
+  lowercase = 'lowercase',
+  capitalize = 'capitalize'
+}
 
 // 3. Создать функцию, которая принимает 2 числа и возвращает их сумму. Полностью типизировать параметры, значение, возвращаемое функцией.
 
@@ -33,16 +45,11 @@ function sum(a: number, b: number): number {
 
 // 8. Создать функцию, которая принимает строку и вариант,  как именно форматировать строку (задание №5) и на основе этого возвращает форматированную строку.
 
-const formatOptions = {
-  uppercase: 'uppercase',
-  lowercase: 'lowercase',
-  capitalize: 'capitalize',
-} as const;
 
-function formatText(str: string, format: TextFormat): string {
-  if (format === formatOptions.uppercase) {
+function formatText(str: string, format: FormatOptions): string {
+  if (format === FormatOptions.uppercase) {
     return str.toUpperCase();
-  } else if (format === formatOptions.lowercase) {
+  } else if (format === FormatOptions.lowercase) {
     return str.toLowerCase();
   } else {
     return str[0].toUpperCase() + str.slice(1).toLowerCase();
