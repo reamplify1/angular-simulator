@@ -25,4 +25,3 @@ export class Collection<T> {
     this.elements[index] = elem;
   }
 }
-

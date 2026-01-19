@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Colors } from '../enums/Color';
 import { Collection } from './collection';
 
+
 @Component({
   selector: 'app-root',
   imports: [],
