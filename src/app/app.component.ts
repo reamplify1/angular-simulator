@@ -10,7 +10,7 @@ import { Collection } from './collection';
 })
 
 export class AppComponent {
-  
+
   companyName: string = 'Румтибет';
 
   numberCollection: Collection<number> = new Collection<number>([1, 2, 3, 4, 5]);
@@ -21,8 +21,9 @@ export class AppComponent {
     this.saveNumberOfVisits();
   }
 
-  isMainColor(color: Color): boolean {
-    return color === Color.RED || color === Color.GREEN || color === Color.BLUE;
+  isPrimaryColor(color: Color): boolean {
+    const mainColors = [Color.RED, Color.GREEN, Color.BLUE];
+    return mainColors.includes(color);
   }
 
   saveLastVisit(): void {
