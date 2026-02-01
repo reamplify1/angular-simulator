@@ -1,23 +1,43 @@
-<header class="header fs-18">
-  <div class="navigation__wrapper container">
-    <div class="navigation__logo">
-      <img class="navigation__logo-image" src="images/logo-mountain.svg" alt="logo" />
-      <p class="navigation__logo-company-name">{{ companyName }}</p>
-    </div>
-    <div class="navigation">
-      <nav class="navigation__menu">
-        <a class="navigation__item">Главная</a>
-        <a class="navigation__item">Про гида</a>
-        <a class="navigation__item">Программа тура</a>
-        <a class="navigation__item">Стоимость</a>
-        <a class="navigation__item">Блог</a>
-        <a class="navigation__item">Контакты</a>
-      </nav>
-      <div class="navigation__button">
-        <button class="button button--green">Консультация</button>
+<!-- <div class="loading-overlay" [hidden]="!loading">
+  <img src="./images/svg/loading.svg" alt="">
+</div> -->
+
+<div class="header-hero-wrapper">
+  <header class="header fs-18">
+    <div class="navigation__wrapper container">
+      <div class="navigation__logo">
+        <img class="navigation__logo-image" src="images/logo-mountain.svg" alt="logo" />
+        <p class="navigation__logo-company-name">{{ companyName }}</p>
+      </div>
+      <div class="navigation">
+        <nav class="navigation__menu">
+          <a class="navigation__item">Главная</a>
+          <a class="navigation__item">Про гида</a>
+          <a class="navigation__item">Программа тура</a>
+          <a class="navigation__item">Стоимость</a>
+          <a class="navigation__item">Блог</a>
+          <a class="navigation__item">Контакты</a>
+        </nav>
+        <div class="navigation__button">
+          <button class="button button--consult">Консультация</button>
+        </div>
       </div>
     </div>
-  </div>
+
+    <div class="date-or-clicker-container container">
+      <span>{{ displayTime ? (dateNow | date:'HH:mm:ss') : clickerCounter}}</span>
+      <div class="clicker-buttons" [hidden]="displayTime">
+        <button class="clicker-btn" (click)="increaseCounter()">+</button>
+        <button class="clicker-btn" (click)="decreaseCounter()" [disabled]="clickerCounter === 0">-</button>
+      </div>
+      <button class="button button--consult"
+        (click)="toggleDateOrClick()">{{ displayTime ? 'показать кликер' : 'показать дату' }}</button>
+    </div>
+
+
+
+  </header>
+
 
   <div class="hero__wrapper">
     <div class="hero__block">
@@ -28,17 +48,27 @@
 
       <div class="hero__filters-wrapper container">
         <div class="hero__filters">
+          <!-- <form class="filters__form" #form="ngForm"> -->
           <div class="hero__filters-item">
             <div class="hero__filters-title fs-16">
-              <span>Локация для тура</span>
+              <select class="location__dropdown" name="location" required [(ngModel)]="location">
+                <option value="" disabled selected hidden>Локация для тура</option>
+                <option class="location__dropdown-option">Boston</option>
+                <option class="location__dropdown-option">London</option>
+                <option class="location__dropdown-option">Винница</option>
+              </select>
             </div>
+            <!-- <p>Вы выбрали: {{ location }}</p> -->
             <div class="hero__filters-description">
               <span>выберите из списка</span>
             </div>
           </div>
           <div class="hero__filters-item">
             <div class="hero__filters-title fs-16">
-              <span>Дата похода</span>
+              <div class="cta-input-container">
+                <input class="cta-input" name="date" placeholder="Дата похода" [(ngModel)]="date" required />
+              </div>
+
             </div>
             <div class="hero__filters-description">
               <span>укажите диапозон</span>
@@ -46,18 +76,126 @@
           </div>
           <div class="hero__filters-item">
             <div class="hero__filters-title fs-16">
-              <span>Участники</span>
+              <select class="location__dropdown" name="participants" required [(ngModel)]="participants">
+                <option value="" disabled selected hidden>Участники</option>
+                <option value="4" class="location__dropdown-option">4</option>
+                <option value="5" class="location__dropdown-option">5</option>
+                <option value="6+" class="location__dropdown-option">6 и более</option>
+              </select>
             </div>
             <div class="hero__filters-description">
-              <span>минимум 4 человека</span>
+              <span>выберите из списка</span>
             </div>
           </div>
           <div class="hero__button-container">
-            <button class="hero__button fs-16">Найти программу</button>
+            <button class="hero__button fs-16" [disabled]="isDisabledBtn()">Найти программу</button>
+            <!-- <button class="hero__button fs-16" [disabled]="form.invalid">Найти программу</button> -->
           </div>
+          <!-- </form> -->
         </div>
-      </div>
 
+      </div>
+      <div class="live-input-container container">
+        <input class="live-input" type="text" placeholder="type 'Hello'" [(ngModel)]="liveInputText">
+        <span class="live-output">{{ liveInputText }}</span>
+      </div>
     </div>
   </div>
-</header>
+
+</div>
+
+
+
+<section class="about-tour">
+  <div class="about-tour__img-container">
+    <img class="about-tour__image about-tour__image--main" src="images/about-tour-img2.png" alt="tour picture">
+    <div class="about-tour__image--overlay">
+      <img class="about-tour__image about-tour__image--secondary" src="images/about-tour-img1.png" alt="tour picture">
+      <img class="about-tour__play-icon" src="images/svg/play-icon.svg" alt="tour picture">
+    </div>
+  </div>
+  <div class="about-tour__info">
+    <span class="section-label">о нашем походе</span>
+    <h2 class="section-title fs-32">Исследуйте все горные массивы мира вместе с нами</h2>
+    <p class="section-text fs-18">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух
+      тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из
+      самых странных слов в Lorem Ipsum, "consectetur"и занялся его поисками в классической латинской литературе.</p>
+    <button class="button--green">Программа тура</button>
+  </div>
+</section>
+
+<section class="programs-wrapper">
+  <div class="programs container">
+    <div class="programs__info">
+      <span class="programs__info-label section-label">наше предложение</span>
+      <h2 class="programs__info-title section-title fs-32">Лучшие программы для тебя</h2>
+      <p class="programs__info-text section-text fs-18">Его корни уходят в один фрагмент классической латыни 45 года
+        н.э., то есть более
+        двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.</p>
+      <div class="programs__info-advantages">
+        <!-- <div class="programs__info-advantages-item"> -->
+        <!-- <div class="programs__info-advantages-item-img"> -->
+        <!-- <img src="./images/svg/info-icon-exp.svg" alt=""> -->
+        <!-- </div> -->
+        <div class="programs__info-advantages-list fs-18">
+
+          @for (item of advantages; track item.id) {
+          <div class="programs__info-advantages-item">
+            <div class="programs__info-advantages-item-img">
+              <img [src]="item.icon" [alt]="item.title">
+            </div>
+
+            <div class="programs__info-advantages-item-description fs-18">
+              <span class="programs__info-advantages-item-description-title">
+                {{ item.title }}
+              </span>
+
+              <p class="programs__info-advantages-item-description-text">
+                {{ item.text }}
+              </p>
+            </div>
+          </div>
+          }
+        </div>
+
+        <!-- <div class="programs__info-advantages-item-description fs-18">
+            <span class="programs__info-advantages-item-description-title">Опытный гид</span>
+            <p class="programs__info-advantages-item-description-text">Для современного мира базовый вектор развития
+              предполагает независимые способы реализации соответствующих условий активизации.</p>
+          </div>
+        </div>
+
+        <div class="programs__info-advantages-item">
+          <div class="programs__info-advantages-item-img">
+            <img src="./images/svg/info-icon-security.svg" alt="">
+          </div>
+          <div class="programs__info-advantages-item-description fs-18">
+            <span class="programs__info-advantages-item-description-title">Безопасный поход</span>
+            <p class="programs__info-advantages-item-description-text">Для современного мира базовый вектор развития
+              предполагает независимые способы реализации соответствующих условий активизации.</p>
+          </div>
+        </div>
+
+        <div class="programs__info-advantages-item">
+          <div class="programs__info-advantages-item-img">
+            <img src="./images/svg/info-icon-prices.svg" alt="">
+          </div>
+          <div class="programs__info-advantages-item-description fs-18">
+            <span class="programs__info-advantages-item-description-title">Лояльные цены</span>
+            <p class="programs__info-advantages-item-description-text">Для современного мира базовый вектор развития
+              предполагает независимые способы реализации соответствующих условий активизации.</p>
+          </div>
+        </div> -->
+      </div>
+      <button class="button button--green">Стоимость программ</button>
+
+    </div>
+    <!-- </div> -->
+    <div class="programs__images">
+      <img src="images/info-program-img1.png">
+      <img src="images/info-program-img2.png">
+      <img src="images/info-program-img3.png">
+      <img src="images/info-program-img4.png">
+    </div>
+  </div>
+</section>

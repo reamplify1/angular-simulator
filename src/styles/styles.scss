@@ -15,6 +15,62 @@
   --black-color: #000000;
   --white-color: #ffffff;
   --secondary-color: #1a3e3e;
+  --yellow-color: #F2BE22;
+  --light-grey-background-color: #F3F5F4
+}
+
+.container {
+  max-width: 1180px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.button {
+  font-weight: 600;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+
+
+}
+
+
+.button--green {
+  padding: 16px 36px;
+  font-weight: 600;
+  font-size: 16px;
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 8px;
+  color: var(--white-color);
+  cursor: pointer;
+  width: fit-content;
+}
+
+.section-label {
+  display: block;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: var(--yellow-color);
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 40px;
+  margin-top: 0px;
+}
+
+.section-text {
+  font-weight: 400;
+  line-height: 1.5;
+  margin-bottom: 40px;
+}
+
+.fs-32 {
+  font-size: 32px;
 }
 
 .fs-18 {
