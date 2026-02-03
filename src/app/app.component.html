@@ -21,7 +21,7 @@
           <a class="navigation__item">Контакты</a>
         </nav>
         <div class="navigation__button">
-          <button class="button button--small">Консультация</button>
+          <button id="button-consult" class="button button--small">Консультация</button>
         </div>
       </div>
     </div>
@@ -29,10 +29,10 @@
     <div class="date-or-clicker-container container">
       <span>{{ displayTime ? (dateNow | date:'HH:mm:ss') : clickerCounter}}</span>
       <div class="clicker-buttons" [hidden]="displayTime">
-        <button class="clicker-btn" (click)="increaseCounter()">+</button>
-        <button class="clicker-btn" (click)="decreaseCounter()" [disabled]="clickerCounter === 0">-</button>
+        <button id="button-counter-increase" class="clicker-btn" (click)="increaseCounter()">+</button>
+        <button id="button-counter-decrease" class="clicker-btn" (click)="decreaseCounter()" [disabled]="clickerCounter === 0">-</button>
       </div>
-      <button class="button button--small"
+      <button id="button-header-toggle" class="button button--small"
         (click)="toggleDateOrClick()">{{ displayTime ? 'показать кликер' : 'показать дату' }}
       </button>
     </div>
@@ -49,7 +49,7 @@
         <div class="hero__filters">
           <div class="hero__filters-item">
             <div class="hero__filters-title fs-16">
-              <select class="location__dropdown" name="location" required [(ngModel)]="location">
+              <select id="hero-select-location" class="location__dropdown" name="location" required [(ngModel)]="location">
                 <option value="" disabled selected hidden>Локация для тура</option>
                 @for (location of locationsToHike; track location.id){
                   <option class="location__dropdown-option">{{ location.name }}</option>
@@ -63,7 +63,7 @@
           <div class="hero__filters-item">
             <div class="hero__filters-title fs-16">
               <div class="date-input-container">
-                <input type="date" class="date-input"[class.date-input--transparent]="!date" name="date" placeholder="Дата похода" [(ngModel)]="date" required />
+                <input id="hero-date-input" type="date" class="date-input"[class.date-input--transparent]="!date" name="date" placeholder="Дата похода" [(ngModel)]="date" required />
                 @if (!date) {
                   <span class="date-placeholder-cover" >Дата похода</span>
                 }
@@ -75,7 +75,7 @@
           </div>
           <div class="hero__filters-item">
             <div class="hero__filters-title fs-16">
-              <select class="location__dropdown" name="participants" required [(ngModel)]="participants">
+              <select id="hero-select-participants" class="location__dropdown" name="participants" required [(ngModel)]="participants">
                 <option value="" disabled selected hidden>Участники</option>
                 <option value="4" class="location__dropdown-option">4</option>
                 <option value="5" class="location__dropdown-option">5</option>
@@ -87,13 +87,13 @@
             </div>
           </div>
           <div class="hero__button-container">
-            <button class="hero__button fs-16" [disabled]="isDisabledBtn()">Найти программу</button>
+            <button id="hero-button-search-program" class="hero__button fs-16" [disabled]="isDisabledBtn()">Найти программу</button>
           </div>
         </div>
 
       </div>
       <div class="live-input-container container">
-        <input class="live-input" type="text" placeholder="type 'Hello'" [(ngModel)]="liveInputText">
+        <input id="hero-live-input" class="live-input" type="text" placeholder="type 'Hello'" [(ngModel)]="liveInputText">
         <span class="live-output">{{ liveInputText }}</span>
       </div>
     </div>
@@ -114,7 +114,7 @@
     <p class="section-text fs-18">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух
       тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из
       самых странных слов в Lorem Ipsum, "consectetur"и занялся его поисками в классической латинской литературе.</p>
-    <button class="button--green">Программа тура</button>
+    <button id="about-tour-program-button" class="button--green">Программа тура</button>
   </div>
 </section>
 
@@ -146,7 +146,7 @@
           }
         </div>
       </div>
-      <button class="button button--green">Стоимость программ</button>
+      <button id="programs-price-button" class="button button--green">Стоимость программ</button>
     </div>
     <div class="programs__images">
       <img src="images/info-program-img1.png">

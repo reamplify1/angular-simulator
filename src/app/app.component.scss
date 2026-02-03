@@ -281,15 +281,28 @@
   pointer-events: none;
 }
 
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+
+
 .hero__button {
+  position: relative;
+  overflow: hidden;
   width: rem(213);
   height: rem(51);
   border-radius: rem(9);
   border: none;
   font-weight: 700;
-  background-color: #6FA0A0;
   color: var(--white-color);
   cursor: pointer;
+  &:not(:disabled) {
+    animation: pulse 2s infinite ease-in-out;
+    background: linear-gradient(135deg, #6FA0A0 0%, #4A7A7A 100%);
+  }
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
