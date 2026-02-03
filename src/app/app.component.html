@@ -1,6 +1,8 @@
-<!-- <div class="loading-overlay" [hidden]="!loading">
-  <img src="./images/svg/loading.svg" alt="">
-</div> -->
+@if (isLoading) {
+  <div class="loading-overlay" alt="Загрузка">
+    <img src="./images/svg/loading.svg" alt="загрузка">
+  </div>
+}
 
 <div class="header-hero-wrapper">
   <header class="header fs-18">
@@ -19,7 +21,7 @@
           <a class="navigation__item">Контакты</a>
         </nav>
         <div class="navigation__button">
-          <button class="button button--consult">Консультация</button>
+          <button class="button button--small">Консультация</button>
         </div>
       </div>
     </div>
@@ -30,14 +32,11 @@
         <button class="clicker-btn" (click)="increaseCounter()">+</button>
         <button class="clicker-btn" (click)="decreaseCounter()" [disabled]="clickerCounter === 0">-</button>
       </div>
-      <button class="button button--consult"
-        (click)="toggleDateOrClick()">{{ displayTime ? 'показать кликер' : 'показать дату' }}</button>
+      <button class="button button--small"
+        (click)="toggleDateOrClick()">{{ displayTime ? 'показать кликер' : 'показать дату' }}
+      </button>
     </div>
-
-
-
   </header>
-
 
   <div class="hero__wrapper">
     <div class="hero__block">
@@ -48,30 +47,30 @@
 
       <div class="hero__filters-wrapper container">
         <div class="hero__filters">
-          <!-- <form class="filters__form" #form="ngForm"> -->
           <div class="hero__filters-item">
             <div class="hero__filters-title fs-16">
               <select class="location__dropdown" name="location" required [(ngModel)]="location">
                 <option value="" disabled selected hidden>Локация для тура</option>
-                <option class="location__dropdown-option">Boston</option>
-                <option class="location__dropdown-option">London</option>
-                <option class="location__dropdown-option">Винница</option>
+                @for (location of locationsToHike; track location.id){
+                  <option class="location__dropdown-option">{{ location.name }}</option>
+                }
               </select>
             </div>
-            <!-- <p>Вы выбрали: {{ location }}</p> -->
             <div class="hero__filters-description">
               <span>выберите из списка</span>
             </div>
           </div>
           <div class="hero__filters-item">
             <div class="hero__filters-title fs-16">
-              <div class="cta-input-container">
-                <input class="cta-input" name="date" placeholder="Дата похода" [(ngModel)]="date" required />
+              <div class="date-input-container">
+                <input type="date" class="date-input"[class.date-input--transparent]="!date" name="date" placeholder="Дата похода" [(ngModel)]="date" required />
+                @if (!date) {
+                  <span class="date-placeholder-cover" >Дата похода</span>
+                }
               </div>
-
             </div>
             <div class="hero__filters-description">
-              <span>укажите диапозон</span>
+              <span>укажите диапазон</span>
             </div>
           </div>
           <div class="hero__filters-item">
@@ -89,9 +88,7 @@
           </div>
           <div class="hero__button-container">
             <button class="hero__button fs-16" [disabled]="isDisabledBtn()">Найти программу</button>
-            <!-- <button class="hero__button fs-16" [disabled]="form.invalid">Найти программу</button> -->
           </div>
-          <!-- </form> -->
         </div>
 
       </div>
@@ -101,10 +98,7 @@
       </div>
     </div>
   </div>
-
 </div>
-
-
 
 <section class="about-tour">
   <div class="about-tour__img-container">
@@ -133,10 +127,6 @@
         н.э., то есть более
         двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.</p>
       <div class="programs__info-advantages">
-        <!-- <div class="programs__info-advantages-item"> -->
-        <!-- <div class="programs__info-advantages-item-img"> -->
-        <!-- <img src="./images/svg/info-icon-exp.svg" alt=""> -->
-        <!-- </div> -->
         <div class="programs__info-advantages-list fs-18">
 
           @for (item of advantages; track item.id) {
@@ -144,12 +134,10 @@
             <div class="programs__info-advantages-item-img">
               <img [src]="item.icon" [alt]="item.title">
             </div>
-
             <div class="programs__info-advantages-item-description fs-18">
               <span class="programs__info-advantages-item-description-title">
                 {{ item.title }}
               </span>
-
               <p class="programs__info-advantages-item-description-text">
                 {{ item.text }}
               </p>
@@ -157,40 +145,9 @@
           </div>
           }
         </div>
-
-        <!-- <div class="programs__info-advantages-item-description fs-18">
-            <span class="programs__info-advantages-item-description-title">Опытный гид</span>
-            <p class="programs__info-advantages-item-description-text">Для современного мира базовый вектор развития
-              предполагает независимые способы реализации соответствующих условий активизации.</p>
-          </div>
-        </div>
-
-        <div class="programs__info-advantages-item">
-          <div class="programs__info-advantages-item-img">
-            <img src="./images/svg/info-icon-security.svg" alt="">
-          </div>
-          <div class="programs__info-advantages-item-description fs-18">
-            <span class="programs__info-advantages-item-description-title">Безопасный поход</span>
-            <p class="programs__info-advantages-item-description-text">Для современного мира базовый вектор развития
-              предполагает независимые способы реализации соответствующих условий активизации.</p>
-          </div>
-        </div>
-
-        <div class="programs__info-advantages-item">
-          <div class="programs__info-advantages-item-img">
-            <img src="./images/svg/info-icon-prices.svg" alt="">
-          </div>
-          <div class="programs__info-advantages-item-description fs-18">
-            <span class="programs__info-advantages-item-description-title">Лояльные цены</span>
-            <p class="programs__info-advantages-item-description-text">Для современного мира базовый вектор развития
-              предполагает независимые способы реализации соответствующих условий активизации.</p>
-          </div>
-        </div> -->
       </div>
       <button class="button button--green">Стоимость программ</button>
-
     </div>
-    <!-- </div> -->
     <div class="programs__images">
       <img src="images/info-program-img1.png">
       <img src="images/info-program-img2.png">

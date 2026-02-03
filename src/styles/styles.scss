@@ -1,5 +1,11 @@
 @use '../assets/fonts';
 
+@use "sass:math";
+
+@function rem($px) {
+  @return math.div($px, 16) * 1rem;
+}
+
 * {
   font-family: 'Nunito Sans';
   font-style: normal;
@@ -20,32 +26,49 @@
 }
 
 .container {
-  max-width: 1180px;
+  max-width: rem(1180);
   width: 100%;
   margin: 0 auto;
 }
 
 .button {
   font-weight: 600;
-  font-size: 16px;
-  padding: 12px 24px;
+  font-size: rem(16);
+  padding: rem(12) rem(24);
   border: none;
-  border-radius: 8px;
+  border-radius: rem(8);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 
+  &:hover {
+    transform: translateY(rem(-4));
+    box-shadow: 0 rem(10) rem(20) rgba(0, 0, 0, 0.15);
+  }
 
+  &:active {
+    transform: translateY(rem(-1));
+  }
 }
 
-
 .button--green {
-  padding: 16px 36px;
+  padding: rem(16) rem(36);
   font-weight: 600;
-  font-size: 16px;
+  font-size: rem(16);
   background-color: var(--secondary-color);
   border: none;
-  border-radius: 8px;
+  border-radius: rem(8);
   color: var(--white-color);
   cursor: pointer;
   width: fit-content;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(rem(-4));
+    box-shadow: 0 rem(10) rem(20) rgba(0, 0, 0, 0.15);
+  }
+
+  &:active {
+    transform: translateY(rem(-1));
+  }
 }
 
 .section-label {
@@ -53,30 +76,30 @@
   text-transform: uppercase;
   font-weight: 400;
   color: var(--yellow-color);
-  margin-bottom: 8px;
+  margin-bottom: rem(8);
 }
 
 .section-title {
   font-weight: 800;
   line-height: 1.2;
-  margin-bottom: 40px;
+  margin-bottom: rem(40);
   margin-top: 0px;
 }
 
 .section-text {
   font-weight: 400;
   line-height: 1.5;
-  margin-bottom: 40px;
+  margin-bottom: rem(40);
 }
 
 .fs-32 {
-  font-size: 32px;
+  font-size: rem(32);
 }
 
 .fs-18 {
-  font-size: 18px;
+  font-size: rem(18);
 }
 
 .fs-16 {
-  font-size: 16px;
+  font-size: rem(16);
 }
