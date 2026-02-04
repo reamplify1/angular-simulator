@@ -102,10 +102,10 @@
 
 <section class="about-tour">
   <div class="about-tour__img-container">
-    <img class="about-tour__image about-tour__image--main" src="images/about-tour-img2.png" alt="tour picture">
+    <img id="about-tour__image--main" class="about-tour__image about-tour__image--main" src="images/about-tour-img2.png" alt="tour picture">
     <div class="about-tour__image--overlay">
-      <img class="about-tour__image about-tour__image--secondary" src="images/about-tour-img1.png" alt="tour picture">
-      <img class="about-tour__play-icon" src="images/svg/play-icon.svg" alt="tour picture">
+      <img id="about-tour__image--secondary" class="about-tour__image about-tour__image--secondary" src="images/about-tour-img1.png" alt="tour picture">
+      <img id="about-tour__play-icon" class="about-tour__play-icon" src="images/svg/play-icon.svg" alt="tour picture">
     </div>
   </div>
   <div class="about-tour__info">
@@ -130,7 +130,7 @@
         <div class="programs__info-advantages-list fs-18">
 
           @for (item of advantages; track item.id) {
-          <div class="programs__info-advantages-item">
+          <div [id]="'advantage-item-' + item.id" class="programs__info-advantages-item">
             <div class="programs__info-advantages-item-img">
               <img [src]="item.icon" [alt]="item.title">
             </div>
