@@ -54,7 +54,6 @@
   font-weight: 600;
 }
 
-
 .button--small {
   color: var(--white-color);
   background-color: var(--secondary-color);
@@ -282,12 +281,18 @@
 }
 
 @keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.03); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.03);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
-
-
 
 .hero__button {
   position: relative;
@@ -299,19 +304,38 @@
   font-weight: 700;
   color: var(--white-color);
   cursor: pointer;
+  z-index: 1;
+  border: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #138173 0%, #1A3E3E 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: -1;
+  }
+
   &:not(:disabled) {
     animation: pulse 2s infinite ease-in-out;
-    background: linear-gradient(135deg, #6FA0A0 0%, #4A7A7A 100%);
-  }
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: transparent;
+    &::before {
+      opacity: 1;
+    }
 
-  &:hover {
-    transform: translateY(rem(-4));
-    box-shadow: 0 rem(10) rem(20) rgba(0, 0, 0, 0.15);
-  }
+    &:hover {
+      transform: translateY(rem(-4));
+      box-shadow: 0 rem(10) rem(20) rgba(0, 0, 0, 0.15);
+    }
 
-  &:active {
-    transform: translateY(rem(-1));
+    &:active {
+      transform: translateY(rem(-1));
+    }
   }
 
   &:disabled {
@@ -336,7 +360,6 @@
 .live-input-container {
   display: flex;
 }
-
 
 .live-input {
   border-radius: rem(8);
@@ -488,9 +511,10 @@
     display: flex;
     border-radius: rem(8);
     transition: all 0.3s ease;
+
     &-description-text {
-    transition: all 0.5s ease;
-  }
+      transition: all 0.5s ease;
+    }
 
     &:hover {
       background-color: #6FA0A0;
