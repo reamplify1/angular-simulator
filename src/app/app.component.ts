@@ -62,6 +62,10 @@ export class AppComponent {
       }
     }
 
+    onPriceProgram() {
+      console.log('price is 199$');
+    }
+
     isPrimaryColor(color: Color): boolean {
       const mainColors: Color[] = [Color.RED, Color.GREEN, Color.BLUE];
       return mainColors.includes(color);
