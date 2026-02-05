@@ -3,10 +3,10 @@ import { Color } from '../enums/Color';
 import { Collection } from './collection';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { IAdvantage } from './models/advantage.model';
-import { advantagesData } from './data/advantages.data';
-import { ILocation } from './models/location.model';
-import { locationsToHike } from './data/location.data';
+import { IAdvantage } from './interfaces/IAdvantage';
+import { advantages } from './data/advantages';
+import { ILocation } from './interfaces/ILocation';
+import { hikeLocations } from './data/locations';
 
 @Component({
   selector: 'app-root',
@@ -22,14 +22,16 @@ export class AppComponent {
   participants: string = '';
   liveInputText = '';
   dateNow: Date = new Date();
-  displayTime: boolean = true;
+  isDisplayTime: boolean = true;
   clickerCounter: number = 0;
   isLoading: boolean = true;
-  advantages: IAdvantage[] = advantagesData;
-  locationsToHike: ILocation[] = locationsToHike
+  advantages: IAdvantage[] = advantages;
+  hikeLocations: ILocation[] = hikeLocations;
+  readonly iconPath: string = './images/svg/';
 
-  numberCollection: Collection < number > = new Collection < number > ([1, 2, 3, 4, 5]);
-  stringCollection: Collection < string > = new Collection < string > (['Boston', 'London', 'Винница']);
+
+  numberCollection: Collection <number> = new Collection <number> ([1, 2, 3, 4, 5]);
+  stringCollection: Collection <string> = new Collection <string> (['Boston', 'London', 'Винница']);
 
   constructor() {
     this.saveLastVisit();
@@ -37,19 +39,19 @@ export class AppComponent {
 
     setTimeout(() => {
       this.isLoading = false;
-    }, 2000)
+    }, 2000);
 
     setInterval(() => {
       this.dateNow = new Date();
     }, 1000);
     }
 
-    toggleDateOrClick():void {
-      this.displayTime = !this.displayTime
+    toggleDate():void {
+      this.isDisplayTime = !this.isDisplayTime;
     }
 
-    isDisabledBtn(): boolean {
-      return !this.location || !this.date || !this.participants
+    isFormValid(): boolean {
+      return Boolean(this.location && this.date && this.participants);
     }
 
     increaseCounter(): void {
@@ -62,8 +64,17 @@ export class AppComponent {
       }
     }
 
+    get formattedTime(): string {
+      return new Date().toLocaleTimeString('ru-RU', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      });
+    }
+
     onPriceProgram() {
-      console.log('price is 199$');
+      alert('price is 199$')
     }
 
     isPrimaryColor(color: Color): boolean {

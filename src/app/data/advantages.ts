@@ -1,20 +1,20 @@
-import { IAdvantage } from "../models/advantage.model";
+import { IAdvantage } from "../interfaces/IAdvantage";
 
- export const advantagesData: IAdvantage[] = [{
+ export const advantages: IAdvantage[] = [{
       id: 1,
-      icon: './images/svg/info-icon-exp.svg',
+      icon: 'info-exp-icon',
       title: 'Опытный гид',
       text: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.'
     },
     {
       id: 2,
-      icon: './images/svg/info-icon-security.svg',
+      icon: 'info-security-icon',
       title: 'Безопасный поход',
       text: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.'
     },
     {
       id: 3,
-      icon: './images/svg/info-icon-prices.svg',
+      icon: 'info-prices-icon',
       title: 'Лояльные цены',
       text: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.'
     }

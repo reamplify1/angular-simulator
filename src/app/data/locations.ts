@@ -1,4 +1,6 @@
-export const locationsToHike = [
+import { ILocation } from "../interfaces/ILocation"
+
+export const hikeLocations: ILocation[] = [
   {
     id: 1,
     name: 'Boston'

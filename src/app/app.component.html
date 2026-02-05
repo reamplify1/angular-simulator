@@ -1,6 +1,6 @@
 @if (isLoading) {
   <div class="loading-overlay" alt="Загрузка">
-    <img src="./images/svg/loading.svg" alt="загрузка">
+    <img src="./images/svg/loading-icon.svg" alt="загрузка">
   </div>
 }
 
@@ -13,12 +13,12 @@
       </div>
       <div class="navigation">
         <nav class="navigation__menu">
-          <a class="navigation__item">Главная</a>
-          <a class="navigation__item">Про гида</a>
-          <a class="navigation__item">Программа тура</a>
-          <a class="navigation__item">Стоимость</a>
-          <a class="navigation__item">Блог</a>
-          <a class="navigation__item">Контакты</a>
+          <a id="main-page" class="navigation__item">Главная</a>
+          <a id="guide-page" class="navigation__item">Про гида</a>
+          <a id="program-page" class="navigation__item">Программа тура</a>
+          <a id="price-page" class="navigation__item">Стоимость</a>
+          <a id="blog-page" class="navigation__item">Блог</a>
+          <a id="contact-page" class="navigation__item">Контакты</a>
         </nav>
         <div class="navigation__button">
           <button id="button-consult" class="button button--small">Консультация</button>
@@ -26,14 +26,14 @@
       </div>
     </div>
 
-    <div class="date-or-clicker-container container">
-      <span>{{ displayTime ? (dateNow | date:'HH:mm:ss') : clickerCounter}}</span>
-      <div class="clicker-buttons" [hidden]="displayTime">
+    <div class="date-clicker-container container">
+      <span>{{ isDisplayTime ? formattedTime : clickerCounter}}</span>
+      <div class="clicker-buttons" [hidden]="isDisplayTime">
         <button id="button-counter-increase" class="clicker-btn" (click)="increaseCounter()">+</button>
         <button id="button-counter-decrease" class="clicker-btn" (click)="decreaseCounter()" [disabled]="clickerCounter === 0">-</button>
       </div>
       <button id="button-header-toggle" class="button button--small"
-        (click)="toggleDateOrClick()">{{ displayTime ? 'показать кликер' : 'показать дату' }}
+        (click)="toggleDate()">{{ isDisplayTime ? 'показать кликер' : 'показать дату' }}
       </button>
     </div>
   </header>
@@ -51,7 +51,7 @@
             <div class="hero__filters-title fs-16">
               <select id="hero-select-location" class="location__dropdown" name="location" required [(ngModel)]="location">
                 <option value="" disabled selected hidden>Локация для тура</option>
-                @for (location of locationsToHike; track location.id){
+                @for (location of hikeLocations; track location.id) {
                   <option class="location__dropdown-option">{{ location.name }}</option>
                 }
               </select>
@@ -63,7 +63,7 @@
           <div class="hero__filters-item">
             <div class="hero__filters-title fs-16">
               <div class="date-input-container">
-                <input id="hero-date-input" type="date" class="date-input"[class.date-input--transparent]="!date" name="date" placeholder="Дата похода" [(ngModel)]="date" required />
+                <input id="hero-date-input" type="date" class="date-input" [class.date-input--transparent]="!date" name="date" placeholder="Дата похода" [(ngModel)]="date" required />
                 @if (!date) {
                   <span class="date-placeholder-cover" >Дата похода</span>
                 }
@@ -87,13 +87,13 @@
             </div>
           </div>
           <div class="hero__button-container">
-            <button id="hero-button-search-program" class="hero__button fs-16" [disabled]="isDisabledBtn()">Найти программу</button>
+            <button id="hero-button-search-program" class="hero__button fs-16" (click)="onPriceProgram()" [disabled]="!isFormValid()">Найти программу</button>
           </div>
         </div>
 
       </div>
       <div class="live-input-container container">
-        <input id="hero-live-input" class="live-input" type="text" placeholder="type 'Hello'" [(ngModel)]="liveInputText">
+        <input id="hero-live-input" class="live-input" maxlength="45" type="text" placeholder="type 'Hello'" [(ngModel)]="liveInputText">
         <span class="live-output">{{ liveInputText }}</span>
       </div>
     </div>
@@ -102,9 +102,9 @@
 
 <section class="about-tour">
   <div class="about-tour__img-container">
-    <img id="about-tour__image--main" class="about-tour__image about-tour__image--main" src="images/about-tour-img2.png" alt="tour picture">
+    <img id="about-tour__image--main" class="about-tour__image about-tour__image--main" src="images/about-tour2.png" alt="tour picture">
     <div class="about-tour__image--overlay">
-      <img id="about-tour__image--secondary" class="about-tour__image about-tour__image--secondary" src="images/about-tour-img1.png" alt="tour picture">
+      <img id="about-tour__image--secondary" class="about-tour__image about-tour__image--secondary" src="images/about-tour1.png" alt="tour picture">
       <img id="about-tour__play-icon" class="about-tour__play-icon" src="images/svg/play-icon.svg" alt="tour picture">
     </div>
   </div>
@@ -129,24 +129,24 @@
       <div class="programs__info-advantages">
         <div class="programs__info-advantages-list fs-18">
 
-          @for (item of advantages; track item.id) {
-          <div [id]="'advantage-item-' + item.id" class="programs__info-advantages-item">
+          @for (advantage of advantages; track advantage.id) {
+          <div [id]="'advantage-item-' + advantage.id" class="programs__info-advantages-item">
             <div class="programs__info-advantages-item-img">
-              <img [src]="item.icon" [alt]="item.title">
+              <img [src]="iconPath + advantage.icon + '.svg'" [alt]="advantage.title">
             </div>
             <div class="programs__info-advantages-item-description fs-18">
               <span class="programs__info-advantages-item-description-title">
-                {{ item.title }}
+                {{ advantage.title }}
               </span>
               <p class="programs__info-advantages-item-description-text">
-                {{ item.text }}
+                {{ advantage.text }}
               </p>
             </div>
           </div>
           }
         </div>
       </div>
-      <button id="programs-price-button" class="button button--green" (click)="onPriceProgram()">Стоимость программ</button>
+      <button id="programs-price-button" class="button button--green">Стоимость программ</button>
     </div>
     <div class="programs__images">
       <img src="images/info-program-img1.png" alt="a cup of tea in mountains">
