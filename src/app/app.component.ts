@@ -73,7 +73,7 @@ export class AppComponent {
       });
     }
 
-    onPriceProgram() {
+    onPriceProgram():void {
       alert('price is 199$')
     }
 
