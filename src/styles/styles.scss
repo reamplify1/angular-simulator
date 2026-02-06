@@ -1,10 +1,6 @@
 @use '../assets/fonts';
 
-@use "sass:math";
-
-@function rem($px) {
-  @return math.div($px, 16) * 1rem;
-}
+@use '../assets/functions' as *;
 
 * {
   font-family: 'Nunito Sans';

@@ -21,7 +21,7 @@ export class AppComponent {
   date: string = '';
   participants: string = '';
   liveInputText = '';
-  dateNow: Date = new Date();
+  timeNow: string = '';
   isDisplayTime: boolean = true;
   clickerCounter: number = 0;
   isLoading: boolean = true;
@@ -42,8 +42,8 @@ export class AppComponent {
     }, 2000);
 
     setInterval(() => {
-      this.dateNow = new Date();
-    }, 1000);
+      this.updateTimer();
+      }, 1000);
     }
 
     toggleDate():void {
@@ -64,17 +64,12 @@ export class AppComponent {
       }
     }
 
-    get formattedTime(): string {
-      return new Date().toLocaleTimeString('ru-RU', {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: false
-      });
+    updateTimer(): void {
+      this.timeNow = new Date().toLocaleString();
     }
 
-    onPriceProgram():void {
-      alert('price is 199$')
+    showProgramPrice():void {
+      alert('price is 199$');
     }
 
     isPrimaryColor(color: Color): boolean {

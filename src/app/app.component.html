@@ -27,26 +27,29 @@
     </div>
 
     <div class="date-clicker-container container">
-      <span>{{ isDisplayTime ? formattedTime : clickerCounter}}</span>
+      <span>{{ isDisplayTime ? timeNow: clickerCounter}}</span>
       <div class="clicker-buttons" [hidden]="isDisplayTime">
         <button
           id="button-counter-increase"
           class="clicker-btn"
-          (click)="increaseCounter()">
+          (click)="increaseCounter()"
+        >
           +
         </button>
         <button
           id="button-counter-decrease"
           class="clicker-btn"
           (click)="decreaseCounter()"
-          [disabled]="clickerCounter === 0">
+          [disabled]="clickerCounter === 0"
+        >
           -
         </button>
       </div>
       <button
         id="button-header-toggle"
         class="button button--small"
-        (click)="toggleDate()">
+        (click)="toggleDate()"
+      >
         {{ isDisplayTime ? 'показать кликер' : 'показать дату' }}
       </button>
     </div>
@@ -68,7 +71,8 @@
                 class="location__dropdown"
                 name="location"
                 required
-                [(ngModel)]="location">
+                [(ngModel)]="location"
+              >
                 <option value="" disabled selected hidden>Локация для тура</option>
                 @for (location of hikeLocations; track location.id) {
                   <option class="location__dropdown-option">{{ location.name }}</option>
@@ -87,9 +91,11 @@
                   type="date"
                   class="date-input"
                   [class.date-input--transparent]="!date"
-                  name="date" placeholder="Дата похода"
+                  name="date"
+                  placeholder="Дата похода"
                   [(ngModel)]="date"
-                  required />
+                  required
+                />
                 @if (!date) {
                   <span class="date-placeholder-cover" >Дата похода</span>
                 }
@@ -107,7 +113,7 @@
                 name="participants"
                 required
                 [(ngModel)]="participants"
-                >
+              >
                 <option value="" disabled selected hidden>Участники</option>
                 <option value="4" class="location__dropdown-option">4</option>
                 <option value="5" class="location__dropdown-option">5</option>
@@ -122,8 +128,9 @@
             <button
               id="hero-button-search-program"
               class="hero__button fs-16"
-              (click)="onPriceProgram()"
-              [disabled]="!isFormValid()">
+              (click)="showProgramPrice()"
+              [disabled]="!isFormValid()"
+            >
               Найти программу
             </button>
           </div>
@@ -137,7 +144,8 @@
           maxlength="45"
           type="text"
           placeholder="type 'Hello'"
-          [(ngModel)]="liveInputText">
+          [(ngModel)]="liveInputText"
+        >
         <span class="live-output">{{ liveInputText }}</span>
       </div>
     </div>
