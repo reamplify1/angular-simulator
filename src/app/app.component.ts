@@ -1,44 +1,96 @@
 import { Component } from '@angular/core';
 import { Color } from '../enums/Color';
 import { Collection } from './collection';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { IAdvantage } from './interfaces/IAdvantage';
+import { advantages } from './data/advantages';
+import { ILocation } from './interfaces/ILocation';
+import { hikeLocations } from './data/locations';
 
 @Component({
   selector: 'app-root',
-  imports: [],
+  imports: [FormsModule, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
 
   companyName: string = 'Румтибет';
+  location: string = '';
+  date: string = '';
+  participants: string = '';
+  liveInputText = '';
+  dateNow: string = new Date().toLocaleString();
+  isDisplayTime: boolean = true;
+  clickerCounter: number = 0;
+  isLoading: boolean = true;
+  advantages: IAdvantage[] = advantages;
+  hikeLocations: ILocation[] = hikeLocations;
+  readonly iconPath: string = './images/svg/';
 
-  numberCollection: Collection<number> = new Collection<number>([1, 2, 3, 4, 5]);
-  stringCollection: Collection<string> = new Collection<string>(['Boston', 'London', 'Винница']);
+
+  numberCollection: Collection <number> = new Collection <number> ([1, 2, 3, 4, 5]);
+  stringCollection: Collection <string> = new Collection <string> (['Boston', 'London', 'Винница']);
 
   constructor() {
     this.saveLastVisit();
     this.saveVisitCount();
-  }
 
-  isPrimaryColor(color: Color): boolean {
-    const mainColors: Color[] = [Color.RED, Color.GREEN, Color.BLUE];
-    return mainColors.includes(color);
-  }
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 2000);
 
-  saveLastVisit(): void {
-    const LAST_VISIT_KEY: string = 'last-visit';
-    const now: Date = new Date();
-    localStorage.setItem(LAST_VISIT_KEY, now.toString());
-  }
+    setInterval(() => {
+      this.updateTimer();
+      }, 1000);
+    }
 
-  saveVisitCount(): void {
-    const VISIT_COUNT_KEY: string = 'visit-count';
-    const visits: string | null = localStorage.getItem(VISIT_COUNT_KEY);
+    toggleDate():void {
+      this.isDisplayTime = !this.isDisplayTime;
+    }
 
-    let count: number = visits ? parseInt(visits) : 0;
-    count++;
+    isFormValid(): boolean {
+      return Boolean(this.location && this.date && this.participants);
+    }
 
-    localStorage.setItem(VISIT_COUNT_KEY, count.toString());
-  }
+    increaseCounter(): void {
+      this.clickerCounter++;
+    }
+
+    decreaseCounter(): void {
+      if (this.clickerCounter > 0) {
+        this.clickerCounter--;
+      }
+    }
+
+    updateTimer(): void {
+      this.dateNow = new Date().toLocaleString();
+    }
+
+    showProgramPrice(): void {
+      alert('price is 199$');
+    }
+
+    isPrimaryColor(color: Color): boolean {
+      const mainColors: Color[] = [Color.RED, Color.GREEN, Color.BLUE];
+      return mainColors.includes(color);
+    }
+
+    saveLastVisit(): void {
+      const LAST_VISIT_KEY: string = 'last-visit';
+      const now: Date = new Date();
+      localStorage.setItem(LAST_VISIT_KEY, now.toString());
+    }
+
+    saveVisitCount(): void {
+      const VISIT_COUNT_KEY: string = 'visit-count';
+      const visits: string | null = localStorage.getItem(VISIT_COUNT_KEY);
+
+      let count: number = visits ? parseInt(visits) : 0;
+      count++;
+
+      localStorage.setItem(VISIT_COUNT_KEY, count.toString());
+    }
 
 }
