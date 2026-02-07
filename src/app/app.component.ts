@@ -21,7 +21,7 @@ export class AppComponent {
   date: string = '';
   participants: string = '';
   liveInputText = '';
-  timeNow: string = '';
+  dateNow: string = new Date().toLocaleString();
   isDisplayTime: boolean = true;
   clickerCounter: number = 0;
   isLoading: boolean = true;
@@ -65,10 +65,10 @@ export class AppComponent {
     }
 
     updateTimer(): void {
-      this.timeNow = new Date().toLocaleString();
+      this.dateNow = new Date().toLocaleString();
     }
 
-    showProgramPrice():void {
+    showProgramPrice(): void {
       alert('price is 199$');
     }
 
