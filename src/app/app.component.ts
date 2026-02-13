@@ -2,15 +2,16 @@ import { Component } from '@angular/core';
 import { Color } from '../enums/Color';
 import { Collection } from './collection';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgTemplateOutlet } from '@angular/common';
 import { IAdvantage } from './interfaces/IAdvantage';
 import { advantages } from './data/advantages';
 import { ILocation } from './interfaces/ILocation';
 import { hikeLocations } from './data/locations';
+import { Status } from './data/status';
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, NgTemplateOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -28,6 +29,15 @@ export class AppComponent {
   advantages: IAdvantage[] = advantages;
   hikeLocations: ILocation[] = hikeLocations;
   readonly iconPath: string = './images/svg/';
+  isNotified: boolean = false;
+  readonly statusMessage: typeof Status = Status;
+  // currentStatus!: Status;
+  currentStatus?: keyof typeof Status;
+  message = '';
+  // readonly success: Status = Status.Success;
+  // readonly info: Status = Status.Info;
+  // readonly warn: Status = Status.Warn;
+  // readonly Error: Status = Status.Error;
 
 
   numberCollection: Collection <number> = new Collection <number> ([1, 2, 3, 4, 5]);
@@ -37,6 +47,11 @@ export class AppComponent {
     this.saveLastVisit();
     this.saveVisitCount();
 
+    // setTimeout(() => {
+    //   this.isNotified = true;
+    // }, 5000);
+
+
     setTimeout(() => {
       this.isLoading = false;
     }, 2000);
@@ -44,6 +59,21 @@ export class AppComponent {
     setInterval(() => {
       this.updateTimer();
       }, 1000);
+    }
+
+    showNotification(key: keyof typeof Status) {
+
+      this.currentStatus = key;
+      this.message = this.statusMessage[key];
+      this.isNotified = true;
+
+      setTimeout(() => {
+        this.isNotified = false;
+      }, 3000);
+    }
+
+    closeNotification() {
+      this.isNotified = false;
     }
 
     toggleDate():void {
