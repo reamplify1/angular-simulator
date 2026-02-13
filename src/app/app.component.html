@@ -208,3 +208,122 @@
     </div>
   </div>
 </section>
+
+<section class="popular-tour-wrapper">
+  <span class="section-label">по версии отдыхающих</span>
+  <h2 class="popular_tour-label section-title">Популярные направления</h2>
+  <div class="popular-tour-container container">
+    <div class="popular-tour-item">
+      <img src="images/popular_tour1.png" alt="">
+    </div>
+    <div class="popular-tour-item">
+      <img src="images/popular_tour2.png" alt="">
+    </div>
+    <div class="popular-tour-item">
+      <img src="images/popular_tour3.png" alt="">
+    </div>
+  </div>
+  <button class="popular-tour-button button button--green" (click)="showNotification('Info')">Рейтинг направлений</button>
+</section>
+
+<section class="traveler-blog-wrapper">
+  <span class="section-label">делимся впечатлениями</span>
+  <h2 class="traveler-blog-label section-title">Блог о путешествиях</h2>
+  <div class="traveler-blog-container container">
+    <div class="traveler-blog-item">
+      <div class="traveler-blog-img-wrapper">
+        <img src="images/traveler-blog1.png" alt="">
+      </div>
+      <div class="blog-info">
+        <h3 class="blog-info__title fs-24">Красивая Италя, какая она в реальности?</h3>
+        <p class="blog-info__description">Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.</p>
+        <div class="blog-info--addition">
+          <span class="blog-date">01/04/2023</span>
+          <span class="blog-link">читать статью</span>
+        </div>
+      </div>
+    </div>
+    <div class="traveler-blog-item">
+      <div class="traveler-blog-img-wrapper">
+        <img src="images/traveler-blog2.png" alt="">
+      </div>
+      <div class="blog-info">
+        <h3 class="blog-info__title fs-24">Долой сомнения! Весь мир открыт для вас!</h3>
+        <p class="blog-info__description">Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации ... независимые способы реализации соответствующих условий активизации </p>
+        <div class="blog-info--addition">
+          <span class="blog-date">01/04/2023</span>
+          <span class="blog-link">читать статью</span>
+        </div>
+      </div>
+    </div>
+    <div class="traveler-blog-item">
+      <div class="traveler-blog-img-wrapper">
+        <img src="images/traveler-blog3.png" alt="">
+      </div>
+      <div class="blog-info">
+        <h3 class="blog-info__title fs-24">Как подготовиться к путешествию в одиночку? </h3>
+        <p class="blog-info__description">Для современного мира базовый вектор развития предполагает.</p>
+        <div class="blog-info--addition">
+          <span class="blog-date">01/04/2023</span>
+          <span class="blog-link">читать статью</span>
+        </div>
+      </div>
+    </div>
+    <div class="traveler-blog-item">
+      <div class="traveler-blog-img-wrapper">
+        <img src="images/traveler-blog4.png" alt="">
+      </div>
+      <div class="blog-info">
+        <h3 class="blog-info__title fs-24">Индия ... летим?</h3>
+        <p class="blog-info__description">Для современного мира базовый..</p>
+        <div class="blog-info--addition">
+          <span class="blog-date">01/04/2023</span>
+          <span class="blog-link">читать статью</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="traveler-blog-button button button--green" (click)="showNotification('Success')">Другие материалы</button>
+
+
+
+</section>
+
+
+@if (isNotified) {
+  <ng-container
+    [ngTemplateOutlet]="notification"
+    [ngTemplateOutletContext]="{
+      title: currentStatus,
+      content: message,
+      image: 'message-icon.svg',
+      status: currentStatus,
+    }"
+  >
+</ng-container>
+}
+
+
+<ng-template #notification let-status='title' let-content="content" let-image="image">
+
+  <div class="notification">
+    <div class="notification-image-container">
+      <img [src]="iconPath + image" alt="">
+    </div>
+    <div class="notification-description-container">
+      <h4 class="fs-16">{{ status }}</h4>
+      <span class="fs-14">{{ content }}</span>
+    </div>
+    <div class="close-message-icon-container">
+      <img src="images/svg/close-message-icon.png" alt="" (click)="closeNotification()">
+    </div>
+
+  </div>
+</ng-template>
+
+<!-- @if (isNotified) {
+  <ng-container [ngTemplateOutlet]="notification" [ngTemplateOutletContext]="{ title: 'Success', content: 'Message content',  image: 'message-icon.svg'}"></ng-container>
+}
+ -->
+
+
