@@ -154,10 +154,22 @@
 
 <section class="about-tour">
   <div class="about-tour__img-container">
-    <img id="about-tour__image--main" class="about-tour__image about-tour__image--main" src="images/about-tour2.png" alt="tour picture">
+    <img id="about-tour__image--main"
+      class="about-tour__image about-tour__image--main"
+      src="images/about-tour2.png"
+      alt="tour picture"
+    >
     <div class="about-tour__image--overlay">
-      <img id="about-tour__image--secondary" class="about-tour__image about-tour__image--secondary" src="images/about-tour1.png" alt="tour picture">
-      <img id="about-tour__play-icon" class="about-tour__play-icon" src="images/svg/play-icon.svg" alt="tour picture">
+      <img id="about-tour__image--secondary"
+        class="about-tour__image about-tour__image--secondary"
+        src="images/about-tour1.png"
+        alt="tour picture"
+      >
+      <img id="about-tour__play-icon"
+        class="about-tour__play-icon"
+        src="images/svg/play-icon.svg"
+        alt="tour picture"
+      >
     </div>
   </div>
   <div class="about-tour__info">
@@ -198,7 +210,7 @@
           }
         </div>
       </div>
-      <button id="programs-price-button" class="button button--green">Стоимость программ</button>
+      <button id="programs-price-button" class="button button--green" (click)="showNotification('Success', MessageType.SUCCESS)">Стоимость программ</button>
     </div>
     <div class="programs__images">
       <img src="images/info-program-img1.png" alt="a cup of tea in mountains">
@@ -213,117 +225,83 @@
   <span class="section-label">по версии отдыхающих</span>
   <h2 class="popular_tour-label section-title">Популярные направления</h2>
   <div class="popular-tour-container container">
-    <div class="popular-tour-item">
-      <img src="images/popular_tour1.png" alt="">
-    </div>
-    <div class="popular-tour-item">
-      <img src="images/popular_tour2.png" alt="">
-    </div>
-    <div class="popular-tour-item">
-      <img src="images/popular_tour3.png" alt="">
-    </div>
+    @for (topTour of topTours; track topTour.id) {
+      <div [id]="'popular-tour-item-' + topTour.id" class="popular-tour-item">
+        <div class="popular-tour-item__rating fs-14">
+          <img [src]="iconPath + 'rating-star-icon' + '.svg'" alt="звезда рейтинга">
+          <span>{{ topTour.rating.toFixed(1) }}</span>
+        </div>
+        <img class="popular-tour-item-img" [src]="imgPath + topTour.img + '.png'" [alt]="topTour.imgAlt">
+        <div class="popular-tour-item__overlay">
+          <div class="popular-tour-item__text">
+            <h5 class="fs-24">{{ topTour.title }}</h5>
+            <span class="fs-14">{{ topTour.preview }}</span>
+          </div>
+          <div class="popular-tour-item__price">
+            <span>{{ topTour.price }} &#36;</span>
+          </div>
+        </div>
+      </div>
+    }
   </div>
-  <button class="popular-tour-button button button--green" (click)="showNotification('Info')">Рейтинг направлений</button>
+  <button id="popular-tour-button"
+    class="popular-tour-button button button--green"
+    (click)="showNotification('hello', MessageType.INFO)">Рейтинг направлений
+  </button>
 </section>
 
 <section class="traveler-blog-wrapper">
   <span class="section-label">делимся впечатлениями</span>
   <h2 class="traveler-blog-label section-title">Блог о путешествиях</h2>
   <div class="traveler-blog-container container">
-    <div class="traveler-blog-item">
+    @for (article of articles; track article.id) {
+      <div [id]="'traveler-blog-' + article.id" class="traveler-blog-item">
       <div class="traveler-blog-img-wrapper">
-        <img src="images/traveler-blog1.png" alt="">
+        <img [src]="'images/' + article.img + '.png'" [alt]="article.imgAlt">
       </div>
       <div class="blog-info">
-        <h3 class="blog-info__title fs-24">Красивая Италя, какая она в реальности?</h3>
-        <p class="blog-info__description">Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.</p>
-        <div class="blog-info--addition">
-          <span class="blog-date">01/04/2023</span>
-          <span class="blog-link">читать статью</span>
+        <a class="blog-info__title fs-24">{{ article.title }}</a>
+        <p class="blog-info__description">{{ article.text.length > 200 ? (article.text | slice:0:200) + '...' : article.text }}</p>
+        <div class="blog-info__addition">
+          <span class="blog-date">{{ article.date }}</span>
+          <a class="blog-link">читать статью</a>
         </div>
       </div>
     </div>
-    <div class="traveler-blog-item">
-      <div class="traveler-blog-img-wrapper">
-        <img src="images/traveler-blog2.png" alt="">
-      </div>
-      <div class="blog-info">
-        <h3 class="blog-info__title fs-24">Долой сомнения! Весь мир открыт для вас!</h3>
-        <p class="blog-info__description">Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации ... независимые способы реализации соответствующих условий активизации </p>
-        <div class="blog-info--addition">
-          <span class="blog-date">01/04/2023</span>
-          <span class="blog-link">читать статью</span>
-        </div>
-      </div>
-    </div>
-    <div class="traveler-blog-item">
-      <div class="traveler-blog-img-wrapper">
-        <img src="images/traveler-blog3.png" alt="">
-      </div>
-      <div class="blog-info">
-        <h3 class="blog-info__title fs-24">Как подготовиться к путешествию в одиночку? </h3>
-        <p class="blog-info__description">Для современного мира базовый вектор развития предполагает.</p>
-        <div class="blog-info--addition">
-          <span class="blog-date">01/04/2023</span>
-          <span class="blog-link">читать статью</span>
-        </div>
-      </div>
-    </div>
-    <div class="traveler-blog-item">
-      <div class="traveler-blog-img-wrapper">
-        <img src="images/traveler-blog4.png" alt="">
-      </div>
-      <div class="blog-info">
-        <h3 class="blog-info__title fs-24">Индия ... летим?</h3>
-        <p class="blog-info__description">Для современного мира базовый..</p>
-        <div class="blog-info--addition">
-          <span class="blog-date">01/04/2023</span>
-          <span class="blog-link">читать статью</span>
-        </div>
-      </div>
-    </div>
+    }
+
   </div>
-  <button class="traveler-blog-button button button--green" (click)="showNotification('Success')">Другие материалы</button>
-
-
-
+  <button id="traveler-blog-button"
+    class="traveler-blog-button button button--green"
+    (click)="showNotification('Warning', MessageType.WARN)"
+  >
+    Другие материалы
+  </button>
 </section>
 
 
-@if (isNotified) {
-  <ng-container
-    [ngTemplateOutlet]="notification"
-    [ngTemplateOutletContext]="{
-      title: currentStatus,
-      content: message,
-      image: 'message-icon.svg',
-      status: currentStatus,
-    }"
-  >
-</ng-container>
-}
+<div class="notification-container">
+    @for (notification of notificationService.getNotifications(); track $index) {
+      <ng-container [ngTemplateOutlet]="notificationTemplate"
+      [ngTemplateOutletContext]="{ notification: notification}" />
+    }
+</div>
 
-
-<ng-template #notification let-status='title' let-content="content" let-image="image">
+<ng-template #notificationTemplate let-notification='notification'>
 
   <div class="notification">
     <div class="notification-image-container">
-      <img [src]="iconPath + image" alt="">
+      <img [src]="iconPath + 'message-icon' + '.svg'" alt="">
     </div>
     <div class="notification-description-container">
-      <h4 class="fs-16">{{ status }}</h4>
-      <span class="fs-14">{{ content }}</span>
+      <h4 class="fs-16">{{ notification.type }}</h4>
+      <span class="fs-14">{{ notification.text }}</span>
     </div>
     <div class="close-message-icon-container">
-      <img src="images/svg/close-message-icon.png" alt="" (click)="closeNotification()">
+      <img src="images/svg/close-message-icon.png" alt="" (click)="closeNotification(notification)">
     </div>
-
   </div>
 </ng-template>
 
-<!-- @if (isNotified) {
-  <ng-container [ngTemplateOutlet]="notification" [ngTemplateOutletContext]="{ title: 'Success', content: 'Message content',  image: 'message-icon.svg'}"></ng-container>
-}
- -->
 
 

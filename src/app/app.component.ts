@@ -1,13 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Color } from '../enums/Color';
 import { Collection } from './collection';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, NgTemplateOutlet } from '@angular/common';
-import { IAdvantage } from './interfaces/IAdvantage';
+import type { IAdvantage } from './interfaces/IAdvantage';
+import type { ILocation } from './interfaces/ILocation';
+import type { IArticle } from './interfaces/IArticle';
+import type { INotification } from './interfaces/IMessage';
+import type { ITopTour } from './interfaces/ITopTour';
+import { topTours } from './data/top-tours';
 import { advantages } from './data/advantages';
-import { ILocation } from './interfaces/ILocation';
 import { hikeLocations } from './data/locations';
-import { Status } from './data/status';
+import { MessageType } from '../enums/Message-type';
+import { blogArticles } from './data/blog-articles';
+import { NotificationService } from './services/notification.service';
+import { LocalStorageService } from './services/local-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -29,28 +36,22 @@ export class AppComponent {
   advantages: IAdvantage[] = advantages;
   hikeLocations: ILocation[] = hikeLocations;
   readonly iconPath: string = './images/svg/';
+  readonly imgPath: string = './images/';
   isNotified: boolean = false;
-  readonly statusMessage: typeof Status = Status;
-  // currentStatus!: Status;
-  currentStatus?: keyof typeof Status;
-  message = '';
-  // readonly success: Status = Status.Success;
-  // readonly info: Status = Status.Info;
-  // readonly warn: Status = Status.Warn;
-  // readonly Error: Status = Status.Error;
+  message:string = '';
+  readonly articles: IArticle[] = blogArticles;
+  readonly MessageType: typeof MessageType = MessageType;
+  topTours: ITopTour[] = topTours;
+  notificationService = inject(NotificationService);
+  localStorageService = inject(LocalStorageService);
 
 
-  numberCollection: Collection <number> = new Collection <number> ([1, 2, 3, 4, 5]);
-  stringCollection: Collection <string> = new Collection <string> (['Boston', 'London', 'Винница']);
+  numberCollection: Collection<number> = new Collection<number>([1, 2, 3, 4, 5]);
+  stringCollection: Collection<string> = new Collection<string>(['Boston', 'London', 'Винница']);
 
   constructor() {
     this.saveLastVisit();
     this.saveVisitCount();
-
-    // setTimeout(() => {
-    //   this.isNotified = true;
-    // }, 5000);
-
 
     setTimeout(() => {
       this.isLoading = false;
@@ -61,19 +62,12 @@ export class AppComponent {
       }, 1000);
     }
 
-    showNotification(key: keyof typeof Status) {
-
-      this.currentStatus = key;
-      this.message = this.statusMessage[key];
-      this.isNotified = true;
-
-      setTimeout(() => {
-        this.isNotified = false;
-      }, 3000);
+    showNotification(text: string, type: MessageType) {
+      this.notificationService.addNotification(type, text);
     }
 
-    closeNotification() {
-      this.isNotified = false;
+    closeNotification(notification: INotification) {
+        this.notificationService.removeNotification(notification.id);
     }
 
     toggleDate():void {
@@ -110,17 +104,17 @@ export class AppComponent {
     saveLastVisit(): void {
       const LAST_VISIT_KEY: string = 'last-visit';
       const now: Date = new Date();
-      localStorage.setItem(LAST_VISIT_KEY, now.toString());
+      this.localStorageService.setItem(LAST_VISIT_KEY, now.toString());
     }
 
     saveVisitCount(): void {
       const VISIT_COUNT_KEY: string = 'visit-count';
-      const visits: string | null = localStorage.getItem(VISIT_COUNT_KEY);
+      const visits: string | null = this.localStorageService.getItem(VISIT_COUNT_KEY);
 
       let count: number = visits ? parseInt(visits) : 0;
       count++;
 
-      localStorage.setItem(VISIT_COUNT_KEY, count.toString());
+      this.localStorageService.setItem(VISIT_COUNT_KEY, count.toString());
     }
 
 }
