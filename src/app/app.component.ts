@@ -40,7 +40,7 @@ export class AppComponent {
   isNotified: boolean = false;
   message:string = '';
   readonly articles: IArticle[] = blogArticles;
-  readonly MessageType: typeof MessageType = MessageType;
+  readonly messageType: typeof MessageType = MessageType;
   topTours: ITopTour[] = topTours;
   notificationService = inject(NotificationService);
   localStorageService = inject(LocalStorageService);
