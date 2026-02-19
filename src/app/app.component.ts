@@ -6,14 +6,14 @@ import { CommonModule, NgTemplateOutlet } from '@angular/common';
 import type { IAdvantage } from './interfaces/IAdvantage';
 import type { ILocation } from './interfaces/ILocation';
 import type { IArticle } from './interfaces/IArticle';
-import type { INotification } from './interfaces/IMessage';
+import type { INotification } from './interfaces/INotification';
 import type { ITopTour } from './interfaces/ITopTour';
 import { topTours } from './data/top-tours';
 import { advantages } from './data/advantages';
 import { hikeLocations } from './data/locations';
-import { MessageType } from '../enums/Message-type';
+import { NotificationType } from '../enums/Notification-type';
 import { blogArticles } from './data/blog-articles';
-import { NotificationService } from './services/notification.service';
+import { NotificationService } from './services/message.service';
 import { LocalStorageService } from './services/local-storage.service';
 
 @Component({
@@ -40,7 +40,7 @@ export class AppComponent {
   isNotified: boolean = false;
   message:string = '';
   readonly articles: IArticle[] = blogArticles;
-  readonly messageType: typeof MessageType = MessageType;
+  readonly notificationType: typeof NotificationType = NotificationType;
   topTours: ITopTour[] = topTours;
   notificationService = inject(NotificationService);
   localStorageService = inject(LocalStorageService);
@@ -62,7 +62,7 @@ export class AppComponent {
       }, 1000);
     }
 
-    showNotification(text: string, type: MessageType) {
+    showNotification(text: string, type: NotificationType) {
       this.notificationService.addNotification(type, text);
     }
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { MessageType } from '../../enums/Message-type';
-import type { INotification } from '../interfaces/IMessage';
+import { NotificationType } from '../../enums/Notification-type';
+import type { INotification } from '../interfaces/INotification';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ export class NotificationService {
 
   notifications: INotification[] = [];
 
-  addNotification(type: MessageType, text: string): void {
+  addNotification(type: NotificationType, text: string): void {
 
     const newNotification: INotification = { id: Date.now(), type, text };
 
