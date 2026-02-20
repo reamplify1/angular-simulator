@@ -23,7 +23,6 @@ import { LocalStorageService } from './services/local-storage.service';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-
   companyName: string = 'Румтибет';
   location: string = '';
   date: string = '';
@@ -35,16 +34,13 @@ export class AppComponent {
   isLoading: boolean = true;
   advantages: IAdvantage[] = advantages;
   hikeLocations: ILocation[] = hikeLocations;
-  readonly iconPath: string = './images/icon/';
-  readonly imgPath: string = './images/';
   isNotified: boolean = false;
-  message:string = '';
+  message: string = '';
   readonly articles: IArticle[] = blogArticles;
   readonly notificationType: typeof NotificationType = NotificationType;
   topTours: ITopTour[] = topTours;
   notificationService: NotificationService = inject(NotificationService);
   localStorageService: LocalStorageService = inject(LocalStorageService);
-
 
   numberCollection: Collection<number> = new Collection<number>([1, 2, 3, 4, 5]);
   stringCollection: Collection<string> = new Collection<string>(['Boston', 'London', 'Винница']);
@@ -59,62 +55,69 @@ export class AppComponent {
 
     setInterval(() => {
       this.updateTimer();
-      }, 1000);
+    }, 1000);
+  }
+
+  get iconPath(): string {
+    return './images/icon/';
+  }
+
+  get imgPath(): string {
+    return './images/';
+  }
+
+  showNotification(text: string, type: NotificationType) {
+    this.notificationService.addNotification(type, text);
+  }
+
+  closeNotification(notification: INotification) {
+    this.notificationService.removeNotification(notification.id);
+  }
+
+  toggleDate(): void {
+    this.isDisplayTime = !this.isDisplayTime;
+  }
+
+  isFormValid(): boolean {
+    return Boolean(this.location && this.date && this.participants);
+  }
+
+  increaseCounter(): void {
+    this.clickerCounter++;
+  }
+
+  decreaseCounter(): void {
+    if (this.clickerCounter > 0) {
+      this.clickerCounter--;
     }
+  }
 
-    showNotification(text: string, type: NotificationType) {
-      this.notificationService.addNotification(type, text);
-    }
+  updateTimer(): void {
+    this.dateNow = new Date().toLocaleString();
+  }
 
-    closeNotification(notification: INotification) {
-        this.notificationService.removeNotification(notification.id);
-    }
+  showProgramPrice(): void {
+    alert('price is 199$');
+  }
 
-    toggleDate(): void {
-      this.isDisplayTime = !this.isDisplayTime;
-    }
+  isPrimaryColor(color: Color): boolean {
+    const mainColors: Color[] = [Color.RED, Color.GREEN, Color.BLUE];
+    return mainColors.includes(color);
+  }
 
-    isFormValid(): boolean {
-      return Boolean(this.location && this.date && this.participants);
-    }
+  saveLastVisit(): void {
+    const LAST_VISIT_KEY: string = 'last-visit';
+    const now: Date = new Date();
+    this.localStorageService.setItem(LAST_VISIT_KEY, now.toString());
+  }
 
-    increaseCounter(): void {
-      this.clickerCounter++;
-    }
+  saveVisitCount(): void {
+    const VISIT_COUNT_KEY: string = 'visit-count';
+    const visits: string | null = this.localStorageService.getItem(VISIT_COUNT_KEY);
 
-    decreaseCounter(): void {
-      if (this.clickerCounter > 0) {
-        this.clickerCounter--;
-      }
-    }
+    let count: number = visits ? parseInt(visits) : 0;
+    count++;
 
-    updateTimer(): void {
-      this.dateNow = new Date().toLocaleString();
-    }
-
-    showProgramPrice(): void {
-      alert('price is 199$');
-    }
-
-    isPrimaryColor(color: Color): boolean {
-      const mainColors: Color[] = [Color.RED, Color.GREEN, Color.BLUE];
-      return mainColors.includes(color);
-    }
-
-    saveLastVisit(): void {
-      const LAST_VISIT_KEY: string = 'last-visit';
-      const now: Date = new Date();
-      this.localStorageService.setItem(LAST_VISIT_KEY, now.toString());
-    }
-
-    saveVisitCount(): void {
-      const VISIT_COUNT_KEY: string = 'visit-count';
-      const visits: string | null = this.localStorageService.getItem(VISIT_COUNT_KEY);
-
-      let count: number = visits ? parseInt(visits) : 0;
-      count++;
-
-      this.localStorageService.setItem(VISIT_COUNT_KEY, count.toString());
-    }
-
+    this.localStorageService.setItem(VISIT_COUNT_KEY, count.toString());
+  }
 }
