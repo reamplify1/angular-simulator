@@ -120,4 +120,5 @@ export class AppComponent {
 
     this.localStorageService.setItem(VISIT_COUNT_KEY, count.toString());
   }
+  
 }
