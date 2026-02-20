@@ -11,7 +11,7 @@ import type { ITopTour } from './interfaces/ITopTour';
 import { topTours } from './data/top-tours';
 import { advantages } from './data/advantages';
 import { hikeLocations } from './data/locations';
-import { NotificationType } from '../enums/Notification-type';
+import { NotificationType } from '../enums/notificationType';
 import { blogArticles } from './data/blog-articles';
 import { NotificationService } from './services/message.service';
 import { LocalStorageService } from './services/local-storage.service';
@@ -28,22 +28,22 @@ export class AppComponent {
   location: string = '';
   date: string = '';
   participants: string = '';
-  liveInputText = '';
+  liveInputText: string = '';
   dateNow: string = new Date().toLocaleString();
   isDisplayTime: boolean = true;
   clickerCounter: number = 0;
   isLoading: boolean = true;
   advantages: IAdvantage[] = advantages;
   hikeLocations: ILocation[] = hikeLocations;
-  readonly iconPath: string = './images/svg/';
+  readonly iconPath: string = './images/icon/';
   readonly imgPath: string = './images/';
   isNotified: boolean = false;
   message:string = '';
   readonly articles: IArticle[] = blogArticles;
   readonly notificationType: typeof NotificationType = NotificationType;
   topTours: ITopTour[] = topTours;
-  notificationService = inject(NotificationService);
-  localStorageService = inject(LocalStorageService);
+  notificationService: NotificationService = inject(NotificationService);
+  localStorageService: LocalStorageService = inject(LocalStorageService);
 
 
   numberCollection: Collection<number> = new Collection<number>([1, 2, 3, 4, 5]);
@@ -70,7 +70,7 @@ export class AppComponent {
         this.notificationService.removeNotification(notification.id);
     }
 
-    toggleDate():void {
+    toggleDate(): void {
       this.isDisplayTime = !this.isDisplayTime;
     }
 

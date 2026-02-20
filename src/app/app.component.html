@@ -246,7 +246,9 @@
   </div>
   <button id="popular-tour-button"
     class="popular-tour-button button button--green"
-    (click)="showNotification('hello', notificationType.INFO)">Рейтинг направлений
+    (click)="showNotification('hello', notificationType.INFO)"
+  >
+    Рейтинг направлений
   </button>
 </section>
 
@@ -281,14 +283,13 @@
 
 
 <div class="notification-container">
-    @for (notification of notificationService.getNotifications(); track $index) {
+    @for (notification of notificationService.getNotifications(); track notification.id) {
       <ng-container [ngTemplateOutlet]="notificationTemplate"
-      [ngTemplateOutletContext]="{ notification: notification}" />
+      [ngTemplateOutletContext]="{ notification }" />
     }
 </div>
 
 <ng-template #notificationTemplate let-notification='notification'>
-
   <div class="notification">
     <div class="notification-image-container">
       <img [src]="iconPath + 'message-icon' + '.svg'" alt="">
@@ -298,7 +299,7 @@
       <span class="fs-14">{{ notification.text }}</span>
     </div>
     <div class="close-message-icon-container">
-      <img src="images/svg/close-message-icon.png" alt="" (click)="closeNotification(notification)">
+      <img src="images/svg/close-message-icon.svg" alt="" (click)="closeNotification(notification)">
     </div>
   </div>
 </ng-template>
