@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NotificationType } from '../../enums/notificationType';
+import { NotificationType } from '../../enums/NotificationType';
 import type { INotification } from '../interfaces/INotification';
 
 @Injectable({

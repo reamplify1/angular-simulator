@@ -1,4 +1,4 @@
-export const topTours = [
+export const tours = [
   {
     id: 1,
     title: 'Озеро возле гор',

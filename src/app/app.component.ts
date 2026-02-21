@@ -7,11 +7,11 @@ import type { IAdvantage } from './interfaces/IAdvantage';
 import type { ILocation } from './interfaces/ILocation';
 import type { IArticle } from './interfaces/IArticle';
 import type { INotification } from './interfaces/INotification';
-import type { ITopTour } from './interfaces/ITopTour';
-import { topTours } from './data/top-tours';
+import type { ITour } from './interfaces/ITour';
+import { tours } from './data/tours';
 import { advantages } from './data/advantages';
 import { hikeLocations } from './data/locations';
-import { NotificationType } from '../enums/notificationType';
+import { NotificationType } from '../enums/NotificationType';
 import { blogArticles } from './data/blog-articles';
 import { NotificationService } from './services/message.service';
 import { LocalStorageService } from './services/local-storage.service';
@@ -23,6 +23,9 @@ import { LocalStorageService } from './services/local-storage.service';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+
+  notificationService: NotificationService = inject(NotificationService);
+  localStorageService: LocalStorageService = inject(LocalStorageService);
   companyName: string = 'Румтибет';
   location: string = '';
   date: string = '';
@@ -36,11 +39,9 @@ export class AppComponent {
   hikeLocations: ILocation[] = hikeLocations;
   isNotified: boolean = false;
   message: string = '';
-  readonly articles: IArticle[] = blogArticles;
-  readonly notificationType: typeof NotificationType = NotificationType;
-  topTours: ITopTour[] = topTours;
-  notificationService: NotificationService = inject(NotificationService);
-  localStorageService: LocalStorageService = inject(LocalStorageService);
+  articles: IArticle[] = blogArticles;
+  notificationType: typeof NotificationType = NotificationType;
+  tours: ITour[] = tours;
 
   numberCollection: Collection<number> = new Collection<number>([1, 2, 3, 4, 5]);
   stringCollection: Collection<string> = new Collection<string>(['Boston', 'London', 'Винница']);
@@ -120,5 +121,5 @@ export class AppComponent {
 
     this.localStorageService.setItem(VISIT_COUNT_KEY, count.toString());
   }
-  
+
 }

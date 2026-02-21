@@ -225,20 +225,20 @@
   <span class="section-label">по версии отдыхающих</span>
   <h2 class="popular_tour-label section-title">Популярные направления</h2>
   <div class="popular-tour-container container">
-    @for (topTour of topTours; track topTour.id) {
-      <div [id]="'popular-tour-item-' + topTour.id" class="popular-tour-item">
+    @for (tour of tours; track tour.id) {
+      <div [id]="'popular-tour-item-' + tour.id" class="popular-tour-item">
         <div class="popular-tour-item__rating fs-14">
           <img [src]="iconPath + 'rating-star-icon' + '.svg'" alt="звезда рейтинга">
-          <span>{{ topTour.rating.toFixed(1) }}</span>
+          <span>{{ tour.rating.toFixed(1) }}</span>
         </div>
-        <img class="popular-tour-item-img" [src]="imgPath + topTour.img + '.png'" [alt]="topTour.imgAlt">
+        <img class="popular-tour-item-img" [src]="imgPath + tour.img + '.png'" [alt]="tour.imgAlt">
         <div class="popular-tour-item__overlay">
           <div class="popular-tour-item__text">
-            <h5 class="fs-24">{{ topTour.title }}</h5>
-            <span class="fs-14">{{ topTour.preview }}</span>
+            <h5 class="fs-24">{{ tour.title }}</h5>
+            <span class="fs-14">{{ tour.preview }}</span>
           </div>
           <div class="popular-tour-item__price">
-            <span>{{ topTour.price }} &#36;</span>
+            <span>{{ tour.price }} &#36;</span>
           </div>
         </div>
       </div>
@@ -284,8 +284,7 @@
 
 <div class="notification-container">
     @for (notification of notificationService.getNotifications(); track notification.id) {
-      <ng-container [ngTemplateOutlet]="notificationTemplate"
-      [ngTemplateOutletContext]="{ notification }" />
+      <ng-container [ngTemplateOutlet]="notificationTemplate" [ngTemplateOutletContext]="{ notification }" />
     }
 </div>
 
@@ -303,6 +302,3 @@
     </div>
   </div>
 </ng-template>
-
-
-
