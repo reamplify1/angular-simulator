@@ -11,7 +11,7 @@ import type { ITour } from './interfaces/ITour';
 import { tours } from './data/tours';
 import { advantages } from './data/advantages';
 import { hikeLocations } from './data/locations';
-import { NotificationType } from '../enums/NotificationType';
+import { NotificationType } from '../enums/otificationType';
 import { blogArticles } from './data/blog-articles';
 import { NotificationService } from './services/message.service';
 import { LocalStorageService } from './services/local-storage.service';
