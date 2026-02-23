@@ -154,7 +154,7 @@
 
 <section class="about-tour">
   <div class="about-tour__img-container">
-    <img 
+    <img
       id="about-tour__image--main"
       class="about-tour__image about-tour__image--main"
       src="images/about-tour2.png"
@@ -234,7 +234,7 @@
           <img [src]="iconPath + 'rating-star-icon' + '.svg'" alt="звезда рейтинга">
           <span>{{ tour.rating.toFixed(1) }}</span>
         </div>
-        <img class="popular-tour-item-img" [src]="imgPath + tour.img + '.png'" [alt]="tour.imgAlt">
+        <img class="popular-tour-item-img" [src]="imgPath + tour.img + '.png'" [alt]="tour.title">
         <div class="popular-tour-item__overlay">
           <div class="popular-tour-item__text">
             <h5 class="fs-24">{{ tour.title }}</h5>
@@ -247,7 +247,8 @@
       </div>
     }
   </div>
-  <button id="popular-tour-button"
+  <button
+    id="popular-tour-button"
     class="popular-tour-button button button--green"
     (click)="showNotification('hello', notificationType.INFO)"
   >
@@ -262,7 +263,7 @@
     @for (article of articles; track article.id) {
       <div [id]="'traveler-blog-' + article.id" class="traveler-blog-item">
       <div class="traveler-blog-img-wrapper">
-        <img [src]="'images/' + article.img + '.png'" [alt]="article.imgAlt">
+        <img [src]="'images/' + article.img + '.png'" [alt]="article.title">
       </div>
       <div class="blog-info">
         <a class="blog-info__title fs-24">{{ article.title }}</a>
@@ -294,14 +295,14 @@
 <ng-template #notificationTemplate let-notification='notification'>
   <div class="notification">
     <div class="notification-image-container">
-      <img [src]="iconPath + 'message-icon' + '.svg'" alt="">
+      <img [src]="iconPath + 'message-icon' + '.svg'" [alt]="notification.text">
     </div>
     <div class="notification-description-container">
       <h4 class="fs-16">{{ notification.type }}</h4>
       <span class="fs-14">{{ notification.text }}</span>
     </div>
     <div class="close-message-icon-container">
-      <img src="images/icon/close-message-icon.svg" alt="" (click)="closeNotification(notification)">
+      <img src="images/icon/close-message-icon.svg" alt="close message" (click)="closeNotification(notification)">
     </div>
   </div>
 </ng-template>

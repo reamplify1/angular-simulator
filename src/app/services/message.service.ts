@@ -13,9 +13,7 @@ export class NotificationService {
 
     const newNotification: INotification = { id: Date.now(), type, text };
 
-    let newArr = [...this.notifications, newNotification];
-
-    this.notifications = newArr;
+    this.notifications = [...this.notifications, newNotification];
 
     setTimeout(() => {
       this.removeNotification(newNotification.id);

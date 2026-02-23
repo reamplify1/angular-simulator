@@ -21,4 +21,5 @@ import { Injectable } from "@angular/core";
     clear(): void {
       localStorage.clear();
     }
+    
   }
