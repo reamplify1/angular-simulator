@@ -3,14 +3,14 @@ import { ILocation } from "../interfaces/ILocation"
 export const hikeLocations: ILocation[] = [
   {
     id: 1,
-    name: 'Boston'
+    name: 'Boston',
   },
   {
     id: 2,
-    name: 'London'
+    name: 'London',
   },
   {
     id: 3,
-    name: 'Винница'
+    name: 'Винница',
   }
 ]
