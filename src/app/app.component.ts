@@ -60,7 +60,7 @@ export class AppComponent {
   }
 
   get iconPath(): string {
-    return './images/icon/';
+    return './images/icons/';
   }
 
   get imgPath(): string {

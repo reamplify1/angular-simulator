@@ -1,6 +1,6 @@
 @if (isLoading) {
   <div class="loading-overlay" alt="Загрузка">
-    <img src="./images/icon/loading-icon.svg" alt="загрузка">
+    <img src="./images/icons/loading-icon.svg" alt="загрузка">
   </div>
 }
 
@@ -170,7 +170,7 @@
       <img
         id="about-tour__play-icon"
         class="about-tour__play-icon"
-        src="images/icon/play-icon.svg"
+        src="images/icons/play-icon.svg"
         alt="tour picture"
       >
     </div>
@@ -295,14 +295,14 @@
 <ng-template #notificationTemplate let-notification='notification'>
   <div class="notification">
     <div class="notification-image-container">
-      <img [src]="iconPath + 'message-icon' + '.svg'" [alt]="notification.text">
+      <img src="images/icons/message-icon.svg" alt="message">
     </div>
     <div class="notification-description-container">
       <h4 class="fs-16">{{ notification.type }}</h4>
       <span class="fs-14">{{ notification.text }}</span>
     </div>
     <div class="close-message-icon-container">
-      <img src="images/icon/close-message-icon.svg" alt="close message" (click)="closeNotification(notification)">
+      <img src="images/icons/close-message-icon.svg" alt="close message" (click)="closeNotification(notification)">
     </div>
   </div>
 </ng-template>
