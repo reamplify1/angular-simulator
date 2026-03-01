@@ -13,7 +13,7 @@ export class NotificationComponent {
 
   notificationService: NotificationService = inject(NotificationService);
 
-  closeNotification(notification: INotification) {
+  closeNotification(notification: INotification): void {
     this.notificationService.removeNotification(notification.id);
   }
 }

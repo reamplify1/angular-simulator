@@ -164,7 +164,7 @@
           }
         </div>
       </div>
-      <button id="programs-price-button" class="button button--green" (click)="notificationService.showSuccess()">Стоимость программ</button>
+      <button id="programs-price-button" class="button button--green" (click)="notificationService.showSuccess('Success message')">Стоимость программ</button>
     </div>
     <div class="programs__images">
       <img src="images/info-program-img1.png" alt="a cup of tea in mountains">
@@ -201,7 +201,7 @@
   <button
     id="popular-tour-button"
     class="popular-tour-button button button--green"
-    (click)="notificationService.showInfo()"
+    (click)="notificationService.showInfo('Info message')"
   >
     Рейтинг направлений
   </button>
@@ -230,7 +230,7 @@
   </div>
   <button id="traveler-blog-button"
     class="traveler-blog-button button button--green"
-    (click)="notificationService.showWarn()"
+    (click)="notificationService.showWarn('Warning message')"
   >
     Другие материалы
   </button>
@@ -243,12 +243,12 @@
     <h2 class="section-title fs-32">Делимся впечатлениями</h2>
   </div>
   <div class="photos">
-    <img class="photos-item1" src="images/photo1.png" alt="photo1">
-    <img src="images/photo2.png" alt="photo2">
-    <img src="images/photo3.png" alt="photo3">
-    <img src="images/photo4.png" alt="photo4">
-    <img class="photos-item5" src="images/photo5.png" alt="photo5">
-    <img src="images/photo6.png" alt="photo6">
+    <img class="photos-item1" src="images/photo-blog-balloons.png" alt="photo blog balloons">
+    <img src="images/photo-blog-boat.png" alt="photo blog boat">
+    <img src="images/photo-blog-map.png" alt="photo blog map">
+    <img src="images/photo-blog-ocean.png" alt="photo blog ocean">
+    <img class="photos-item5" src="images/photo-blog-canyon.png" alt="photo blog canyon">
+    <img src="images/photo-blog-table.png" alt="photo blog table">
   </div>
   <button id="button-pinterest" class="pinterest-button button button--green">Наш pinterest</button>
 </section>

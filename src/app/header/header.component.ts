@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterLinkActive } from "@angular/router";
+import { INavigation } from '../interfaces/INavigation';
 
 @Component({
   selector: 'app-header',
@@ -28,7 +29,7 @@ export class HeaderComponent {
     }
   }
 
-  navigation = [
+  navigation: INavigation[] = [
   { id: 'main-page', label: 'Главная' , link: ''},
   { id: 'guide-page', label: 'Пользователи', link: 'users' },
   ];

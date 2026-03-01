@@ -21,20 +21,20 @@ export class NotificationService {
     }, 5000);
   }
 
-  showWarn() {
-    this.addNotification(NotificationType.WARN, 'Warn message');
+  showWarn(message: string): void {
+    this.addNotification(NotificationType.WARN, message);
   }
 
-  showError() {
-    this.addNotification(NotificationType.ERROR, 'Error message');
+  showError(message: string): void  {
+    this.addNotification(NotificationType.ERROR, message);
   }
 
-  showSuccess() {
-    this.addNotification(NotificationType.SUCCESS, 'Success message');
+  showSuccess(message: string): void  {
+    this.addNotification(NotificationType.SUCCESS, message);
   }
 
-  showInfo() {
-    this.addNotification(NotificationType.INFO, 'Info message');
+  showInfo(message: string): void  {
+    this.addNotification(NotificationType.INFO, message);
   }
 
   getNotifications(): INotification[] {
