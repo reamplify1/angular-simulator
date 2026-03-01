@@ -39,7 +39,6 @@
   }
 }
 
-
 .subscribe {
   position: absolute;
   left: 50%;
@@ -59,7 +58,6 @@
     display: flex;
     flex-direction: column;
     gap: rem(8);
-
   }
 
   &-cta {
@@ -103,6 +101,7 @@
 
     .subscribe-cta-info {
       width: rem(536);
+      font-size: rem(14);
 
       .span-underline {
         text-decoration: underline;
@@ -204,7 +203,7 @@
     }
   }
 
-  .footer-section-important {
+  .footer-section-important-info {
     display: flex;
     flex-direction: column;
     width: rem(280);
