@@ -16,4 +16,5 @@ export class NotificationComponent {
   closeNotification(notification: INotification): void {
     this.notificationService.removeNotification(notification.id);
   }
+
 }

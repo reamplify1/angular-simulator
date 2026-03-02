@@ -25,15 +25,15 @@ export class NotificationService {
     this.addNotification(NotificationType.WARN, message);
   }
 
-  showError(message: string): void  {
+  showError(message: string): void {
     this.addNotification(NotificationType.ERROR, message);
   }
 
-  showSuccess(message: string): void  {
+  showSuccess(message: string): void {
     this.addNotification(NotificationType.SUCCESS, message);
   }
 
-  showInfo(message: string): void  {
+  showInfo(message: string): void {
     this.addNotification(NotificationType.INFO, message);
   }
 

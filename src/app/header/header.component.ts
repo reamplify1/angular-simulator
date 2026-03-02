@@ -10,6 +10,7 @@ import { INavigation } from '../interfaces/INavigation';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
+
   companyName: string = 'Румтибет';
   dateNow: string = new Date().toLocaleString();
   isDisplayTime: boolean = true;
@@ -30,8 +31,8 @@ export class HeaderComponent {
   }
 
   navigation: INavigation[] = [
-  { id: 'main-page', label: 'Главная' , link: ''},
-  { id: 'guide-page', label: 'Пользователи', link: 'users' },
+    { id: 'main-page', label: 'Главная' , link: ''},
+    { id: 'guide-page', label: 'Пользователи', link: 'users' },
   ];
 
 }

@@ -23,6 +23,7 @@ import { LocalStorageService } from '../services/local-storage.service';
   standalone: true,
 })
 export class HomePageComponent {
+
   notificationService: NotificationService = inject(NotificationService);
   localStorageService: LocalStorageService = inject(LocalStorageService);
   location: string = '';
