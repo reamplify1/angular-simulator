@@ -43,9 +43,6 @@ export class HomePageComponent {
   stringCollection: Collection<string> = new Collection<string>(['Boston', 'London', 'Винница']);
 
   constructor() {
-    this.saveLastVisit();
-    this.saveVisitCount();
-
     setTimeout(() => {
       this.isLoading = false;
     }, 2000);
@@ -70,22 +67,6 @@ export class HomePageComponent {
   isPrimaryColor(color: Color): boolean {
     const mainColors: Color[] = [Color.RED, Color.GREEN, Color.BLUE];
     return mainColors.includes(color);
-  }
-
-  saveLastVisit(): void {
-    const LAST_VISIT_KEY: string = 'last-visit';
-    const now: Date = new Date();
-    this.localStorageService.setItem(LAST_VISIT_KEY, now.toString());
-  }
-
-  saveVisitCount(): void {
-    const VISIT_COUNT_KEY: string = 'visit-count';
-    const visits: string | null = this.localStorageService.getItem(VISIT_COUNT_KEY);
-
-    let count: number = visits ? parseInt(visits) : 0;
-    count++;
-
-    this.localStorageService.setItem(VISIT_COUNT_KEY, count.toString());
   }
 
 }
