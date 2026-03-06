@@ -1,0 +1,53 @@
+<header class="header fs-18">
+    <div class="navigation__wrapper container">
+      <div class="navigation__logo">
+        <img class="navigation__logo-image" src="images/logo-mountain.svg" alt="logo" />
+        <p class="navigation__logo-company-name">{{ companyName }}</p>
+      </div>
+      <div class="navigation">
+        <nav class="navigation__menu">
+          @for (elem of navigation; track elem.id) {
+            <a
+              [id]="elem.id"
+              [routerLink]="elem.link"
+              routerLinkActive="active-link"
+              [routerLinkActiveOptions]="{ exact: true }"
+              class="navigation__item">
+              {{ elem.label }}
+            </a>
+          }
+        </nav>
+        <div class="navigation__button">
+          <button id="button-consult" class="button button--small button-consult">Консультация</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="date-clicker-container container">
+      <span>{{ isDisplayTime ? dateNow: clickerCounter}}</span>
+      <div class="clicker-buttons" [hidden]="isDisplayTime">
+        <button
+          id="button-counter-increase"
+          class="clicker-btn"
+          (click)="increaseCounter()"
+        >
+          +
+        </button>
+        <button
+          id="button-counter-decrease"
+          class="clicker-btn"
+          (click)="decreaseCounter()"
+          [disabled]="clickerCounter === 0"
+        >
+          -
+        </button>
+      </div>
+      <button
+        id="button-header-toggle"
+        class="button button--small"
+        (click)="toggleDate()"
+      >
+        {{ isDisplayTime ? 'показать кликер' : 'показать дату' }}
+      </button>
+    </div>
+  </header>

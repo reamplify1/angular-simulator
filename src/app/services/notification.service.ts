@@ -1,6 +1,7 @@
+import { INotification } from './../interfaces/INotification';
 import { Injectable } from '@angular/core';
 import { NotificationType } from '../../enums/NotificationType';
-import type { INotification } from '../interfaces/INotification';
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class NotificationService {
 
   notifications: INotification[] = [];
 
-  addNotification(type: NotificationType, text: string): void {
+  private addNotification(type: NotificationType, text: string): void {
 
     const newNotification: INotification = { id: Date.now(), type, text };
 
@@ -18,6 +19,22 @@ export class NotificationService {
     setTimeout(() => {
       this.removeNotification(newNotification.id);
     }, 5000);
+  }
+
+  showWarn(message: string): void {
+    this.addNotification(NotificationType.WARN, message);
+  }
+
+  showError(message: string): void {
+    this.addNotification(NotificationType.ERROR, message);
+  }
+
+  showSuccess(message: string): void {
+    this.addNotification(NotificationType.SUCCESS, message);
+  }
+
+  showInfo(message: string): void {
+    this.addNotification(NotificationType.INFO, message);
   }
 
   getNotifications(): INotification[] {

@@ -1,0 +1,47 @@
+@use '../../assets/functions'as *;
+
+.notification-container {
+  position: fixed;
+  top: rem(7);
+  right: rem(7);
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 10px;
+  z-index: 9999;
+}
+
+.notification {
+  position: relative;
+  padding: rem(15);
+  height: rem(70);
+  width: rem(350);
+  display: flex;
+  gap: rem(15);
+  background-color: #0F172A99;
+  color: #E8E9EB;
+  line-height: rem(20);
+  border: rem(1) solid #FFFFFF;
+  border-radius: 10px;
+  z-index: 9999;
+
+
+  .notification-description-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h4 {
+      font-weight: 716;
+      margin: 0;
+    }
+  }
+
+  .close-message-icon-container {
+    position: absolute;
+    width: rem(20);
+    height: rem(20);
+    top: 7px;
+    right: 7px;
+    cursor: pointer;
+  }
+}

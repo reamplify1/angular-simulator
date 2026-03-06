@@ -1,17 +1,14 @@
 import { Component, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from "./header/header.component";
-import { FooterComponent } from "./footer/footer.component";
-import { NotificationComponent } from "./notification/notification.component";
-import { LocalStorageService } from './services/local-storage.service';
+import { RouterLink } from '@angular/router';
+import { LocalStorageService } from '../services/local-storage.service';
 
 @Component({
-  selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, FooterComponent, NotificationComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  selector: 'app-not-found-page',
+  imports: [RouterLink],
+  templateUrl: './not-found-page.component.html',
+  styleUrl: './not-found-page.component.scss',
 })
-export class AppComponent {
+export class NotFoundPageComponent {
 
   localStorageService: LocalStorageService = inject(LocalStorageService);
 
@@ -20,7 +17,7 @@ export class AppComponent {
     this.saveVisitCount();
   }
 
-  saveLastVisit(): void {
+    saveLastVisit(): void {
     const LAST_VISIT_KEY: string = 'last-visit';
     const now: Date = new Date();
     this.localStorageService.setItem(LAST_VISIT_KEY, now.toString());

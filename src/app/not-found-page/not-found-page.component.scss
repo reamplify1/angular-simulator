@@ -1,0 +1,68 @@
+@use '../../assets/functions'as *;
+
+.not-found-fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.not-found-content {
+  text-align: center;
+  animation: fadeIn 0.8s ease-out;
+
+  h1 {
+    font-size: clamp(rem(100), 20vw, rem(200));
+    font-weight: 900;
+    line-height: 0.8;
+    margin: 0;
+    color: #2ecc71;
+    text-shadow: rem(10) rem(10) rem(20) rgba(46, 204, 113, 0.15);
+  }
+
+  p {
+    font-size: rem(24);
+    color: #5d6d7e;
+    margin: rem(20) 0 rem(40);
+    font-weight: 400;
+  }
+
+  .button--green {
+    padding: rem(16) rem(40);
+    font-size: rem(18);
+    border-radius: 50px;
+    border: none;
+    background-color: #2ecc71;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
+      filter: brightness(1.1);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
