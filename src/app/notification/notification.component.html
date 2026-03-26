@@ -1,5 +1,5 @@
 <div class="notification-container">
-  @for (notification of notificationService.getNotifications(); track notification.id) {
+  @for (notification of notificationService.notifications$ | async; track notification.id) {
     <ng-container [ngTemplateOutlet]="notificationTemplate" [ngTemplateOutletContext]="{ notification }" />
   }
 </div>

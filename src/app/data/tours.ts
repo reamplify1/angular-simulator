@@ -18,7 +18,7 @@ export const tours = [
     rating: 4.5,
   },
   {
-    id: 1,
+    id: 3,
     title: 'Растяжка в горах',
     preview: 'для тех, кто заботится о себе',
     img: 'popular_tour3',
