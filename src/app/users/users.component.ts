@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { AsyncPipe } from '@angular/common';
-import { LoaderService } from '../services/loader.service';
 
 @Component({
   selector: 'app-users',
@@ -12,12 +11,11 @@ import { LoaderService } from '../services/loader.service';
 export class UsersComponent {
 
   private userService = inject(UserService);
-  private loader = inject(LoaderService);
 
   users$ = this.userService.getUsers();
-  loading$ = this.loader.loading$;
 
   ngOnInit(): void {
     this.userService.loadUsers().subscribe();
   }
+
 }

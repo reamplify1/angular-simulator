@@ -1,40 +1,36 @@
 @use '../../assets/functions'as *;
 
-
-.user-card__wrapper {
+.user-card-list__wrapper {
   display: flex;
   justify-content: center;
   flex-direction: row;
   flex-wrap: wrap;
   padding: rem(80) rem(230);
   padding-bottom: calc(rem(80) + rem(109));
-  // width: 100%;
+  width: 100%;
   gap: rem(50) rem(70);
   color: #F3F5F4;
 }
 
-.user-card {
-  // margin: 150px;
+.user-card-list {
   padding: rem(35) rem(30);
   z-index: 9999;
   height: rem(630);
   width: rem(440);
-  // color: black;
   display: flex;
   flex-direction: column;
   box-shadow: 0px 10px 30px 0px #0000000F;
   border-top: #D4A373 4px solid;
   border-radius: rem(4);
-  // border: 1px solid red;
 
-  .user-name {
+  .user-card-name {
     font-weight: 800;
     font-size: rem(26);
     line-height: rem(30);
-    color: var(--secondary-color)
+    color: var(--secondary-color);
   }
 
-  .user-username {
+  .user-card-username {
     margin-top: rem(3);
     margin-bottom: rem(20);
     font-weight: 700;
@@ -46,7 +42,7 @@
 
 .user-card__section-title {
   display: flex;
-  align-items: center;  
+  align-items: center;
   gap: rem(6);
   margin-top: rem(25);
   margin-bottom: rem(13);
@@ -58,9 +54,9 @@
 
     &::after {
     content: "";
-    flex: 1;                 // линия занимает всё свободное пространство справа
-    height: 1px;             // толщина линии
-    background-color: #E2E8F0; // цвет линии (можно свой)
+    flex: 1;
+    height: rem(1);
+    background-color: #E2E8F0;
   }
 }
 
@@ -72,7 +68,6 @@
   gap: rem(10);
 
   .user-card__labels-span {
-    // margin-top: rem(10);
     font-size: rem(14);
     line-height: rem(20);
     color: #667C7C;
@@ -80,7 +75,7 @@
 }
 
 .secondary-color {
-  color: #D4A373 !important;;
+  color: #D4A373 !important;
 }
 
 .text-italic {
@@ -92,7 +87,7 @@
 }
 
 .text-coordinates {
-  border: 1px solid #E2E8F0;
+  border: rem(1) solid #E2E8F0;
   padding: rem(1) rem(6);
   border-radius: rem(3);
   background-color: #F4F7F5;
@@ -116,10 +111,9 @@
     font-weight: 700;
     font-size: rem(14);
     line-height: rem(20);
-    color: var(--secondary-color)
+    color: var(--secondary-color);
   }
 }
-
 
 .user-card__contacts {
   display: flex;
@@ -143,28 +137,6 @@
   flex-direction: row;
   justify-content: space-between;
 }
-
-// .user-card__contacts {
-//   margin-top: rem(12);
-//   display: flex;
-//   flex-direction: row;
-
-//   .contacts__labels {
-//     display: flex;
-//     flex-direction: column;
-//   }
-
-//   .contacts__values {
-//     display: flex;
-//     flex-direction: column;
-//   }
-// }
-
-
-
-
-
-
 
 .user-card__address {
   display: flex;
@@ -194,4 +166,10 @@
     display: flex;
     flex-direction: column;
   }
+}
+
+.user-card-empty {
+  background-color: #B15757;
+  padding: rem(30);
+  border-radius: rem(10);
 }

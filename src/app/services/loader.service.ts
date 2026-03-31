@@ -11,10 +11,12 @@ export class LoaderService {
   loading$: Observable<boolean> = this.loadingSubject.asObservable();
 
   showLoader(): void {
+    document.body.style.overflow = 'hidden';
     this.loadingSubject.next(true);
   }
 
   hideLoader(): void {
+    document.body.style.overflow = '';
     this.loadingSubject.next(false);
   }
 

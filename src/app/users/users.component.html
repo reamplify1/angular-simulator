@@ -1,15 +1,10 @@
-@if (loading$ | async) {
-  <div>Loading...</div>
-}
-
-
-<div class="user-card__wrapper">
+<div class="user-card-list__wrapper">
   @for (user of users$ | async; track user.id) {
 
-  <div class="user-card">
+  <div class="user-card-list">
 
-    <span class="user-name">{{ user.name }}</span>
-    <span class="user-username">@{{ user.username }}</span>
+    <span class="user-card-name">{{ user.name }}</span>
+    <span class="user-card-username">@{{ user.username }}</span>
 
     <span class="user-card__section-title">Контакты</span>
     <div class="user-card__contacts">
@@ -45,9 +40,6 @@
           <span class="user-card__values-span text-coordinates">{{ user.address.geo.lat }}</span>
           <span class="user-card__values-span text-coordinates">{{ user.address.geo.lng }}</span>
         </div>
-        <!-- <span class="user-card__values-span text-border">
-          {{ user.address.geo.lat }} {{ user.address.geo.lng }}
-        </span> -->
       </div>
     </div>
 
@@ -77,5 +69,7 @@
     </div>
 
   </div>
+  } @empty {
+    <div class="user-card-empty">Нет пользователей для отображения</div>
   }
 </div>
