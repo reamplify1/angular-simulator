@@ -9,10 +9,10 @@ import { IUser } from '../interfaces/IUser';
 })
 export class UserService {
 
-  private api = inject(UserApiService);
-  private loader = inject(LoaderService);
+  private api: UserApiService = inject(UserApiService);
+  private loader: LoaderService = inject(LoaderService);
 
-  private usersSubject = new BehaviorSubject<IUser[]>([]);
+  private usersSubject: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
   users$: Observable<IUser[]> = this.usersSubject.asObservable();
 
   setUsers(users: IUser[]): void {
