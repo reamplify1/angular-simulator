@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { AsyncPipe } from '@angular/common';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { IUser } from '../interfaces/IUser';
 
 @Component({
@@ -14,10 +14,15 @@ export class UsersComponent {
 
   private userService: UserService = inject(UserService);
 
-  users$: Observable<IUser[]> = this.userService.getUsers();
+  users$: Observable<IUser[]> = this.userService.users$;
 
   ngOnInit(): void {
-    this.userService.loadUsers().subscribe();
+    this.userService.loadUsers()
+      .pipe(
+        tap((users: IUser[]) => {
+          this.userService.setUsers(users);
+        })
+    ).subscribe();
   }
 
 }

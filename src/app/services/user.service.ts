@@ -3,14 +3,16 @@ import { BehaviorSubject, Observable, catchError, finalize, tap, of, delay } fro
 import { UserApiService } from './user-api.service';
 import { LoaderService } from './loader.service';
 import { IUser } from '../interfaces/IUser';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
 
-  private api: UserApiService = inject(UserApiService);
-  private loader: LoaderService = inject(LoaderService);
+  private userApiService: UserApiService = inject(UserApiService);
+  private loaderService: LoaderService = inject(LoaderService);
+  private notificationService = inject(NotificationService);
 
   private usersSubject: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
   users$: Observable<IUser[]> = this.usersSubject.asObservable();
@@ -19,27 +21,21 @@ export class UserService {
     this.usersSubject.next(users);
   }
 
-  getUsers(): Observable<IUser[]> {
-    return this.users$;
+  getUsers(): IUser[] {
+    return this.usersSubject.getValue();
   }
 
   loadUsers(): Observable<IUser[]> {
-
-    this.loader.showLoader();
-
-    return this.api.getUsers().pipe(
-      delay(2000),
-      tap(users => this.setUsers(users)),
-
+    this.loaderService.showLoader();
+    return this.userApiService.getUsers().pipe(
       catchError(error => {
+        this.notificationService.showError('Ошибка загрузки пользователей');
         console.error('Ошибка загрузки пользователей', error);
         return of([]);
       }),
-
       finalize(() => {
-        this.loader.hideLoader();
+        this.loaderService.hideLoader();
       })
-
     );
   }
 

@@ -43,7 +43,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
   }
 
   closeNotification(id: number): void {
-    const updated = this.notifications.filter(n => n.id !== id);
+    const updated: INotification[] = this.notifications.filter(n => n.id !== id);
     this.notificationsSubject.next(updated);
   }
 
