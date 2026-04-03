@@ -4,6 +4,7 @@ import { UserApiService } from './user-api.service';
 import { LoaderService } from './loader.service';
 import { IUser } from '../interfaces/IUser';
 import { NotificationService } from './notification.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -28,14 +29,13 @@ export class UserService {
   loadUsers(): Observable<IUser[]> {
     this.loaderService.showLoader();
 
-    return this.userApiService
-    .getUsers()
-    .pipe(
-      catchError(error => {
-        this.notificationService.showError('Ошибка загрузки пользователей');
-        console.error('Ошибка загрузки пользователей', error);
-        return of([]);
-      }),
+    return this.userApiService.getUsers()
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          this.notificationService.showError('Ошибка загрузки пользователей');
+          console.error('Ошибка загрузки пользователей', error);
+          return of([]);
+        }),
       finalize(() => {
         this.loaderService.hideLoader();
       })
