@@ -27,7 +27,10 @@ export class UserService {
 
   loadUsers(): Observable<IUser[]> {
     this.loaderService.showLoader();
-    return this.userApiService.getUsers().pipe(
+
+    return this.userApiService
+    .getUsers()
+    .pipe(
       catchError(error => {
         this.notificationService.showError('Ошибка загрузки пользователей');
         console.error('Ошибка загрузки пользователей', error);
