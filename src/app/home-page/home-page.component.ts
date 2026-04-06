@@ -26,6 +26,7 @@ export class HomePageComponent {
 
   notificationService: NotificationService = inject(NotificationService);
   localStorageService: LocalStorageService = inject(LocalStorageService);
+
   location: string = '';
   date: string = '';
   participants: string = '';
@@ -41,12 +42,6 @@ export class HomePageComponent {
 
   numberCollection: Collection<number> = new Collection<number>([1, 2, 3, 4, 5]);
   stringCollection: Collection<string> = new Collection<string>(['Boston', 'London', 'Винница']);
-
-  constructor() {
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 2000);
-  }
 
   get iconPath(): string {
     return './images/icons/';
