@@ -14,19 +14,28 @@ export class UserService {
   private userApiService: UserApiService = inject(UserApiService);
   private loaderService: LoaderService = inject(LoaderService);
   private notificationService = inject(NotificationService);
+  private LOCAL_STORAGE_KEY = 'users';
 
   private usersSubject: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
   users$: Observable<IUser[]> = this.usersSubject.asObservable();
 
   setUsers(users: IUser[]): void {
     this.usersSubject.next(users);
+    localStorage.setItem(this.LOCAL_STORAGE_KEY, JSON.stringify(users));
   }
 
   getUsers(): IUser[] {
     return this.usersSubject.getValue();
   }
 
-  loadUsers(): Observable<IUser[]> {
+  loadUsers(forceUpdate: boolean = false): Observable<IUser[]> {
+    const cachedData: string | null = localStorage.getItem(this.LOCAL_STORAGE_KEY);
+    if (cachedData && !forceUpdate) {
+      const users = JSON.parse(cachedData);
+      this.usersSubject.next(users);
+      return of(users);
+    }
+
     this.loaderService.showLoader();
 
     return this.userApiService.getUsers()
