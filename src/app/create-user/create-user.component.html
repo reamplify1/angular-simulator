@@ -1,0 +1,33 @@
+<form [formGroup]="createUserForm" class="user-form">
+  <h2 class="form-title">Регистрация</h2>
+  <div class="form-section">
+    <label>Имя <input id="name" type="text" formControlName="name"></label>
+    <label>Username <input id="username" type="text" formControlName="username"></label>
+    <label>Email <input id="email" type="email" formControlName="email"></label>
+    <label>Телефон <input id="telephone" type="text" formControlName="phone"></label>
+    <label>Website <input id="website" type="text" formControlName="website"></label>
+  </div>
+
+  <div formGroupName="address" class="form-section">
+    <h3>Адрес</h3>
+    <label>Город <input id="address-city" type="text" formControlName="city"></label>
+    <label>Улица <input id="address-street" type="text" formControlName="street"></label>
+    <label>Офис <input id="address-office" type="text" formControlName="suite"></label>
+    <label>Индекс <input id="address-index" type="text" formControlName="zipcode"></label>
+
+    <div formGroupName="geo">
+      <h4>Координаты</h4>
+      <label>Geo latitude <input id="latitude" type="text" formControlName="lat"></label>
+      <label>Geo longitude <input id="longitude" type="text" formControlName="lng"></label>
+    </div>
+  </div>
+
+  <div formGroupName="company" class="form-section">
+    <h3>Компания</h3>
+    <label>Название <input id="company-name" type="text" formControlName="name"></label>
+    <label>Миссия <input id="company-mission" type="text" formControlName="catchPhrase"></label>
+    <label>Специализация <input id="company-specialization" type="text" formControlName="bs"></label>
+  </div>
+
+  <button id="form-button" (click)="onSubmit()" type="submit" [disabled]="createUserForm.invalid">Сохранить</button>
+</form>
