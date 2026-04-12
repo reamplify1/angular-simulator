@@ -13,8 +13,8 @@ export class UserService {
 
   private userApiService: UserApiService = inject(UserApiService);
   private loaderService: LoaderService = inject(LoaderService);
-  private notificationService = inject(NotificationService);
-  private LOCAL_STORAGE_KEY = 'users';
+  private notificationService: NotificationService = inject(NotificationService);
+  private LOCAL_STORAGE_KEY: string = 'users';
 
   private usersSubject: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
   users$: Observable<IUser[]> = this.usersSubject.asObservable();
@@ -26,6 +26,12 @@ export class UserService {
 
   getUsers(): IUser[] {
     return this.usersSubject.getValue();
+  }
+
+  addUser(user: IUser): void {
+    const currentUsers: IUser[] = this.getUsers();
+    const updatedUsers: IUser[] = [...currentUsers, user];
+    this.setUsers(updatedUsers);
   }
 
   loadUsers(forceUpdate: boolean = false): Observable<IUser[]> {

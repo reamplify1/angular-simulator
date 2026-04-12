@@ -1,8 +1,25 @@
+import { UserService } from './../services/user.service';
 import { NotificationService } from './../services/notification.service';
-import { FormGroup } from '@angular/forms';
-import { Component, inject } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import type {IUserForm} from '../interfaces/IUserForm.ts';
+import { IUser } from '../interfaces/IUser';
+import type { ToFormControls } from '../types/ToFormControls';
+
+function fillUnknown(obj: any): void {
+  Object.keys(obj).forEach(key => {
+    const value = obj[key];
+
+    if (value === '' || value === null || value === undefined) {
+      obj[key] = 'Неизвестно';
+    }
+
+    if (typeof value === 'object' && value !== null) {
+      fillUnknown(value);
+    }
+  });
+}
 
 @Component({
   selector: 'app-create-user',
@@ -10,12 +27,17 @@ import type {IUserForm} from '../interfaces/IUserForm.ts';
   templateUrl: './create-user.component.html',
   styleUrl: './create-user.component.scss',
 })
+
 export class CreateUserComponent {
+
   private notificationService: NotificationService = inject(NotificationService);
+  private userService: UserService = inject(UserService);
   private fb: FormBuilder = inject(FormBuilder);
 
-  createUserForm: FormGroup<IUserForm> = this.fb.group({
-    id: [{ value: Date.now(), disabled: true }],
+  @Output() addUser: EventEmitter<IUser> = new EventEmitter<IUser>();
+
+  createUserForm: FormGroup<ToFormControls<IUser>> = this.fb.group({
+    id: [ Date.now()],
     name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
     username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
     email: ['', [Validators.required, Validators.email, Validators.maxLength(100)]],
@@ -38,7 +60,7 @@ export class CreateUserComponent {
       catchPhrase: ['', [Validators.maxLength(200)]],
       bs: ['', [Validators.maxLength(100)]]
     })
-  });
+  }) as FormGroup<ToFormControls<IUser>>;
 
   onSubmit(): void {
     if (this.createUserForm.invalid) {
@@ -46,18 +68,16 @@ export class CreateUserComponent {
       return;
     }
 
-    const formValue: ReturnType<typeof this.createUserForm.getRawValue> = this.createUserForm.getRawValue();
+    const formValue: IUserForm = this.createUserForm.getRawValue() as IUserForm;
 
-    const submittedData: typeof formValue  = { ...formValue };
+    const submittedData: IUser = { ...formValue } as IUser;
 
-    if (!submittedData.website) submittedData.website = 'Неизвестно';
+    fillUnknown(submittedData);
 
-    if (!submittedData.company.catchPhrase) submittedData.company.catchPhrase = 'Неизвестно';
+    this.notificationService.showSuccess('Пользователь успешно добавлен');
+    this.addUser.emit(submittedData);
 
-    if (!submittedData.company.bs) submittedData.company.bs = 'Неизвестно';
-
-    if (!submittedData.address.suite) submittedData.address.suite = 'Неизвестно';
-
+    this.createUserForm.reset();
     console.log('Final user form:', submittedData);
   }
 
