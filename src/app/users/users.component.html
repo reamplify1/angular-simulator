@@ -9,16 +9,8 @@
 
 <app-create-user (addUser)="addUser($event)" />
 
-<div class="search-container">
-  <img src="images/icons/search-icon.svg" class="search-icon" alt="search">
-  <input
-    id="search-input"
-    class="search-input"
-    type="text"
-    [(ngModel)]="searchValue"
-    placeholder="Поиск пользователей..."
-  >
-</div>
+<app-search (searchChange)="onSearch($event)" />
+
 <div class="user-card-list__wrapper">
   @for (user of filteredUsers; track user.id) {
     <app-user-card [user]="user" (delete)="deleteUser($event)"/>

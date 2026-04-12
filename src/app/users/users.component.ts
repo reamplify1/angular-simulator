@@ -1,16 +1,15 @@
 import { Component, inject } from '@angular/core';
 import { UserService } from '../services/user.service';
-import { AsyncPipe } from '@angular/common';
 import { Observable, tap } from 'rxjs';
 import type { IUser } from '../interfaces/IUser';
 import { UserCardComponent } from '../user-card/user-card.component';
 import { NotificationService } from '../services/notification.service';
 import { CreateUserComponent } from '../create-user/create-user.component';
-import { FormsModule } from '@angular/forms';
+import { SearchUsersComponent } from '../search/search-users.component';
 
 @Component({
   selector: 'app-users',
-  imports: [UserCardComponent, CreateUserComponent, FormsModule],
+  imports: [UserCardComponent, CreateUserComponent, SearchUsersComponent],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss',
 })
@@ -62,9 +61,13 @@ export class UsersComponent {
     });
   }
 
+  onSearch(value: string): void {
+    this.searchValue = value;
+  }
+
   get filteredUsers(): IUser[] {
     const users: IUser[] = this.userService.getUsers();
-    const search: string = this.searchValue
+    const search: string = this.searchValue.toLowerCase();
 
     return users.filter(users => users.name.toLowerCase().includes(search))
   }

@@ -1,0 +1,10 @@
+<div class="search-container">
+  <img src="images/icons/search-icon.svg" class="search-icon">
+
+  <input
+    class="search-input"
+    [(ngModel)]="searchValue"
+    (ngModelChange)="onSearchChange()"
+    placeholder="Поиск пользователей..."
+  >
+</div>
