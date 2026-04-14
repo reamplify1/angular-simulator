@@ -1,10 +1,11 @@
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, finalize, tap, of, delay } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, finalize, of } from 'rxjs';
 import { UserApiService } from './user-api.service';
 import { LoaderService } from './loader.service';
 import { IUser } from '../interfaces/IUser';
 import { NotificationService } from './notification.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,7 @@ export class UserService {
   private userApiService: UserApiService = inject(UserApiService);
   private loaderService: LoaderService = inject(LoaderService);
   private notificationService: NotificationService = inject(NotificationService);
+  private localStorageService: LocalStorageService = inject(LocalStorageService);
   private LOCAL_STORAGE_KEY: string = 'users';
 
   private usersSubject: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
@@ -21,7 +23,8 @@ export class UserService {
 
   setUsers(users: IUser[]): void {
     this.usersSubject.next(users);
-    localStorage.setItem(this.LOCAL_STORAGE_KEY, JSON.stringify(users));
+    // localStorage.setItem(this.LOCAL_STORAGE_KEY, JSON.stringify(users));
+    this.localStorageService.setItem(this.LOCAL_STORAGE_KEY, users);
   }
 
   getUsers(): IUser[] {
@@ -35,11 +38,11 @@ export class UserService {
   }
 
   loadUsers(forceUpdate: boolean = false): Observable<IUser[]> {
-    const cachedData: string | null = localStorage.getItem(this.LOCAL_STORAGE_KEY);
-    if (cachedData && !forceUpdate) {
-      const users = JSON.parse(cachedData);
-      this.usersSubject.next(users);
-      return of(users);
+    const storageUsers: IUser[] | null = this.localStorageService.getItem(this.LOCAL_STORAGE_KEY);
+
+    if (storageUsers && !forceUpdate) {
+      this.usersSubject.next(storageUsers);
+      return of(storageUsers);
     }
 
     this.loaderService.showLoader();

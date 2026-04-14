@@ -7,12 +7,12 @@
   <img src="images/icons/refresh-icon.svg" class="refresh-icon" alt="refresh-button">
 </button>
 
-<app-create-user (addUser)="addUser($event)" />
+<app-create-user (onCreateUser)="addUser($event)" />
 
-<app-search (searchChange)="onSearch($event)" />
+<app-users-filter (searchChange)="onSearch($event)" />
 
 <div class="user-card-list__wrapper">
-  @for (user of filteredUsers; track user.id) {
+  @for (user of filteredUsers$ | async; track user.id) {
     <app-user-card [user]="user" (delete)="deleteUser($event)"/>
   } @empty {
     <div class="user-card-empty">

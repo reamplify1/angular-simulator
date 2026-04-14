@@ -1,25 +1,10 @@
 import { UserService } from './../services/user.service';
 import { NotificationService } from './../services/notification.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Component, EventEmitter, inject, Output } from '@angular/core';
-import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import type {IUserForm} from '../interfaces/IUserForm.ts';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IUser } from '../interfaces/IUser';
 import type { ToFormControls } from '../types/ToFormControls';
-
-function fillUnknown(obj: any): void {
-  Object.keys(obj).forEach(key => {
-    const value = obj[key];
-
-    if (value === '' || value === null || value === undefined) {
-      obj[key] = 'Неизвестно';
-    }
-
-    if (typeof value === 'object' && value !== null) {
-      fillUnknown(value);
-    }
-  });
-}
 
 @Component({
   selector: 'app-create-user',
@@ -30,14 +15,29 @@ function fillUnknown(obj: any): void {
 
 export class CreateUserComponent {
 
+  @Output() onCreateUser: EventEmitter<IUser> = new EventEmitter<IUser>();
+
   private notificationService: NotificationService = inject(NotificationService);
   private userService: UserService = inject(UserService);
   private fb: FormBuilder = inject(FormBuilder);
 
-  @Output() addUser: EventEmitter<IUser> = new EventEmitter<IUser>();
+  private fillUnknown(obj: Record<string, unknown>): void {
+    (Object.keys(obj) as Array<keyof typeof obj>).forEach((key) => {
+      const value: unknown = obj[key];
+
+      if (value === '' || value == null) {
+        obj[key] = 'Неизвестно';
+        return;
+      }
+
+      if (typeof value === 'object' && !Array.isArray(value)) {
+        this.fillUnknown(value as Record<string, unknown>);
+      }
+    });
+  }
 
   createUserForm: FormGroup<ToFormControls<IUser>> = this.fb.group({
-    id: [ Date.now()],
+    id: [Date.now()],
     name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
     username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
     email: ['', [Validators.required, Validators.email, Validators.maxLength(100)]],
@@ -68,17 +68,16 @@ export class CreateUserComponent {
       return;
     }
 
-    const formValue: IUserForm = this.createUserForm.getRawValue() as IUserForm;
+    const formValue: IUser = this.createUserForm.getRawValue() as IUser;
 
-    const submittedData: IUser = { ...formValue } as IUser;
+    const submittedData: IUser = { ...formValue };
 
-    fillUnknown(submittedData);
+    this.fillUnknown(submittedData as unknown as Record<string, unknown>);
 
     this.notificationService.showSuccess('Пользователь успешно добавлен');
-    this.addUser.emit(submittedData);
+    this.onCreateUser.emit(submittedData);
 
     this.createUserForm.reset();
-    console.log('Final user form:', submittedData);
   }
 
 }

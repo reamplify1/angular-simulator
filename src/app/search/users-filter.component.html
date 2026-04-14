@@ -3,8 +3,7 @@
 
   <input
     class="search-input"
-    [(ngModel)]="searchValue"
-    (ngModelChange)="onSearchChange()"
+    [formControl]="searchControl"
     placeholder="Поиск пользователей..."
   >
 </div>
