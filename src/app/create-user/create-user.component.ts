@@ -13,7 +13,7 @@ import type { ToFormControls } from '../types/ToFormControls';
 
 export class CreateUserComponent {
 
-  @Output() onCreateUser: EventEmitter<IUser> = new EventEmitter<IUser>();
+  @Output() createUser: EventEmitter<IUser> = new EventEmitter<IUser>();
 
   private fb: FormBuilder = inject(FormBuilder);
 
@@ -55,7 +55,7 @@ export class CreateUserComponent {
       id: Date.now() + Math.random()
     };
 
-    this.onCreateUser.emit(submittedData);
+    this.createUser.emit(submittedData);
 
     this.createUserForm.reset();
   }

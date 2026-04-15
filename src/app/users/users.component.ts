@@ -44,7 +44,7 @@ export class UsersComponent {
     .subscribe();
   }
 
-  deleteUser(id: number): void {
+  onDeleteUser(id: number): void {
     this.userService.deleteUser(id);
   }
 
