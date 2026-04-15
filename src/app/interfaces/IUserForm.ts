@@ -1,29 +1,29 @@
-export interface IUserForm {
-  id: number;
-  name: string;
-  username: string;
-  email: string;
-  phone: string;
-  website?: string;
-  company: ICompany;
-  address: IAddress;
-}
+// export interface IUserForm {
+//   id: number;
+//   name: string;
+//   username: string;
+//   email: string;
+//   phone: string;
+//   website?: string;
+//   company: ICompany;
+//   address: IAddress;
+// }
 
-interface ICompany {
-  name: string;
-  catchPhrase: string;
-  bs: string;
-}
+// interface ICompany {
+//   name: string;
+//   catchPhrase: string;
+//   bs: string;
+// }
 
-interface IAddress {
-  street: string;
-  suite?: string;
-  city: string;
-  zipcode: string;
-  geo: IGeo;
-}
+// interface IAddress {
+//   street: string;
+//   suite?: string;
+//   city: string;
+//   zipcode: string;
+//   geo: IGeo;
+// }
 
-interface IGeo {
-  lat?: string;
-  lng?: string;
-}
+// interface IGeo {
+//   lat?: string;
+//   lng?: string;
+// }

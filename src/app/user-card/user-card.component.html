@@ -14,7 +14,7 @@
     <div class="user-card__values">
       <span class="user-card__values-span secondary-color">{{ user.email }}</span>
       <span class="user-card__values-span">{{ user.phone }}</span>
-      <span class="user-card__values-span secondary-color">{{ user.website }}</span>
+      <span class="user-card__values-span secondary-color">{{ user.website || 'Неизвестно' }}</span>
     </div>
   </div>
 
@@ -31,7 +31,7 @@
     <div class="user-card__values">
       <span class="user-card__values-span">{{ user.address.city }}</span>
       <span class="user-card__values-span">{{ user.address.street }}</span>
-      <span class="user-card__values-span">{{ user.address.suite }}</span>
+      <span class="user-card__values-span">{{ user.address.suite || 'Неизвестно' }}</span>
       <span class="user-card__values-span">{{ user.address.zipcode }}</span>
 
       <div class="user-card__values-coordinates">
@@ -55,7 +55,7 @@
     <div class="user-card__values">
       <span class="user-card__values-span">{{ user.company.name }}</span>
       <span class="user-card__values-span text-italic">
-        {{ user.company.catchPhrase }}
+        {{ user.company.catchPhrase || 'Неизвестно' }}
       </span>
     </div>
   </div>
@@ -66,7 +66,7 @@
     </div>
 
     <div class="user-card__values">
-      <span class="user-card__values-span">{{ user.company.bs }}</span>
+      <span class="user-card__values-span">{{ user.company.bs || 'Неизвестно' }}</span>
     </div>
   </div>
   <button id="delete-user-btn" class="delete-user-btn" (click)="onDelete()">Удалить пользователя</button>

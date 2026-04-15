@@ -18,29 +18,40 @@ export class UsersComponent {
 
   private notificationService: NotificationService = inject(NotificationService)
   private userService: UserService = inject(UserService);
-  loading: boolean = false;
 
   private search$ = new BehaviorSubject<string>('');
   private users$: Observable<IUser[]> = this.userService.users$;
-  private searchSubject$ = new BehaviorSubject<string>('');
+
+  filteredUsers$: Observable<IUser[]> = combineLatest<[IUser[], string]>([
+    this.users$,
+    this.search$
+  ]).pipe(
+    map(([users, search]: [IUser[], string]) => {
+      const value = search.toLowerCase();
+      return users.filter(user => user.name.toLowerCase().includes(value));
+    })
+  );
+
+  onSearch(value: string): void {
+    this.search$.next(value);
+  }
 
   ngOnInit(): void {
     this.userService.loadUsers()
       .pipe(
-        tap((users: IUser[]) => {
-          this.userService.setUsers(users);
-        })
-    )
+        tap((users: IUser[]) => this.userService.setUsers(users))
+      )
     .subscribe();
   }
 
   deleteUser(id: number): void {
-    const users: IUser[] = this.userService.getUsers().filter(user => user.id !== id);
-    this.userService.setUsers(users);
+    this.userService.deleteUser(id);
   }
 
   addUser(user: IUser): void {
     this.userService.addUser(user);
+    this.notificationService.showSuccess('Пользователь успешно добавлен');
+    console.log(user);
   }
 
   refresh(): void {
@@ -52,20 +63,6 @@ export class UsersComponent {
       })
     )
     .subscribe();
-  }
-
-  filteredUsers$: Observable<IUser[]> = combineLatest([
-    this.users$,
-    this.searchSubject$
-  ]).pipe(
-    map(([users, search]) => {
-      const value = search.toLowerCase();
-      return users.filter(user => user.name.toLowerCase().includes(value));
-    })
-  );
-
-  onSearch(value: string): void {
-    this.searchSubject$.next(value);
   }
 
 }

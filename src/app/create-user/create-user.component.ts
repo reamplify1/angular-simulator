@@ -1,5 +1,3 @@
-import { UserService } from './../services/user.service';
-import { NotificationService } from './../services/notification.service';
 import { FormGroup } from '@angular/forms';
 import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -17,24 +15,7 @@ export class CreateUserComponent {
 
   @Output() onCreateUser: EventEmitter<IUser> = new EventEmitter<IUser>();
 
-  private notificationService: NotificationService = inject(NotificationService);
-  private userService: UserService = inject(UserService);
   private fb: FormBuilder = inject(FormBuilder);
-
-  private fillUnknown(obj: Record<string, unknown>): void {
-    (Object.keys(obj) as Array<keyof typeof obj>).forEach((key) => {
-      const value: unknown = obj[key];
-
-      if (value === '' || value == null) {
-        obj[key] = 'Неизвестно';
-        return;
-      }
-
-      if (typeof value === 'object' && !Array.isArray(value)) {
-        this.fillUnknown(value as Record<string, unknown>);
-      }
-    });
-  }
 
   createUserForm: FormGroup<ToFormControls<IUser>> = this.fb.group({
     id: [Date.now()],
@@ -60,21 +41,20 @@ export class CreateUserComponent {
       catchPhrase: ['', [Validators.maxLength(200)]],
       bs: ['', [Validators.maxLength(100)]]
     })
-  }) as FormGroup<ToFormControls<IUser>>;
+  }) as FormGroup<ToFormControls<IUser>>
 
   onSubmit(): void {
     if (this.createUserForm.invalid) {
-      this.notificationService.showError('Fill out all fields correctly');
       return;
     }
 
     const formValue: IUser = this.createUserForm.getRawValue() as IUser;
 
-    const submittedData: IUser = { ...formValue };
+    const submittedData: IUser = {
+      ...formValue,
+      id: Date.now() + Math.random()
+    };
 
-    this.fillUnknown(submittedData as unknown as Record<string, unknown>);
-
-    this.notificationService.showSuccess('Пользователь успешно добавлен');
     this.onCreateUser.emit(submittedData);
 
     this.createUserForm.reset();

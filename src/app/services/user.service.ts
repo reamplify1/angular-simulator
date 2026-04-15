@@ -23,7 +23,6 @@ export class UserService {
 
   setUsers(users: IUser[]): void {
     this.usersSubject.next(users);
-    // localStorage.setItem(this.LOCAL_STORAGE_KEY, JSON.stringify(users));
     this.localStorageService.setItem(this.LOCAL_STORAGE_KEY, users);
   }
 
@@ -37,11 +36,15 @@ export class UserService {
     this.setUsers(updatedUsers);
   }
 
+  deleteUser(id: number): void {
+    const users: IUser[] = this.getUsers().filter(user => user.id !== id);
+    this.setUsers(users);
+  }
+
   loadUsers(forceUpdate: boolean = false): Observable<IUser[]> {
     const storageUsers: IUser[] | null = this.localStorageService.getItem(this.LOCAL_STORAGE_KEY);
 
-    if (storageUsers && !forceUpdate) {
-      this.usersSubject.next(storageUsers);
+    if (storageUsers?.length && !forceUpdate) {
       return of(storageUsers);
     }
 
