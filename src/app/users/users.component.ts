@@ -7,10 +7,11 @@ import { NotificationService } from '../services/notification.service';
 import { UserCreateComponent } from '../create-user/user-create.component';
 import { UsersFilterComponent } from '../search/users-filter.component';
 import { AsyncPipe } from '@angular/common';
+import { LoaderComponent } from '../loader/loader.component';
 
 @Component({
   selector: 'app-users',
-  imports: [UserCardComponent, UserCreateComponent, UsersFilterComponent, AsyncPipe],
+  imports: [UserCardComponent, UserCreateComponent, UsersFilterComponent, AsyncPipe, LoaderComponent],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss',
 })
