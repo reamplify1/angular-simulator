@@ -4,13 +4,13 @@ import { map, Observable, combineLatest, tap, BehaviorSubject } from 'rxjs';
 import type { IUser } from '../interfaces/IUser';
 import { UserCardComponent } from '../user-card/user-card.component';
 import { NotificationService } from '../services/notification.service';
-import { CreateUserComponent } from '../create-user/create-user.component';
+import { UserCreateComponent } from '../create-user/user-create.component';
 import { UsersFilterComponent } from '../search/users-filter.component';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-users',
-  imports: [UserCardComponent, CreateUserComponent, UsersFilterComponent, AsyncPipe],
+  imports: [UserCardComponent, UserCreateComponent, UsersFilterComponent, AsyncPipe],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss',
 })
@@ -19,21 +19,20 @@ export class UsersComponent {
   private notificationService: NotificationService = inject(NotificationService)
   private userService: UserService = inject(UserService);
 
-  private search$ = new BehaviorSubject<string>('');
-  private users$: Observable<IUser[]> = this.userService.users$;
+  private filter$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   filteredUsers$: Observable<IUser[]> = combineLatest<[IUser[], string]>([
-    this.users$,
-    this.search$
+    this.userService.users$,
+    this.filter$
   ]).pipe(
-    map(([users, search]: [IUser[], string]) => {
-      const value = search.toLowerCase();
-      return users.filter(user => user.name.toLowerCase().includes(value));
+    map(([users, filter]: [IUser[], string]) => {
+      const value: string = filter.toLowerCase();
+      return users.filter((user: IUser) => user.name.toLowerCase().includes(value));
     })
   );
 
   onSearch(value: string): void {
-    this.search$.next(value);
+    this.filter$.next(value);
   }
 
   ngOnInit(): void {

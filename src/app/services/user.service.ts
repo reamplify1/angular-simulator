@@ -37,7 +37,7 @@ export class UserService {
   }
 
   deleteUser(id: number): void {
-    const users: IUser[] = this.getUsers().filter(user => user.id !== id);
+    const users: IUser[] = this.getUsers().filter((user: IUser) => user.id !== id);
     this.setUsers(users);
   }
 

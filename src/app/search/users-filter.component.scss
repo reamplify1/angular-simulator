@@ -1,6 +1,6 @@
 @use '../../assets/functions'as *;
 
-.search-container {
+.filter-container {
   position: relative;
   display: flex;
   justify-content: center;
@@ -20,7 +20,7 @@
   }
 }
 
-.search-input {
+.filter-input {
   width: 100%;
   max-width: 400px;
   padding: rem(12) rem(16) rem(12) rem(44);

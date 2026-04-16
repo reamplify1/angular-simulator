@@ -48,14 +48,14 @@
   }
 }
 
-.user-card__labels {
+.user-card__info {
   display: flex;
   flex-direction: column;
   font-size: rem(14);
   line-height: rem(20);
   gap: rem(10);
 
-  .user-card__labels-span {
+  .user-card__key {
     font-size: rem(14);
     line-height: rem(20);
     color: #667C7C;
@@ -95,7 +95,7 @@
     gap: rem(4);
   }
 
-  .user-card__values-span {
+  .user-card__value {
     font-weight: 700;
     font-size: rem(14);
     line-height: rem(20);

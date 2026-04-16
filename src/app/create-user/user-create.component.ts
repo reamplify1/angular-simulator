@@ -5,19 +5,19 @@ import { IUser } from '../interfaces/IUser';
 import type { ToFormControls } from '../types/ToFormControls';
 
 @Component({
-  selector: 'app-create-user',
+  selector: 'app-user-create',
   imports: [ReactiveFormsModule],
-  templateUrl: './create-user.component.html',
-  styleUrl: './create-user.component.scss',
+  templateUrl: './user-create.component.html',
+  styleUrl: './user-create.component.scss',
 })
 
-export class CreateUserComponent {
+export class UserCreateComponent {
 
   @Output() createUser: EventEmitter<IUser> = new EventEmitter<IUser>();
 
   private fb: FormBuilder = inject(FormBuilder);
 
-  createUserForm: FormGroup<ToFormControls<IUser>> = this.fb.group({
+  userForm: FormGroup<ToFormControls<IUser>> = this.fb.group({
     id: [Date.now()],
     name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
     username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
@@ -44,11 +44,11 @@ export class CreateUserComponent {
   }) as FormGroup<ToFormControls<IUser>>
 
   onSubmit(): void {
-    if (this.createUserForm.invalid) {
+    if (this.userForm.invalid) {
       return;
     }
 
-    const formValue: IUser = this.createUserForm.getRawValue() as IUser;
+    const formValue: IUser = this.userForm.getRawValue() as IUser;
 
     const submittedData: IUser = {
       ...formValue,
@@ -57,7 +57,7 @@ export class CreateUserComponent {
 
     this.createUser.emit(submittedData);
 
-    this.createUserForm.reset();
+    this.userForm.reset();
   }
 
 }
