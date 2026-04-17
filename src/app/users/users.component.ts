@@ -17,14 +17,14 @@ import { LoaderComponent } from '../loader/loader.component';
 })
 export class UsersComponent {
 
-  private notificationService: NotificationService = inject(NotificationService)
+  private notificationService: NotificationService = inject(NotificationService);
   private userService: UserService = inject(UserService);
 
-  private filter$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  private filterSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   filteredUsers$: Observable<IUser[]> = combineLatest<[IUser[], string]>([
     this.userService.users$,
-    this.filter$
+    this.filterSubject
   ]).pipe(
     map(([users, filter]: [IUser[], string]) => {
       const value: string = filter.toLowerCase();
@@ -33,7 +33,7 @@ export class UsersComponent {
   );
 
   onSearch(value: string): void {
-    this.filter$.next(value);
+    this.filterSubject.next(value);
   }
 
   ngOnInit(): void {
