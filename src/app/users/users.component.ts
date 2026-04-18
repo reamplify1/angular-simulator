@@ -27,8 +27,8 @@ export class UsersComponent {
     this.filterSubject
   ]).pipe(
     map(([users, filter]: [IUser[], string]) => {
-      const value: string = filter.toLowerCase();
-      return users.filter((user: IUser) => user.name.toLowerCase().includes(value));
+      const value: string = filter.trim().toLowerCase();
+      return users.filter((user: IUser) => user.name.trim().toLowerCase().includes(value));
     })
   );
 

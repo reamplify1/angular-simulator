@@ -5,7 +5,7 @@ import { type INotification } from '../interfaces/INotification';
 
 @Component({
   selector: 'app-notification',
-  imports: [NgTemplateOutlet, AsyncPipe],
+  imports: [AsyncPipe],
   templateUrl: './notification.component.html',
   styleUrl: './notification.component.scss',
 })
