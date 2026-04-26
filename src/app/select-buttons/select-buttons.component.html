@@ -1,0 +1,10 @@
+<div class="card flex justify-center">
+  <p-selectbutton
+    [options]="themeOptions"
+    [(ngModel)]="value"
+    [multiple]="false"
+    optionLabel="name"
+    optionValue="value"
+    (onChange)="onThemeChange($event.value)"
+  />
+</div>

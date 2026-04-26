@@ -18,12 +18,13 @@
                 required
                 [(ngModel)]="location"
               >
-                <option value="" disabled selected hidden>Локация для тура</option>
-                @for (location of hikeLocations; track location.id) {
-                  <option class="location__dropdown-option">{{ location.name }}</option>
-                }
-              </select>
-            </div>
+              <option value="" disabled selected hidden>Локация для тура</option>
+              @for (location of hikeLocations; track location.id) {
+                <option class="location__dropdown-option">{{ location.name }}</option>
+              }
+            </select>
+            <fa-icon [icon]="faChevronDown" class="fa-chevron-down"></fa-icon>
+          </div>
             <div class="hero__filters-description">
               <span>выберите из списка</span>
             </div>
@@ -64,6 +65,7 @@
                 <option value="5" class="location__dropdown-option">5</option>
                 <option value="6+" class="location__dropdown-option">6 и более</option>
               </select>
+              <fa-icon [icon]="faChevronDown" class="fa-chevron-down"></fa-icon>
             </div>
             <div class="hero__filters-description">
               <span>выберите из списка</span>
@@ -112,12 +114,9 @@
         src="images/about-tour1.png"
         alt="tour picture"
       >
-      <img
-        id="about-tour__play-icon"
-        class="about-tour__play-icon"
-        src="images/icons/play-icon.svg"
-        alt="tour picture"
-      >
+      <div class="about-tour__play-icon">
+        <fa-icon class=" fs-22" [icon]="faPlay" />
+      </div>
     </div>
   </div>
   <div class="about-tour__info">
@@ -148,19 +147,20 @@
         <div class="programs__info-advantages-list fs-18">
 
           @for (advantage of advantages; track advantage.id) {
-          <div [id]="'advantage-item-' + advantage.id" class="programs__info-advantages-item">
-            <div class="programs__info-advantages-item-img">
-              <img [src]="iconPath + advantage.icon + '.svg'" [alt]="advantage.title">
+            <div [id]="'advantage-item-' + advantage.id" class="programs__info-advantages-item">
+              <div class="programs__info-advantages-item-img">
+                <fa-icon class="fs-32" [icon]="advantage.icon" />
+                <!-- <img [src]="advantage.icon" [alt]="advantage.title"> -->
+              </div>
+              <div class="programs__info-advantages-item-description fs-18">
+                <span class="programs__info-advantages-item-description-title">
+                  {{ advantage.title }}
+                </span>
+                <p class="programs__info-advantages-item-description-text">
+                  {{ advantage.text }}
+                </p>
+              </div>
             </div>
-            <div class="programs__info-advantages-item-description fs-18">
-              <span class="programs__info-advantages-item-description-title">
-                {{ advantage.title }}
-              </span>
-              <p class="programs__info-advantages-item-description-text">
-                {{ advantage.text }}
-              </p>
-            </div>
-          </div>
           }
         </div>
       </div>

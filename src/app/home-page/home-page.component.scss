@@ -6,7 +6,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: var(--primary-color);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -52,14 +52,14 @@
 .header {
   width: 100%;
   height: calc(#{rem(72)} + #{rem(6)} + #{rem(58)});
-  color: var(--white-color);
+  color: var(--primary-color);
   padding-top: rem(16);
   padding-bottom: rem(16);
   font-weight: 600;
 }
 
 .button--small {
-  color: var(--white-color);
+  color: var(--primary-color);
   background-color: var(--secondary-color);
 
 }
@@ -155,7 +155,7 @@
     margin: 0;
     text-align: left;
     text-transform: uppercase;
-    color: var(--white-color);
+    color: var(--primary-color);
     font-weight: 700;
     font-style: normal;
     font-size: rem(50);
@@ -187,6 +187,7 @@
 }
 
 .hero__filters-title {
+  position: relative;
   display: flex;
   align-items: center;
   width: 100%;
@@ -203,17 +204,25 @@
   height: rem(51);
   padding: rem(16) rem(40) rem(16) rem(16);
   font-weight: 700;
-  color: var(--light-grey-background-color);
+  color: var(--light-background-color);
   border: 1px solid #e1e3e4;
   border-radius: rem(8);
-  background-image: url('/images/icons/arrow-down.svg');
   background-repeat: no-repeat;
   background-position: right rem(16) center;
   background-size: rem(20);
 
   &-option {
-    color: var(--black-color);
+    color: var(--third-color);
   }
+}
+
+.fa-chevron-down {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--primary-color)
 }
 
 .date-input-container {
@@ -222,7 +231,7 @@
 }
 
 .date-input::placeholder {
-  color: var(--white-color);
+  color: var(--primary-color);
   font-family: Nunito Sans;
   font-weight: 700;
   font-size: rem(16);
@@ -240,7 +249,7 @@
   background-color: transparent;
   border: 1px solid #e1e3e4;
   outline: none;
-  color: var(--white-color);
+  color: var(--primary-color);
   font-weight: 700;
   background-image: url('/images/icons/calendar-icon.svg');
   background-repeat: no-repeat;
@@ -278,7 +287,7 @@
   position: absolute;
   top: 50%;
   left: 16px;
-  color: var(--light-grey-background-color);
+  color: var(--light-background-color);
   transform: translate(0, -50%);
   font-weight: 700;
   pointer-events: none;
@@ -306,7 +315,7 @@
   border-radius: rem(9);
   border: none;
   font-weight: 700;
-  color: var(--white-color);
+  color: var(--primary-color);
   cursor: pointer;
   z-index: 1;
   border: none;
@@ -346,14 +355,14 @@
   &:disabled {
     opacity: 1;
     background-color: var(--secondary-color);
-    color: var(--white-color);
+    color: var(--primary-color);
     cursor: not-allowed;
   }
 }
 
 .hero__filters-description {
   padding: rem(8);
-  color: var(--light-grey-background-color);
+  color: var(--light-background-color);
 
   span {
     font-weight: 400;
@@ -373,7 +382,7 @@
   background-color: transparent;
   border: 1px solid #e1e3e4;
   outline: none;
-  color: var(--white-color);
+  color: var(--primary-color);
   margin-right: rem(100);
 
 }
@@ -381,7 +390,7 @@
 .live-output {
   display: flex;
   align-items: center;
-  color: var(--white-color);
+  color: var(--primary-color);
 }
 
 .about-tour {
@@ -437,9 +446,14 @@
   position: absolute;
   top: 50%;
   left: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--secondary-color);
   transform: translate(-50%, -50%);
-  width: rem(60);
-  height: rem(60);
+  width: rem(50);
+  height: rem(50);
   cursor: pointer;
   transition: transform 0.5s ease;
 
@@ -456,7 +470,7 @@
 }
 
 .programs-wrapper {
-  background-color: var(--light-grey-background-color);
+  background-color: var(--light-background-color);
 }
 
 .programs {
@@ -684,7 +698,7 @@
   align-items: center;
   flex-direction: column;
   padding: rem(85);
-  background-color: var(--light-grey-background-color);
+  background-color: var(--light-background-color);
   margin-bottom: rem(85);
 
   .traveler-blog-label {
@@ -704,7 +718,7 @@
     }
 
     .traveler-blog-item {
-      background-color: var(--white-color);
+      background-color: var(--primary-color);
       border-radius: 10px;
       cursor: pointer;
       overflow: hidden;
@@ -814,7 +828,7 @@
   width: rem(1180);
   gap: rem(64);
   padding: rem(40) rem(100);
-  background-color: var(--white-color);
+  background-color: var(--primary-color);
   box-shadow: 0px 0px 15px 0px #18121E1F;
   border-radius: rem(6);
 
@@ -847,7 +861,7 @@
           width: rem(280);
           height: rem(45);
           padding: rem(12) rem(16);
-          background-color: var(--light-grey-background-color);
+          background-color: var(--light-background-color);
         }
       }
 
@@ -857,7 +871,7 @@
         .button--subscribe {
           border-radius: rem(4);
           background-color: var(--secondary-color);
-          color: var(--white-color);
+          color: var(--primary-color);
           height: 100%;
           width: rem(240);
         }

@@ -50,7 +50,7 @@
   width: rem(1180);
   gap: rem(64);
   padding: rem(40) rem(100);
-  background-color: var(--white-color);
+  background-color: var(--primary-color);
   box-shadow: 0px 0px 15px 0px #18121E1F;
   border-radius: rem(6);
 
@@ -74,6 +74,8 @@
       .subscribe-input {
         display: flex;
         height: 100%;
+        background-color: #F3F5F4;
+        border-radius: 4px;
 
         input {
           border: none;
@@ -82,7 +84,7 @@
           width: rem(280);
           height: rem(45);
           padding: rem(12) rem(16);
-          background-color: var(--light-grey-background-color);
+          background-color: var(--light-background-color);
         }
       }
 
@@ -92,7 +94,7 @@
         .button--subscribe {
           border-radius: rem(4);
           background-color: var(--secondary-color);
-          color: var(--white-color);
+          color: var(--primary-color);
           height: 100%;
           width: rem(240);
         }
@@ -128,7 +130,7 @@
   display: flex;
   justify-content: space-between;
   width: rem(1180);
-  color: var(--light-grey-background-color);
+  color: var(--light-background-color);
   padding: rem(178) 0 rem(80) 0;
 
   h4 {
@@ -159,10 +161,9 @@
     transform: translateY(-50%);
     width: rem(6);
     height: rem(10);
-    background-image: url('/images/icons/arrow-icon.svg');
     background-size: contain;
     background-repeat: no-repeat;
-    color: var(--light-grey-background-color);
+    color: var(--light-background-color);
   }
 
   .footer-section-company {
@@ -198,9 +199,27 @@
     width: rem(280);
     gap: rem(16);
 
+    .footer-section-service {
+      display: flex;
+      flex-direction: row;
+      gap: rem(8);
+      text-align: center;
+
+      span {
+        padding: 0px;
+      }
+    }
+
     h4 {
       margin-bottom: rem(4);
     }
+  }
+
+  .fa-angle-right {
+    display: flex;
+    width: rem(9);
+    height: rem(10);
+    padding: 0px;
   }
 
   .footer-section-important-info {
@@ -212,6 +231,15 @@
     h4 {
       margin-bottom: rem(4);
     }
+
+    .footer-section-important-info-item {
+      display: flex;
+      gap: rem(8);
+
+      span {
+        padding: 0px;
+      }
+    }
   }
 }
 
@@ -222,7 +250,7 @@
   width: 100%;
 
   .footer-bottom {
-    color: var(--light-grey-background-color);
+    color: var(--light-color);
     display: flex;
     align-items: center;
     justify-content: space-between;

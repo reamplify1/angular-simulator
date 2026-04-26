@@ -31,27 +31,29 @@
         <a id="contact-number" class="fs-14">+7 (123) 456-78-90</a>
       </div>
       <div class="footer-section-company-logos">
-        <img id="contact-telegram-icon" src="/images/icons/footer-logos/telegram-icon.svg" alt="telegram logo">
-        <img id="contact-vk-icon" src="/images/icons/footer-logos/vk-icon.svg" alt="vk logo">
-        <img id="contact-pinterest-icon" src="/images/icons/footer-logos/pinterest-icon.svg" alt="pinterest logo">
-        <img id="contact-skype-icon" src="/images/icons/footer-logos/skype-icon.svg" alt="skype logo">
+        <fa-icon class="fs-32" [icon]="faTelegram" />
+        <fa-icon class="fs-32" [icon]="faVk" />
+        <fa-icon class="fs-32" [icon]="faPinterest" />
+        <fa-icon class="fs-32" [icon]="faSkype" />
       </div>
     </div>
     <div class="footer-section-services">
       <h4>Наши услуги</h4>
-      <span>Прогулки в горы летом</span>
-      <span>Зимние походы в горы</span>
-      <span>Посещение храмов в горах</span>
-      <span>Экстремальные виды туризма</span>
-      <span>Походы в джунглях Амазонии</span>
-      <span>Поездка в Африку</span>
+      @for (service of servicesInfo; track $index; let i = $index) {
+        <div class="footer-section-service">
+          <fa-icon [icon]="faAngleRight" class="fa-angle-right"></fa-icon>
+          <span>{{ service }}</span>
+        </div>
+      }
     </div>
     <div class="footer-section-important-info">
       <h4>Важно для путешествий</h4>
-      <span>Как собрать в долгий поход?</span>
-      <span>Жизненно важные предметы для похода</span>
-      <span>Медицинская страховка, гарантии безопасности</span>
-      <span>Если вы врач - загляните сюда</span>
+      @for (info of travelInfo; track $index; let i = $index) {
+    <div class="footer-section-important-info-item">
+      <fa-icon [icon]="faAngleRight" class="fa-angle-right"></fa-icon>
+      <span>{{ info }}</span>
+    </div>
+      }
     </div>
   </div>
   <div class="footer-bottom-wrapper">

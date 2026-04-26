@@ -9,7 +9,8 @@
   padding-bottom: calc(rem(80) + rem(109));
   width: 100%;
   gap: rem(50) rem(70);
-  color: #F3F5F4;
+  color: var(--light-color);
+  background-color: var(--primary-color);
 }
 
 .user-card-empty {
@@ -21,7 +22,7 @@
 .refresh-button {
   height: rem(80);
   width: rem(80);
-  background-color: #D4A373;
+  background-color: var(--user-card-secondary-color);;
   border-radius: 50%;
   position: fixed;
   bottom: rem(60);
@@ -36,8 +37,8 @@
   z-index: 999;
 
   &:hover {
-    background: #D4A373;
-    color: white;
+    background: var(--user-card-secondary-color);;
+    color: var(--primary-color);
   }
 
   &:active {

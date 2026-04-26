@@ -1,12 +1,19 @@
 @use '../../assets/functions' as *;
 
+.user-form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-color);
+}
+
 .user-form {
   max-width: rem(600);
   margin: rem(100) auto;
   padding: rem(24);
-  background: #ffffff;
+  background: var(--user-form-background-color);
   border-radius: rem(12);
-  box-shadow: 0 rem(4) rem(20) rgba(0, 0, 0, 0.08);
+  box-shadow: 0 rem(4) rem(20) var(--user-card-shadow-color);
   font-family: 'Segoe UI', Roboto, sans-serif;
 }
 
@@ -15,7 +22,7 @@
   width: fit-content;
   margin: 0 auto rem(24);
   font-size: rem(28);
-  color: #1f2937;
+  color: var(--form-create-user-secondary-color);
   font-weight: 700;
   letter-spacing: rem(-0.5);
   text-align: center;
@@ -25,7 +32,7 @@
     display: block;
     width: 100%;
     height: rem(4);
-    background: #D4A373;
+    background: var(--user-card-secondary-color);
     margin-top: rem(8);
     border-radius: rem(2);
   }
@@ -42,7 +49,7 @@
   h3, h4 {
     width: 100%;
     margin: rem(8) 0 rem(4);
-    color: #333;
+    color: var(--form-create-user-secondary-color);
   }
 }
 
