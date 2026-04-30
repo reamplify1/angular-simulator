@@ -10,6 +10,7 @@ import { ThemeSwitcherComponent } from '../theme-switcher/theme-switcher.compone
 import { ThemeService } from '../services/theme.service';
 import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs';
+import { AppTheme } from '../../enums/AppTheme';
 
 
 @Component({
@@ -33,7 +34,7 @@ export class HeaderComponent {
   clickerCounter: number = 0;
 
   ngOnInit(): void {
-    const theme = this.themeService.getTheme();
+    const theme: AppTheme = this.themeService.getTheme();
     this.themeService.setTheme(theme);
   }
 
