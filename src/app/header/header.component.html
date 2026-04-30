@@ -17,9 +17,9 @@
           </a>
         }
       </nav>
-      <app-theme-switcher/>
+      <app-theme-switcher id="theme-switcher"/>
       <div class="navigation__button">
-        <app-dark-mode-toggle  />
+        <app-dark-mode-toggle id="dark-mode-switcher"/>
         @if (isDarkMode$ | async) {
           <fa-icon [icon]="faMoon"></fa-icon>
         } @else {
