@@ -3,31 +3,39 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { INavigation } from '../interfaces/INavigation';
-import { ToggleSwitchDisabledDemo } from '../toggle-switch/toggle-switch-disabled-demo';
+import { DarkModeToggleComponent } from '../toggle-theme-color.component/dark-mode-toggle';
 import { faSun, faMoon ,IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { SelectbuttonMultipleDemo } from '../select-buttons/select-buttons.component';
-import { ThemesService } from '../services/themes.service';
+import { ThemeSwitcherComponent } from '../theme-switcher/theme-switcher.component';
+import { ThemeService } from '../services/theme.service';
+import { AsyncPipe } from '@angular/common';
+import { Observable } from 'rxjs';
 
 
 @Component({
   selector: 'app-header',
-  imports: [FormsModule, RouterLink, RouterLinkActive, SelectbuttonMultipleDemo ,ToggleSwitchDisabledDemo, FontAwesomeModule],
+  imports: [FormsModule, RouterLink, AsyncPipe ,RouterLinkActive, ThemeSwitcherComponent, DarkModeToggleComponent, FontAwesomeModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   standalone: true,
 })
 export class HeaderComponent {
 
-  themeService: ThemesService = inject(ThemesService);
+  themeService: ThemeService = inject(ThemeService);
   notificationService: NotificationService = inject(NotificationService);
 
+  isDarkMode$: Observable<boolean> = this.themeService.isDarkMode$;
   faMoon: IconDefinition = faMoon;
   faSun: IconDefinition = faSun;
   companyName: string = 'Румтибет';
   dateNow: string = new Date().toLocaleString();
   isDisplayTime: boolean = true;
   clickerCounter: number = 0;
+
+  ngOnInit(): void {
+    const theme = this.themeService.getTheme();
+    this.themeService.setTheme(theme);
+  }
 
   toggleDate(): void {
     this.isDisplayTime = !this.isDisplayTime;

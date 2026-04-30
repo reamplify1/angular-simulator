@@ -17,13 +17,13 @@
           </a>
         }
       </nav>
-      <app-select-buttons />
+      <app-theme-switcher/>
       <div class="navigation__button">
-        <toggle-switch-disabled-demo (toggle)="this.themeService.toggleDarkMode($event)"/>
-        @if (this.themeService.themeColorDay) {
-          <fa-icon [icon]="faSun" class="fa-sun-icon"></fa-icon>
-        } @else {
+        <app-dark-mode-toggle  />
+        @if (isDarkMode$ | async) {
           <fa-icon [icon]="faMoon"></fa-icon>
+        } @else {
+          <fa-icon [icon]="faSun" class="fa-sun-icon"></fa-icon>
         }
         <button
           id="button-consult"
@@ -37,7 +37,7 @@
   </div>
 
   <div class="date-clicker-container container">
-    <span>{{ isDisplayTime ? dateNow: clickerCounter}}</span>
+    <span>{{ isDisplayTime ? dateNow: clickerCounter }}</span>
     <div class="clicker-buttons" [hidden]="isDisplayTime">
       <button
         id="button-counter-increase"

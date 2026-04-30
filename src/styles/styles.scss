@@ -26,6 +26,7 @@
   --user-card-shadow-color: #0000000F;
   --user-card-secondary-color: #D4A373;
   --user-form-background-color: #ebebebec;
+  --user-card-border-color: #F4F7F5;
 }
 
 .my-app-dark {
@@ -40,6 +41,7 @@
   --p-primary-hover-color: #c7c7c7 !important;
   --user-card-secondary-color: #368092;
   --user-form-background-color: #313131d5;
+  --user-card-border-color: #252525;
 
   .navigation__item {
     color: var(--secondary-color);
