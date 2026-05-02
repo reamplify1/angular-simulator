@@ -6,7 +6,7 @@ import { INavigation } from '../interfaces/INavigation';
 import { DarkModeToggleComponent } from '../toggle-theme-color.component/dark-mode-toggle';
 import { faSun, faMoon ,IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ThemeSwitcherComponent } from '../theme-switcher/theme-switcher.component';
+import { ThemeComponent } from '../theme-switcher/theme.component';
 import { ThemeService } from '../services/theme.service';
 import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs';
@@ -15,7 +15,7 @@ import { AppTheme } from '../../enums/AppTheme';
 
 @Component({
   selector: 'app-header',
-  imports: [FormsModule, RouterLink, AsyncPipe ,RouterLinkActive, ThemeSwitcherComponent, DarkModeToggleComponent, FontAwesomeModule],
+  imports: [FormsModule, RouterLink, AsyncPipe ,RouterLinkActive, ThemeComponent, DarkModeToggleComponent, FontAwesomeModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   standalone: true,

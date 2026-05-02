@@ -19,8 +19,8 @@ export class ThemeService {
   private themeSubject: BehaviorSubject<AppTheme> = new BehaviorSubject<AppTheme>(AppTheme.AURA);
   theme$: Observable<AppTheme> = this.themeSubject.asObservable();
 
-  private darkModeSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  isDarkMode$: Observable<boolean> = this.darkModeSubject.asObservable();
+  private isDarkModeSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  isDarkMode$: Observable<boolean> = this.isDarkModeSubject.asObservable();
 
   constructor() {
     this.initTheme();
@@ -38,7 +38,7 @@ export class ThemeService {
   private initDarkMode(): void {
     const isDark: boolean = this.localStorageService.getItem<boolean>('dark-mode') ?? false;
 
-    this.darkModeSubject.next(isDark);
+    this.isDarkModeSubject.next(isDark);
 
     document.documentElement.classList.toggle('my-app-dark', isDark);
   }
@@ -76,7 +76,7 @@ export class ThemeService {
 
   toggleDarkMode(isDark: boolean): void {
     document.documentElement.classList.toggle('my-app-dark', isDark);
-    this.darkModeSubject.next(isDark);
+    this.isDarkModeSubject.next(isDark);
     this.localStorageService.setItem('dark-mode', isDark);
   }
 

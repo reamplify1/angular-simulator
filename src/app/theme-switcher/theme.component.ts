@@ -6,17 +6,17 @@ import { AppTheme } from '../../enums/AppTheme';
 import type { ITheme } from '../interfaces/ITheme';
 
 @Component({
-  selector: 'app-theme-switcher',
+  selector: 'app-theme',
   standalone: true,
   imports: [SelectButtonModule, FormsModule],
-  templateUrl: './theme-switcher.component.html',
-  styleUrl: './theme-switcher.component.scss',
+  templateUrl: './theme.component.html',
+  styleUrl: './theme.component.scss',
 })
-export class ThemeSwitcherComponent {
+export class ThemeComponent {
 
   themeService: ThemeService = inject(ThemeService)
 
-  value: AppTheme = AppTheme.AURA;
+  theme: AppTheme = AppTheme.AURA;
 
   themeOptions: ITheme[] = [
     { name: 'Aura', value: AppTheme.AURA },
@@ -26,12 +26,12 @@ export class ThemeSwitcherComponent {
   ];
 
   ngOnInit(): void {
-    this.value = this.themeService.getTheme();
+    this.theme = this.themeService.getTheme();
   }
 
   onThemeChange(theme: AppTheme): void {
     this.themeService.setTheme(theme);
-    this.value = theme;
+    this.theme = theme;
   }
 
 }
