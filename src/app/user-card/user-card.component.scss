@@ -7,8 +7,8 @@
   width: rem(440);
   display: flex;
   flex-direction: column;
-  box-shadow: 0px 10px 30px 0px #0000000F;
-  border-top: #D4A373 4px solid;
+  box-shadow: 0px 10px 30px 0px var(--user-card-shadow-color);
+  border-top: var(--user-card-secondary-color) 4px solid;
   border-radius: rem(4);
 
   .user-card-name {
@@ -24,7 +24,7 @@
     font-weight: 700;
     font-size: rem(15);
     line-height: rem(17);
-    color: #D4A373;
+    color: var(--user-card-secondary-color);
   }
 }
 
@@ -63,7 +63,7 @@
 }
 
 .secondary-color {
-  color: #D4A373 !important;
+  color: var(--user-card-secondary-color) !important;
 }
 
 .text-italic {
@@ -78,7 +78,7 @@
   border: rem(1) solid #E2E8F0;
   padding: rem(1) rem(6);
   border-radius: rem(3);
-  background-color: #F4F7F5;
+  background-color: var(--user-card-border-color);
 }
 
 .user-card__values {
@@ -161,11 +161,11 @@
   margin-top: rem(24);
   padding: rem(10) rem(14);
 
-  border: rem(1) solid #D4A373;
+  border: rem(1) solid var(--user-card-secondary-color);
   border-radius: rem(4);
 
   background-color: transparent;
-  color: #D4A373;
+  color: var(--user-card-secondary-color);;
 
   font-weight: 700;
   font-size: rem(14);
@@ -175,7 +175,7 @@
   transition: all 0.2s ease;
 
   &:hover {
-    background-color: #D4A373;
+    background-color: var(--user-card-secondary-color);
     color: white;
   }
 

@@ -14,10 +14,12 @@ import { NotificationType } from '../../enums/NotificationType';
 import { blogArticles } from '.././data/blog-articles';
 import { NotificationService } from '../services/notification.service';
 import { LocalStorageService } from '../services/local-storage.service';
+import { faPlay, IconDefinition, faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-home-page',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, FontAwesomeModule],
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
   standalone: true,
@@ -26,6 +28,9 @@ export class HomePageComponent {
 
   notificationService: NotificationService = inject(NotificationService);
   localStorageService: LocalStorageService = inject(LocalStorageService);
+
+  faPlay: IconDefinition = faPlay;
+  faChevronDown: IconDefinition = faChevronDown;
 
   location: string = '';
   date: string = '';

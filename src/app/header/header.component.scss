@@ -5,7 +5,7 @@
   top: 0;
   left: 0;
   z-index: 999;
-  background-color: #18121E80;
+  background-color: var(--header-background-color);
   z-index: 9999;
   width: 100%;
   height: rem(156);
@@ -16,7 +16,7 @@
 
 .button--small {
   color: var(--secondary-color);
-  background-color: var(--white-color);
+  background-color: var(--primary-color);
   border: none;
 }
 
@@ -60,6 +60,14 @@
     display: flex;
     gap: rem(24);
   }
+
+  &__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: rem(10);
+    flex-direction: row;
+  }
 }
 
 .date-clicker-container {
@@ -85,17 +93,21 @@
     cursor: pointer;
 
     &:disabled {
-      color: #6FA0A0;
+      color: var(--secondary-color);
       cursor: not-allowed;
     }
   }
 }
 
 .navigation__item {
-  color: var(--light-grey-background-color);
+  color: var(--navigation-item-color);
   text-decoration: none;
 }
 
 .active-link {
   text-decoration: underline;
+}
+
+.fa-sun-icon {
+  color: var(--primary-color)
 }
