@@ -2,7 +2,7 @@
 import { definePreset } from '@primeuix/themes';
 import Aura from '@primeuix/themes/aura';
 
-export const CustomIndigoPreset = definePreset(Aura, {
+export const customIndigoPreset = definePreset(Aura, {
 
   semantic: {
     primary: {

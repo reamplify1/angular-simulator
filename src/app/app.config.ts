@@ -5,12 +5,12 @@ import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import Nora from '@primeuix/themes/nora';
 import Lara from '@primeuix/themes/lara';
-import { CustomIndigoPreset } from './presets/indigo-preset';
+import { customIndigoPreset } from './presets/indigo-preset';
 import { Preset } from '@primeuix/themes/types';
 import { AppTheme } from '../enums/AppTheme';
 
 function getInitialTheme(): Preset {
-  const savedTheme: string | null = localStorage.getItem('app-theme');
+  const savedTheme: AppTheme | null = localStorage.getItem('app-theme') as AppTheme | null;
 
   switch (savedTheme) {
     case AppTheme.LARA:
@@ -20,7 +20,7 @@ function getInitialTheme(): Preset {
       return Nora;
 
     case AppTheme.CUSTOM:
-      return CustomIndigoPreset;
+      return customIndigoPreset;
 
     default:
       return Aura;

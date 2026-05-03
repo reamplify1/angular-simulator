@@ -3,7 +3,7 @@ import { PrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import Lara from '@primeuix/themes/lara';
 import Nora from '@primeuix/themes/nora';
-import { CustomIndigoPreset } from '../presets/indigo-preset';
+import { customIndigoPreset } from '../presets/indigo-preset';
 import { usePreset } from '@primeuix/themes';
 import { AppTheme } from '../../enums/AppTheme';
 import { LocalStorageService } from './local-storage.service';
@@ -14,7 +14,7 @@ export class ThemeService {
 
   private primeNg: PrimeNG = inject(PrimeNG);
   private localStorageService: LocalStorageService = inject(LocalStorageService)
-  private STORAGE_KEY = 'app-theme';
+  private STORAGE_KEY: string = 'app-theme';
 
   private themeSubject: BehaviorSubject<AppTheme> = new BehaviorSubject<AppTheme>(AppTheme.AURA);
   theme$: Observable<AppTheme> = this.themeSubject.asObservable();
@@ -65,7 +65,7 @@ export class ThemeService {
       break;
 
       case AppTheme.CUSTOM:
-      usePreset(CustomIndigoPreset);
+      usePreset(customIndigoPreset);
       break;
     }
   }
