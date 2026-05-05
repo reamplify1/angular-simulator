@@ -1,5 +1,12 @@
 @use '../../assets/functions'as *;
 
+.filter-wrapper {
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .filter-container {
   position: relative;
   display: flex;
@@ -27,7 +34,7 @@
   font-size: rem(16);
   font-family: 'Inter', sans-serif;
   color: #000;
-  background-color: #ffffff;
+  background-color: var(--primary-color);
 
   border: 1px solid #d1d5db;
   border-radius: 12px;

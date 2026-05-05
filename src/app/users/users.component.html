@@ -14,7 +14,7 @@
 <div class="user-card-list__wrapper">
   @for (user of filteredUsers$ | async; track user.id) {
     <app-user-card [user]="user" (deleteUser)="onDeleteUser($event)"/>
-  } @empty { 
+  } @empty {
     <div class="user-card-empty">
       Нет пользователей для отображения
     </div>

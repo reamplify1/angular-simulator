@@ -14,11 +14,38 @@
 }
 
 :root {
-  --black-color: #000000;
-  --white-color: #ffffff;
+  --primary-color: #ffffff;
   --secondary-color: #1a3e3e;
+  --third-color: #000000;
   --yellow-color: #F2BE22;
-  --light-grey-background-color: #F3F5F4
+  --light-background-color: #F3F5F4;
+  --light-color: #F3F5F4;
+  --header-background-color: #18121E80;
+  --navigation-item-color: #F3F5F4;
+  --form-create-user-secondary-color: #1f2937;
+  --user-card-shadow-color: #0000000F;
+  --user-card-secondary-color: #D4A373;
+  --user-form-background-color: #ebebebec;
+  --user-card-border-color: #F4F7F5;
+}
+
+.my-app-dark {
+  --primary-color: rgb(27, 27, 27);
+  --secondary-color: #f0f0f0;
+  --light-background-color: #000000d5;
+  --light-color: #F3F5F4;
+  --header-background-color: #3a3a3af6;
+  --form-create-user-secondary-color: #cfcfcf;
+  --user-card-shadow-color: #9494942d;
+  --p-primary-color: #f8f8f8 !important;
+  --p-primary-hover-color: #c7c7c7 !important;
+  --user-card-secondary-color: #368092;
+  --user-form-background-color: #313131d5;
+  --user-card-border-color: #252525;
+
+  .navigation__item {
+    color: var(--secondary-color);
+  }
 }
 
 .container {
@@ -52,7 +79,7 @@
   background-color: var(--secondary-color);
   border: none;
   border-radius: rem(8);
-  color: var(--white-color);
+  color: var(--primary-color);
   cursor: pointer;
   width: fit-content;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -96,6 +123,10 @@
 
 .fs-24 {
   font-size: rem(24);
+}
+
+.fs-22 {
+  font-size: rem(22);
 }
 
 .fs-18 {
