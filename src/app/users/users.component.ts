@@ -8,10 +8,11 @@ import { UserCreateComponent } from '../create-user/user-create.component';
 import { UsersFilterComponent } from '../search/users-filter.component';
 import { AsyncPipe } from '@angular/common';
 import { LoaderComponent } from '../loader/loader.component';
+import { PluralizePipe } from '../pipes/pluralize.pipe';
 
 @Component({
   selector: 'app-users',
-  imports: [UserCardComponent, UserCreateComponent, UsersFilterComponent, AsyncPipe, LoaderComponent],
+  imports: [UserCardComponent, UserCreateComponent, UsersFilterComponent, AsyncPipe, LoaderComponent, PluralizePipe],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss',
 })
@@ -28,6 +29,11 @@ export class UsersComponent {
   ]).pipe(
     map(([users, filter]: [IUser[], string]) => {
       const value: string = filter.trim().toLowerCase();
+
+      if (!value) {
+        return users;
+      }
+
       return users.filter((user: IUser) => user.name.trim().toLowerCase().includes(value));
     })
   );

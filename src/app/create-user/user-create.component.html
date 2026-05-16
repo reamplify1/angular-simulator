@@ -4,23 +4,33 @@
     <div class="form-section">
       <label>
         Имя
-        <input id="name" type="text" formControlName="name">
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          appAnimatedGradient
+            [config]="{
+              colors: ['#ff0055', '#00ffcc'],
+              delay: 500,
+              thickness: '4px',
+            }"
+        >
       </label>
       <label>
         Username
-        <input id="username" type="text" formControlName="username">
+        <input id="username" type="text" formControlName="username" appAnimatedGradient>
       </label>
       <label>
         Email
-        <input id="email" type="email" formControlName="email">
+        <input id="email" type="email" formControlName="email" appAnimatedGradient>
       </label>
       <label>
         Телефон
-        <input id="telephone" type="text" formControlName="phone">
+        <input id="telephone" type="text" formControlName="phone" appAnimatedGradient>
       </label>
       <label>
         Website
-        <input id="website" type="text" formControlName="website">
+        <input id="website" type="text" formControlName="website" appAnimatedGradient>
       </label>
     </div>
 
@@ -28,30 +38,30 @@
       <h3>Адрес</h3>
       <label>
         Город
-        <input id="address-city" type="text" formControlName="city">
+        <input id="address-city" type="text" formControlName="city" appAnimatedGradient>
       </label>
       <label>
         Улица
-        <input id="address-street" type="text" formControlName="street">
+        <input id="address-street" type="text" formControlName="street" appAnimatedGradient>
       </label>
       <label>
         Офис
-        <input id="address-office" type="text" formControlName="suite">
+        <input id="address-office" type="text" formControlName="suite" appAnimatedGradient>
       </label>
       <label>
         Индекс
-        <input id="address-index" type="text" formControlName="zipcode">
+        <input id="address-index" type="text" formControlName="zipcode" appAnimatedGradient>
       </label>
 
       <div formGroupName="geo">
         <h4>Координаты</h4>
         <label>
           Geo latitude
-          <input id="latitude" type="text" formControlName="lat">
+          <input id="latitude" type="text" formControlName="lat" appAnimatedGradient>
         </label>
         <label>
           Geo longitude
-          <input id="longitude" type="text" formControlName="lng">
+          <input id="longitude" type="text" formControlName="lng" appAnimatedGradient>
         </label>
       </div>
     </div>
@@ -60,15 +70,15 @@
       <h3>Компания</h3>
       <label>
         Название
-        <input id="company-name" type="text" formControlName="name">
+        <input id="company-name" type="text" formControlName="name" appAnimatedGradient>
       </label>
       <label>
         Миссия
-        <input id="company-mission" type="text" formControlName="catchPhrase">
+        <input id="company-mission" type="text" formControlName="catchPhrase" appAnimatedGradient>
       </label>
       <label>
         Специализация
-        <input id="company-specialization" type="text" formControlName="bs">
+        <input id="company-specialization" type="text" formControlName="bs" appAnimatedGradient>
       </label>
     </div>
 
@@ -77,6 +87,7 @@
       (click)="onSubmit()"
       type="submit"
       [disabled]="userForm.invalid"
+      appHoverBold
     >
       Сохранить
     </button>

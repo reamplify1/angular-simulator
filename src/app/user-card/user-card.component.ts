@@ -1,9 +1,14 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IUser } from '../interfaces/IUser';
+import { CommonModule } from '@angular/common';
+import { PhoneFormatPipe } from '../pipes/phone-format.pipe';
+import { HoverBoldDirective } from '../directives/bold-text.directive';
+import { AnimatedGradientDirective } from '../directives/animated-gradient.directive';
+
 
 @Component({
   selector: 'app-user-card',
-  imports: [],
+  imports: [CommonModule, PhoneFormatPipe, HoverBoldDirective, AnimatedGradientDirective],
   templateUrl: './user-card.component.html',
   styleUrl: './user-card.component.scss',
 })

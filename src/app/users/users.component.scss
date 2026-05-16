@@ -22,7 +22,7 @@
 .refresh-button {
   height: rem(80);
   width: rem(80);
-  background-color: var(--user-card-secondary-color);;
+  background-color: var(--user-card-secondary-color);
   border-radius: 50%;
   position: fixed;
   bottom: rem(60);
@@ -37,7 +37,7 @@
   z-index: 999;
 
   &:hover {
-    background: var(--user-card-secondary-color);;
+    background: var(--user-card-secondary-color);
     color: var(--primary-color);
   }
 
@@ -57,4 +57,30 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+.users-count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  padding: 10px 14px;
+  margin: 0px;
+
+  background-color: var(--primary-color);
+  border-radius: 10px;
+
+  font-size: 14px;
+}
+
+.users-count__number {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--user-card-secondary-color);
+}
+
+.users-count__text {
+  font-weight: 500;
 }
