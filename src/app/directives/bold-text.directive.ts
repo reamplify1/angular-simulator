@@ -1,20 +1,20 @@
-import { Directive, ElementRef, HostBinding, HostListener } from '@angular/core';
+import { Directive, ElementRef, HostBinding, HostListener, inject } from '@angular/core';
 
 @Directive({
   selector: '[appHoverBold]',
 })
 export class HoverBoldDirective {
 
-  constructor(private el: ElementRef) { }
+  private el: ElementRef = inject(ElementRef);
 
   @HostBinding('style.fontWeight') fontWeight: string = '';
 
   @HostListener('mouseenter') onMouseEnter(): void {
-    this.fontWeight = 'bold'
+    this.fontWeight = 'bold';
   }
 
   @HostListener('mouseleave') onMouseLeave(): void {
-    this.fontWeight = 'normal'
+    this.fontWeight = 'normal';
   }
 
 }

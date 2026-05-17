@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener, Input, Renderer2, OnDestroy } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input, Renderer2, OnDestroy, inject } from '@angular/core';
 import { IGradientConfiguration } from '../interfaces/IGradientConfiguration';
 
 @Directive({
@@ -9,11 +9,8 @@ export class AnimatedGradientDirective implements OnDestroy {
   @Input() config: IGradientConfiguration = {};
 
   private timer: ReturnType<typeof setTimeout> | null = null;
-
-  constructor(
-    private el: ElementRef,
-    private renderer: Renderer2
-  ) {}
+  private el: ElementRef = inject(ElementRef);
+  private renderer: Renderer2 = inject(Renderer2)
 
   @HostListener('mouseenter')
   onMouseEnter(): void {
@@ -37,7 +34,6 @@ export class AnimatedGradientDirective implements OnDestroy {
     const colors: string[] = this.config.colors ?? ['#ff6ec4', '#7873f5'];
     const thickness: string = this.config.thickness ?? '2px';
     const element: HTMLElement = this.el.nativeElement;
-
     this.renderer.setStyle(element, 'border', `${thickness} solid transparent`);
     this.renderer.setStyle(element, 'borderImage', `linear-gradient(90deg, ${colors.join(',')}) 1`);
   }

@@ -11,18 +11,14 @@ export class PluralizePipe implements PipeTransform {
     const lastTwo: number = value % 100;
 
     if (lastTwo >= 11 && lastTwo <= 14) {
-      return many;
+      return `${value} ${many}`;
+    } else if (lastOne === 1) {
+      return `${value} ${one}`;
+    } else if (lastOne >= 2 && lastOne <= 4) {
+      return `${value} ${few}`;
+    } else {
+      return `${value} ${many}`;
     }
-
-    if (lastOne === 1) {
-      return one;
-    }
-
-    if (lastOne >= 2 && lastOne <= 4) {
-      return few;
-    }
-
-    return many;
   }
 
 }

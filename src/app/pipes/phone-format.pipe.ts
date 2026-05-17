@@ -1,13 +1,14 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { PhoneFormat } from '../../enums/PhoneFormat';
 
-type PhoneFormat = 'compact' | 'international' | 'national' | 'masked';
+// type PhoneFormat = 'compact' | 'international' | 'national' | 'masked';
 
 @Pipe({
   name: 'phoneFormat',
 })
 export class PhoneFormatPipe implements PipeTransform {
 
-  transform(value: string | number, format: PhoneFormat = 'international' ): string {
+  transform(value: string | number, format: PhoneFormat = PhoneFormat.INTERNATIONAL ): string {
     if (!value) return '';
 
     const rawNumbers: string = value.toString().replace(/\D/g, '');
@@ -18,17 +19,15 @@ export class PhoneFormatPipe implements PipeTransform {
     const group3: string = rawNumbers.slice(10, 12);
 
     switch (format) {
-      case 'compact':
-        return '+' + rawNumbers;
-      case 'national':
+      case PhoneFormat.COMPACT:
+        return `+${rawNumbers}`;
+      case PhoneFormat.NATIONAL:
         return `${operator} ${group1} ${group2} ${group3}`;
-      case 'masked':
+      case PhoneFormat.MASKED:
         return `+${country} ${operator} *** ** ${group3}`;
-      case 'international':
-      default:
+      case PhoneFormat.INTERNATIONAL:
         return `+${country} ${operator} ${group1} ${group2} ${group3}`;
     }
-
   }
 
 }
