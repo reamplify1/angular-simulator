@@ -34,8 +34,17 @@ export class AnimatedGradientDirective implements OnDestroy {
     const colors: string[] = this.config.colors ?? ['#ff6ec4', '#7873f5'];
     const thickness: string = this.config.thickness ?? '2px';
     const element: HTMLElement = this.el.nativeElement;
-    this.renderer.setStyle(element, 'border', `${thickness} solid transparent`);
-    this.renderer.setStyle(element, 'borderImage', `linear-gradient(90deg, ${colors.join(',')}) 1`);
+    this.renderer.setStyle(
+      element,
+      'border',
+      `${thickness} solid transparent`
+    );
+
+    this.renderer.setStyle(
+      element,
+      'borderImage',
+      `linear-gradient(90deg, ${colors.join(', ')}) 1`
+    );
   }
 
   private removeBorder(): void {
