@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { PhoneFormatPipe } from '../pipes/phone-format.pipe';
 import { HoverBoldDirective } from '../directives/bold-text.directive';
 import { AnimatedGradientDirective } from '../directives/animated-gradient.directive';
-
+import { PhoneFormat } from '../../enums/PhoneFormat';
 
 @Component({
   selector: 'app-user-card',
@@ -16,6 +16,8 @@ export class UserCardComponent {
 
   @Input({ required: true }) user!: IUser;
   @Output() deleteUser: EventEmitter<number> = new EventEmitter<number>();
+
+  protected readonly PhoneFormat: typeof PhoneFormat = PhoneFormat;
 
   onDelete(): void {
     this.deleteUser.emit(this.user.id);

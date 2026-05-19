@@ -1,8 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { PhoneFormat } from '../../enums/PhoneFormat';
 
-// type PhoneFormat = 'compact' | 'international' | 'national' | 'masked';
-
 @Pipe({
   name: 'phoneFormat',
 })
@@ -20,13 +18,13 @@ export class PhoneFormatPipe implements PipeTransform {
 
     switch (format) {
       case PhoneFormat.COMPACT:
-        return `+${rawNumbers}`;
+        return `+${ rawNumbers }`;
       case PhoneFormat.NATIONAL:
-        return `${operator} ${group1} ${group2} ${group3}`;
+        return `${ operator } ${ group1 } ${ group2 } ${ group3 }`;
       case PhoneFormat.MASKED:
-        return `+${country} ${operator} *** ** ${group3}`;
+        return `+${ country } ${ operator } *** ** ${ group3 }`;
       case PhoneFormat.INTERNATIONAL:
-        return `+${country} ${operator} ${group1} ${group2} ${group3}`;
+        return `+${ country } ${ operator } ${ group1 } ${ group2 } ${ group3 }`;
     }
   }
 

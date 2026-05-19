@@ -13,7 +13,7 @@
 
     <div class="user-card__values">
       <span class="user-card__value secondary-color">{{ user.email }}</span>
-      <span class="user-card__value">{{ user.phone | phoneFormat : 'masked' }}</span>
+      <span class="user-card__value">{{ user.phone | phoneFormat : PhoneFormat.MASKED }}</span>
       <span class="user-card__value secondary-color">{{ user.website || 'Неизвестно' }}</span>
     </div>
   </div>
