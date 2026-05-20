@@ -9,11 +9,13 @@ export class HoverBoldDirective {
 
   @HostBinding('style.fontWeight') fontWeight: string = '';
 
-  @HostListener('mouseenter') onMouseEnter(): void {
+  @HostListener('mouseenter')
+  onMouseEnter(): void {
     this.fontWeight = 'bold';
   }
 
-  @HostListener('mouseleave') onMouseLeave(): void {
+  @HostListener('mouseleave')
+  onMouseLeave(): void {
     this.fontWeight = 'normal';
   }
 

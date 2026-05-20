@@ -6,7 +6,7 @@ import { PhoneFormat } from '../../enums/PhoneFormat';
 })
 export class PhoneFormatPipe implements PipeTransform {
 
-  transform(value: string | number, format: PhoneFormat = PhoneFormat.INTERNATIONAL ): string {
+  transform(value: string | number, format: PhoneFormat = PhoneFormat.INTERNATIONAL): string {
     if (!value) return '';
 
     const rawNumbers: string = value.toString().replace(/\D/g, '');

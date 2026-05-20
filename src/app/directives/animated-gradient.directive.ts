@@ -50,9 +50,11 @@ export class AnimatedGradientDirective implements OnDestroy {
   private removeBorder(): void {
     const element: HTMLElement = this.el.nativeElement;
 
-    this.renderer.removeStyle(element, 'border');
-    this.renderer.removeStyle(element, 'borderImage');
-    this.renderer.removeStyle(element, 'borderRadius');
+    const styles: string[] = ['border', 'borderImage', 'borderRadius'];
+
+    styles.forEach(style => {
+      this.renderer.removeStyle(element, style);
+    });
   }
 
   ngOnDestroy(): void {

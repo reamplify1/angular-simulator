@@ -11,11 +11,9 @@
 
 <app-users-filter (filterUser)="onSearch($event)" />
 
-
 @let users = filteredUsers$ | async;
 
-@if (users) {
-
+@if (users && users.length > 0) {
   <p class="users-count">
     Найдено:
     <span class="users-count__text">
@@ -29,11 +27,11 @@
         [user]="user"
         (deleteUser)="onDeleteUser($event)"
       />
-    } @empty {
-      <div class="user-card-empty">
-        Нет пользователей для отображения
-      </div>
     }
+  </div>
+} @else {
+  <div class="user-card-empty">
+    Нет пользователей для отображения
   </div>
 
 }

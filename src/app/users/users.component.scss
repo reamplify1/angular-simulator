@@ -14,7 +14,13 @@
 }
 
 .user-card-empty {
-  background-color: #B15757;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: rem(350);
+  margin: rem(20) auto;
+  margin-bottom: rem(200);
+  color:rgb(0, 0, 0);
   padding: rem(30);
   border-radius: rem(10);
 }
