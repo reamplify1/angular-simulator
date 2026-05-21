@@ -27,6 +27,7 @@
   --user-card-secondary-color: #D4A373;
   --user-form-background-color: #ebebebec;
   --user-card-border-color: #F4F7F5;
+  --filter-input-color: #00000;
 }
 
 .my-app-dark {
@@ -42,6 +43,7 @@
   --user-card-secondary-color: #368092;
   --user-form-background-color: #313131d5;
   --user-card-border-color: #252525;
+  --filter-input-color: #ffffff;
 
   .navigation__item {
     color: var(--secondary-color);
@@ -139,4 +141,35 @@
 
 .fs-14 {
   font-size: rem(14);
+}
+
+@keyframes moveGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+[appAnimatedGradient] {
+  border: var(--gradient-thickness, 2px) solid var(--user-card-border-color, #ccc);
+  background-clip: padding-box;
+
+  transition: border-color 0.4s ease, border-width 0.4s ease, filter 0.4s ease;
+}
+
+.animated-gradient-border {
+  outline: none !important;
+  border: var(--gradient-thickness, 2px) solid transparent !important;
+  background-image:
+    linear-gradient(var(--primary-color, #ffffff), var(--primary-color, #ffffff)),
+    linear-gradient(to right, var(--gradient-colors)) !important;
+
+  background-origin: padding-box, border-box !important;
+  background-clip: padding-box, border-box !important;
+
+  background-size: 100% 100%, 200% 200% !important;
+  background-repeat: no-repeat;
+
+  animation: moveGradient 4s linear infinite;
+
+  filter: drop-shadow(0 0 5px var(--gradient-first-color, rgba(0, 0, 0, 0.15))) !important;
 }

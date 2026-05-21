@@ -14,7 +14,13 @@
 }
 
 .user-card-empty {
-  background-color: #B15757;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: rem(350);
+  margin: rem(20) auto;
+  margin-bottom: rem(200);
+  color:rgb(0, 0, 0);
   padding: rem(30);
   border-radius: rem(10);
 }
@@ -22,7 +28,7 @@
 .refresh-button {
   height: rem(80);
   width: rem(80);
-  background-color: var(--user-card-secondary-color);;
+  background-color: var(--user-card-secondary-color);
   border-radius: 50%;
   position: fixed;
   bottom: rem(60);
@@ -37,7 +43,7 @@
   z-index: 999;
 
   &:hover {
-    background: var(--user-card-secondary-color);;
+    background: var(--user-card-secondary-color);
     color: var(--primary-color);
   }
 
@@ -57,4 +63,24 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+.users-count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  padding: 10px 14px;
+  margin: 0px;
+
+  background-color: var(--primary-color);
+  border-radius: 10px;
+
+  font-size: 14px;
+}
+
+.users-count__text {
+  font-weight: 500;
 }

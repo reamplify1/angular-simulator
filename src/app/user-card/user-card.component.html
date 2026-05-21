@@ -1,6 +1,6 @@
-<div class="user-card-list">
+<div class="user-card-list" appAnimatedGradient="{ delay: 500, thickness: '4px' }">
 
-  <span class="user-card-name">{{ user.name }}</span>
+  <span class="user-card-name">{{ user.name | uppercase }}</span>
   <span class="user-card-username">@{{ user.username }}</span>
 
   <span class="user-card__section-title">Контакты</span>
@@ -13,7 +13,7 @@
 
     <div class="user-card__values">
       <span class="user-card__value secondary-color">{{ user.email }}</span>
-      <span class="user-card__value">{{ user.phone }}</span>
+      <span class="user-card__value">{{ user.phone | phoneFormat : phoneFormat.MASKED }}</span>
       <span class="user-card__value secondary-color">{{ user.website || 'Неизвестно' }}</span>
     </div>
   </div>
@@ -69,5 +69,12 @@
       <span class="user-card__value">{{ user.company.bs || 'Неизвестно' }}</span>
     </div>
   </div>
-  <button id="delete-user-btn" class="delete-user-btn" (click)="onDelete()">Удалить пользователя</button>
+  <button
+    id="delete-user-btn"
+    class="delete-user-btn"
+    (click)="onDelete()"
+    appHoverBold
+  >
+    Удалить пользователя
+  </button>
 </div>

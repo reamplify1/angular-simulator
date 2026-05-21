@@ -11,12 +11,27 @@
 
 <app-users-filter (filterUser)="onSearch($event)" />
 
-<div class="user-card-list__wrapper">
-  @for (user of filteredUsers$ | async; track user.id) {
-    <app-user-card [user]="user" (deleteUser)="onDeleteUser($event)"/>
-  } @empty {
-    <div class="user-card-empty">
-      Нет пользователей для отображения
-    </div>
-  }
-</div>
+@let users = filteredUsers$ | async;
+
+@if (users && users.length > 0) {
+  <p class="users-count">
+    Найдено:
+    <span class="users-count__text">
+      {{ users.length | pluralize:'пользователь':'пользователя':'пользователей' }}
+    </span>
+  </p>
+
+  <div class="user-card-list__wrapper">
+    @for (user of users; track user.id) {
+      <app-user-card
+        [user]="user"
+        (deleteUser)="onDeleteUser($event)"
+      />
+    }
+  </div>
+} @else {
+  <div class="user-card-empty">
+    Нет пользователей для отображения
+  </div>
+
+}
