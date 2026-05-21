@@ -37,13 +37,13 @@ export class AnimatedGradientDirective implements OnDestroy {
     this.renderer.setStyle(
       element,
       'border',
-      `${thickness} solid transparent`
+      `${ thickness } solid transparent`
     );
 
     this.renderer.setStyle(
       element,
       'borderImage',
-      `linear-gradient(90deg, ${colors.join(', ')}) 1`
+      `linear-gradient(90deg, ${ colors.join(', ') }) 1`
     );
   }
 
@@ -52,7 +52,7 @@ export class AnimatedGradientDirective implements OnDestroy {
 
     const styles: string[] = ['border', 'borderImage', 'borderRadius'];
 
-    styles.forEach(style => {
+    styles.forEach((style: string) => {
       this.renderer.removeStyle(element, style);
     });
   }
