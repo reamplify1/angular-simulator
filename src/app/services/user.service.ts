@@ -52,15 +52,10 @@ export class UserService {
 
     return this.userApiService.getUsers()
       .pipe(
-        catchError((error: HttpErrorResponse) => {
-          this.notificationService.showError('Ошибка загрузки пользователей');
-          console.error('Ошибка загрузки пользователей', error);
-          return of([]);
-        }),
-      finalize(() => {
-        this.loaderService.hideLoader();
-      })
-    );
+        finalize(() => {
+          this.loaderService.hideLoader();
+        })
+      );
   }
 
 }
