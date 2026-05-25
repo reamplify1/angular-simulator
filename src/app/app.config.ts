@@ -8,6 +8,7 @@ import Lara from '@primeuix/themes/lara';
 import { customIndigoPreset } from './presets/indigo-preset';
 import { Preset } from '@primeuix/themes/types';
 import { AppTheme } from '../enums/AppTheme';
+import { provideHttpClient } from '@angular/common/http';
 
 function getInitialTheme(): Preset {
   const savedTheme: AppTheme | null = localStorage.getItem('app-theme') as AppTheme | null;
@@ -31,6 +32,8 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
+    provideZoneChangeDetection(),
+    provideHttpClient(),
     provideZoneChangeDetection(),
 
     providePrimeNG({
