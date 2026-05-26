@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, finalize, of } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, finalize, of, tap } from 'rxjs';
 import { UserApiService } from './user-api.service';
 import { LoaderService } from './loader.service';
 import { IUser } from '../interfaces/IUser';
@@ -12,13 +12,13 @@ import { LocalStorageService } from './local-storage.service';
 })
 export class UserService {
 
-  private userApiService: UserApiService = inject(UserApiService);
-  private loaderService: LoaderService = inject(LoaderService);
-  private notificationService: NotificationService = inject(NotificationService);
-  private localStorageService: LocalStorageService = inject(LocalStorageService);
-  private LOCAL_STORAGE_KEY: string = 'users';
+  private readonly userApiService: UserApiService = inject(UserApiService);
+  private readonly loaderService: LoaderService = inject(LoaderService);
+  private readonly notificationService: NotificationService = inject(NotificationService);
+  private readonly localStorageService: LocalStorageService = inject(LocalStorageService);
+  private readonly LOCAL_STORAGE_KEY: string = 'users';
 
-  private usersSubject: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
+  private readonly usersSubject: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
   users$: Observable<IUser[]> = this.usersSubject.asObservable();
 
   setUsers(users: IUser[]): void {
@@ -42,20 +42,32 @@ export class UserService {
   }
 
   loadUsers(forceUpdate: boolean = false): Observable<IUser[]> {
-    const storageUsers: IUser[] | null = this.localStorageService.getItem(this.LOCAL_STORAGE_KEY);
+    const storageUsers: IUser[] | null = this.localStorageService.getItem<IUser[]>(this.LOCAL_STORAGE_KEY);
 
-    if (storageUsers?.length && !forceUpdate) {
-      return of(storageUsers);
+    if (storageUsers && storageUsers.length > 0 && !forceUpdate) {
+      this.setUsers(storageUsers);
+      return of<IUser[]>(storageUsers);
     }
 
     this.loaderService.showLoader();
 
-    return this.userApiService.getUsers()
-      .pipe(
-        finalize(() => {
-          this.loaderService.hideLoader();
-        })
-      );
+    return this.userApiService.getUsers().pipe(
+
+      tap((users: IUser[]): void => {
+        this.setUsers(users);
+      }),
+
+      catchError((error: HttpErrorResponse): Observable<IUser[]> => {
+
+        this.notificationService.showError('Ошибка загрузки пользователей');
+
+        return of<IUser[]>([]);
+      }),
+
+      finalize((): void => {
+        this.loaderService.hideLoader();
+      })
+    );
   }
 
 }
