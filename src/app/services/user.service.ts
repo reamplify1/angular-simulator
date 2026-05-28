@@ -12,10 +12,10 @@ import { LocalStorageService } from './local-storage.service';
 })
 export class UserService {
 
-  private readonly userApiService: UserApiService = inject(UserApiService);
-  private readonly loaderService: LoaderService = inject(LoaderService);
-  private readonly notificationService: NotificationService = inject(NotificationService);
-  private readonly localStorageService: LocalStorageService = inject(LocalStorageService);
+  private userApiService: UserApiService = inject(UserApiService);
+  private loaderService: LoaderService = inject(LoaderService);
+  private notificationService: NotificationService = inject(NotificationService);
+  private localStorageService: LocalStorageService = inject(LocalStorageService);
   private readonly LOCAL_STORAGE_KEY: string = 'users';
 
   private readonly usersSubject: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
@@ -45,7 +45,6 @@ export class UserService {
     const storageUsers: IUser[] | null = this.localStorageService.getItem<IUser[]>(this.LOCAL_STORAGE_KEY);
 
     if (storageUsers && storageUsers.length > 0 && !forceUpdate) {
-      this.setUsers(storageUsers);
       return of<IUser[]>(storageUsers);
     }
 
@@ -53,7 +52,7 @@ export class UserService {
 
     return this.userApiService.getUsers().pipe(
 
-      tap((users: IUser[]): void => {
+      tap((users: IUser[]) => {
         this.setUsers(users);
       }),
 
@@ -64,7 +63,7 @@ export class UserService {
         return of<IUser[]>([]);
       }),
 
-      finalize((): void => {
+      finalize(() => {
         this.loaderService.hideLoader();
       })
     );
