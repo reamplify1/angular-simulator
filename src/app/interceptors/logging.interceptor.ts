@@ -1,9 +1,10 @@
 import { HttpErrorResponse, HttpEvent, HttpHandlerFn, HttpInterceptorFn, HttpRequest, HttpResponse } from '@angular/common/http';
 import { tap } from 'rxjs';
+import { IRequestInfo } from '../interfaces/IRequestInfo';
 
 export const loggingInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn) => {
   const startTime: number = performance.now();
-  const { method, url }: { method: string; url: string } = req;
+  const { method, url }: IRequestInfo = req;
 
   return next(req).pipe(
     tap({
