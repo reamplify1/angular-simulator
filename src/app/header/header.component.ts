@@ -55,6 +55,7 @@ export class HeaderComponent {
   navigation: INavigation[] = [
     { id: 'main-page', label: 'Главная' , link: ''},
     { id: 'guide-page', label: 'Пользователи', link: 'users' },
+    { id: 'posts-page', label: 'Посты', link: 'posts' },
   ];
 
 }

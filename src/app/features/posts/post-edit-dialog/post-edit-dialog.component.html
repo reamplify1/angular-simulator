@@ -1,0 +1,72 @@
+<p-dialog
+  header="Редактировать пост"
+  [(visible)]="isOpen"
+  (onHide)="onCancel()"
+  [modal]="true"
+  [style]="{ width: '700px' }"
+  styleClass="edit-post-dialog"
+>
+  <form
+    [formGroup]="editForm"
+    (ngSubmit)="onSubmit()"
+    class="edit-form"
+  >
+    <div class="field">
+      <label for="title">Заголовок</label>
+      <input
+        class="edit-input"
+        pInputText
+        id="title"
+        type="text"
+        formControlName="title"
+        placeholder="Введите заголовок поста"
+      />
+    </div>
+
+    <div class="field">
+      <label for="tags">Теги</label>
+      <input
+        class="edit-input"
+        pInputText
+        id="tags"
+        type="text"
+        formControlName="tags"
+        placeholder="news, coding, ideas"
+      />
+    </div>
+
+    <div class="field">
+      <label for="views">Просмотры</label>
+
+      <p-inputNumber
+        class="edit-input-views"
+        id="views"
+        formControlName="views"
+        [min]="0"
+        [showButtons]="true"
+        buttonLayout="horizontal"
+        spinnerMode="horizontal"
+        incrementButtonClass="p-button-secondary"
+        decrementButtonClass="p-button-secondary"
+        placeholder="0"
+      ></p-inputNumber>
+    </div>
+
+    <div class="dialog-actions">
+      <p-button
+        label="Отмена"
+        severity="secondary"
+        [outlined]="true"
+        type="button"
+        (click)="onCancel()"
+      ></p-button>
+
+      <p-button
+        label="Сохранить"
+        icon="pi pi-check"
+        type="submit"
+        [disabled]="editForm.invalid"
+      ></p-button>
+    </div>
+  </form>
+</p-dialog>

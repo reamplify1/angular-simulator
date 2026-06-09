@@ -1,0 +1,75 @@
+:host {
+  display: block;
+}
+
+:host ::ng-deep .p-datatable tbody tr {
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+:host ::ng-deep .p-datatable tbody tr:hover {
+  background: rgba(59, 130, 246, 0.05);
+}
+
+:host ::ng-deep .p-button {
+  border-radius: 8px;
+}
+
+.posts-wrapper {
+  background: var(--surface-card);
+  border-radius: 12px;
+  margin-bottom: 110px;
+}
+
+.table-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 1rem 1.25rem;
+
+  border-radius: 12px;
+  background: var(--surface-ground);
+}
+
+.table-header__left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.table-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.table-subtitle {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.table-header__right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.posts-list-table {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.post-title-cell {
+  font-weight: 600;
+}
+
+.views {
+  color: #555;
+}
+
+.actions {
+  text-align: center;
+}
+

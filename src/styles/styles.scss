@@ -2,6 +2,8 @@
 
 @use '../assets/functions' as *;
 
+@import "../../node_modules/primeicons/primeicons.css";
+
 * {
   font-family: 'Nunito Sans';
   font-style: normal;
@@ -28,6 +30,9 @@
   --user-form-background-color: #ebebebec;
   --user-card-border-color: #F4F7F5;
   --filter-input-color: #00000;
+  --post-detail-card-background: #f1f1f1;
+  --post-detail-card-title: #1a3e3e;
+  --post-detail-card-body: #555555;
 }
 
 .my-app-dark {
@@ -44,6 +49,9 @@
   --user-form-background-color: #313131d5;
   --user-card-border-color: #252525;
   --filter-input-color: #ffffff;
+  --post-detail-card-background: #ececec;
+  --post-detail-card-title: #F2BE22;
+  --post-detail-card-body: #7e7e7e;
 
   .navigation__item {
     color: var(--secondary-color);
