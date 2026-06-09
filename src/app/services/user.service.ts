@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, finalize, of } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, finalize, of, tap } from 'rxjs';
 import { UserApiService } from './user-api.service';
 import { LoaderService } from './loader.service';
 import { IUser } from '../interfaces/IUser';
@@ -16,9 +16,9 @@ export class UserService {
   private loaderService: LoaderService = inject(LoaderService);
   private notificationService: NotificationService = inject(NotificationService);
   private localStorageService: LocalStorageService = inject(LocalStorageService);
-  private LOCAL_STORAGE_KEY: string = 'users';
+  private readonly LOCAL_STORAGE_KEY: string = 'users';
 
-  private usersSubject: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
+  private readonly usersSubject: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
   users$: Observable<IUser[]> = this.usersSubject.asObservable();
 
   setUsers(users: IUser[]): void {
@@ -42,21 +42,27 @@ export class UserService {
   }
 
   loadUsers(forceUpdate: boolean = false): Observable<IUser[]> {
-    const storageUsers: IUser[] | null = this.localStorageService.getItem(this.LOCAL_STORAGE_KEY);
+    const storageUsers: IUser[] | null = this.localStorageService.getItem<IUser[]>(this.LOCAL_STORAGE_KEY);
 
-    if (storageUsers?.length && !forceUpdate) {
-      return of(storageUsers);
+    if (storageUsers && storageUsers.length > 0 && !forceUpdate) {
+      return of<IUser[]>(storageUsers);
     }
 
     this.loaderService.showLoader();
 
-    return this.userApiService.getUsers()
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          this.notificationService.showError('Ошибка загрузки пользователей');
-          console.error('Ошибка загрузки пользователей', error);
-          return of([]);
-        }),
+    return this.userApiService.getUsers().pipe(
+
+      tap((users: IUser[]) => {
+        this.setUsers(users);
+      }),
+
+      catchError((error: HttpErrorResponse): Observable<IUser[]> => {
+
+        this.notificationService.showError('Ошибка загрузки пользователей');
+
+        return of<IUser[]>([]);
+      }),
+
       finalize(() => {
         this.loaderService.hideLoader();
       })
