@@ -23,22 +23,6 @@ export class AppComponent {
   constructor() {
     this.saveLastVisit();
     this.saveVisitCount();
-
-    this.router.events.subscribe(event => {
-
-    if (event instanceof NavigationStart) {
-      this.loader.showLoader();
-    }
-
-    if (
-      event instanceof NavigationEnd ||
-      event instanceof NavigationCancel ||
-      event instanceof NavigationError
-    ) {
-      this.loader.hideLoader();
-    }
-
-  });
   }
 
   saveLastVisit(): void {

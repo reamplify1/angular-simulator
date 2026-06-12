@@ -1,9 +1,6 @@
 import { Routes } from '@angular/router';
-import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
-import { UsersComponent } from './users/users.component';
-import { HomePageComponent } from './home-page/home-page.component';
 import { postResolver } from './features/posts/post.resolver';
-import { PostsComponent } from './features/posts/posts.component';
+
 
 export const routes: Routes = [
   {

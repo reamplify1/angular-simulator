@@ -1,7 +1,11 @@
 export interface IPostCreateForm {
   title: string;
   body: string;
-  tags: string[];
-  views: number;
   userId: number;
+  tags: string;
+  views: number;
+  reactions: {
+    likes: number;
+    dislikes: number;
+  }
 }

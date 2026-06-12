@@ -2,17 +2,19 @@
   display: block;
 }
 
-:host ::ng-deep .p-datatable tbody tr {
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
+:host ::ng-deep {
+  .p-datatable tbody tr {
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
 
-:host ::ng-deep .p-datatable tbody tr:hover {
-  background: rgba(59, 130, 246, 0.05);
-}
+  .p-datatable tbody tr:hover {
+    background: rgba(59, 130, 246, 0.05);
+  }
 
-:host ::ng-deep .p-button {
-  border-radius: 8px;
+  .p-button {
+    border-radius: 8px;
+  }
 }
 
 .posts-wrapper {

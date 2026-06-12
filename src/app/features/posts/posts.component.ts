@@ -7,7 +7,6 @@ import { AsyncPipe } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { SkeletonModule } from 'primeng/skeleton';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
-import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { PostEditDialogComponent } from './post-edit-dialog/post-edit-dialog.component';
@@ -15,26 +14,29 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ContextMenuModule } from 'primeng/contextmenu'; // Импортируем модуль меню
 import { MenuItem } from 'primeng/api';
 import { IPostsResponse } from './interfaces/IPostsResponse';
-import { IPostEditFormValue } from './interfaces/IPostEditFormValue';
+import { IPostEditRequest } from './interfaces/IPostEditRequest';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-posts',
-  imports: [TableModule, ContextMenuModule, RouterLink, AsyncPipe, SkeletonModule, PostEditDialogComponent, DialogModule, InputTextModule, InputNumberModule, ButtonModule, RouterOutlet],
+  imports: [TableModule, ContextMenuModule, RouterLink, AsyncPipe, SkeletonModule, InputTextModule, InputNumberModule, ButtonModule, RouterOutlet],
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.scss',
+  providers: [DialogService]
 })
 export class PostsComponent implements OnInit {
 
   private router: Router = inject(Router);
   private postService: PostApiService = inject(PostApiService);
   private destroyRef: DestroyRef = inject(DestroyRef);
+  private dialogService: DialogService = inject(DialogService);
 
   posts$: BehaviorSubject<IPost[]> = new BehaviorSubject<IPost[]>([]);
 
   rows: number = 10;
   totalRecords: number = 0;
   isLoading: boolean = true;
-  isDialogComponentOpen: boolean = false;
+
   selectedPost: IPost | null = null;
   contextMenuItems: MenuItem[] = [];
   skeletonRows: IPost[] = Array(16).fill({}) as IPost[];
@@ -78,7 +80,7 @@ export class PostsComponent implements OnInit {
         label: 'Удалить',
         icon: 'pi pi-fw pi-trash',
         styleClass: 'text-red-500',
-        command: () => this.onDelete(this.selectedPost?.id)
+        command: () => this.onDeleteTableRow(this.selectedPost?.id)
       }
     ];
   }
@@ -89,30 +91,53 @@ export class PostsComponent implements OnInit {
     }
   }
 
-  onDoubleClick(id: number): void {
+  onDoubleClickTableRow(id: number): void {
     this.router.navigate(['/posts', id]);
   }
 
-  onSavePost(updatedPost: IPostEditFormValue): void {
-    if (this.selectedPost && this.selectedPost.id) {
-      const id: number = this.selectedPost.id;
-      this.postService.updatePost(id, updatedPost).pipe(
-        tap((savedPost) => {
-          const currentPosts: IPost[] = this.posts$.getValue();
-          const updatedList: IPost[] = currentPosts.map(p => p.id === savedPost.id ? savedPost : p);
-          this.posts$.next(updatedList);
+  onSavePost(id: number, updatedPost: IPostEditRequest): void {
+    this.postService.updatePost(id, updatedPost).pipe(
+      tap((savedPost: IPost) => {
+        console.log('SERVER RESPONSE:', savedPost);
+        const currentPosts: IPost[] = this.posts$.getValue();
+
+        const updatedList = currentPosts.map(post => {
+          if (post.id === savedPost.id) {
+            return { ...post, ...savedPost, views: updatedPost.views};
+          }
+
+          return post;
+        });
+
+        this.posts$.next(updatedList);
+      })
+    ).subscribe();
+  }
+
+    onEditPost(post: IPost | null): void {
+      if (!post) return;
+
+      const postId: number = post.id;
+
+      const ref: DynamicDialogRef<PostEditDialogComponent> | null = this.dialogService.open(PostEditDialogComponent, {
+        data: { post },
+        header: 'Редактировать пост',
+        width: '700px'
+      });
+
+      if (!ref) return;
+
+      ref.onClose.pipe(
+        tap((result: IPostEditRequest | null) => {
+          if (!result) return;
+
+          this.onSavePost(postId, result);
         }),
-        finalize(() => this.isDialogComponentOpen = false),
+        takeUntilDestroyed(this.destroyRef)
       ).subscribe();
     }
-  }
 
-  onEditPost(post: IPost | null): void {
-    this.selectedPost = post;
-    this.isDialogComponentOpen = true;
-  }
-
-  onDelete(id: number | undefined): void {
+  onDeleteTableRow(id: number | undefined): void {
     if (!id) return;
 
     this.postService.deletePost(id).pipe(

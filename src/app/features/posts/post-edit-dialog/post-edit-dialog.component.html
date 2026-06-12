@@ -1,11 +1,3 @@
-<p-dialog
-  header="Редактировать пост"
-  [(visible)]="isOpen"
-  (onHide)="onCancel()"
-  [modal]="true"
-  [style]="{ width: '700px' }"
-  styleClass="edit-post-dialog"
->
   <form
     [formGroup]="editForm"
     (ngSubmit)="onSubmit()"
@@ -69,4 +61,3 @@
       ></p-button>
     </div>
   </form>
-</p-dialog>

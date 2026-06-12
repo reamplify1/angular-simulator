@@ -73,7 +73,7 @@
           } @else {
 
             <tr
-              (dblclick)="onDoubleClick(post.id)"
+              (dblclick)="onDoubleClickTableRow(post.id)"
               (contextmenu)="selectedPost = post"
               class="clickable-row"
             >
@@ -111,13 +111,3 @@
   }
 
 </div>
-
-@if (isDialogComponentOpen) {
-  <app-post-edit-dialog
-    [isOpen]="isDialogComponentOpen"
-    [post]="selectedPost"
-    (close)="isDialogComponentOpen = false"
-    (save)="onSavePost($event)">
-  </app-post-edit-dialog>
-}
-

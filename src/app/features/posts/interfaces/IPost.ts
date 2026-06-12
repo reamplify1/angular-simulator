@@ -3,10 +3,10 @@ export interface IPost {
   title: string;
   body: string;
   tags: string[];
+  views: number;
   reactions: {
     likes: number;
     dislikes: number;
   }
-  views: number;
   userId: number;
 }
