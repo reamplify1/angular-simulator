@@ -1,0 +1,53 @@
+@if (post) {
+
+  <div class="post-detail-container">
+
+    <button
+      pButton
+      type="button"
+      icon="pi pi-arrow-left"
+      label="Назад"
+      class="p-button-outlined p-button-secondary back-button"
+      (click)="goBack()"
+    >
+      Назад
+    </button>
+    
+    <article class="post-card">
+
+      <h1 class="post-title">{{ post.title }}</h1>
+
+      <div class="post-meta">
+
+        <div class="meta-item">
+          <span class="meta-label">Просмотры</span>
+          <span class="meta-value">{{ post.views }}</span>
+        </div>
+
+        <div class="meta-item">
+          <span class="meta-label">👍 Лайки</span>
+          <span class="meta-value">{{ post.reactions.likes }}</span>
+        </div>
+
+        <div class="meta-item">
+          <span class="meta-label">👎 Дизлайки</span>
+          <span class="meta-value">{{ post.reactions.dislikes }}</span>
+        </div>
+
+      </div>
+
+      <p class="post-body">{{ post.body }}</p>
+
+      <div class="tags">
+        @for (tag of post.tags; track tag) {
+          <span class="tag">{{ tag }}</span>
+        }
+      </div>
+
+    </article>
+
+  </div>
+
+} @else {
+  <p class="error-message">Пост не найден</p>
+}

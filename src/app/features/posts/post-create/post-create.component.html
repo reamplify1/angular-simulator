@@ -1,0 +1,108 @@
+<div class="create-post-container">
+
+  <div class="navigation-bar mb-3">
+    <button
+      pButton
+      type="button"
+      label="Назад к списку"
+      icon="pi pi-arrow-left"
+      routerLink="/posts"
+      class="p-button-text p-button-secondary"
+    ></button>
+  </div>
+
+  <div class="create-post-card p-4">
+    <h2 class="mt-0 mb-4">Создание нового поста</h2>
+
+    <form [formGroup]="postForm" (ngSubmit)="onSubmit()" class="flex flex-column gap-3">
+
+      <div class="form-field flex flex-column gap-2">
+        <label for="title">Название поста</label>
+        <input
+          pInputText
+          id="title"
+          formControlName="title"
+          placeholder="Введите название"
+        />
+      </div>
+
+      <div class="form-field flex flex-column gap-2">
+        <label for="body">Текст поста</label>
+        <textarea
+          pInputTextarea
+          id="body"
+          formControlName="body"
+          rows="6"
+          placeholder="Введите текст"
+        ></textarea>
+      </div>
+
+      <div class="form-field flex flex-column gap-2">
+        <label for="userId">ID пользователя</label>
+        <input
+          pInputText
+          id="userId"
+          type="number"
+          formControlName="userId"
+          placeholder="Например: 1"
+        />
+      </div>
+
+      <div class="form-field flex flex-column gap-2">
+        <label for="tags">Теги</label>
+        <input
+          pInputText
+          id="tags"
+          formControlName="tags"
+          placeholder="angular, typescript, frontend"
+        />
+      </div>
+
+      <div class="form-field flex flex-column gap-2">
+        <label for="views">Просмотры</label>
+        <input
+          pInputText
+          id="views"
+          type="number"
+          formControlName="views"
+          placeholder="0"
+        />
+      </div>
+
+      <div formGroupName="reactions" class="reactions p-3 surface-ground border-round flex gap-3">
+
+        <div class="form-field flex-1 flex flex-column gap-2">
+          <label for="likes">Лайки</label>
+          <input
+            pInputText
+            id="likes"
+            type="number"
+            formControlName="likes"
+          />
+        </div>
+
+        <div class="form-field flex-1 flex flex-column gap-2">
+          <label for="dislikes">Дизлайки</label>
+          <input
+            pInputText
+            id="dislikes"
+            type="number"
+            formControlName="dislikes"
+          />
+        </div>
+
+      </div>
+
+      <div class="flex justify-content-end mt-3">
+        <button
+          pButton
+          type="submit"
+          label="Создать пост"
+          icon="pi pi-check"
+          [disabled]="postForm.invalid"
+        ></button>
+      </div>
+
+    </form>
+  </div>
+</div>
