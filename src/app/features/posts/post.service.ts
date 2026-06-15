@@ -1,3 +1,5 @@
+import { LoaderService } from './../../services/loader.service';
+import { NotificationService } from './../../services/notification.service';
 import { inject, Injectable } from '@angular/core';
 import { PostApiService } from './post-api.service';
 import { BehaviorSubject, delay, finalize, Observable, tap } from 'rxjs';
@@ -11,6 +13,8 @@ import { IPostsResponse } from './interfaces/IPostsResponse';
 export class PostService {
 
   private postApiService: PostApiService = inject(PostApiService);
+  private notificationService: NotificationService = inject(NotificationService);
+  private loaderService: LoaderService = inject(LoaderService);
 
   private  postsSubject : BehaviorSubject<IPost[]> = new BehaviorSubject<IPost[]>([]);
   readonly posts$: Observable<IPost[]> = this.postsSubject.asObservable();
@@ -21,13 +25,17 @@ export class PostService {
 
   loadPosts(rows: number, skip: number = 0): Observable<IPostsResponse>{
     this.loadingSubject.next(true);
+    this.loaderService.showLoader();
     return this.postApiService.getPosts(rows, skip).pipe(
       delay(2000),
       tap((res: IPostsResponse) => {
         this.postsSubject.next(res.posts);
         this.totalRecordsSubject.next(res.total);
       }),
-      finalize(() => this.loadingSubject.next(false)),
+      finalize(() => {
+        this.loadingSubject.next(false);
+        this.loaderService.hideLoader();
+      }),
     )
   }
 
@@ -43,8 +51,8 @@ export class PostService {
 
           return post;
         });
-
         this.postsSubject.next(updatedList);
+        this.notificationService.showSuccess("Пост успешно обновлен");
       })
     )
   }
@@ -54,6 +62,7 @@ export class PostService {
       tap(() => {
         const currentPosts: IPost[] = this.postsSubject.getValue();
         this.postsSubject.next(currentPosts.filter(post => post.id !== id));
+        this.notificationService.showSuccess("Пост успешно удален");
       }),
     )
   }
