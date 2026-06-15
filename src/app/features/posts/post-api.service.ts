@@ -3,7 +3,6 @@ import { IPost } from "./interfaces/IPost";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { IPostsResponse } from "./interfaces/IPostsResponse";
-import { IPostEditForm } from "./interfaces/IPostEditForm";
 import { IPostEditRequest } from "./interfaces/IPostEditRequest";
 
 @Injectable({

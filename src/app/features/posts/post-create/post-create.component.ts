@@ -26,7 +26,7 @@ export class PostCreateComponent {
     title: ['', [Validators.required]],
     body: ['', [Validators.required]],
     userId: [1, [Validators.required]],
-    tags: [[], [Validators.required]],
+    tags: ['', [Validators.required]],
     views: [0],
     reactions: this.fb.group({
       likes: [0],
@@ -39,7 +39,7 @@ export class PostCreateComponent {
 
     const formValue: IPostCreateForm = this.postForm.value as IPostCreateForm;
 
-    const tagsArray: string[] = formValue.tags ? formValue.tags.split(',').map((t: string) => t.trim()) : [];
+    const tagsArray: string[] = formValue.tags ? formValue.tags.split(',').map((tag: string) => tag.trim()) : [];
 
     const newPost: IPost = {
       ...formValue,
@@ -52,7 +52,6 @@ export class PostCreateComponent {
   this.postApi.createPost(newPost)
     .pipe(
       tap((response: IPost) => {
-        console.log('Новый пост создан:', response);
         this.router.navigate(['/posts']);
       }),
     )

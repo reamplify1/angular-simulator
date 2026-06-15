@@ -2,8 +2,6 @@
 
   <p-contextMenu #cm [model]="contextMenuItems"></p-contextMenu>
 
-  @if (isPostsUrl) {
-
     <div class="card p-4">
 
       <div class="table-header">
@@ -12,7 +10,7 @@
           <h2 class="table-title">Список постов</h2>
 
           <span class="table-subtitle">
-            Всего: {{ totalRecords }}
+            Всего: {{ totalRecords$ | async }}
           </span>
         </div>
 
@@ -30,15 +28,14 @@
       </div>
 
       <p-table
-        [value]="isLoading ? skeletonRows : (posts$ | async) || []"
-        [(contextMenuSelection)]="selectedPost"
+        [value]="(loading$ | async) ? skeletonRows : ((posts$ | async) || [])"
         [contextMenu]="cm"
         class="p-datatable-striped posts-list-table"
-        [rowHover]="!isLoading"
-
+        [rowHover]="true"
         [paginator]="true"
         [rows]="rows"
-        [totalRecords]="totalRecords"
+        [first]="first"
+        [totalRecords]="(totalRecords$ | async) ?? 0"]
         [lazy]="true"
         (onPage)="onPageChange($event)"
       >
@@ -54,7 +51,7 @@
 
         <ng-template pTemplate="body" let-post>
 
-          @if (isLoading) {
+          @if (loading$ | async) {
             <tr>
               <td>
                 <p-skeleton width="80%" height="1rem"></p-skeleton>
@@ -103,11 +100,5 @@
       </p-table>
 
     </div>
-
-  } @else {
-
-    <router-outlet></router-outlet>
-
-  }
 
 </div>

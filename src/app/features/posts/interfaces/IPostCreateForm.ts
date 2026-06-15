@@ -1,11 +1,5 @@
-export interface IPostCreateForm {
-  title: string;
-  body: string;
-  userId: number;
+import { IPost } from "./IPost";
+
+export interface IPostCreateForm extends Omit<IPost, 'id' | 'tags'> {
   tags: string;
-  views: number;
-  reactions: {
-    likes: number;
-    dislikes: number;
-  }
 }

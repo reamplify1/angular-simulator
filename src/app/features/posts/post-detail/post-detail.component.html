@@ -1,5 +1,3 @@
-@if (post) {
-
   <div class="post-detail-container">
 
     <button
@@ -12,7 +10,7 @@
     >
       Назад
     </button>
-    
+
     <article class="post-card">
 
       <h1 class="post-title">{{ post.title }}</h1>
@@ -47,7 +45,3 @@
     </article>
 
   </div>
-
-} @else {
-  <p class="error-message">Пост не найден</p>
-}

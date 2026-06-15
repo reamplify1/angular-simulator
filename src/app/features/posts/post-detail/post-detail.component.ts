@@ -13,7 +13,7 @@ export class PostDetailComponent implements OnInit {
   private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private location: Location = inject(Location);
 
-  post: IPost | null = null;
+  post!: IPost;   
 
   ngOnInit(): void {
     this.post = this.activatedRoute.snapshot.data['postData'];

@@ -1,25 +1,22 @@
-import { BehaviorSubject, delay, finalize, tap } from 'rxjs';
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
-import { PostApiService } from './post-api.service';
+import { PostService } from './post.service';
+import { Observable, take, tap } from 'rxjs';import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { IPost } from './interfaces/IPost';
 import { TableModule, TablePageEvent } from 'primeng/table';
 import { AsyncPipe } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { SkeletonModule } from 'primeng/skeleton';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { PostEditDialogComponent } from './post-edit-dialog/post-edit-dialog.component';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ContextMenuModule } from 'primeng/contextmenu'; // Импортируем модуль меню
 import { MenuItem } from 'primeng/api';
-import { IPostsResponse } from './interfaces/IPostsResponse';
 import { IPostEditRequest } from './interfaces/IPostEditRequest';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-posts',
-  imports: [TableModule, ContextMenuModule, RouterLink, AsyncPipe, SkeletonModule, InputTextModule, InputNumberModule, ButtonModule, RouterOutlet],
+  imports: [TableModule, ContextMenuModule, RouterLink, AsyncPipe, SkeletonModule, InputTextModule, InputNumberModule, ButtonModule],
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.scss',
   providers: [DialogService]
@@ -27,133 +24,95 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 export class PostsComponent implements OnInit {
 
   private router: Router = inject(Router);
-  private postService: PostApiService = inject(PostApiService);
-  private destroyRef: DestroyRef = inject(DestroyRef);
+  private postService: PostService = inject(PostService);
   private dialogService: DialogService = inject(DialogService);
 
-  posts$: BehaviorSubject<IPost[]> = new BehaviorSubject<IPost[]>([]);
+  posts$: Observable<IPost[]> = this.postService.posts$;
+  loading$: Observable<boolean> = this.postService.loading$;
+  totalRecords$: Observable<number> = this.postService.totalRecords$;
 
   rows: number = 10;
-  totalRecords: number = 0;
-  isLoading: boolean = true;
-
-  selectedPost: IPost | null = null;
+  first: number = 0;
+  selectedPost!: IPost;
   contextMenuItems: MenuItem[] = [];
   skeletonRows: IPost[] = Array(16).fill({}) as IPost[];
 
   ngOnInit(): void {
-    this.loadPosts();
+    this.loadPosts(this.rows, 0);
     this.initContextMenu();
   }
 
-  get isPostsUrl(): boolean {
-    return this.router.url === '/posts';
+  loadPosts(rows: number, skip: number = 0): void {
+    this.postService.loadPosts(rows, skip).subscribe();
   }
 
-  private loadPosts(skip: number = 0): void {
-    this.isLoading = true;
-
-    this.postService.getPosts(this.rows, skip).pipe(
-      delay(2000),
-      tap((res: IPostsResponse) => {
-        this.posts$.next(res.posts);
-        this.totalRecords = res.total;
-      }),
-      finalize(() => this.isLoading = false),
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe();
-  }
 
   private initContextMenu(): void {
     this.contextMenuItems = [
       {
         label: 'Просмотреть',
         icon: 'pi pi-fw pi-eye',
-        command: () => this.onViewPost(this.selectedPost?.id)
+        command: () => this.onViewPost(this.selectedPost!.id)
       },
       {
         label: 'Редактировать',
         icon: 'pi pi-fw pi-pencil',
-        command: () => this.onEditPost(this.selectedPost)
+        command: () => this.editPost(this.selectedPost)
       },
       {
         label: 'Удалить',
         icon: 'pi pi-fw pi-trash',
         styleClass: 'text-red-500',
-        command: () => this.onDeleteTableRow(this.selectedPost?.id)
+        command: () => this.deletePost(this.selectedPost?.id)
       }
     ];
   }
 
-  onViewPost(id: number | undefined): void {
-    if (id) {
+  onViewPost(id: number ): void {
       this.router.navigate(['/posts', id]);
-    }
   }
 
   onDoubleClickTableRow(id: number): void {
     this.router.navigate(['/posts', id]);
   }
 
-  onSavePost(id: number, updatedPost: IPostEditRequest): void {
-    this.postService.updatePost(id, updatedPost).pipe(
-      tap((savedPost: IPost) => {
-        console.log('SERVER RESPONSE:', savedPost);
-        const currentPosts: IPost[] = this.posts$.getValue();
+  updatePost(id: number, updatedPost: IPostEditRequest): void {
+    this.postService.updatePost(id, updatedPost).subscribe();
+  }
 
-        const updatedList = currentPosts.map(post => {
-          if (post.id === savedPost.id) {
-            return { ...post, ...savedPost, views: updatedPost.views};
-          }
+  editPost(post: IPost | null): void {
+    if (!post) return;
 
-          return post;
-        });
+    const postId: number = post.id;
 
-        this.posts$.next(updatedList);
-      })
+    const ref: DynamicDialogRef<PostEditDialogComponent> | null = this.dialogService.open(PostEditDialogComponent, {
+      data: { post },
+      header: 'Редактировать пост',
+      width: '700px',
+      closable: true,     
+      dismissableMask: true
+    });
+
+    if (!ref) return;
+
+    ref.onClose.pipe(
+      tap((result: IPostEditRequest | null) => {
+        if (!result) return;
+
+        this.updatePost(postId, result);
+      }),
+      take(1)
     ).subscribe();
   }
 
-    onEditPost(post: IPost | null): void {
-      if (!post) return;
-
-      const postId: number = post.id;
-
-      const ref: DynamicDialogRef<PostEditDialogComponent> | null = this.dialogService.open(PostEditDialogComponent, {
-        data: { post },
-        header: 'Редактировать пост',
-        width: '700px'
-      });
-
-      if (!ref) return;
-
-      ref.onClose.pipe(
-        tap((result: IPostEditRequest | null) => {
-          if (!result) return;
-
-          this.onSavePost(postId, result);
-        }),
-        takeUntilDestroyed(this.destroyRef)
-      ).subscribe();
-    }
-
-  onDeleteTableRow(id: number | undefined): void {
-    if (!id) return;
-
-    this.postService.deletePost(id).pipe(
-      tap(() => {
-        const currentPosts: IPost[] = this.posts$.getValue();
-        this.posts$.next(currentPosts.filter(post => post.id !== id));
-      }),
-    ).subscribe();
+  deletePost(id: number): void {
+    this.postService.deletePost(id).subscribe();
   }
 
   onPageChange(event: TablePageEvent): void {
     this.rows = event.rows;
-
-    const skip: number = event.first;
-
-    this.loadPosts(skip);
+    this.first = event.first;
+    this.loadPosts(this.rows, this.first);
   }
 
 }
