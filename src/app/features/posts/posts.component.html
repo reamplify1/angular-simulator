@@ -28,7 +28,7 @@
       </div>
 
       <p-table
-        [value]="(loading$ | async) ? skeletonRows : ((posts$ | async) || [])"
+        [value]="isLoading ? skeletonRows : (posts$ | async) || []"
         [contextMenu]="cm"
         class="p-datatable-striped posts-list-table"
         [rowHover]="true"
@@ -51,7 +51,7 @@
 
         <ng-template pTemplate="body" let-post>
 
-          @if (loading$ | async) {
+          @if (isLoading) {
             <tr>
               <td>
                 <p-skeleton width="80%" height="1rem"></p-skeleton>

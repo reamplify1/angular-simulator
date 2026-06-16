@@ -22,8 +22,11 @@ export class PostEditDialogComponent implements OnInit {
   private fb: FormBuilder = inject(FormBuilder);
 
   ngOnInit(): void {
-    const post: IPost = this.dialogConfig.data.post;
+    this.initForm();
+  }
 
+  initForm(): void {
+    const post: IPost = this.dialogConfig.data.post;
     if (!post) return;
 
     this.editForm.patchValue({
@@ -40,7 +43,7 @@ export class PostEditDialogComponent implements OnInit {
   });
 
   onCancel(): void {
-    this.dialogRef.close(null);
+    this.dialogRef.close();
   }
 
   onSubmit(): void {

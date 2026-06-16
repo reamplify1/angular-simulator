@@ -1,5 +1,5 @@
 import { PostService } from './post.service';
-import { Observable, take, tap } from 'rxjs';import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { finalize, Observable, take, tap } from 'rxjs';import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { IPost } from './interfaces/IPost';
 import { TableModule, TablePageEvent } from 'primeng/table';
 import { AsyncPipe } from '@angular/common';
@@ -28,9 +28,9 @@ export class PostsComponent implements OnInit {
   private dialogService: DialogService = inject(DialogService);
 
   posts$: Observable<IPost[]> = this.postService.posts$;
-  loading$: Observable<boolean> = this.postService.loading$;
   totalRecords$: Observable<number> = this.postService.totalRecords$;
 
+  isLoading: boolean = false;
   rows: number = 10;
   first: number = 0;
   selectedPost!: IPost;
@@ -43,7 +43,10 @@ export class PostsComponent implements OnInit {
   }
 
   loadPosts(rows: number, skip: number = 0): void {
-    this.postService.loadPosts(rows, skip).subscribe();
+    this.isLoading = true;
+    this.postService.loadPosts(rows, skip)
+      .pipe(finalize(() => this.isLoading = false))
+      .subscribe();
   }
 
 
@@ -89,7 +92,7 @@ export class PostsComponent implements OnInit {
       data: { post },
       header: 'Редактировать пост',
       width: '700px',
-      closable: true,     
+      closable: true,
       dismissableMask: true
     });
 

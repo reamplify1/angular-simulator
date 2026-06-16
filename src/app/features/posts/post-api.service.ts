@@ -30,8 +30,8 @@ export class PostApiService {
     return this.http.put<IPost>(`${ this.apiUrl }/${ id }`, editedPost);
   }
 
-  deletePost(id: number): Observable<{ isDeleted: boolean }> {
-    return this.http.delete<{ isDeleted: boolean }>(`${ this.apiUrl }/${ id }`);
+  deletePost(id: number): Observable<IPost> {
+    return this.http.delete<IPost>(`${ this.apiUrl }/${ id }`);
   }
 
 }

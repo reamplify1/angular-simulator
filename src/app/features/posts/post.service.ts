@@ -18,13 +18,10 @@ export class PostService {
 
   private  postsSubject : BehaviorSubject<IPost[]> = new BehaviorSubject<IPost[]>([]);
   readonly posts$: Observable<IPost[]> = this.postsSubject.asObservable();
-  private loadingSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  readonly loading$: Observable<boolean> = this.loadingSubject.asObservable();
   private totalRecordsSubject: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   readonly totalRecords$: Observable<number> =  this.totalRecordsSubject.asObservable();
 
   loadPosts(rows: number, skip: number = 0): Observable<IPostsResponse>{
-    this.loadingSubject.next(true);
     this.loaderService.showLoader();
     return this.postApiService.getPosts(rows, skip).pipe(
       delay(2000),
@@ -33,7 +30,6 @@ export class PostService {
         this.totalRecordsSubject.next(res.total);
       }),
       finalize(() => {
-        this.loadingSubject.next(false);
         this.loaderService.hideLoader();
       }),
     )
@@ -44,12 +40,10 @@ export class PostService {
       tap((savedPost: IPost) => {
         const currentPosts: IPost[] = this.postsSubject.getValue();
 
-        const updatedList: IPost[] = currentPosts.map(post => {
-          if (post.id === savedPost.id) {
-            return { ...post, ...savedPost, views: updatedPost.views};
-          }
-
-          return post;
+        const updatedList: IPost[] = currentPosts.map((post: IPost) => {
+          return post.id === savedPost.id
+            ? { ...post, ...savedPost, views: updatedPost.views as number }
+            : post
         });
         this.postsSubject.next(updatedList);
         this.notificationService.showSuccess("Пост успешно обновлен");
@@ -57,11 +51,11 @@ export class PostService {
     )
   }
 
-  deletePost(id: number): Observable<{ isDeleted: boolean }> {
+  deletePost(id: number): Observable<IPost> {
     return this.postApiService.deletePost(id).pipe(
       tap(() => {
         const currentPosts: IPost[] = this.postsSubject.getValue();
-        this.postsSubject.next(currentPosts.filter(post => post.id !== id));
+        this.postsSubject.next(currentPosts.filter((post: IPost) => post.id !== id));
         this.notificationService.showSuccess("Пост успешно удален");
       }),
     )

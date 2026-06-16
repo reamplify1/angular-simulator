@@ -2,13 +2,14 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { PostApiService } from '../post-api.service';
-import { tap } from 'rxjs';
+import { catchError, tap, throwError } from 'rxjs';
 import { ButtonModule } from 'primeng/button';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
 import { IPost } from '../interfaces/IPost';
 import { IPostCreateForm } from '../interfaces/IPostCreateForm';
 import { ToFormControls } from '../../../types/ToFormControls';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-post-create',
@@ -44,7 +45,6 @@ export class PostCreateComponent {
     const newPost: IPost = {
       ...formValue,
       id: Date.now(),
-      userId: Number(formValue.userId),
       tags: tagsArray,
       views: Number(formValue.views),
     };
@@ -54,6 +54,9 @@ export class PostCreateComponent {
       tap((response: IPost) => {
         this.router.navigate(['/posts']);
       }),
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => new Error('Не удалось создать пост'));
+      })
     )
     .subscribe();
   }
