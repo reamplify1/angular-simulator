@@ -1,9 +1,14 @@
-<app-header></app-header>
+<div class="layout">
 
-<router-outlet></router-outlet>
+  <app-header/>
 
-<app-footer></app-footer>
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+
+  <app-footer/>
+
+</div>
 
 <app-notification/>
-
 <app-loader/>

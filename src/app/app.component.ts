@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "./header/header.component";
 import { FooterComponent } from "./footer/footer.component";
 import { NotificationComponent } from "./notification/notification.component";
 import { LocalStorageService } from './services/local-storage.service';
 import { LoaderComponent } from "./loader/loader.component";
+import { LoaderService } from './services/loader.service';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,9 @@ import { LoaderComponent } from "./loader/loader.component";
 export class AppComponent {
 
   localStorageService: LocalStorageService = inject(LocalStorageService);
+
+  private router: Router = inject(Router);
+  private loader: LoaderService = inject(LoaderService);
 
   constructor() {
     this.saveLastVisit();
