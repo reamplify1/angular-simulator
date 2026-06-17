@@ -1,3 +1,4 @@
+import { NotificationService } from './../../../services/notification.service';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -22,6 +23,7 @@ export class PostCreateComponent {
   private fb: FormBuilder = inject(FormBuilder);
   private postApi: PostApiService = inject(PostApiService);
   private router: Router = inject(Router);
+  private notificationService: NotificationService = inject(NotificationService)
 
   postForm: FormGroup<ToFormControls<IPostCreateForm>> = this.fb.group({
     title: ['', [Validators.required]],
@@ -55,7 +57,8 @@ export class PostCreateComponent {
         this.router.navigate(['/posts']);
       }),
       catchError((error: HttpErrorResponse) => {
-        return throwError(() => new Error('Не удалось создать пост'));
+        this.notificationService.showError('Не удалось создать пост');
+        return throwError(() => error);
       })
     )
     .subscribe();
