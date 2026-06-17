@@ -1,5 +1,5 @@
 import { PostService } from './post.service';
-import { finalize, Observable, take, tap } from 'rxjs';import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { catchError, finalize, Observable, take, tap, throwError } from 'rxjs';import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { IPost } from './interfaces/IPost';
 import { TableModule, TablePageEvent } from 'primeng/table';
 import { AsyncPipe } from '@angular/common';
@@ -13,6 +13,8 @@ import { ContextMenuModule } from 'primeng/contextmenu'; // Импортируе
 import { MenuItem } from 'primeng/api';
 import { IPostEditRequest } from './interfaces/IPostEditRequest';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { NotificationService } from '../../services/notification.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-posts',
@@ -26,6 +28,7 @@ export class PostsComponent implements OnInit {
   private router: Router = inject(Router);
   private postService: PostService = inject(PostService);
   private dialogService: DialogService = inject(DialogService);
+  private notificationService: NotificationService = inject(NotificationService);
 
   posts$: Observable<IPost[]> = this.postService.posts$;
   totalRecords$: Observable<number> = this.postService.totalRecords$;
@@ -72,15 +75,20 @@ export class PostsComponent implements OnInit {
   }
 
   onViewPost(id: number ): void {
-      this.router.navigate(['/posts', id]);
+    this.router.navigate(['/posts', id]);
   }
 
   onDoubleClickTableRow(id: number): void {
     this.router.navigate(['/posts', id]);
   }
 
-  updatePost(id: number, updatedPost: IPostEditRequest): void {
-    this.postService.updatePost(id, updatedPost).subscribe();
+  updatePost(id: number, updatedPost: IPostEditRequest): Observable<IPost> {
+    return this.postService.updatePost(id, updatedPost).pipe(
+      catchError((error: HttpErrorResponse) => {
+        this.notificationService.showError('Не удалось обновить пост');
+        return throwError(() => error);
+      })
+    );
   }
 
   editPost(post: IPost | null): void {
@@ -99,17 +107,26 @@ export class PostsComponent implements OnInit {
     if (!ref) return;
 
     ref.onClose.pipe(
+      take(1),
       tap((result: IPostEditRequest | null) => {
         if (!result) return;
-
-        this.updatePost(postId, result);
+        this.updatePost(postId, result).pipe(
+          catchError((error: HttpErrorResponse) => {
+            this.notificationService.showError('Не удалось обновить пост');
+            return throwError(() => error);
+          })
+        ).subscribe();
       }),
-      take(1)
     ).subscribe();
   }
 
   deletePost(id: number): void {
-    this.postService.deletePost(id).subscribe();
+    this.postService.deletePost(id).pipe(
+      catchError((error: HttpErrorResponse) => {
+        this.notificationService.showError('Не удалось удалить пост');
+        return throwError(() => error);
+      })
+    ).subscribe();
   }
 
   onPageChange(event: TablePageEvent): void {

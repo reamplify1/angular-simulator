@@ -54,6 +54,7 @@ export class PostCreateComponent {
   this.postApi.createPost(newPost)
     .pipe(
       tap((response: IPost) => {
+        this.notificationService.showSuccess('Пост создан');
         this.router.navigate(['/posts']);
       }),
       catchError((error: HttpErrorResponse) => {
