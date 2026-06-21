@@ -1,5 +1,5 @@
 import { PostService } from './post.service';
-import { catchError, finalize, Observable, take, tap, throwError } from 'rxjs';import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { catchError, EMPTY, finalize, Observable, switchMap, take, tap, throwError } from 'rxjs';import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { IPost } from './interfaces/IPost';
 import { TableModule, TablePageEvent } from 'primeng/table';
 import { AsyncPipe } from '@angular/common';
@@ -108,15 +108,18 @@ export class PostsComponent implements OnInit {
 
     ref.onClose.pipe(
       take(1),
-      tap((result: IPostEditRequest | null) => {
-        if (!result) return;
-        this.updatePost(postId, result).pipe(
+      switchMap((result: IPostEditRequest | null) => {
+        if (!result) {
+          return EMPTY;
+        }
+
+        return this.updatePost(postId, result).pipe(
           catchError((error: HttpErrorResponse) => {
             this.notificationService.showError('Не удалось обновить пост');
             return throwError(() => error);
           })
-        ).subscribe();
-      }),
+        );
+      })
     ).subscribe();
   }
 
