@@ -32,6 +32,25 @@
         >
         Консультация
         </button>
+
+        @if (isLogged$ | async) {
+          <button
+            id="button-logout"
+            class="button button--small button--logout"
+            (click)="onLogout()"
+          >
+            Выйти
+          </button>
+        } @else {
+          <button
+            id="button-login"
+            class="button button--small button-login"
+            routerLink="/login"
+          >
+            Войти
+          </button>
+        }
+
       </div>
     </div>
   </div>
@@ -62,5 +81,6 @@
     >
       {{ isDisplayTime ? 'показать кликер' : 'показать дату' }}
     </button>
+
   </div>
 </header>

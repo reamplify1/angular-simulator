@@ -11,6 +11,7 @@ import { ThemeService } from '../services/theme.service';
 import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs';
 import { AppTheme } from '../../enums/AppTheme';
+import { AuthService } from '../features/auth/services/auth.service';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class HeaderComponent {
 
   themeService: ThemeService = inject(ThemeService);
   notificationService: NotificationService = inject(NotificationService);
+  private authService: AuthService = inject(AuthService);
 
   isDarkMode$: Observable<boolean> = this.themeService.isDarkMode$;
   faMoon: IconDefinition = faMoon;
@@ -33,9 +35,15 @@ export class HeaderComponent {
   isDisplayTime: boolean = true;
   clickerCounter: number = 0;
 
+  public isLogged$: Observable<boolean> = this.authService.isAuthenticated$;
+
   ngOnInit(): void {
     const theme: AppTheme = this.themeService.getTheme();
     this.themeService.setTheme(theme);
+  }
+
+  onLogout(): void {
+    this.authService.logout();
   }
 
   toggleDate(): void {
