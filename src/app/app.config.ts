@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
+import { APP_INITIALIZER, ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { providePrimeNG } from 'primeng/config';
@@ -12,6 +12,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { loggingInterceptor } from './interceptors/logging.interceptor';
 import { errorInterceptor } from './interceptors/error.interceptor';
 import { authInterceptor } from './features/auth/auth.interceptor';
+import { AuthService } from './features/auth/services/auth.service';
 
 function getInitialTheme(): Preset {
   const savedTheme: AppTheme | null = localStorage.getItem('app-theme') as AppTheme | null;
@@ -31,6 +32,10 @@ function getInitialTheme(): Preset {
   }
 }
 
+export function initializeApp(authService: AuthService) {
+  return () => authService.initAuth();
+}
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
@@ -45,6 +50,12 @@ export const appConfig: ApplicationConfig = {
           darkModeSelector: '.my-app-dark'
         },
       }
-    })
+    }),
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeApp,
+      deps: [AuthService], 
+      multi: true
+    }
   ]
 };

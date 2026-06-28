@@ -1,17 +1,17 @@
-import { HttpErrorResponse, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
+import { HttpErrorResponse, HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { catchError, switchMap, throwError } from 'rxjs';
 import { IAuth } from './interfaces/IAuth';
 
-export const authInterceptor: HttpInterceptorFn = (req, next) => {
+export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn) => {
   const authService: AuthService = inject(AuthService);
   const token: string | null = authService.getToken();
 
   if (token) {
     const modifiedReq: HttpRequest<unknown> = req.clone({
       setHeaders: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${ token }`
       }
     });
 

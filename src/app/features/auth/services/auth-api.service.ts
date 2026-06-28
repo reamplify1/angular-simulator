@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { IAuth } from '../interfaces/IAuth';
 import { Observable } from 'rxjs';
 import { ILoginRequest } from '../interfaces/ILoginRequest';
+import { ICurrentUser } from '../interfaces/ICurrentUser';
 
 @Injectable({
   providedIn: 'root',
@@ -10,13 +11,18 @@ import { ILoginRequest } from '../interfaces/ILoginRequest';
 export class AuthApiService {
 
   private http: HttpClient = inject(HttpClient);
+  private url: string = 'https://dummyjson.com/auth/';
 
-  loginUser(credentials: ILoginRequest): Observable<IAuth> {
-    return this.http.post<IAuth>('https://dummyjson.com/auth/login', credentials);
+  login(credentials: ILoginRequest): Observable<IAuth> {
+    return this.http.post<IAuth>(`${ this.url }login`, credentials);
   }
 
-  refreshUserToken(refreshToken: string): Observable<IAuth> {
-    return this.http.post<IAuth>('https://dummyjson.com/auth/refresh', { refreshToken });
+  refreshToken(refreshToken: string): Observable<IAuth> {
+    return this.http.post<IAuth>(`${ this.url }refresh`, { refreshToken });
+  }
+
+  getCurrentUser(): Observable<ICurrentUser> {
+    return this.http.get<ICurrentUser>(`${ this.url }/me`);
   }
 
 }
