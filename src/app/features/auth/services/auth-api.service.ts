@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { IAuth } from '../interfaces/IAuth';
+import { IAuthResponse } from '../interfaces/IAuthResponse';
 import { Observable } from 'rxjs';
 import { ILoginRequest } from '../interfaces/ILoginRequest';
-import { ICurrentUser } from '../interfaces/ICurrentUser';
+import { IAuthUser } from '../interfaces/IAuthUser';
 
 @Injectable({
   providedIn: 'root',
@@ -13,16 +13,16 @@ export class AuthApiService {
   private http: HttpClient = inject(HttpClient);
   private url: string = 'https://dummyjson.com/auth/';
 
-  login(credentials: ILoginRequest): Observable<IAuth> {
-    return this.http.post<IAuth>(`${ this.url }login`, credentials);
+  login(credentials: ILoginRequest): Observable<IAuthResponse> {
+    return this.http.post<IAuthResponse>(`${ this.url }login`, credentials);
   }
 
-  refreshToken(refreshToken: string): Observable<IAuth> {
-    return this.http.post<IAuth>(`${ this.url }refresh`, { refreshToken });
+  refreshToken(refreshToken: string): Observable<IAuthResponse> {
+    return this.http.post<IAuthResponse>(`${ this.url }refresh`, { refreshToken });
   }
 
-  getCurrentUser(): Observable<ICurrentUser> {
-    return this.http.get<ICurrentUser>(`${ this.url }/me`);
+  getCurrentUser(): Observable<IAuthUser> {
+    return this.http.get<IAuthUser>(`${ this.url }/me`);
   }
 
 }

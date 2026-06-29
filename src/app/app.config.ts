@@ -13,6 +13,8 @@ import { loggingInterceptor } from './interceptors/logging.interceptor';
 import { errorInterceptor } from './interceptors/error.interceptor';
 import { authInterceptor } from './features/auth/auth.interceptor';
 import { AuthService } from './features/auth/services/auth.service';
+import { Observable } from 'rxjs';
+import { IAuthUser } from './features/auth/interfaces/IAuthUser';
 
 function getInitialTheme(): Preset {
   const savedTheme: AppTheme | null = localStorage.getItem('app-theme') as AppTheme | null;
@@ -32,7 +34,7 @@ function getInitialTheme(): Preset {
   }
 }
 
-export function initializeApp(authService: AuthService) {
+export function initializeApp(authService: AuthService): () => Observable<IAuthUser | null> {
   return () => authService.initAuth();
 }
 
@@ -54,7 +56,7 @@ export const appConfig: ApplicationConfig = {
     {
       provide: APP_INITIALIZER,
       useFactory: initializeApp,
-      deps: [AuthService], 
+      deps: [AuthService],
       multi: true
     }
   ]

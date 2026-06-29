@@ -1,13 +1,14 @@
 import { inject, Injectable } from '@angular/core';
 import { AuthApiService } from './auth-api.service';
 import { ILoginRequest } from '../interfaces/ILoginRequest';
-import { IAuth } from '../interfaces/IAuth';
+import { IAuthResponse } from '../interfaces/IAuthResponse';
 import { BehaviorSubject, catchError, map, Observable, of, switchMap, tap, throwError } from 'rxjs';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { NotificationService } from '../../../services/notification.service';
 import { Router } from '@angular/router';
-import { IAuthSession } from '../interfaces/IAuthSession';
-import { ICurrentUser } from '../interfaces/ICurrentUser';
+import { IToken } from '../interfaces/IToken';
+import { IAuthUser } from '../interfaces/IAuthUser';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -19,42 +20,46 @@ export class AuthService {
   private notificationService: NotificationService = inject(NotificationService);
   private router: Router = inject(Router);
 
-  private currentUserSubject: BehaviorSubject<ICurrentUser | null> = new BehaviorSubject<ICurrentUser | null>(null);
-  currentUser$: Observable<ICurrentUser | null> = this.currentUserSubject.asObservable();
+  private currentUserSubject: BehaviorSubject<IAuthUser | null> = new BehaviorSubject<IAuthUser | null>(null);
+  currentUser$: Observable<IAuthUser | null> = this.currentUserSubject.asObservable();
 
-  isAuthenticated$: Observable<boolean> = this.currentUser$.pipe(
-    map(user => !!user)
-  );
+  isAuthenticated$(): boolean {
+    return !!this.currentUserSubject.value;
+  }
 
-  login(credentials: ILoginRequest): Observable<ICurrentUser> {
+  login(credentials: ILoginRequest): Observable<IAuthUser> {
     return this.authApiService.login(credentials).pipe(
-      switchMap((response: IAuth) => {
-        const authData: IAuthSession = {
+      switchMap((response: IAuthResponse) => {
+        const authData: IToken = {
           accessToken: response.accessToken,
           refreshToken: response.refreshToken
-      };
-      this.localStorageService.setItem("auth_data", JSON.stringify(authData));
+        };
+      this.localStorageService.setItem("auth_data", authData);
       return this.authApiService.getCurrentUser();
       }),
-      tap((user: ICurrentUser) => {
+      tap((user: IAuthUser) => {
         this.currentUserSubject.next(user);
       })
     );
   }
 
-  getProfile(): Observable<ICurrentUser> {
+  getProfile(): Observable<IAuthUser> {
     return this.authApiService.getCurrentUser().pipe(
-      tap((user: ICurrentUser) => {
+      tap((user: IAuthUser) => {
         this.currentUserSubject.next(user);
+      }),
+      catchError((error: HttpErrorResponse) => {
+      this.currentUserSubject.next(null);
+      return throwError(() => error);
       })
     );
   }
 
   isLoggedIn(): boolean {
-    return !!this.getToken();
+    return !!this.getAccessToken();
   }
 
-  initAuth(): Observable<ICurrentUser | null> {
+  initAuth(): Observable<IAuthUser | null> {
     if (this.isLoggedIn()) {
       return this.getProfile().pipe(
         catchError(() => {
@@ -66,21 +71,17 @@ export class AuthService {
     return of(null);
   }
 
-  getToken(): string | null {
-    const data: string | null = this.localStorageService.getItem<string>("auth_data");
-    if (!data) return null;
-    const authData = JSON.parse(data);
-    return authData.accessToken;
+  getAccessToken(): string | null {
+    const authData: IToken | null = this.localStorageService.getItem<IToken>("auth_data");
+    return authData ? authData.accessToken : null;
   }
 
   getRefreshToken(): string | null {
-    const data: string | null = this.localStorageService.getItem<string>("auth_data");
-    if (!data) return null;
-    const authData: IAuthSession = JSON.parse(data);
-    return authData.refreshToken;
+    const authData: IToken | null = this.localStorageService.getItem<IToken>("auth_data");
+    return authData ? authData.refreshToken : null;
   }
 
-  refreshToken(): Observable<IAuth> {
+  refreshToken(): Observable<IAuthResponse> {
     const refreshToken: string | null = this.getRefreshToken();
     if (!refreshToken) {
       this.notificationService.showError('Нужно войти в систему заново');
@@ -88,12 +89,12 @@ export class AuthService {
     }
 
     return this.authApiService.refreshToken(refreshToken).pipe(
-      tap((response: IAuth) => {
-        const authData: IAuthSession = {
+      tap((response: IAuthResponse) => {
+        const authData: IToken = {
             accessToken: response.accessToken,
             refreshToken: response.refreshToken
           };
-        this.localStorageService.setItem('auth_data', JSON.stringify(authData));
+        this.localStorageService.setItem('auth_data', authData);
       })
     )
   }
