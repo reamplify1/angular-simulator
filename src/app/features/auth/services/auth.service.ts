@@ -38,7 +38,7 @@ export class AuthService {
 
   login(credentials: ILoginRequest): Observable<IAuthUser> {
     return this.authApiService.login(credentials).pipe(
-      tap(response => this.saveTokens(response)),
+      tap((response: IAuthResponse) => this.saveTokens(response)),
       switchMap(() => this.getProfile())
     );
   }
