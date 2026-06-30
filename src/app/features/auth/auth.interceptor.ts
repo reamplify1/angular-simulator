@@ -36,7 +36,7 @@ export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, ne
           filter((token: string | null) => token !== null),
           take(1),
           switchMap((token: string) => {
-            const retryRequest = addToken(req, token);
+            const retryRequest: HttpRequest<unknown> = addToken(req, token);
             return next(retryRequest);
           })
         );

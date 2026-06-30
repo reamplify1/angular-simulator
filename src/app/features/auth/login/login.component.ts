@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { AuthService } from '../services/auth.service';
 import { ILoginRequest } from '../interfaces/ILoginRequest';
 import { Router } from '@angular/router';
-import { catchError, tap, throwError } from 'rxjs';
+import { catchError, of, tap } from 'rxjs';
 import { NotificationService } from '../../../services/notification.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CardModule } from 'primeng/card';
@@ -40,7 +40,7 @@ export class LoginComponent {
       }),
       catchError((error: HttpErrorResponse) => {
         this.notificationService.showError('Не удалось войти. Проверьте правильность введенных данных.');
-        return throwError(() => error);
+        return of(null);
       })
     )
     .subscribe()
