@@ -1,7 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterOutlet } from '@angular/router';
-import { HeaderComponent } from "./header/header.component";
-import { FooterComponent } from "./footer/footer.component";
+import { Router, RouterOutlet } from '@angular/router';
 import { NotificationComponent } from "./notification/notification.component";
 import { LocalStorageService } from './services/local-storage.service';
 import { LoaderComponent } from "./loader/loader.component";
@@ -9,7 +7,7 @@ import { LoaderService } from './services/loader.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, FooterComponent, NotificationComponent, LoaderComponent],
+  imports: [RouterOutlet, NotificationComponent, LoaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

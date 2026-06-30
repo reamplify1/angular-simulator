@@ -35,7 +35,7 @@ export class HeaderComponent {
   isDisplayTime: boolean = true;
   clickerCounter: number = 0;
 
-  public isLogged$: Observable<boolean> = this.authService.isAuthenticated$;
+  isLogged$: Observable<boolean> = this.authService.isAuthenticated$;
 
   ngOnInit(): void {
     const theme: AppTheme = this.themeService.getTheme();

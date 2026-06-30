@@ -23,9 +23,9 @@ export class AuthService {
   private currentUserSubject: BehaviorSubject<IAuthUser | null> = new BehaviorSubject<IAuthUser | null>(null);
   currentUser$: Observable<IAuthUser | null> = this.currentUserSubject.asObservable();
 
-  isAuthenticated$(): boolean {
-    return !!this.currentUserSubject.value;
-  }
+  readonly isAuthenticated$: Observable<boolean> = this.currentUser$.pipe(
+    map(user => user !== null)
+  );
 
   login(credentials: ILoginRequest): Observable<IAuthUser> {
     return this.authApiService.login(credentials).pipe(
@@ -55,12 +55,8 @@ export class AuthService {
     );
   }
 
-  isLoggedIn(): boolean {
-    return !!this.getAccessToken();
-  }
-
   initAuth(): Observable<IAuthUser | null> {
-    if (this.isLoggedIn()) {
+    if (this.getAccessToken()) {
       return this.getProfile().pipe(
         catchError(() => {
           this.localStorageService.removeItem("auth_data");
