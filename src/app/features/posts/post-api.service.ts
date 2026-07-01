@@ -10,7 +10,7 @@ import { IPostEditRequest } from "./interfaces/IPostEditRequest";
 })
 export class PostApiService {
 
-  private http: HttpClient = inject(HttpClient)
+  private http: HttpClient = inject(HttpClient);
 
   private readonly apiUrl: string = 'https://dummyjson.com/posts';
 

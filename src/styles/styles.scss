@@ -16,6 +16,7 @@
 }
 
 :root {
+  --hero-block-color: #ffffff;
   --primary-color: #ffffff;
   --secondary-color: #1a3e3e;
   --third-color: #000000;
@@ -33,9 +34,13 @@
   --post-detail-card-background: #f1f1f1;
   --post-detail-card-title: #1a3e3e;
   --post-detail-card-body: #555555;
+  --button-login: #2563EB;
+  --button-login-hover: #1d55ce;
+  --button-logout: #555555;
 }
 
 .my-app-dark {
+  --hero-block-color: #979797;
   --primary-color: rgb(27, 27, 27);
   --secondary-color: #f0f0f0;
   --light-background-color: #000000d5;
@@ -52,6 +57,9 @@
   --post-detail-card-background: #ececec;
   --post-detail-card-title: #F2BE22;
   --post-detail-card-body: #7e7e7e;
+  --button-login: #E5B01D;
+  --button-login-hover: #C99611;
+  --button-logout: rgb(27, 27, 27);
 
   .navigation__item {
     color: var(--secondary-color);
