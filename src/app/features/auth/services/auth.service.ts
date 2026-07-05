@@ -26,7 +26,7 @@ export class AuthService {
 
   initAuth(): Observable<IAuthUser | null> {
     if (this.getAccessToken()) {
-      return this.getProfile().pipe(
+      return this.loadCurrentUser().pipe(
         catchError(() => {
           this.clearAuthData();
           return of(null);
@@ -39,7 +39,7 @@ export class AuthService {
   login(credentials: ILoginRequest): Observable<IAuthUser> {
     return this.authApiService.login(credentials).pipe(
       tap((response: IAuthResponse) => this.saveTokens(response)),
-      switchMap(() => this.getProfile())
+      switchMap(() => this.loadCurrentUser())
     );
   }
 
@@ -51,12 +51,16 @@ export class AuthService {
     this.localStorageService.setItem("auth_data", authData);
   }
 
-  getProfile(): Observable<IAuthUser> {
+  loadCurrentUser(): Observable<IAuthUser> {
     return this.authApiService.getCurrentUser().pipe(
       tap((user: IAuthUser) => {
         this.currentUserSubject.next(user);
       })
     );
+  }
+
+  getCurrentUser(): IAuthUser | null {
+    return this.currentUserSubject.value;
   }
 
   getAccessToken(): string | null {
