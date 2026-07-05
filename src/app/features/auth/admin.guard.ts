@@ -3,6 +3,7 @@ import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { IAuthUser } from './interfaces/IAuthUser';
 import { NotificationService } from '../../services/notification.service';
+import { UserRole } from '../../../enums/UserRole';
 
 export const adminGuard: CanActivateFn = () => {
 
@@ -11,7 +12,7 @@ export const adminGuard: CanActivateFn = () => {
   const notificationService: NotificationService = inject(NotificationService);
   const currentUser: IAuthUser | null = authService.getCurrentUser();
 
-  if (currentUser?.role === 'admin') {
+  if (currentUser?.role === UserRole.ADMIN) {
     return true;
   }
 
