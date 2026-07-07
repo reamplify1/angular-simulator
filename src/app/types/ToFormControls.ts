@@ -1,4 +1,4 @@
-import { FormControl, FormGroup } from "@angular/forms";
+import { FormControl, FormGroup } from '@angular/forms';
 
 export type ToFormControls<T> = {
   [K in keyof T]-?: T[K] extends object

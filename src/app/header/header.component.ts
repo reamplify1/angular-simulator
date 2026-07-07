@@ -1,10 +1,10 @@
 import { NotificationService } from './../services/notification.service';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink, RouterLinkActive } from "@angular/router";
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { INavigation } from '../interfaces/INavigation';
 import { DarkModeToggleComponent } from '../toggle-theme-color.component/dark-mode-toggle';
-import { faSun, faMoon ,IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { faSun, faMoon, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ThemeComponent } from '../theme-switcher/theme.component';
 import { ThemeService } from '../services/theme.service';
@@ -13,16 +13,22 @@ import { Observable } from 'rxjs';
 import { AppTheme } from '../../enums/AppTheme';
 import { AuthService } from '../features/auth/services/auth.service';
 
-
 @Component({
   selector: 'app-header',
-  imports: [FormsModule, RouterLink, AsyncPipe ,RouterLinkActive, ThemeComponent, DarkModeToggleComponent, FontAwesomeModule],
+  imports: [
+    FormsModule,
+    RouterLink,
+    AsyncPipe,
+    RouterLinkActive,
+    ThemeComponent,
+    DarkModeToggleComponent,
+    FontAwesomeModule,
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   standalone: true,
 })
-export class HeaderComponent {
-
+export class HeaderComponent implements OnInit {
   themeService: ThemeService = inject(ThemeService);
   notificationService: NotificationService = inject(NotificationService);
   private authService: AuthService = inject(AuthService);
@@ -30,10 +36,10 @@ export class HeaderComponent {
   isDarkMode$: Observable<boolean> = this.themeService.isDarkMode$;
   faMoon: IconDefinition = faMoon;
   faSun: IconDefinition = faSun;
-  companyName: string = 'Румтибет';
+  companyName = 'Румтибет';
   dateNow: string = new Date().toLocaleString();
-  isDisplayTime: boolean = true;
-  clickerCounter: number = 0;
+  isDisplayTime = true;
+  clickerCounter = 0;
 
   isLogged$: Observable<boolean> = this.authService.isAuthenticated$;
 
@@ -61,9 +67,8 @@ export class HeaderComponent {
   }
 
   navigation: INavigation[] = [
-    { id: 'main-page', label: 'Главная' , link: ''},
+    { id: 'main-page', label: 'Главная', link: '' },
     { id: 'guide-page', label: 'Пользователи', link: 'users' },
     { id: 'posts-page', label: 'Посты', link: 'posts' },
   ];
-
 }

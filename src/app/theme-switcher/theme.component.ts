@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { ThemeService } from '../services/theme.service';
@@ -12,9 +12,8 @@ import type { ITheme } from '../interfaces/ITheme';
   templateUrl: './theme.component.html',
   styleUrl: './theme.component.scss',
 })
-export class ThemeComponent {
-
-  themeService: ThemeService = inject(ThemeService)
+export class ThemeComponent implements OnInit {
+  themeService: ThemeService = inject(ThemeService);
 
   theme: AppTheme = AppTheme.AURA;
 
@@ -22,7 +21,7 @@ export class ThemeComponent {
     { name: 'Aura', value: AppTheme.AURA },
     { name: 'Lara', value: AppTheme.LARA },
     { name: 'Nora', value: AppTheme.NORA },
-    { name: 'Custom', value: AppTheme.CUSTOM }
+    { name: 'Custom', value: AppTheme.CUSTOM },
   ];
 
   ngOnInit(): void {
@@ -33,6 +32,4 @@ export class ThemeComponent {
     this.themeService.setTheme(theme);
     this.theme = theme;
   }
-
 }
-

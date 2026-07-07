@@ -6,7 +6,6 @@ import { NotificationService } from '../../services/notification.service';
 import { UserRole } from '../../../enums/UserRole';
 
 export const adminGuard: CanActivateFn = () => {
-
   const authService: AuthService = inject(AuthService);
   const router: Router = inject(Router);
   const notificationService: NotificationService = inject(NotificationService);
@@ -18,5 +17,4 @@ export const adminGuard: CanActivateFn = () => {
 
   notificationService.showError('Access denied. Administrator role is required.');
   return router.createUrlTree(['/']);
-
 };

@@ -8,5 +8,5 @@ export interface IPost {
   reactions: {
     likes: number;
     dislikes: number;
-  }
+  };
 }

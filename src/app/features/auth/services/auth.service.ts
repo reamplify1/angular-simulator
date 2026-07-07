@@ -12,16 +12,17 @@ import { IAuthUser } from '../interfaces/IAuthUser';
   providedIn: 'root',
 })
 export class AuthService {
-
   private readonly authApiService: AuthApiService = inject(AuthApiService);
   private readonly localStorageService: LocalStorageService = inject(LocalStorageService);
   private readonly router: Router = inject(Router);
 
-  private currentUserSubject: BehaviorSubject<IAuthUser | null> = new BehaviorSubject<IAuthUser | null>(null);
+  private currentUserSubject: BehaviorSubject<IAuthUser | null> =
+    new BehaviorSubject<IAuthUser | null>(null);
+
   readonly currentUser$: Observable<IAuthUser | null> = this.currentUserSubject.asObservable();
 
   readonly isAuthenticated$: Observable<boolean> = this.currentUser$.pipe(
-    map(user => user !== null)
+    map((user) => user !== null),
   );
 
   initAuth(): Observable<IAuthUser | null> {
@@ -30,7 +31,7 @@ export class AuthService {
         catchError(() => {
           this.clearAuthData();
           return of(null);
-        })
+        }),
       );
     }
     return of(null);
@@ -39,23 +40,23 @@ export class AuthService {
   login(credentials: ILoginRequest): Observable<IAuthUser> {
     return this.authApiService.login(credentials).pipe(
       tap((response: IAuthResponse) => this.saveTokens(response)),
-      switchMap(() => this.loadCurrentUser())
+      switchMap(() => this.loadCurrentUser()),
     );
   }
 
   private saveTokens(response: IAuthResponse): void {
     const authData: IToken = {
-        accessToken: response.accessToken,
-        refreshToken: response.refreshToken
+      accessToken: response.accessToken,
+      refreshToken: response.refreshToken,
     };
-    this.localStorageService.setItem("auth_data", authData);
+    this.localStorageService.setItem('auth_data', authData);
   }
 
   loadCurrentUser(): Observable<IAuthUser> {
     return this.authApiService.getCurrentUser().pipe(
       tap((user: IAuthUser) => {
         this.currentUserSubject.next(user);
-      })
+      }),
     );
   }
 
@@ -64,12 +65,12 @@ export class AuthService {
   }
 
   getAccessToken(): string | null {
-    const authData: IToken | null = this.localStorageService.getItem<IToken>("auth_data");
+    const authData: IToken | null = this.localStorageService.getItem<IToken>('auth_data');
     return authData ? authData.accessToken : null;
   }
 
   getRefreshToken(): string | null {
-    const authData: IToken | null = this.localStorageService.getItem<IToken>("auth_data");
+    const authData: IToken | null = this.localStorageService.getItem<IToken>('auth_data');
     return authData ? authData.refreshToken : null;
   }
 
@@ -79,9 +80,9 @@ export class AuthService {
       return throwError(() => new Error('No refresh token available'));
     }
 
-    return this.authApiService.refreshToken(refreshToken).pipe(
-      tap((response: IAuthResponse) => this.saveTokens(response))
-    );
+    return this.authApiService
+      .refreshToken(refreshToken)
+      .pipe(tap((response: IAuthResponse) => this.saveTokens(response)));
   }
 
   logout(): void {
@@ -93,5 +94,4 @@ export class AuthService {
     this.localStorageService.removeItem('auth_data');
     this.currentUserSubject.next(null);
   }
-
 }

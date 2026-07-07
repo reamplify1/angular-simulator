@@ -9,20 +9,18 @@ import { IAuthUser } from '../interfaces/IAuthUser';
   providedIn: 'root',
 })
 export class AuthApiService {
-
   private http: HttpClient = inject(HttpClient);
-  private url: string = 'https://dummyjson.com/auth/';
+  private url = 'https://dummyjson.com/auth/';
 
   login(credentials: ILoginRequest): Observable<IAuthResponse> {
-    return this.http.post<IAuthResponse>(`${ this.url }login`, credentials);
+    return this.http.post<IAuthResponse>(`${this.url}login`, credentials);
   }
 
   refreshToken(refreshToken: string): Observable<IAuthResponse> {
-    return this.http.post<IAuthResponse>(`${ this.url }refresh`, { refreshToken });
+    return this.http.post<IAuthResponse>(`${this.url}refresh`, { refreshToken });
   }
 
   getCurrentUser(): Observable<IAuthUser> {
-    return this.http.get<IAuthUser>(`${ this.url }/me`);
+    return this.http.get<IAuthUser>(`${this.url}/me`);
   }
-
 }

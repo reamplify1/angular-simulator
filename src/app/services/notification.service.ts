@@ -4,11 +4,12 @@ import { NotificationType } from '../../enums/NotificationType';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-  export class NotificationService {
-
-  private notificationsSubject: BehaviorSubject<INotification[]> = new BehaviorSubject<INotification[]>([]);
+export class NotificationService {
+  private notificationsSubject: BehaviorSubject<INotification[]> = new BehaviorSubject<
+    INotification[]
+  >([]);
 
   private get notifications(): INotification[] {
     return this.notificationsSubject.value;
@@ -46,5 +47,4 @@ import { BehaviorSubject, Observable } from 'rxjs';
     const updated: INotification[] = this.notifications.filter((n: INotification) => n.id !== id);
     this.notificationsSubject.next(updated);
   }
-
 }
