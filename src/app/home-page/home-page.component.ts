@@ -14,7 +14,7 @@ import { NotificationType } from '../../enums/NotificationType';
 import { blogArticles } from '.././data/blog-articles';
 import { NotificationService } from '../services/notification.service';
 import { LocalStorageService } from '../services/local-storage.service';
-import { faPlay, IconDefinition, faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { faPlay, IconDefinition, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
@@ -25,22 +25,21 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   standalone: true,
 })
 export class HomePageComponent {
-
   notificationService: NotificationService = inject(NotificationService);
   localStorageService: LocalStorageService = inject(LocalStorageService);
 
   faPlay: IconDefinition = faPlay;
   faChevronDown: IconDefinition = faChevronDown;
 
-  location: string = '';
-  date: string = '';
-  participants: string = '';
-  liveInputText: string = '';
-  isLoading: boolean = true;
+  location = '';
+  date = '';
+  participants = '';
+  liveInputText = '';
+  isLoading = true;
   advantages: IAdvantage[] = advantages;
   hikeLocations: ILocation[] = hikeLocations;
-  isNotified: boolean = false;
-  message: string = '';
+  isNotified = false;
+  message = '';
   articles: IArticle[] = blogArticles;
   notificationType: typeof NotificationType = NotificationType;
   tours: ITour[] = tours;
@@ -68,5 +67,4 @@ export class HomePageComponent {
     const mainColors: Color[] = [Color.RED, Color.GREEN, Color.BLUE];
     return mainColors.includes(color);
   }
-
 }

@@ -5,7 +5,6 @@ import { IPost } from './interfaces/IPost';
 import { LoaderService } from '../../services/loader.service';
 import { finalize } from 'rxjs';
 
-
 export const postResolver: ResolveFn<IPost> = (route) => {
   const loaderService: LoaderService = inject(LoaderService);
   const postApiService: PostApiService = inject(PostApiService);
@@ -17,6 +16,6 @@ export const postResolver: ResolveFn<IPost> = (route) => {
   return postApiService.getPostById(Number(id)).pipe(
     finalize(() => {
       loaderService.hideLoader();
-    })
+    }),
   );
 };

@@ -11,10 +11,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
-
   private primeNg: PrimeNG = inject(PrimeNG);
-  private localStorageService: LocalStorageService = inject(LocalStorageService)
-  private STORAGE_KEY: string = 'app-theme';
+  private localStorageService: LocalStorageService = inject(LocalStorageService);
+  private STORAGE_KEY = 'app-theme';
 
   private themeSubject: BehaviorSubject<AppTheme> = new BehaviorSubject<AppTheme>(AppTheme.AURA);
   theme$: Observable<AppTheme> = this.themeSubject.asObservable();
@@ -49,24 +48,23 @@ export class ThemeService {
     this.localStorageService.setItem(this.STORAGE_KEY, theme);
   }
 
-
   applyTheme(theme: AppTheme): void {
     switch (theme) {
       case AppTheme.AURA:
-      usePreset(Aura);
-      break;
+        usePreset(Aura);
+        break;
 
       case AppTheme.LARA:
-      usePreset(Lara);
-      break;
+        usePreset(Lara);
+        break;
 
       case AppTheme.NORA:
-      usePreset(Nora);
-      break;
+        usePreset(Nora);
+        break;
 
       case AppTheme.CUSTOM:
-      usePreset(customIndigoPreset);
-      break;
+        usePreset(customIndigoPreset);
+        break;
     }
   }
 
@@ -79,6 +77,4 @@ export class ThemeService {
     this.isDarkModeSubject.next(isDark);
     this.localStorageService.setItem('dark-mode', isDark);
   }
-
 }
-

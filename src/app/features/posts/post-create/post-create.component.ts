@@ -19,11 +19,10 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrl: './post-create.component.scss',
 })
 export class PostCreateComponent {
-
   private fb: FormBuilder = inject(FormBuilder);
   private postApi: PostApiService = inject(PostApiService);
   private router: Router = inject(Router);
-  private notificationService: NotificationService = inject(NotificationService)
+  private notificationService: NotificationService = inject(NotificationService);
 
   postForm: FormGroup<ToFormControls<IPostCreateForm>> = this.fb.group({
     title: ['', [Validators.required]],
@@ -34,7 +33,7 @@ export class PostCreateComponent {
     reactions: this.fb.group({
       likes: [0],
       dislikes: [0],
-    })
+    }),
   }) as FormGroup<ToFormControls<IPostCreateForm>>;
 
   onSubmit(): void {
@@ -42,7 +41,9 @@ export class PostCreateComponent {
 
     const formValue: IPostCreateForm = this.postForm.value as IPostCreateForm;
 
-    const tagsArray: string[] = formValue.tags ? formValue.tags.split(',').map((tag: string) => tag.trim()) : [];
+    const tagsArray: string[] = formValue.tags
+      ? formValue.tags.split(',').map((tag: string) => tag.trim())
+      : [];
 
     const newPost: IPost = {
       ...formValue,
@@ -51,18 +52,18 @@ export class PostCreateComponent {
       views: Number(formValue.views),
     };
 
-  this.postApi.createPost(newPost)
-    .pipe(
-      tap((response: IPost) => {
-        this.notificationService.showSuccess('Пост создан');
-        this.router.navigate(['/posts']);
-      }),
-      catchError((error: HttpErrorResponse) => {
-        this.notificationService.showError('Не удалось создать пост');
-        return throwError(() => error);
-      })
-    )
-    .subscribe();
+    this.postApi
+      .createPost(newPost)
+      .pipe(
+        tap(() => {
+          this.notificationService.showSuccess('Пост создан');
+          this.router.navigate(['/posts']);
+        }),
+        catchError((error: HttpErrorResponse) => {
+          this.notificationService.showError('Не удалось создать пост');
+          return throwError(() => error);
+        }),
+      )
+      .subscribe();
   }
-
 }

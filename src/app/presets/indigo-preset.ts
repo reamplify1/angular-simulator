@@ -3,7 +3,6 @@ import { definePreset } from '@primeuix/themes';
 import Aura from '@primeuix/themes/aura';
 
 export const customIndigoPreset = definePreset(Aura, {
-
   semantic: {
     primary: {
       500: 'var(--secondary-color)',
@@ -16,16 +15,15 @@ export const customIndigoPreset = definePreset(Aura, {
           hoverColor: 'var(--yellow-color)',
           activeColor: 'var(--third-color)',
           inverseColor: 'var(--primary-color)',
-        }
+        },
       },
       dark: {
         primary: {
           hoverColor: 'var(--yellow-color)',
           activeColor: 'var(--third-color)',
           inverseColor: 'var(--primary-color)',
-        }
-      }
-    }
-  }
-
+        },
+      },
+    },
+  },
 });

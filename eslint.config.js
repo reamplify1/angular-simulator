@@ -5,7 +5,6 @@ const { defineConfig } = require("eslint/config");
 const tseslint = require("typescript-eslint");
 const angular = require("angular-eslint");
 
-const eslintPluginPrettier = require("eslint-plugin-prettier");
 const eslintConfigPrettier = require("eslint-config-prettier");
 
 module.exports = defineConfig([
@@ -15,14 +14,9 @@ module.exports = defineConfig([
     extends: [
       eslint.configs.recommended,
       tseslint.configs.recommended,
-      tseslint.configs.stylistic,
       angular.configs.tsRecommended,
       eslintConfigPrettier,
     ],
-
-    plugins: {
-      prettier: eslintPluginPrettier,
-    },
 
     processor: angular.processInlineTemplates,
 
@@ -100,13 +94,12 @@ module.exports = defineConfig([
             match: true,
           },
         },
+
         {
           selector: "enumMember",
           format: ["UPPER_CASE"],
         },
       ],
-
-      "prettier/prettier": "error",
     },
   },
 

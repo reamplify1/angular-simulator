@@ -1,4 +1,4 @@
-import { ILocation } from "../interfaces/ILocation"
+import { ILocation } from '../interfaces/ILocation';
 
 export const hikeLocations: ILocation[] = [
   {
@@ -12,5 +12,5 @@ export const hikeLocations: ILocation[] = [
   {
     id: 3,
     name: 'Винница',
-  }
-]
+  },
+];

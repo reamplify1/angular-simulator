@@ -26,4 +26,4 @@ export const tours = [
     price: 230,
     rating: 5.0,
   },
-]
+];

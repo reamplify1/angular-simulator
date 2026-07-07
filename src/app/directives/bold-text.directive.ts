@@ -4,10 +4,9 @@ import { Directive, ElementRef, HostBinding, HostListener, inject } from '@angul
   selector: '[appHoverBold]',
 })
 export class HoverBoldDirective {
-
   private el: ElementRef = inject(ElementRef);
 
-  @HostBinding('style.fontWeight') fontWeight: string = '';
+  @HostBinding('style.fontWeight') fontWeight = '';
 
   @HostListener('mouseenter')
   onMouseEnter(): void {
@@ -18,5 +17,4 @@ export class HoverBoldDirective {
   onMouseLeave(): void {
     this.fontWeight = 'normal';
   }
-
 }
