@@ -17,13 +17,17 @@
           </a>
         }
       </nav>
-      <app-theme id="theme-switcher"/>
+      @if (appConfig.enableTheming) {
+        <app-theme id="theme-switcher"/>
+      }
       <div class="navigation__button">
-        <app-dark-mode-toggle id="dark-mode-switcher"/>
-        @if (isDarkMode$ | async) {
-          <fa-icon [icon]="faMoon"></fa-icon>
-        } @else {
-          <fa-icon [icon]="faSun" class="fa-sun-icon"></fa-icon>
+        @if (appConfig.enableTheming) {
+          <app-dark-mode-toggle id="dark-mode-switcher"/>
+          @if (isDarkMode$ | async) {
+            <fa-icon [icon]="faMoon"></fa-icon>
+          } @else {
+            <fa-icon [icon]="faSun" class="fa-sun-icon"></fa-icon>
+          }
         }
         <button
           id="button-consult"
@@ -56,6 +60,12 @@
   </div>
 
   <div class="date-clicker-container container">
+
+    <div class="last-login">
+      Последний вход:
+      {{ lastLogin | date: dateFormat }}
+    </div>
+
     <span>{{ isDisplayTime ? dateNow: clickerCounter }}</span>
     <div class="clicker-buttons" [hidden]="isDisplayTime">
       <button
