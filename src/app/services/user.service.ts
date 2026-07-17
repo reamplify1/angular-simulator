@@ -4,14 +4,12 @@ import { UserApiService } from './user-api.service';
 import { LoaderService } from './loader.service';
 import { IUser } from '../interfaces/IUser';
 import { NotificationService } from './notification.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-
   private userApiService: UserApiService = inject(UserApiService);
   private loaderService: LoaderService = inject(LoaderService);
   private notificationService: NotificationService = inject(NotificationService);
@@ -41,8 +39,10 @@ export class UserService {
     this.setUsers(users);
   }
 
-  loadUsers(forceUpdate: boolean = false): Observable<IUser[]> {
-    const storageUsers: IUser[] | null = this.localStorageService.getItem<IUser[]>(this.LOCAL_STORAGE_KEY);
+  loadUsers(forceUpdate = false): Observable<IUser[]> {
+    const storageUsers: IUser[] | null = this.localStorageService.getItem<IUser[]>(
+      this.LOCAL_STORAGE_KEY,
+    );
 
     if (storageUsers && storageUsers.length > 0 && !forceUpdate) {
       return of<IUser[]>(storageUsers);
@@ -51,13 +51,11 @@ export class UserService {
     this.loaderService.showLoader();
 
     return this.userApiService.getUsers().pipe(
-
       tap((users: IUser[]) => {
         this.setUsers(users);
       }),
 
-      catchError((error: HttpErrorResponse): Observable<IUser[]> => {
-
+      catchError((): Observable<IUser[]> => {
         this.notificationService.showError('Ошибка загрузки пользователей');
 
         return of<IUser[]>([]);
@@ -65,8 +63,7 @@ export class UserService {
 
       finalize(() => {
         this.loaderService.hideLoader();
-      })
+      }),
     );
   }
-
 }

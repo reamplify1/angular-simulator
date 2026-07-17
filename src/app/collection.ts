@@ -1,5 +1,4 @@
 export class Collection<T> {
-
   elements: T[];
 
   constructor(elements: T[]) {
@@ -25,5 +24,4 @@ export class Collection<T> {
   replaceElement(index: number, elem: T): void {
     this.elements[index] = elem;
   }
-
 }

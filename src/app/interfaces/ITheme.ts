@@ -1,4 +1,4 @@
-import { AppTheme } from "../../enums/AppTheme";
+import { AppTheme } from '../../enums/AppTheme';
 
 export interface ITheme {
   name: string;

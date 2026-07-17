@@ -1,11 +1,21 @@
-import { HttpErrorResponse, HttpEvent, HttpHandlerFn, HttpInterceptorFn, HttpRequest, HttpResponse } from '@angular/common/http';
+import {
+  HttpErrorResponse,
+  HttpEvent,
+  HttpHandlerFn,
+  HttpInterceptorFn,
+  HttpRequest,
+  HttpResponse,
+} from '@angular/common/http';
 import { tap } from 'rxjs';
 import { IRequestInfo } from '../interfaces/IRequestInfo';
 import { APP_CONFIG } from '../tokens/app-config.token';
 import { inject } from '@angular/core';
 import { IAppConfig } from '../interfaces/IAppConfig';
 
-export const loggingInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn) => {
+export const loggingInterceptor: HttpInterceptorFn = (
+  req: HttpRequest<unknown>,
+  next: HttpHandlerFn,
+) => {
   const startTime: number = performance.now();
   const { method, url }: IRequestInfo = req;
   const appConfig: IAppConfig = inject(APP_CONFIG);
@@ -25,7 +35,7 @@ export const loggingInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>,
       error: (error: HttpErrorResponse) => {
         const duration: string = (performance.now() - startTime).toFixed(2);
         console.error(`[HTTP Error] ${ method } ${ url } - Status: ${ error.status } (${ duration }ms)`);
-      }
-    })
-  )
-}
+      },
+    }),
+  );
+};

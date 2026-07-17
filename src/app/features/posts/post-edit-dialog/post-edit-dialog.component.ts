@@ -15,7 +15,6 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
   styleUrl: './post-edit-dialog.component.scss',
 })
 export class PostEditDialogComponent implements OnInit {
-
   private dialogConfig: DynamicDialogConfig = inject(DynamicDialogConfig);
   private dialogRef: DynamicDialogRef = inject(DynamicDialogRef);
 
@@ -49,7 +48,9 @@ export class PostEditDialogComponent implements OnInit {
   onSubmit(): void {
     const formValue: IPostEditForm = this.editForm.value;
 
-    const tags: string[] = formValue.tags ? formValue.tags.split(',').map((tag: string) => tag.trim()) : [];
+    const tags: string[] = formValue.tags
+      ? formValue.tags.split(',').map((tag: string) => tag.trim())
+      : [];
 
     const editedPost: IPostEditRequest = {
       title: formValue.title,
@@ -59,5 +60,4 @@ export class PostEditDialogComponent implements OnInit {
 
     this.dialogRef.close(editedPost);
   }
-
 }

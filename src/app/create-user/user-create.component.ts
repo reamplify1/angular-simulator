@@ -6,16 +6,13 @@ import type { ToFormControls } from '../types/ToFormControls';
 import { HoverBoldDirective } from '../directives/bold-text.directive';
 import { AnimatedGradientDirective } from '../directives/animated-gradient.directive';
 
-
 @Component({
   selector: 'app-user-create',
   imports: [ReactiveFormsModule, HoverBoldDirective, AnimatedGradientDirective],
   templateUrl: './user-create.component.html',
   styleUrl: './user-create.component.scss',
 })
-
 export class UserCreateComponent {
-
   @Output() createUser: EventEmitter<IUser> = new EventEmitter<IUser>();
 
   private fb: FormBuilder = inject(FormBuilder);
@@ -35,16 +32,16 @@ export class UserCreateComponent {
       zipcode: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(10)]],
       geo: this.fb.group({
         lat: ['', Validators.required],
-        lng: ['', Validators.required]
-      })
+        lng: ['', Validators.required],
+      }),
     }),
 
     company: this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(50)]],
       catchPhrase: ['', [Validators.maxLength(200)]],
-      bs: ['', [Validators.maxLength(100)]]
-    })
-  }) as FormGroup<ToFormControls<IUser>>
+      bs: ['', [Validators.maxLength(100)]],
+    }),
+  }) as FormGroup<ToFormControls<IUser>>;
 
   onSubmit(): void {
     if (this.userForm.invalid) {
@@ -55,12 +52,11 @@ export class UserCreateComponent {
 
     const submittedData: IUser = {
       ...formValue,
-      id: Date.now() + Math.random()
+      id: Date.now() + Math.random(),
     };
 
     this.createUser.emit(submittedData);
 
     this.userForm.reset();
   }
-
 }

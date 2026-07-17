@@ -23,7 +23,7 @@ export const blogArticles = [
     text: 'Для современного мира базовый вектор развития предполагает.',
     date: '12/09/2023',
   },
-    {
+  {
     id: 4,
     title: 'Индия ... летим?',
     img: 'traveler-blog4',
@@ -31,4 +31,4 @@ export const blogArticles = [
     text: 'Для современного мира базовый.',
     date: '24/06/2023',
   },
-]
+];

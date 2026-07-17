@@ -9,7 +9,6 @@ import { LocalStorageService } from '../services/local-storage.service';
   styleUrl: './not-found-page.component.scss',
 })
 export class NotFoundPageComponent {
-
   localStorageService: LocalStorageService = inject(LocalStorageService);
 
   constructor() {
@@ -24,7 +23,7 @@ export class NotFoundPageComponent {
   }
 
   saveVisitCount(): void {
-    const VISIT_COUNT_KEY: string = 'visit-count';
+    const VISIT_COUNT_KEY = 'visit-count';
     const visits: string | null = this.localStorageService.getItem(VISIT_COUNT_KEY);
 
     let count: number = visits ? parseInt(visits) : 0;
@@ -32,5 +31,4 @@ export class NotFoundPageComponent {
 
     this.localStorageService.setItem(VISIT_COUNT_KEY, count.toString());
   }
-
 }

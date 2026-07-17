@@ -6,7 +6,7 @@ import { IAppConfig } from '../interfaces/IAppConfig';
 import { APP_CONFIG } from '../tokens/app-config.token';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
   export class NotificationService {
 
@@ -55,5 +55,4 @@ import { APP_CONFIG } from '../tokens/app-config.token';
     const updated: INotification[] = this.notifications.filter((n: INotification) => n.id !== id);
     this.notificationsSubject.next(updated);
   }
-
 }

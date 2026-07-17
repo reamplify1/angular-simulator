@@ -1,13 +1,23 @@
-import { HttpErrorResponse, HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
+import {
+  HttpErrorResponse,
+  HttpHandlerFn,
+  HttpInterceptorFn,
+  HttpRequest,
+} from '@angular/common/http';
 import { inject } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { BehaviorSubject, catchError, filter, finalize, switchMap, take, throwError } from 'rxjs';
 import { IAuthResponse } from './interfaces/IAuthResponse';
 
-let isRefreshing: boolean = false;
-const refreshTokenSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
+let isRefreshing = false;
+const refreshTokenSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(
+  null,
+);
 
-export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn) => {
+export const authInterceptor: HttpInterceptorFn = (
+  req: HttpRequest<unknown>,
+  next: HttpHandlerFn,
+) => {
   const authService: AuthService = inject(AuthService);
   const accessToken: string | null = authService.getAccessToken();
 
@@ -18,15 +28,14 @@ export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, ne
   const addToken = (req: HttpRequest<unknown>, token: string): HttpRequest<unknown> => {
     return req.clone({
       setHeaders: {
-        Authorization: `Bearer ${ token }`
-      }
+        Authorization: `Bearer ${ token }`,
+      },
     });
   };
 
   const request: HttpRequest<unknown> = accessToken ? addToken(req, accessToken) : req;
 
   return next(request).pipe(
-
     catchError((error: HttpErrorResponse) => {
       if (error.status !== 401) {
         return throwError(() => error);
@@ -38,14 +47,12 @@ export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, ne
           switchMap((token: string) => {
             const retryRequest: HttpRequest<unknown> = addToken(req, token);
             return next(retryRequest);
-          })
+          }),
         );
-
       }
       isRefreshing = true;
       refreshTokenSubject.next(null);
       return authService.refreshToken().pipe(
-
         switchMap((response: IAuthResponse) => {
           refreshTokenSubject.next(response.accessToken);
           const retryRequest = addToken(req, response.accessToken);
@@ -59,8 +66,8 @@ export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, ne
 
         finalize(() => {
           isRefreshing = false;
-        })
+        }),
       );
-    })
-  )
+    }),
+  );
 };

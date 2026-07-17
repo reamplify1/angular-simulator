@@ -1,11 +1,11 @@
 import { LocalStorageService } from './../services/local-storage.service';
 import { NotificationService } from './../services/notification.service';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink, RouterLinkActive } from "@angular/router";
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { INavigation } from '../interfaces/INavigation';
 import { DarkModeToggleComponent } from '../toggle-theme-color.component/dark-mode-toggle';
-import { faSun, faMoon ,IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { faSun, faMoon, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ThemeComponent } from '../theme-switcher/theme.component';
 import { ThemeService } from '../services/theme.service';
@@ -17,7 +17,6 @@ import { DATE_FORMAT } from '../tokens/date-format.token';
 import { APP_CONFIG } from '../tokens/app-config.token';
 import { IAppConfig } from '../interfaces/IAppConfig';
 
-
 @Component({
   selector: 'app-header',
   imports: [FormsModule, RouterLink, AsyncPipe, DatePipe ,RouterLinkActive, ThemeComponent, DarkModeToggleComponent, FontAwesomeModule],
@@ -25,8 +24,7 @@ import { IAppConfig } from '../interfaces/IAppConfig';
   styleUrl: './header.component.scss',
   standalone: true,
 })
-export class HeaderComponent {
-
+export class HeaderComponent implements OnInit {
   themeService: ThemeService = inject(ThemeService);
   notificationService: NotificationService = inject(NotificationService);
   localStorageService: LocalStorageService = inject(LocalStorageService);
@@ -40,8 +38,8 @@ export class HeaderComponent {
   faMoon: IconDefinition = faMoon;
   faSun: IconDefinition = faSun;
   dateNow: string = new Date().toLocaleString();
-  isDisplayTime: boolean = true;
-  clickerCounter: number = 0;
+  isDisplayTime = true;
+  clickerCounter = 0;
 
   isLogged$: Observable<boolean> = this.authService.isAuthenticated$;
 
@@ -75,9 +73,8 @@ export class HeaderComponent {
   }
 
   navigation: INavigation[] = [
-    { id: 'main-page', label: 'Главная' , link: ''},
+    { id: 'main-page', label: 'Главная', link: '' },
     { id: 'guide-page', label: 'Пользователи', link: 'users' },
     { id: 'posts-page', label: 'Посты', link: 'posts' },
   ];
-
 }

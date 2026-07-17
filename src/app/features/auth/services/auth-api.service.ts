@@ -11,7 +11,6 @@ import { IAppConfig } from '../../../interfaces/IAppConfig';
   providedIn: 'root',
 })
 export class AuthApiService {
-
   private http: HttpClient = inject(HttpClient);
   private url: string = 'https://dummyjson.com/auth/';
   private readonly appConfig: IAppConfig = inject(APP_CONFIG);
@@ -35,7 +34,6 @@ export class AuthApiService {
   }
 
   getCurrentUser(): Observable<IAuthUser> {
-    return this.http.get<IAuthUser>(`${ this.url }/me`);
+    return this.http.get<IAuthUser>(`${this.url}/me`);
   }
-
 }

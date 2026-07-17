@@ -9,11 +9,10 @@ import { Location } from '@angular/common';
   styleUrl: './post-detail.component.scss',
 })
 export class PostDetailComponent implements OnInit {
-
   private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private location: Location = inject(Location);
 
-  post!: IPost;   
+  post!: IPost;
 
   ngOnInit(): void {
     this.post = this.activatedRoute.snapshot.data['postData'];
@@ -22,5 +21,4 @@ export class PostDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
-
 }

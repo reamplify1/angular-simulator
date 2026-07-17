@@ -22,7 +22,9 @@
             icon="pi pi-plus"
             routerLink="create"
             class="p-button-sm"
-          ></button>
+            aria-label="создать пост"
+          >
+          </button>
         </div>
 
       </div>
@@ -87,6 +89,7 @@
                   type="button"
                   icon="pi pi-ellipsis-v"
                   class="p-button-rounded p-button-text"
+                  aria-label="Open post actions"
                   (click)="selectedPost = post; cm.show($event); $event.stopPropagation()"
                 ></button>
               </td>

@@ -1,15 +1,14 @@
-import { inject, Injectable } from "@angular/core";
-import { IPost } from "./interfaces/IPost";
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { IPostsResponse } from "./interfaces/IPostsResponse";
-import { IPostEditRequest } from "./interfaces/IPostEditRequest";
+import { inject, Injectable } from '@angular/core';
+import { IPost } from './interfaces/IPost';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { IPostsResponse } from './interfaces/IPostsResponse';
+import { IPostEditRequest } from './interfaces/IPostEditRequest';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PostApiService {
-
   private http: HttpClient = inject(HttpClient);
 
   private readonly apiUrl: string = 'https://dummyjson.com/posts';
@@ -33,5 +32,4 @@ export class PostApiService {
   deletePost(id: number): Observable<IPost> {
     return this.http.delete<IPost>(`${ this.apiUrl }/${ id }`);
   }
-
 }

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { map, Observable, combineLatest, tap, BehaviorSubject } from 'rxjs';
 import type { IUser } from '../interfaces/IUser';
@@ -12,12 +12,18 @@ import { PluralizePipe } from '../pipes/pluralize.pipe';
 
 @Component({
   selector: 'app-users',
-  imports: [UserCardComponent, UserCreateComponent, UsersFilterComponent, AsyncPipe, LoaderComponent, PluralizePipe],
+  imports: [
+    UserCardComponent,
+    UserCreateComponent,
+    UsersFilterComponent,
+    AsyncPipe,
+    LoaderComponent,
+    PluralizePipe,
+  ],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss',
 })
-export class UsersComponent {
-
+export class UsersComponent implements OnInit {
   private notificationService: NotificationService = inject(NotificationService);
   private userService: UserService = inject(UserService);
 
@@ -25,7 +31,7 @@ export class UsersComponent {
 
   filteredUsers$: Observable<IUser[]> = combineLatest<[IUser[], string]>([
     this.userService.users$,
-    this.filterSubject
+    this.filterSubject,
   ]).pipe(
     map(([users, filter]: [IUser[], string]) => {
       const value: string = filter.trim().toLowerCase();
@@ -35,7 +41,7 @@ export class UsersComponent {
       }
 
       return users.filter((user: IUser) => user.name.trim().toLowerCase().includes(value));
-    })
+    }),
   );
 
   onSearch(value: string): void {
@@ -43,11 +49,10 @@ export class UsersComponent {
   }
 
   ngOnInit(): void {
-    this.userService.loadUsers()
-      .pipe(
-        tap((users: IUser[]) => this.userService.setUsers(users))
-      )
-    .subscribe();
+    this.userService
+      .loadUsers()
+      .pipe(tap((users: IUser[]) => this.userService.setUsers(users)))
+      .subscribe();
   }
 
   onDeleteUser(id: number): void {
@@ -61,14 +66,14 @@ export class UsersComponent {
   }
 
   refresh(): void {
-    this.userService.loadUsers(true)
-    .pipe(
-      tap((users: IUser[]) => {
-        this.userService.setUsers(users);
-        this.notificationService.showSuccess('Users are updated');
-      })
-    )
-    .subscribe();
+    this.userService
+      .loadUsers(true)
+      .pipe(
+        tap((users: IUser[]) => {
+          this.userService.setUsers(users);
+          this.notificationService.showSuccess('Users are updated');
+        }),
+      )
+      .subscribe();
   }
-
 }
