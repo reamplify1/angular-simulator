@@ -4,6 +4,7 @@
       <img class="navigation__logo-image" src="images/logo-mountain.svg" alt="logo" />
       <p class="navigation__logo-company-name">{{ companyName }}</p>
     </div>
+
     <div class="navigation">
       <nav class="navigation__menu">
         @for (elem of navigation; track elem.id) {
@@ -12,25 +13,25 @@
             [routerLink]="elem.link"
             routerLinkActive="active-link"
             [routerLinkActiveOptions]="{ exact: true }"
-            class="navigation__item">
+            class="navigation__item"
+          >
             {{ elem.label }}
           </a>
         }
       </nav>
-      <app-theme id="theme-switcher"/>
-      <div class="navigation__button">
-        <app-dark-mode-toggle id="dark-mode-switcher"/>
-        @if (isDarkMode$ | async) {
-          <fa-icon [icon]="faMoon"></fa-icon>
-        } @else {
-          <fa-icon [icon]="faSun" class="fa-sun-icon"></fa-icon>
+
+      <div class="navigation__actions">
+        @if (appConfig.enableTheming) {
+          <app-theme id="theme-switcher" />
+          <app-dark-mode-toggle id="dark-mode-switcher" />
         }
+
         <button
           id="button-consult"
           class="button button--small button-consult"
-          (click)="this.notificationService.showInfo('Info message')"
+          (click)="notificationService.showInfo('Info message')"
         >
-        Консультация
+          Консультация
         </button>
 
         @if (isLogged$ | async) {
@@ -50,13 +51,18 @@
             Войти
           </button>
         }
-
       </div>
     </div>
   </div>
 
   <div class="date-clicker-container container">
-    <span>{{ isDisplayTime ? dateNow: clickerCounter }}</span>
+    <div class="last-login">
+      Последний вход:
+      {{ lastLogin | date: dateFormat }}
+    </div>
+
+    <span>{{ isDisplayTime ? dateNow : clickerCounter }}</span>
+
     <div class="clicker-buttons" [hidden]="isDisplayTime">
       <button
         id="button-counter-increase"
@@ -65,6 +71,7 @@
       >
         +
       </button>
+
       <button
         id="button-counter-decrease"
         class="clicker-btn"
@@ -74,6 +81,7 @@
         -
       </button>
     </div>
+
     <button
       id="button-header-toggle"
       class="button button--small"
@@ -81,6 +89,5 @@
     >
       {{ isDisplayTime ? 'показать кликер' : 'показать дату' }}
     </button>
-
   </div>
 </header>

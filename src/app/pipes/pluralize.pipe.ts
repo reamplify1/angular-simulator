@@ -9,13 +9,13 @@ export class PluralizePipe implements PipeTransform {
     const lastTwo: number = value % 100;
 
     if (lastTwo >= 11 && lastTwo <= 14) {
-      return `${value} ${many}`;
+      return `${ value } ${ many }`;
     } else if (lastOne === 1) {
-      return `${value} ${one}`;
+      return `${ value } ${ one }`;
     } else if (lastOne >= 2 && lastOne <= 4) {
-      return `${value} ${few}`;
+      return `${ value } ${ few }`;
     } else {
-      return `${value} ${many}`;
+      return `${ value } ${ many }`;
     }
   }
 }

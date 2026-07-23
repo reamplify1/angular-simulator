@@ -1,15 +1,18 @@
 import { INotification } from './../interfaces/INotification';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { NotificationType } from '../../enums/NotificationType';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { IAppConfig } from '../interfaces/IAppConfig';
+import { APP_CONFIG } from '../tokens/app-config.token';
 
 @Injectable({
   providedIn: 'root',
 })
-export class NotificationService {
-  private notificationsSubject: BehaviorSubject<INotification[]> = new BehaviorSubject<
-    INotification[]
-  >([]);
+  export class NotificationService {
+
+  private readonly appConfig: IAppConfig = inject(APP_CONFIG);
+
+  private notificationsSubject: BehaviorSubject<INotification[]> = new BehaviorSubject<INotification[]>([]);
 
   private get notifications(): INotification[] {
     return this.notificationsSubject.value;
@@ -18,6 +21,11 @@ export class NotificationService {
   notifications$: Observable<INotification[]> = this.notificationsSubject.asObservable();
 
   addNotification(type: NotificationType, text: string): void {
+
+    if (!this.appConfig.enableNotifications) {
+      return;
+    }
+
     const newNotification: INotification = { id: Date.now(), type, text };
 
     this.notificationsSubject.next([...this.notifications, newNotification]);

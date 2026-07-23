@@ -20,6 +20,8 @@ import { authInterceptor } from './features/auth/auth.interceptor';
 import { AuthService } from './features/auth/services/auth.service';
 import { Observable } from 'rxjs';
 import { IAuthUser } from './features/auth/interfaces/IAuthUser';
+import { DATE_FORMAT } from './tokens/date-format.token';
+import { APP_CONFIG } from './tokens/app-config.token';
 
 function getInitialTheme(): Preset {
   const savedTheme: AppTheme | null = localStorage.getItem('app-theme') as AppTheme | null;
@@ -62,7 +64,21 @@ export const appConfig: ApplicationConfig = {
       provide: APP_INITIALIZER,
       useFactory: initializeApp,
       deps: [AuthService],
-      multi: true,
+      multi: true
     },
-  ],
+    {
+      provide: DATE_FORMAT,
+      useValue: 'dd.MM.yyyy HH:mm'
+    },
+    {
+      provide: APP_CONFIG,
+      useValue: {
+        companyName: 'Румтибет',
+        enableLogs: true,
+        enableNotifications: true,
+        enableTheming: true,
+        sessionTimeout: 30
+      }
+    }
+  ]
 };

@@ -8,12 +8,14 @@ import { usePreset } from '@primeuix/themes';
 import { AppTheme } from '../../enums/AppTheme';
 import { LocalStorageService } from './local-storage.service';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { APP_CONFIG } from '../tokens/app-config.token';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
   private primeNg: PrimeNG = inject(PrimeNG);
-  private localStorageService: LocalStorageService = inject(LocalStorageService);
-  private STORAGE_KEY = 'app-theme';
+  private localStorageService: LocalStorageService = inject(LocalStorageService)
+  private STORAGE_KEY: string = 'app-theme';
+  private readonly appConfig = inject(APP_CONFIG);
 
   private themeSubject: BehaviorSubject<AppTheme> = new BehaviorSubject<AppTheme>(AppTheme.AURA);
   theme$: Observable<AppTheme> = this.themeSubject.asObservable();
@@ -27,6 +29,13 @@ export class ThemeService {
   }
 
   private initTheme(): void {
+
+    if (!this.appConfig.enableTheming) {
+      this.applyTheme(AppTheme.AURA);
+      this.themeSubject.next(AppTheme.AURA);
+      return;
+    }
+
     const saved: AppTheme | null = this.localStorageService.getItem<AppTheme>(this.STORAGE_KEY);
     const theme: AppTheme = saved ?? AppTheme.AURA;
 
@@ -43,6 +52,10 @@ export class ThemeService {
   }
 
   setTheme(theme: AppTheme): void {
+    if (!this.appConfig.enableTheming) {
+      return;
+    }
+
     this.applyTheme(theme);
     this.themeSubject.next(theme);
     this.localStorageService.setItem(this.STORAGE_KEY, theme);
@@ -73,6 +86,10 @@ export class ThemeService {
   }
 
   toggleDarkMode(isDark: boolean): void {
+    if (!this.appConfig.enableTheming) {
+      return;
+    }
+
     document.documentElement.classList.toggle('my-app-dark', isDark);
     this.isDarkModeSubject.next(isDark);
     this.localStorageService.setItem('dark-mode', isDark);

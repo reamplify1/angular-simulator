@@ -39,8 +39,11 @@ export class AuthService {
 
   login(credentials: ILoginRequest): Observable<IAuthUser> {
     return this.authApiService.login(credentials).pipe(
-      tap((response: IAuthResponse) => this.saveTokens(response)),
-      switchMap(() => this.loadCurrentUser()),
+      tap((response: IAuthResponse) => {
+        this.saveTokens(response);
+        this.localStorageService.setItem('last-login', new Date().toISOString());
+      }),
+      switchMap(() => this.loadCurrentUser())
     );
   }
 

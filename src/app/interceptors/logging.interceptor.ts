@@ -8,6 +8,9 @@ import {
 } from '@angular/common/http';
 import { tap } from 'rxjs';
 import { IRequestInfo } from '../interfaces/IRequestInfo';
+import { APP_CONFIG } from '../tokens/app-config.token';
+import { inject } from '@angular/core';
+import { IAppConfig } from '../interfaces/IAppConfig';
 
 export const loggingInterceptor: HttpInterceptorFn = (
   req: HttpRequest<unknown>,
@@ -15,6 +18,11 @@ export const loggingInterceptor: HttpInterceptorFn = (
 ) => {
   const startTime: number = performance.now();
   const { method, url }: IRequestInfo = req;
+  const appConfig: IAppConfig = inject(APP_CONFIG);
+
+  if (!appConfig.enableLogs) {
+    return next(req);
+  }
 
   return next(req).pipe(
     tap({

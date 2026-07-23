@@ -17,7 +17,7 @@ export class NotFoundPageComponent {
   }
 
   saveLastVisit(): void {
-    const LAST_VISIT_KEY = 'last-visit';
+    const LAST_VISIT_KEY: string = 'last-visit';
     const now: Date = new Date();
     this.localStorageService.setItem(LAST_VISIT_KEY, now.toString());
   }
