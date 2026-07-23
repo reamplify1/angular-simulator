@@ -76,7 +76,7 @@ export const appConfig: ApplicationConfig = {
         companyName: 'Румтибет',
         enableLogs: true,
         enableNotifications: true,
-        enableTheming: false,
+        enableTheming: true,
         sessionTimeout: 30
       }
     }
