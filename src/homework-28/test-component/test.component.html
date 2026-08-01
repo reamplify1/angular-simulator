@@ -1,0 +1,23 @@
+<div>
+
+  <div>
+    Текущее значение count: <span>{{ count }}</span>
+  </div>
+
+  <div class="buttons-grid">
+    <button (click)="increment()">Сценарий 1: (click)</button>
+
+    <button (click)="ngOnInit()">Сценарий 2: setTimeout</button>
+
+    <button (click)="scenarioPromise()">Сценарий 3: Promise.resolve()</button>
+
+    <button (click)="scenarioHttp()">Сценарий 4: HttpClient</button>
+
+    <button (click)="scenarioInterval()">Сценарий 5: setInterval</button>
+
+    <button (click)="scenarioCombo()">
+      Сценарий 6: (Клик + Promise + setTimeout)
+    </button>
+  </div>
+
+</div>
