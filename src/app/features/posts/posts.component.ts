@@ -16,6 +16,7 @@ import { IPostEditRequest } from './interfaces/IPostEditRequest';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { NotificationService } from '../../services/notification.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-posts',
@@ -28,6 +29,7 @@ import { HttpErrorResponse } from '@angular/common/http';
     InputTextModule,
     InputNumberModule,
     ButtonModule,
+    TranslatePipe
   ],
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.scss',

@@ -5,10 +5,11 @@ import { PhoneFormatPipe } from '../pipes/phone-format.pipe';
 import { HoverBoldDirective } from '../directives/bold-text.directive';
 import { AnimatedGradientDirective } from '../directives/animated-gradient.directive';
 import { PhoneFormat } from '../../enums/PhoneFormat';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-card',
-  imports: [CommonModule, PhoneFormatPipe, HoverBoldDirective, AnimatedGradientDirective],
+  imports: [CommonModule, PhoneFormatPipe, HoverBoldDirective, AnimatedGradientDirective, TranslatePipe],
   templateUrl: './user-card.component.html',
   styleUrl: './user-card.component.scss',
 })

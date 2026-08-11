@@ -9,6 +9,7 @@ import { UsersFilterComponent } from '../search/users-filter.component';
 import { AsyncPipe } from '@angular/common';
 import { LoaderComponent } from '../loader/loader.component';
 import { PluralizePipe } from '../pipes/pluralize.pipe';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-users',
@@ -19,6 +20,7 @@ import { PluralizePipe } from '../pipes/pluralize.pipe';
     AsyncPipe,
     LoaderComponent,
     PluralizePipe,
+    TranslatePipe
   ],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss',

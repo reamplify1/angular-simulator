@@ -13,7 +13,7 @@ import { APP_CONFIG } from '../tokens/app-config.token';
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
   private primeNg: PrimeNG = inject(PrimeNG);
-  private localStorageService: LocalStorageService = inject(LocalStorageService)
+  private localStorageService: LocalStorageService = inject(LocalStorageService);
   private STORAGE_KEY: string = 'app-theme';
   private readonly appConfig = inject(APP_CONFIG);
 

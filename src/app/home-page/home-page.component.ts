@@ -16,17 +16,20 @@ import { NotificationService } from '../services/notification.service';
 import { LocalStorageService } from '../services/local-storage.service';
 import { faPlay, IconDefinition, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home-page',
-  imports: [FormsModule, CommonModule, FontAwesomeModule],
+  imports: [FormsModule, CommonModule, FontAwesomeModule, TranslatePipe],
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
   standalone: true,
 })
 export class HomePageComponent {
+
   notificationService: NotificationService = inject(NotificationService);
   localStorageService: LocalStorageService = inject(LocalStorageService);
+  private readonly translateService: TranslateService = inject(TranslateService);
 
   faPlay: IconDefinition = faPlay;
   faChevronDown: IconDefinition = faChevronDown;
@@ -60,11 +63,41 @@ export class HomePageComponent {
   }
 
   showProgramPrice(): void {
-    alert('price is 199$');
+    const message: string  = this.translateService.instant('home-page.programPrice');
+    alert(message);
   }
 
   isPrimaryColor(color: Color): boolean {
     const mainColors: Color[] = [Color.RED, Color.GREEN, Color.BLUE];
     return mainColors.includes(color);
   }
+
+  showSuccessMessage(): void {
+    const message = this.translateService.instant('home-page.successMessage');
+    this.notificationService.showSuccess(message);
+  }
+
+  showInfoMessage(): void {
+    const message: string = this.translateService.instant(
+      'home-page.aboutTour.infoMessage'
+    );
+    this.notificationService.showInfo(message);
+  }
+
+  showRating(): void {
+    const message: string = this.translateService.instant(
+      'home-page.popularTours.rating'
+    );
+
+    this.notificationService.showInfo(message);
+  }
+
+  showOtherMaterials(): void {
+    const message: string = this.translateService.instant(
+      'home-page.blog.otherMaterialsMessage'
+    );
+
+    this.notificationService.showWarn(message);
+  }
+
 }

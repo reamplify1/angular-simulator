@@ -16,10 +16,14 @@ import { AuthService } from '../features/auth/services/auth.service';
 import { DATE_FORMAT } from '../tokens/date-format.token';
 import { APP_CONFIG } from '../tokens/app-config.token';
 import { IAppConfig } from '../interfaces/IAppConfig';
+import { TranslatePipe } from '@ngx-translate/core';
+import { LanguageService } from '../services/language.service';
+import { SelectModule } from 'primeng/select';
+import { ILanguage } from '../features/auth/interfaces/ILanguage';
 
 @Component({
   selector: 'app-header',
-  imports: [FormsModule, RouterLink, AsyncPipe, DatePipe ,RouterLinkActive, ThemeComponent, DarkModeToggleComponent, FontAwesomeModule],
+  imports: [FormsModule, RouterLink, AsyncPipe, DatePipe ,RouterLinkActive, SelectModule ,ThemeComponent, DarkModeToggleComponent, FontAwesomeModule, TranslatePipe],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   standalone: true,
@@ -32,6 +36,7 @@ export class HeaderComponent implements OnInit {
   readonly dateFormat: string = inject(DATE_FORMAT);
   readonly lastLogin: Date | null = this.getLastLoginDate();
   readonly appConfig: IAppConfig = inject(APP_CONFIG);
+  readonly languageService: LanguageService = inject(LanguageService);
 
   readonly companyName: string = this.appConfig.companyName;
   isDarkMode$: Observable<boolean> = this.themeService.isDarkMode$;
@@ -73,8 +78,15 @@ export class HeaderComponent implements OnInit {
   }
 
   navigation: INavigation[] = [
-    { id: 'main-page', label: 'Главная', link: '' },
-    { id: 'guide-page', label: 'Пользователи', link: 'users' },
-    { id: 'posts-page', label: 'Посты', link: 'posts' },
+    { id: 'main-page', label: 'header.navigation.home', link: '' },
+    { id: 'guide-page', label: 'header.navigation.users', link: 'users' },
+    { id: 'posts-page', label: 'header.navigation.posts', link: 'posts' },
   ];
+
+  languages: ILanguage[] = [
+    { code: 'ru', label: 'RU' },
+    { code: 'en', label: 'EN' },
+    { code: 'kk', label: 'KZ' },
+  ];
+
 }

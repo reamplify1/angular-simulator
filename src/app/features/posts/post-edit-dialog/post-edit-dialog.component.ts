@@ -7,10 +7,11 @@ import { ButtonModule } from 'primeng/button';
 import { IPostEditForm } from '../interfaces/IPostEditForm';
 import { IPostEditRequest } from '../interfaces/IPostEditRequest';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-post-edit-dialog',
-  imports: [CommonModule, ReactiveFormsModule, InputNumberModule, ButtonModule],
+  imports: [CommonModule, ReactiveFormsModule, InputNumberModule, ButtonModule, TranslatePipe],
   templateUrl: './post-edit-dialog.component.html',
   styleUrl: './post-edit-dialog.component.scss',
 })

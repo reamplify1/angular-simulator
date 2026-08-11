@@ -4,77 +4,77 @@
     <button
       pButton
       type="button"
-      label="Назад к списку"
+      [label]="'posts.backAriaLabel' | translate"
       icon="pi pi-arrow-left"
       routerLink="/posts"
       class="p-button-text p-button-secondary"
-      aria-label="Назад к списку"
+      [attr.aria-label]="'posts.backAriaLabel' | translate"
     >
     </button>
   </div>
 
   <div class="create-post-card p-4">
-    <h2 class="mt-0 mb-4">Создание нового поста</h2>
+    <h2 class="mt-0 mb-4">{{ 'posts.createLabel' | translate }}</h2>
 
     <form [formGroup]="postForm" (ngSubmit)="onSubmit()" class="flex flex-column gap-3">
 
       <div class="form-field flex flex-column gap-2">
-        <label for="title">Название поста</label>
+        <label for="title">{{ 'posts.form.title' | translate }}</label>
         <input
           pInputText
           id="title"
           formControlName="title"
-          placeholder="Введите название"
+          [placeholder]="'posts.form.titlePlaceholder' | translate"
         />
       </div>
 
       <div class="form-field flex flex-column gap-2">
-        <label for="body">Текст поста</label>
+        <label for="body">{{ 'posts.form.body' | translate }}</label>
         <textarea
           pInputTextarea
           id="body"
           formControlName="body"
           rows="6"
-          placeholder="Введите текст"
+          [placeholder]="'posts.form.bodyPlaceholder' | translate"
         ></textarea>
       </div>
 
       <div class="form-field flex flex-column gap-2">
-        <label for="userId">ID пользователя</label>
+        <label for="userId">{{ 'posts.form.userId' | translate }}</label>
         <input
           pInputText
           id="userId"
           type="number"
           formControlName="userId"
-          placeholder="Например: 1"
+          [placeholder]="'posts.form.userIdPlaceholder' | translate"
         />
       </div>
 
       <div class="form-field flex flex-column gap-2">
-        <label for="tags">Теги</label>
+        <label for="tags">{{ 'posts.form.tags' | translate }}</label>
         <input
           pInputText
           id="tags"
           formControlName="tags"
-          placeholder="angular, typescript, frontend"
+          [placeholder]="'posts.form.tagsPlaceholder' | translate"я
         />
       </div>
 
       <div class="form-field flex flex-column gap-2">
-        <label for="views">Просмотры</label>
+        <label for="views">{{ 'posts.form.views' | translate }}</label>
         <input
           pInputText
           id="views"
           type="number"
           formControlName="views"
-          placeholder="0"
+          [placeholder]="'posts.form.viewsPlaceholder' | translate"
         />
       </div>
 
       <div formGroupName="reactions" class="reactions p-3 surface-ground border-round flex gap-3">
 
         <div class="form-field flex-1 flex flex-column gap-2">
-          <label for="likes">Лайки</label>
+          <label for="likes">{{ 'posts.form.likes' | translate }}</label>
           <input
             pInputText
             id="likes"
@@ -84,7 +84,7 @@
         </div>
 
         <div class="form-field flex-1 flex flex-column gap-2">
-          <label for="dislikes">Дизлайки</label>
+          <label for="dislikes">{{ 'posts.form.dislikes' | translate }}</label>
           <input
             pInputText
             id="dislikes"
@@ -99,10 +99,10 @@
         <button
           pButton
           type="submit"
-          label="Создать пост"
+          [label]="'posts.form.create' | translate"
           icon="pi pi-check"
           [disabled]="postForm.invalid"
-          aria-label="создать пост"
+          [attr.aria-label]="'posts.form.createAria' | translate"
         >
         </button>
       </div>

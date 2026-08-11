@@ -60,6 +60,15 @@ export class TestComponentSecond implements OnInit {
     });
   }
 
+  scenarioHttp() {
+    this.http.get<{ id: number }>('https://jsonplaceholder.typicode.com/todos/1')
+      .subscribe(() => {
+        this.count += 50;
+        console.log('HTTP Запрос завершен, count =', this.count);
+        this.cdr.markForCheck();
+      });
+  }
+
   scenarioInterval() {
     if (this.intervalId !== null) {
       clearInterval(this.intervalId);
@@ -68,6 +77,22 @@ export class TestComponentSecond implements OnInit {
       this.count += 5;
       console.log('setInterval сработал, count =', this.count);
     }, 2000);
+  }
+
+  scenarioCombo() {
+    this.count += 1;
+
+    Promise.resolve().then(() => {
+      this.count += 2;
+      this.cdr.markForCheck();
+    });
+
+    setTimeout(() => {
+      this.count += 3;
+      this.cdr.markForCheck();
+    }, 500);
+
+    this.cdr.markForCheck();
   }
 
   scenarioReattach() {

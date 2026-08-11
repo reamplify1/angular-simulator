@@ -7,10 +7,11 @@
       <div class="table-header">
 
         <div class="table-header__left">
-          <h2 class="table-title">Список постов</h2>
+          <h2 class="table-title">{{ 'posts.title' | translate }}</h2>
 
           <span class="table-subtitle">
-            Всего: {{ totalRecords$ | async }}
+            {{ 'posts.total' | translate }}
+            {{ totalRecords$ | async }}
           </span>
         </div>
 
@@ -18,11 +19,11 @@
           <button
             pButton
             type="button"
-            label="Создать пост"
+            [label]="'posts.create' | translate"
             icon="pi pi-plus"
             routerLink="create"
             class="p-button-sm"
-            aria-label="создать пост"
+            [attr.aria-label]="'posts.createAria' | translate"
           >
           </button>
         </div>
@@ -44,10 +45,10 @@
 
         <ng-template pTemplate="header">
           <tr>
-            <th style="width: 45%">Название</th>
-            <th style="width: 25%">Теги</th>
-            <th style="width: 15%">Просмотры</th>
-            <th style="width: 15%; text-align: center;">Действия</th>
+            <th style="width: 45%">{{ 'posts.columns.title' | translate }}</th>
+            <th style="width: 25%">{{ 'posts.columns.tags' | translate }}</th>
+            <th style="width: 15%">{{ 'posts.columns.views' | translate }}</th>
+            <th style="width: 15%; text-align: center;">{{ 'posts.columns.actions' | translate }}</th>
           </tr>
         </ng-template>
 
@@ -89,7 +90,7 @@
                   type="button"
                   icon="pi pi-ellipsis-v"
                   class="p-button-rounded p-button-text"
-                  aria-label="Open post actions"
+                  [attr.aria-label]="'posts.actions' | translate"
                   (click)="selectedPost = post; cm.show($event); $event.stopPropagation()"
                 ></button>
               </td>

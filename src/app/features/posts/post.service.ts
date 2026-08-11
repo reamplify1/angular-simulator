@@ -6,6 +6,7 @@ import { BehaviorSubject, delay, finalize, Observable, tap } from 'rxjs';
 import { IPost } from './interfaces/IPost';
 import { IPostEditRequest } from './interfaces/IPostEditRequest';
 import { IPostsResponse } from './interfaces/IPostsResponse';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,7 @@ export class PostService {
   private postApiService: PostApiService = inject(PostApiService);
   private notificationService: NotificationService = inject(NotificationService);
   private loaderService: LoaderService = inject(LoaderService);
+  private translateService: TranslateService = inject(TranslateService);
 
   private postsSubject: BehaviorSubject<IPost[]> = new BehaviorSubject<IPost[]>([]);
   readonly posts$: Observable<IPost[]> = this.postsSubject.asObservable();
@@ -45,7 +47,10 @@ export class PostService {
             : post;
         });
         this.postsSubject.next(updatedList);
-        this.notificationService.showSuccess('Пост успешно обновлен');
+
+        this.notificationService.showSuccess(
+          this.translateService.instant('posts.notifications.updated'),
+        );
       }),
     );
   }
@@ -55,7 +60,10 @@ export class PostService {
       tap(() => {
         const currentPosts: IPost[] = this.postsSubject.getValue();
         this.postsSubject.next(currentPosts.filter((post: IPost) => post.id !== id));
-        this.notificationService.showSuccess('Пост успешно удален');
+
+        this.notificationService.showSuccess(
+          this.translateService.instant('posts.notifications.deleted'),
+        );
       }),
     );
   }

@@ -1,7 +1,11 @@
 <header class="header fs-18">
   <div class="navigation__wrapper container">
     <div class="navigation__logo">
-      <img class="navigation__logo-image" src="images/logo-mountain.svg" alt="logo" />
+      <img
+        class="navigation__logo-image"
+        src="images/logo-mountain.svg"
+        alt="logo"
+      />
       <p class="navigation__logo-company-name">{{ companyName }}</p>
     </div>
 
@@ -15,7 +19,7 @@
             [routerLinkActiveOptions]="{ exact: true }"
             class="navigation__item"
           >
-            {{ elem.label }}
+            {{ elem.label | translate }}
           </a>
         }
       </nav>
@@ -25,13 +29,12 @@
           <app-theme id="theme-switcher" />
           <app-dark-mode-toggle id="dark-mode-switcher" />
         }
-
         <button
           id="button-consult"
           class="button button--small button-consult"
           (click)="notificationService.showInfo('Info message')"
         >
-          Консультация
+          {{ 'header.consultation' | translate }}
         </button>
 
         @if (isLogged$ | async) {
@@ -40,7 +43,7 @@
             class="button button--small button--logout"
             (click)="onLogout()"
           >
-            Выйти
+            {{ 'header.logout' | translate }}
           </button>
         } @else {
           <button
@@ -48,7 +51,7 @@
             class="button button--small button-login"
             routerLink="/login"
           >
-            Войти
+            {{ 'header.login' | translate }}
           </button>
         }
       </div>
@@ -57,11 +60,22 @@
 
   <div class="date-clicker-container container">
     <div class="last-login">
-      Последний вход:
+      {{ 'header.lastLogin' | translate }}
       {{ lastLogin | date: dateFormat }}
     </div>
 
     <span>{{ isDisplayTime ? dateNow : clickerCounter }}</span>
+
+    <p-select
+      [options]="languages"
+      class="language-select"
+      optionLabel="label"
+      optionValue="code"
+      [ngModel]="languageService.getCurrentLanguage()"
+      (ngModelChange)="languageService.setLanguage($event)"
+      class="language-select"
+    >
+    </p-select>
 
     <div class="clicker-buttons" [hidden]="isDisplayTime">
       <button
@@ -87,7 +101,9 @@
       class="button button--small"
       (click)="toggleDate()"
     >
-      {{ isDisplayTime ? 'показать кликер' : 'показать дату' }}
+      {{
+        (isDisplayTime ? 'header.showClicker' : 'header.showDate') | translate
+      }}
     </button>
   </div>
 </header>

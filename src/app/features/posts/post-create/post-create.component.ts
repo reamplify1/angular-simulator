@@ -11,10 +11,11 @@ import { IPost } from '../interfaces/IPost';
 import { IPostCreateForm } from '../interfaces/IPostCreateForm';
 import { ToFormControls } from '../../../types/ToFormControls';
 import { HttpErrorResponse } from '@angular/common/http';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-post-create',
-  imports: [ReactiveFormsModule, InputTextModule, InputNumberModule, ButtonModule, RouterLink],
+  imports: [ReactiveFormsModule, InputTextModule, InputNumberModule, ButtonModule, RouterLink, TranslatePipe],
   templateUrl: './post-create.component.html',
   styleUrl: './post-create.component.scss',
 })

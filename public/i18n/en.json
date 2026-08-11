@@ -1,0 +1,289 @@
+{
+  "header": {
+    "navigation": {
+      "home": "Home",
+      "users": "Users",
+      "posts": "Posts"
+    },
+    "consultation": "Consultation",
+    "login": "Log in",
+    "logout": "Log out",
+    "showClicker": "Show clicker",
+    "showDate": "Show date",
+    "lastLogin": "Last login"
+  },
+  "home-page": {
+    "tourLocation": "Tour location",
+    "selectFromList": "Select from the list",
+    "hikeDate": "Hike date",
+    "specifyRange": "Specify the range",
+    "participants": "Participants",
+    "sixOrMore": "6 or more",
+    "findProgram": "Find program",
+    "inputPlaceholder": "Type 'Hello'",
+    "programCost": "Program cost",
+    "successMessage": "Success",
+    "programPrice": "Program price: $199",
+    "images": {
+      "teaInMountains": "A cup of tea in the mountains",
+      "touristOnMountain": "A tourist on top of the mountain",
+      "snowmobile": "A man on a snowmobile",
+      "riverInMountains": "A river in the mountains"
+    },
+    "heroTitle": "Enjoy a walk in the mountains",
+    "heroSubtitle": "With like-minded people",
+    "advantages": {
+      "experiencedGuide": {
+        "title": "Experienced guide",
+        "text": "The modern world development vector assumes independent ways of implementing the relevant conditions for activation."
+      },
+      "safeHike": {
+        "title": "Safe hike",
+        "text": "The modern world development vector assumes independent ways of implementing the relevant conditions for activation."
+      },
+      "loyalPrices": {
+        "title": "Loyal prices",
+        "text": "The modern world development vector assumes independent ways of implementing the relevant conditions for activation."
+      }
+    },
+    "programs": {
+      "label": "Our offer",
+      "title": "The best programs for you",
+      "description": "Its roots go back to a fragment of classical Latin from 45 AD, more than two thousand years ago. Richard McClintock, a professor of Latin at a college."
+    },
+    "aboutTour": {
+      "label": "About our hike",
+      "title": "Explore all the world's mountain ranges with us",
+      "description": "Its roots go back to a fragment of classical Latin from 45 AD, more than two thousand years ago. Richard McClintock, a professor of Latin at Hampden-Sydney College in Virginia, took one of the strangest words in Lorem Ipsum, \"consectetur\", and searched for it in classical Latin literature.",
+      "programButton": "Tour program",
+      "infoMessage": "Information message"
+    },
+    "popularTours": {
+      "label": "According to travelers",
+      "title": "Popular destinations",
+      "rating": "Destination rating",
+      "ratingStar": "Rating star"
+    },
+    "tours": {
+      "lakeNearMountains": {
+        "title": "Lake near the mountains",
+        "preview": "A romantic adventure",
+        "text": "For the modern world, the basic vector of development assumes independent ways of implementing the corresponding conditions for activation."
+      },
+      "nightInMountains": {
+        "title": "Night in the mountains",
+        "preview": "With a group of friends",
+        "text": "For the modern world, the basic vector of development assumes independent ways of implementing the corresponding conditions for activation."
+      },
+      "mountainStretching": {
+        "title": "Stretching in the mountains",
+        "preview": "For those who care about themselves",
+        "text": "For the modern world, the basic vector of development assumes independent ways of implementing the corresponding conditions for activation."
+      }
+    },
+    "blog": {
+      "article1": {
+        "title": "Beautiful Italy, what is it really like?",
+        "imgAlt": "A city by the sea",
+        "text": "The basic vector of development for the modern world assumes independent ways of implementing the corresponding conditions for activation."
+      },
+      "article2": {
+        "title": "No more doubts! The whole world is open to you!",
+        "imgAlt": "A view above the clouds",
+        "text": "The basic vector of development for the modern world assumes independent ways of implementing the corresponding conditions for activation."
+      },
+      "article3": {
+        "title": "How to prepare for traveling alone?",
+        "imgAlt": "A lonely traveler",
+        "text": "The basic vector of development for the modern world assumes independent ways of implementing the corresponding conditions for activation."
+      },
+      "article4": {
+        "title": "India... shall we fly?",
+        "imgAlt": "The Taj Mahal in India",
+        "text": "The basic vector of development for the modern world assumes independent ways of implementing the corresponding conditions for activation."
+      },
+      "label": "Sharing impressions",
+      "title": "Travel blog",
+      "readArticle": "Read article",
+      "otherMaterials": "Other materials",
+      "otherMaterialsMessage": "Other materials are currently unavailable"
+    },
+    "photoReport": {
+      "label": "Photo report",
+      "title": "Sharing impressions",
+      "pinterest": "Our Pinterest",
+      "images": {
+        "balloons": "Hot air balloons",
+        "boat": "Boat",
+        "map": "Map",
+        "ocean": "Ocean",
+        "canyon": "Canyon",
+        "table": "Table"
+      }
+    }
+  },
+  "footer": {
+    "label": "relevant",
+    "title": "Get useful travel newsletters",
+    "emailLabel": "Enter your e-mail address",
+    "emailPlaceholder": "name@domain.com",
+    "subscribe": "Subscribe to news",
+    "agreement": "by subscribing to the newsletter, you automatically agree to the",
+    "personalData": "personal data processing terms",
+    "and": "and",
+    "advertising": "advertising mailing rules",
+    "company": "RUMTibet Company",
+    "companyDescription": "Its roots go back to a fragment of classical Latin from 45 AD, more than two thousand years ago. Richard McClintock, a professor of Latin at Hampden-Sydney College.",
+    "services": "Our services",
+    "travelInfo": "Important for travelers",
+    "copyright": "Individual entrepreneur Konstantinopolsky K.K., 2023",
+    "privacy": "Personal data processing policy",
+    "servicesList": {
+      "summerMountainWalks": "Summer mountain walks",
+      "winterMountainHikes": "Winter mountain hikes",
+      "mountainTemples": "Visiting mountain temples",
+      "extremeTourism": "Extreme types of tourism",
+      "amazonJungleHikes": "Hikes in the Amazon jungle",
+      "africaTrip": "Trip to Africa"
+    },
+    "travelList": {
+      "longHike": "How to prepare for a long hike?",
+      "essentialItems": "Essential items for a hike",
+      "medicalInsurance": "Medical insurance and safety guarantees",
+      "forDoctors": "If you are a doctor — look here"
+    }
+  },
+  "users": {
+    "refresh": "Refresh users",
+    "found": "Found:",
+    "user": "user",
+    "usersFew": "users",
+    "usersMany": "users",
+    "empty": "No users to display",
+    "card": {
+      "contacts": "Contacts",
+      "email": "Email:",
+      "phone": "Phone:",
+      "website": "Website:",
+      "address": "Address",
+      "city": "City:",
+      "street": "Street:",
+      "office": "Office:",
+      "zipcode": "ZIP code:",
+      "coordinates": "Coordinates:",
+      "work": "Work",
+      "company": "Company:",
+      "mission": "Mission:",
+      "specialization": "Specialization",
+      "unknown": "Unknown",
+      "delete": "Delete user"
+    }
+  },
+  "userForm": {
+    "form": {
+      "registration": "Registration",
+      "name": "Name",
+      "username": "Username",
+      "email": "Email",
+      "phone": "Phone",
+      "website": "Website",
+      "address": {
+        "title": "Address",
+        "city": "City",
+        "street": "Street",
+        "office": "Office",
+        "zipcode": "ZIP code",
+        "coordinates": "Coordinates",
+        "latitude": "Latitude",
+        "longitude": "Longitude"
+      },
+      "company": {
+        "title": "Company",
+        "name": "Name",
+        "mission": "Mission",
+        "specialization": "Specialization"
+      },
+      "save": "Save"
+    }
+  },
+  "users-filter": {
+    "searchPlaceholder": "Search users..."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "home": "Home"
+  },
+  "errors": {
+    "server": "Server error ({{ status }}). Please try again later."
+  },
+  "posts": {
+    "backAriaLabel": "Back to posts list",
+    "createLabel": "Create a new post",
+    "title": "Posts list",
+    "total": "Total:",
+    "create": "Create post",
+    "createAria": "Create post",
+    "columns": {
+      "title": "Title",
+      "tags": "Tags",
+      "views": "Views",
+      "actions": "Actions"
+    },
+    "actions": "Open post actions",
+    "notifications": {
+      "updated": "Post successfully updated",
+      "deleted": "Post successfully deleted"
+    },
+    "form": {
+      "title": "Post title",
+      "titlePlaceholder": "Enter title",
+      "body": "Post text",
+      "bodyPlaceholder": "Enter text",
+      "userId": "User ID",
+      "userIdPlaceholder": "For example: 1",
+      "tags": "Tags",
+      "tagsPlaceholder": "angular, typescript, frontend",
+      "views": "Views",
+      "viewsPlaceholder": "0",
+      "likes": "Likes",
+      "dislikes": "Dislikes",
+      "create": "Create post",
+      "createAria": "Create post"
+    },
+    "details": {
+      "back": "Back",
+      "views": "Views",
+      "likes": "Likes",
+      "dislikes": "Dislikes"
+    },
+    "edit": {
+      "titleLabel": "Title",
+      "tags": "Теги",
+      "tagsPlaceholder": "news, coding, ideas",
+      "views": "Просмотры",
+      "viewsPlaceholder": "0",
+      "cancel": "Отмена",
+      "save": "Сохранить"
+    }
+  },
+  "login": {
+    "hero": {
+      "title": "Explore the Mountains",
+      "description": "Where the roads end, real adventures begin.",
+      "features": {
+        "routes": "Over 500 verified routes",
+        "guides": "Professional guides",
+        "adventures": "Unforgettable journeys"
+      }
+    },
+    "form": {
+      "title": "Welcome",
+      "subtitle": "Sign in to your account",
+      "username": "Username",
+      "usernamePlaceholder": "Enter username",
+      "password": "Password",
+      "passwordPlaceholder": "Enter password",
+      "submit": "Sign in"
+    }
+  }
+}

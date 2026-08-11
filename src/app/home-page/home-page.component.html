@@ -3,8 +3,8 @@
   <div class="hero__wrapper">
     <div class="hero__block">
       <div class="hero__block-title container">
-        <p>насладись прогулкой в горах</p>
-        <p>с командой единомышленников</p>
+        <p>{{ 'home-page.heroTitle' | translate }}</p>
+        <p>{{ 'home-page.heroSubtitle' | translate }}</p>
       </div>
 
       <div class="hero__filters-wrapper container">
@@ -18,7 +18,7 @@
                 required
                 [(ngModel)]="location"
               >
-              <option value="" disabled selected hidden>Локация для тура</option>
+              <option value="" disabled selected hidden>{{ 'home-page.tourLocation' | translate }}</option>
               @for (location of hikeLocations; track location.id) {
                 <option class="location__dropdown-option">{{ location.name }}</option>
               }
@@ -26,7 +26,7 @@
             <fa-icon [icon]="faChevronDown" class="fa-chevron-down"></fa-icon>
           </div>
             <div class="hero__filters-description">
-              <span>выберите из списка</span>
+              <span>{{ 'home-page.selectFromList' | translate }}</span>
             </div>
           </div>
           <div class="hero__filters-item">
@@ -38,17 +38,17 @@
                   class="date-input"
                   [class.date-input--transparent]="!date"
                   name="date"
-                  placeholder="Дата похода"
+                  [placeholder]="'home-page.hikeDate' | translate"
                   [(ngModel)]="date"
                   required
                 />
                 @if (!date) {
-                  <span class="date-placeholder-cover" >Дата похода</span>
+                  <span class="date-placeholder-cover" >{{ 'home-page.hikeDate' | translate }}</span>
                 }
               </div>
             </div>
             <div class="hero__filters-description">
-              <span>укажите диапазон</span>
+              <span>{{ 'home-page.specifyRange' | translate }}</span>
             </div>
           </div>
           <div class="hero__filters-item">
@@ -60,15 +60,15 @@
                 required
                 [(ngModel)]="participants"
               >
-                <option value="" disabled selected hidden>Участники</option>
+                <option value="" disabled selected hidden>{{ 'home-page.participants' | translate }}</option>
                 <option value="4" class="location__dropdown-option">4</option>
                 <option value="5" class="location__dropdown-option">5</option>
-                <option value="6+" class="location__dropdown-option">6 и более</option>
+                <option value="6+" class="location__dropdown-option">{{ 'home-page.sixOrMore' | translate }}</option>
               </select>
               <fa-icon [icon]="faChevronDown" class="fa-chevron-down"></fa-icon>
             </div>
             <div class="hero__filters-description">
-              <span>выберите из списка</span>
+              <span>{{ 'home-page.selectFromList' | translate }}</span>
             </div>
           </div>
           <div class="hero__button-container">
@@ -78,7 +78,7 @@
               (click)="showProgramPrice()"
               [disabled]="!isFormValid()"
             >
-              Найти программу
+              {{ 'home-page.findProgram' | translate }}
             </button>
           </div>
         </div>
@@ -90,7 +90,7 @@
           class="live-input"
           maxlength="45"
           type="text"
-          placeholder="type 'Hello'"
+          [placeholder]="'home-page.inputPlaceholder' | translate"
           [(ngModel)]="liveInputText"
         >
         <span class="live-output">{{ liveInputText }}</span>
@@ -120,17 +120,15 @@
     </div>
   </div>
   <div class="about-tour__info">
-    <span class="section-label">о нашем походе</span>
-    <h2 class="section-title fs-32">Исследуйте все горные массивы мира вместе с нами</h2>
-    <p class="section-text fs-18">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух
-      тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из
-      самых странных слов в Lorem Ipsum, "consectetur"и занялся его поисками в классической латинской литературе.</p>
+    <span class="section-label">{{ 'home-page.aboutTour.label' | translate }}</span>
+    <h2 class="section-title fs-32">{{ 'home-page.aboutTour.title' | translate }}</h2>
+    <p class="section-text fs-18">{{ 'home-page.aboutTour.description' | translate }}</p>
     <button
       id="about-tour-program-button"
       class="button--green"
-      (click)="notificationService.showInfo('Info message')"
+      (click)="showInfoMessage()"
     >
-      Программа тура
+      {{ 'home-page.aboutTour.programButton' | translate }}
     </button>
   </div>
 </section>
@@ -138,11 +136,9 @@
 <section class="programs-wrapper">
   <div class="programs container">
     <div class="programs__info">
-      <span class="programs__info-label section-label">наше предложение</span>
-      <h2 class="programs__info-title section-title fs-32">Лучшие программы для тебя</h2>
-      <p class="programs__info-text section-text fs-18">Его корни уходят в один фрагмент классической латыни 45 года
-        н.э., то есть более
-        двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.</p>
+      <span class="programs__info-label section-label">{{ 'home-page.programs.label' | translate }}</span>
+      <h2 class="programs__info-title section-title fs-32">{{ 'home-page.programs.title' | translate }}</h2>
+      <p class="programs__info-text section-text fs-18">{{ 'home-page.programs.description' | translate }}</p>
       <div class="programs__info-advantages">
         <div class="programs__info-advantages-list fs-18">
 
@@ -153,42 +149,54 @@
               </div>
               <div class="programs__info-advantages-item-description fs-18">
                 <span class="programs__info-advantages-item-description-title">
-                  {{ advantage.title }}
+                  {{ advantage.title | translate }}
                 </span>
                 <p class="programs__info-advantages-item-description-text">
-                  {{ advantage.text }}
+                  {{ advantage.text | translate }}
                 </p>
               </div>
             </div>
           }
         </div>
       </div>
-      <button id="programs-price-button" class="button button--green" (click)="notificationService.showSuccess('Success message')">Стоимость программ</button>
+      <button id="programs-price-button" class="button button--green" (click)="showSuccessMessage()">{{ 'home-page.programCost' | translate }}</button>
     </div>
     <div class="programs__images">
-      <img src="images/info-program-img1.png" alt="a cup of tea in mountains">
-      <img src="images/info-program-img2.png" alt="a tourist on top of the mountain">
-      <img src="images/info-program-img3.png" alt="a man on a snowmobile">
-      <img src="images/info-program-img4.png" alt="river in mountains">
+      <img
+        src="images/info-program-img1.png"
+        [alt]="'home-page.images.teaInMountains' | translate"
+      >
+      <img
+        src="images/info-program-img2.png"
+        [alt]="'home-page.images.touristOnMountain' | translate"
+      >
+      <img
+        src="images/info-program-img3.png"
+        [alt]="'home-page.images.snowmobile' | translate"
+      >
+      <img
+        src="images/info-program-img4.png"
+        [alt]="'home-page.images.riverInMountains' | translate"
+      >
     </div>
   </div>
 </section>
 
 <section class="popular-tour-wrapper">
-  <span class="section-label">по версии отдыхающих</span>
-  <h2 class="popular_tour-label section-title">Популярные направления</h2>
+  <span class="section-label">{{ 'home-page.popularTours.label' | translate }}</span>
+  <h2 class="popular_tour-label section-title">{{ 'home-page.popularTours.title' | translate }}</h2>
   <div class="popular-tour-container container">
     @for (tour of tours; track tour.id) {
       <div [id]="'popular-tour-item-' + tour.id" class="popular-tour-item">
         <div class="popular-tour-item__rating fs-14">
-          <img [src]="iconPath + 'rating-star-icon' + '.svg'" alt="звезда рейтинга">
+          <img [src]="iconPath + 'rating-star-icon' + '.svg'" [alt]="'home-page.ratingStar' | translate">
           <span>{{ tour.rating.toFixed(1) }}</span>
         </div>
         <img class="popular-tour-item-img" [src]="imgPath + tour.img + '.png'" [alt]="tour.title">
         <div class="popular-tour-item__overlay">
           <div class="popular-tour-item__text">
-            <h5 class="fs-24">{{ tour.title }}</h5>
-            <span class="fs-14">{{ tour.preview }}</span>
+            <h5 class="fs-24">{{ tour.title | translate }}</h5>
+            <span class="fs-14">{{ tour.preview | translate }}</span>
           </div>
           <div class="popular-tour-item__price">
             <span>{{ tour.price }} &#36;</span>
@@ -200,15 +208,15 @@
   <button
     id="popular-tour-button"
     class="popular-tour-button button button--green"
-    (click)="notificationService.showInfo('Info message')"
+    (click)="showRating()"
   >
-    Рейтинг направлений
+    {{ 'home-page.popularTours.rating' | translate }}
   </button>
 </section>
 
 <section class="traveler-blog-wrapper">
-  <span class="section-label">делимся впечатлениями</span>
-  <h2 class="traveler-blog-label section-title">Блог о путешествиях</h2>
+  <span class="section-label">{{ 'home-page.blog.label' | translate }}</span>
+  <h2 class="traveler-blog-label section-title">{{ 'home-page.blog.title' | translate }}</h2>
   <div class="traveler-blog-container container">
     @for (article of articles; track article.id) {
       <div [id]="'traveler-blog-' + article.id" class="traveler-blog-item">
@@ -216,11 +224,17 @@
         <img [src]="'images/' + article.img + '.png'" [alt]="article.title">
       </div>
       <div class="blog-info">
-        <a class="blog-info__title fs-24">{{ article.title }}</a>
-        <p class="blog-info__description">{{ article.text.length > 200 ? (article.text | slice:0:200) + '...' : article.text }}</p>
+        <a class="blog-info__title fs-24">{{ article.title | translate}}</a>
+        <p class="blog-info__description">
+          {{
+            (article.text | translate).length > 200
+              ? (article.text | translate | slice:0:200) + '...'
+              : (article.text | translate)
+          }}
+        </p>
         <div class="blog-info__addition">
           <span class="blog-date">{{ article.date }}</span>
-          <a class="blog-link">читать статью</a>
+          <a class="blog-link">{{ 'home-page.blog.readArticle' | translate }}</a>
         </div>
       </div>
     </div>
@@ -229,25 +243,25 @@
   </div>
   <button id="traveler-blog-button"
     class="traveler-blog-button button button--green"
-    (click)="notificationService.showWarn('Warning message')"
+    (click)="showOtherMaterials()"
   >
-    Другие материалы
+    {{ 'home-page.blog.otherMaterials' | translate }}
   </button>
 </section>
 
 
 <section class="photo-report-wrapper">
   <div class="photo-report">
-    <span class="section-label">фото-отчет</span>
-    <h2 class="section-title fs-32">Делимся впечатлениями</h2>
+    <span class="section-label">{{ 'home-page.photoReport.label' | translate }}</span>
+    <h2 class="section-title fs-32">{{ 'home-page.photoReport.title' | translate }}</h2>
   </div>
   <div class="photos">
-    <img class="photos-item1" src="images/photo-blog-balloons.png" alt="photo blog balloons">
-    <img src="images/photo-blog-boat.png" alt="photo blog boat">
-    <img src="images/photo-blog-map.png" alt="photo blog map">
-    <img src="images/photo-blog-ocean.png" alt="photo blog ocean">
-    <img class="photos-item5" src="images/photo-blog-canyon.png" alt="photo blog canyon">
-    <img src="images/photo-blog-table.png" alt="photo blog table">
+    <img class="photos-item1" src="images/photo-blog-balloons.png" [alt]="'home-page.photoReport.images.balloons' | translate">
+    <img src="images/photo-blog-boat.png" [alt]="'home-page.photoReport.images.boat' | translate">
+    <img src="images/photo-blog-map.png" [alt]="'home-page.photoReport.images.map' | translate">
+    <img src="images/photo-blog-ocean.png" [alt]="'home-page.photoReport.images.ocean' | translate">
+    <img class="photos-item5" src="images/photo-blog-canyon.png" [alt]="'home-page.photoReport.images.canyon' | translate">
+    <img src="images/photo-blog-table.png" [alt]="'home-page.photoReport.images.table' | translate">
   </div>
-  <button id="button-pinterest" class="pinterest-button button button--green">Наш pinterest</button>
+  <button id="button-pinterest" class="pinterest-button button button--green">{{ 'home-page.photoReport.pinterest' | translate }}</button>
 </section>

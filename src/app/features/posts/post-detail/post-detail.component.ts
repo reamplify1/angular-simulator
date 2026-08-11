@@ -2,11 +2,13 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IPost } from '../interfaces/IPost';
 import { Location } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-post-detail',
   templateUrl: './post-detail.component.html',
   styleUrl: './post-detail.component.scss',
+  imports: [TranslatePipe]
 })
 export class PostDetailComponent implements OnInit {
   private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
