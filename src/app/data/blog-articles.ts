@@ -1,4 +1,6 @@
-export const blogArticles = [
+import { IBlogArticle } from "../interfaces/IBlogArticale";
+
+export const blogArticles: IBlogArticle[] = [
   {
     id: 1,
     title: 'home-page.blog.article1.title',

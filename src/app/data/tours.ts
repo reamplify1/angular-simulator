@@ -1,4 +1,9 @@
-export const tours = [
+import { ITours } from "../features/auth/interfaces/ITours";
+
+export const tours: ITours[
+
+  
+] = [
   {
     id: 1,
     title: 'home-page.tours.lakeNearMountains.title',
