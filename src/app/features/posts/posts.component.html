@@ -41,6 +41,11 @@
         [totalRecords]="(totalRecords$ | async) ?? 0"
         [lazy]="true"
         (onPage)="onPageChange($event)"
+        [showFirstLastIcon]="true"
+        [showPageLinks]="true"
+        [pageLinks]="5"
+        [showCurrentPageReport]="true"
+        [currentPageReportTemplate]="'primeng.currentPageReport' | translate"
       >
 
         <ng-template pTemplate="header">

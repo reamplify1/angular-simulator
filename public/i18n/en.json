@@ -217,6 +217,11 @@
     "server": "Server error ({{ status }}). Please try again later."
   },
   "posts": {
+    "contextMenu": {
+      "view": "View",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
     "backAriaLabel": "Back to posts list",
     "createLabel": "Create a new post",
     "title": "Posts list",
@@ -285,5 +290,8 @@
       "passwordPlaceholder": "Enter password",
       "submit": "Sign in"
     }
+  },
+  "primeng": {
+    "currentPageReport": "{first} - {last} of {totalRecords}"
   }
 }

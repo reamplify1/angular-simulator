@@ -18,7 +18,7 @@ import { loggingInterceptor } from './interceptors/logging.interceptor';
 import { errorInterceptor } from './interceptors/error.interceptor';
 import { authInterceptor } from './features/auth/auth.interceptor';
 import { AuthService } from './features/auth/services/auth.service';
-import { Observable } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import { IAuthUser } from './features/auth/interfaces/IAuthUser';
 import { DATE_FORMAT } from './tokens/date-format.token';
 import { APP_CONFIG } from './tokens/app-config.token';
@@ -46,12 +46,12 @@ function getInitialTheme(): Preset {
 
 export function initializeApp(
   authService: AuthService,
-  languageService: LanguageService
-  ): () => Observable<IAuthUser | null> {
-  return () => {
-    languageService.initLanguage();
-    return authService.initAuth();
-  };
+  languageService: LanguageService,
+): () => Observable<IAuthUser | null> {
+  return () =>
+    languageService.initLanguage().pipe(
+      switchMap(() => authService.initAuth()),
+    );
 }
 
 export const appConfig: ApplicationConfig = {

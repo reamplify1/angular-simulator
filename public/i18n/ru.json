@@ -217,6 +217,11 @@
     "server": "Ошибка сервера ({{ status }}). Пожалуйста, попробуйте позже."
   },
   "posts": {
+    "contextMenu": {
+      "view": "Просмотреть",
+      "edit": "Редактировать",
+      "delete": "Удалить"
+    },
     "backAriaLabel": "Назад к списку",
     "createLabel": "Создание нового поста",
     "title": "Список постов",
@@ -285,5 +290,8 @@
       "passwordPlaceholder": "Введите пароль",
       "submit": "Войти"
     }
+  },
+  "primeng": {
+    "currentPageReport": "{first} - {last} из {totalRecords}"
   }
 }

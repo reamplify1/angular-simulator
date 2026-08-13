@@ -217,6 +217,11 @@
     "server": "Сервер қатесі ({{ status }}). Кейінірек қайталап көріңіз."
   },
   "posts": {
+    "contextMenu": {
+      "view": "Қарау",
+      "edit": "Өңдеу",
+      "delete": "Жою"
+    },
     "backAriaLabel": "Жазбалар тізіміне оралу",
     "createLabel": "Жаңа жазба жасау",
     "title": "Посттар тізімі",
@@ -285,5 +290,8 @@
       "passwordPlaceholder": "Құпиясөзді енгізіңіз",
       "submit": "Кіру"
     }
+  },
+  "primeng": {
+    "currentPageReport": "{first} - {last} / {totalRecords}"
   }
 }

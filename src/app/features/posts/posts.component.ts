@@ -16,7 +16,7 @@ import { IPostEditRequest } from './interfaces/IPostEditRequest';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { NotificationService } from '../../services/notification.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-posts',
@@ -40,6 +40,7 @@ export class PostsComponent implements OnInit {
   private postService: PostService = inject(PostService);
   private dialogService: DialogService = inject(DialogService);
   private notificationService: NotificationService = inject(NotificationService);
+  private translateService: TranslateService = inject(TranslateService);
 
   posts$: Observable<IPost[]> = this.postService.posts$;
   totalRecords$: Observable<number> = this.postService.totalRecords$;
@@ -67,17 +68,17 @@ export class PostsComponent implements OnInit {
   private initContextMenu(): void {
     this.contextMenuItems = [
       {
-        label: 'Просмотреть',
+        label: this.translateService.instant('posts.contextMenu.view'),
         icon: 'pi pi-fw pi-eye',
         command: () => this.onViewPost(this.selectedPost!.id),
       },
       {
-        label: 'Редактировать',
+        label: this.translateService.instant('posts.contextMenu.edit'),
         icon: 'pi pi-fw pi-pencil',
         command: () => this.editPost(this.selectedPost),
       },
       {
-        label: 'Удалить',
+        label: this.translateService.instant('posts.contextMenu.delete'),
         icon: 'pi pi-fw pi-trash',
         styleClass: 'text-red-500',
         command: () => this.deletePost(this.selectedPost?.id),
