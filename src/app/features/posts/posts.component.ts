@@ -1,5 +1,5 @@
 import { PostService } from './post.service';
-import { catchError, EMPTY, finalize, Observable, switchMap, take, throwError } from 'rxjs';
+import { catchError, EMPTY, finalize, map, Observable, switchMap, take, throwError } from 'rxjs';
 import { Component, inject, OnInit } from '@angular/core';
 import { IPost } from './interfaces/IPost';
 import { TableModule, TablePageEvent } from 'primeng/table';
@@ -17,6 +17,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { NotificationService } from '../../services/notification.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { IContextMenuTranslations } from '../../interfaces/IContextMenu';
 
 @Component({
   selector: 'app-posts',
@@ -54,7 +55,6 @@ export class PostsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadPosts(this.rows, 0);
-    this.initContextMenu();
   }
 
   loadPosts(rows: number, skip = 0): void {
@@ -65,26 +65,28 @@ export class PostsComponent implements OnInit {
       .subscribe();
   }
 
-  private initContextMenu(): void {
-    this.contextMenuItems = [
-      {
-        label: this.translateService.instant('posts.contextMenu.view'),
-        icon: 'pi pi-fw pi-eye',
-        command: () => this.onViewPost(this.selectedPost!.id),
-      },
-      {
-        label: this.translateService.instant('posts.contextMenu.edit'),
-        icon: 'pi pi-fw pi-pencil',
-        command: () => this.editPost(this.selectedPost),
-      },
-      {
-        label: this.translateService.instant('posts.contextMenu.delete'),
-        icon: 'pi pi-fw pi-trash',
-        styleClass: 'text-red-500',
-        command: () => this.deletePost(this.selectedPost?.id),
-      },
-    ];
-  }
+  contextMenuItems$: Observable<MenuItem[]> = this.translateService
+    .stream('posts.contextMenu')
+    .pipe(
+      map((translations: IContextMenuTranslations) => [
+        {
+          label: translations.view,
+          icon: 'pi pi-fw pi-eye',
+          command: () => this.onViewPost(this.selectedPost!.id),
+        },
+        {
+          label: translations.edit,
+          icon: 'pi pi-fw pi-pencil',
+          command: () => this.editPost(this.selectedPost),
+        },
+        {
+          label: translations.delete,
+          icon: 'pi pi-fw pi-trash',
+          styleClass: 'text-red-500',
+          command: () => this.deletePost(this.selectedPost?.id),
+        },
+      ]),
+    );
 
   onViewPost(id: number): void {
     this.router.navigate(['/posts', id]);
