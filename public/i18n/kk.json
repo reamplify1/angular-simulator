@@ -262,6 +262,7 @@
       "dislikes": "Ұнатпаулар"
     },
     "edit": {
+      "title": "Постты өңдеу",
       "titleLabel": "Тақырып",
       "tags": "Тегтер",
       "tagsPlaceholder": "news, coding, ideas",

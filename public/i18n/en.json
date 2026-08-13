@@ -262,13 +262,14 @@
       "dislikes": "Dislikes"
     },
     "edit": {
+      "title": "Edit post",
       "titleLabel": "Title",
-      "tags": "Теги",
+      "tags": "Tags",
       "tagsPlaceholder": "news, coding, ideas",
-      "views": "Просмотры",
+      "views": "Views",
       "viewsPlaceholder": "0",
-      "cancel": "Отмена",
-      "save": "Сохранить"
+      "cancel": "Cancel",
+      "save": "Save"
     }
   },
   "login": {

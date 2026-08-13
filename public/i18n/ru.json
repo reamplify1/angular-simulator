@@ -262,6 +262,7 @@
       "dislikes": "Дизлайки"
     },
     "edit": {
+      "title": "Редактировать пост",
       "titleLabel": "Заголовок",
       "tags": "Теги",
       "tagsPlaceholder": "news, coding, ideas",

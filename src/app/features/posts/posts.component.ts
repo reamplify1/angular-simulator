@@ -114,7 +114,7 @@ export class PostsComponent implements OnInit {
       PostEditDialogComponent,
       {
         data: { post },
-        header: 'Редактировать пост',
+        header: this.translateService.instant('posts.edit.title'),
         width: '700px',
         closable: true,
         dismissableMask: true,
