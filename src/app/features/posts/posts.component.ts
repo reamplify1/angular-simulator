@@ -53,18 +53,6 @@ export class PostsComponent implements OnInit {
   contextMenuItems: MenuItem[] = [];
   skeletonRows: IPost[] = Array(16).fill({}) as IPost[];
 
-  ngOnInit(): void {
-    this.loadPosts(this.rows, 0);
-  }
-
-  loadPosts(rows: number, skip = 0): void {
-    this.isLoading = true;
-    this.postService
-      .loadPosts(rows, skip)
-      .pipe(finalize(() => (this.isLoading = false)))
-      .subscribe();
-  }
-
   contextMenuItems$: Observable<MenuItem[]> = this.translateService
     .stream('posts.contextMenu')
     .pipe(
@@ -87,6 +75,18 @@ export class PostsComponent implements OnInit {
         },
       ]),
     );
+
+  ngOnInit(): void {
+    this.loadPosts(this.rows, 0);
+  }
+
+  loadPosts(rows: number, skip = 0): void {
+    this.isLoading = true;
+    this.postService
+      .loadPosts(rows, skip)
+      .pipe(finalize(() => (this.isLoading = false)))
+      .subscribe();
+  }
 
   onViewPost(id: number): void {
     this.router.navigate(['/posts', id]);
