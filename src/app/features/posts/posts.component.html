@@ -32,6 +32,11 @@
 
       </div>
 
+      <p-datepicker
+        [showIcon]="true"
+        [showButtonBar]="true">
+      </p-datepicker>
+
       <p-table
         [value]="isLoading ? skeletonRows : (posts$ | async) || []"
         [contextMenu]="cm"

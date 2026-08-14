@@ -9,7 +9,7 @@ import { UsersFilterComponent } from '../search/users-filter.component';
 import { AsyncPipe } from '@angular/common';
 import { LoaderComponent } from '../loader/loader.component';
 import { PluralizePipe } from '../pipes/pluralize.pipe';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-users',
@@ -28,6 +28,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 export class UsersComponent implements OnInit {
   private notificationService: NotificationService = inject(NotificationService);
   private userService: UserService = inject(UserService);
+  private translateService: TranslateService = inject(TranslateService);
 
   private filterSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
@@ -63,7 +64,7 @@ export class UsersComponent implements OnInit {
 
   addUser(user: IUser): void {
     this.userService.addUser(user);
-    this.notificationService.showSuccess('Пользователь успешно добавлен');
+    this.notificationService.showSuccess(this.translateService.instant('users.updated'));
     console.log(user);
   }
 
@@ -73,7 +74,7 @@ export class UsersComponent implements OnInit {
       .pipe(
         tap((users: IUser[]) => {
           this.userService.setUsers(users);
-          this.notificationService.showSuccess('Users are updated');
+          this.notificationService.showSuccess(this.translateService.instant('users.created'));
         }),
       )
       .subscribe();

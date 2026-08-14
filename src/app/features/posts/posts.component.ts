@@ -18,7 +18,7 @@ import { NotificationService } from '../../services/notification.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { IContextMenuTranslations } from '../../interfaces/IContextMenu';
-
+import { DatePickerModule } from 'primeng/datepicker';
 @Component({
   selector: 'app-posts',
   imports: [
@@ -30,7 +30,8 @@ import { IContextMenuTranslations } from '../../interfaces/IContextMenu';
     InputTextModule,
     InputNumberModule,
     ButtonModule,
-    TranslatePipe
+    TranslatePipe,
+    DatePickerModule
   ],
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.scss',
