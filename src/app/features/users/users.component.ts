@@ -3,12 +3,12 @@ import { UserService } from './services/user.service';
 import { map, Observable, combineLatest, tap, BehaviorSubject } from 'rxjs';
 import type { IUser } from './interfaces/IUser';
 import { UserCardComponent } from './components/user-card/user-card.component';
-import { NotificationService } from '../core/services/notification.service';
+import { NotificationService } from '../../core/services/notification.service';
 import { UserCreateComponent } from './components/user-create/user-create.component';
 import { UsersFilterComponent } from './components/search/users-filter.component';
 import { AsyncPipe } from '@angular/common';
-import { LoaderComponent } from '../shared/components/loader/loader.component';
-import { PluralizePipe } from '../shared/pipes/pluralize.pipe';
+import { LoaderComponent } from '../../shared/components/loader/loader.component';
+import { PluralizePipe } from '../../shared/pipes/pluralize.pipe';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -88,5 +88,5 @@ export class UsersComponent implements OnInit {
       )
       .subscribe();
   }
-  
+
 }

@@ -14,7 +14,7 @@ export const routes: Routes = [
       {
         path: '',
         loadComponent: () =>
-          import('./home-page/home-page.component').then(
+          import('./pages/home-page/home-page.component').then(
             (m) => m.HomePageComponent,
           ),
         pathMatch: 'full',
@@ -22,7 +22,7 @@ export const routes: Routes = [
       {
         path: 'users',
         loadComponent: () =>
-          import('./users/users.component').then((m) => m.UsersComponent),
+          import('./features/users/users.component').then((m) => m.UsersComponent),
         canActivate: [authGuard, adminGuard],
       },
       {
@@ -75,7 +75,7 @@ export const routes: Routes = [
   {
     path: '**',
     loadComponent: () =>
-      import('./not-found-page/not-found-page.component').then(
+      import('./pages/not-found-page/not-found-page.component').then(
         (m) => m.NotFoundPageComponent,
       ),
   },

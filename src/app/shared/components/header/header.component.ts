@@ -1,9 +1,9 @@
-import { LocalStorageService } from '../core/services/local-storage.service';
-import { NotificationService } from '../core/services/notification.service';
+import { LocalStorageService } from '../../../core/services/local-storage.service';
+import { NotificationService } from '../../../core/services/notification.service';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { INavigation } from '../interfaces/INavigation';
+import { INavigation } from '../../../interfaces/INavigation';
 import { DarkModeToggleComponent } from '../toggle-theme-color.component/dark-mode-toggle';
 import {
   faSun,
@@ -12,18 +12,18 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ThemeComponent } from '../theme-switcher/theme.component';
-import { ThemeService } from '../core/services/theme.service';
+import { ThemeService } from '../../../core/services/theme.service';
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { Observable } from 'rxjs';
-import { AppTheme } from '../../enums/AppTheme';
-import { AuthService } from '../core/auth/auth.service';
-import { DATE_FORMAT } from '../core/tokens/date-format.token';
-import { APP_CONFIG } from '../core/tokens/app-config.token';
-import { IAppConfig } from '../interfaces/IAppConfig';
+import { AppTheme } from '../../../../enums/AppTheme';
+import { AuthService } from '../../../core/auth/auth.service';
+import { DATE_FORMAT } from '../../../core/tokens/date-format.token';
+import { APP_CONFIG } from '../../../core/tokens/app-config.token';
+import { IAppConfig } from '../../../interfaces/IAppConfig';
 import { TranslatePipe } from '@ngx-translate/core';
-import { LanguageService } from '../core/services/language.service';
+import { LanguageService } from '../../../core/services/language.service';
 import { SelectModule } from 'primeng/select';
-import { ILanguage } from '../features/auth/interfaces/ILanguage';
+import { ILanguage } from '../../../features/auth/interfaces/ILanguage';
 
 @Component({
   selector: 'app-header',
@@ -44,7 +44,7 @@ import { ILanguage } from '../features/auth/interfaces/ILanguage';
   standalone: true,
 })
 export class HeaderComponent implements OnInit {
-  
+
   themeService: ThemeService = inject(ThemeService);
   notificationService: NotificationService = inject(NotificationService);
   localStorageService: LocalStorageService = inject(LocalStorageService);

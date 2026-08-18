@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ToggleSwitch } from 'primeng/toggleswitch';
 import { FormsModule } from '@angular/forms';
-import { ThemeService } from '../core/services/theme.service';
+import { ThemeService } from '../../../core/services/theme.service';
 import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs';
 
@@ -19,6 +19,6 @@ export class DarkModeToggleComponent {
 
   onToggle(isDark: boolean): void {
     this.themeService.toggleDarkMode(isDark);
-    
+
   }
 }

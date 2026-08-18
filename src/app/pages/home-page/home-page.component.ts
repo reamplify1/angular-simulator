@@ -1,19 +1,19 @@
 import { Component, inject } from '@angular/core';
-import { Color } from '../../enums/Color';
-import { Collection } from '../collection';
+import { Color } from '../../../enums/Color';
+import { Collection } from '../../collection';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import type { IAdvantage } from '../interfaces/IAdvantage';
-import type { ILocation } from '../interfaces/ILocation';
-import type { IArticle } from '../interfaces/IArticle';
-import type { ITour } from '../interfaces/ITour';
-import { tours } from '../data/tours';
-import { advantages } from '../data/advantages';
-import { hikeLocations } from '.././data/locations';
-import { NotificationType } from '../../enums/NotificationType';
-import { blogArticles } from '.././data/blog-articles';
-import { NotificationService } from '../core/services/notification.service';
-import { LocalStorageService } from '../core/services/local-storage.service';
+import type { IAdvantage } from '../../interfaces/IAdvantage';
+import type { ILocation } from '../../interfaces/ILocation';
+import type { IArticle } from '../../interfaces/IArticle';
+import type { ITour } from '../../interfaces/ITour';
+import { tours } from '../../data/tours';
+import { advantages } from '../../data/advantages';
+import { hikeLocations } from '../../data/locations';
+import { NotificationType } from '../../../enums/NotificationType';
+import { blogArticles } from '../../data/blog-articles';
+import { NotificationService } from '../../core/services/notification.service';
+import { LocalStorageService } from '../../core/services/local-storage.service';
 import {
   faPlay,
   IconDefinition,
@@ -30,7 +30,7 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
   standalone: true,
 })
 export class HomePageComponent {
-  
+
   notificationService: NotificationService = inject(NotificationService);
   localStorageService: LocalStorageService = inject(LocalStorageService);
   private readonly translateService: TranslateService =
@@ -56,7 +56,7 @@ export class HomePageComponent {
     1, 2, 3, 4, 5,
   ]);
 
-  stringCollection: Collection<string> = new Collection<string>(['Boston','London','Винница',]);
+  stringCollection: Collection<string> = new Collection<string>(['Boston', 'London', 'Винница',]);
 
   get iconPath(): string {
     return './images/icons/';

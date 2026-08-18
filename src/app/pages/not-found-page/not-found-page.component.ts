@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { LocalStorageService } from '../core/services/local-storage.service';
+import { LocalStorageService } from '../../core/services/local-storage.service';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
@@ -34,5 +34,5 @@ export class NotFoundPageComponent {
 
     this.localStorageService.setItem(VISIT_COUNT_KEY, count.toString());
   }
-  
+
 }

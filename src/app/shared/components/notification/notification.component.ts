@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
-import { NotificationService } from '../core/services/notification.service';
-import { type INotification } from '../interfaces/INotification';
+import { NotificationService } from '../../../core/services/notification.service';
+import { type INotification } from '../../../interfaces/INotification';
 
 @Component({
   selector: 'app-notification',
@@ -10,7 +10,7 @@ import { type INotification } from '../interfaces/INotification';
   styleUrl: './notification.component.scss',
 })
 export class NotificationComponent {
-  
+
   notificationService: NotificationService = inject(NotificationService);
 
   closeNotification(notification: INotification): void {

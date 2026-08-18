@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { NotificationComponent } from './notification/notification.component';
+import { NotificationComponent } from './shared/components/notification/notification.component';
 import { LocalStorageService } from './core/services/local-storage.service';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { LoaderService } from './core/services/loader.service';
@@ -39,5 +39,5 @@ export class AppComponent {
 
     this.localStorageService.setItem(VISIT_COUNT_KEY, count.toString());
   }
-  
+
 }

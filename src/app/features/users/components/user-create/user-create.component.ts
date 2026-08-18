@@ -2,9 +2,9 @@ import { FormGroup } from '@angular/forms';
 import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IUser } from '../../interfaces/IUser';
-import type { ToFormControls } from '../../../types/ToFormControls';
-import { HoverBoldDirective } from '../../../shared/directives/bold-text.directive';
-import { AnimatedGradientDirective } from '../../../shared/directives/animated-gradient.directive';
+import type { ToFormControls } from '../../../../types/ToFormControls';
+import { HoverBoldDirective } from '../../../../shared/directives/bold-text.directive';
+import { AnimatedGradientDirective } from '../../../../shared/directives/animated-gradient.directive';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
@@ -19,7 +19,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   styleUrl: './user-create.component.scss',
 })
 export class UserCreateComponent {
-  
+
   @Output() createUser: EventEmitter<IUser> = new EventEmitter<IUser>();
 
   private fb: FormBuilder = inject(FormBuilder);

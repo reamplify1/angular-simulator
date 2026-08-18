@@ -7,6 +7,6 @@
     "rootDir": "./src",
     "types": []
   },
-  "include": ["src/**/*.ts", "src/app/theme-switcher/theme.component.ts"],
+  "include": ["src/**/*.ts", "src/app/shared/components/theme-switcher/theme.component.ts"],
   "exclude": ["src/**/*.spec.ts"]
 }

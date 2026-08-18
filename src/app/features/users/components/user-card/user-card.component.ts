@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IUser } from '../../interfaces/IUser';
 import { CommonModule } from '@angular/common';
-import { PhoneFormatPipe } from '../../../shared/pipes/phone-format.pipe';
-import { HoverBoldDirective } from '../../../shared/directives/bold-text.directive';
-import { AnimatedGradientDirective } from '../../../shared/directives/animated-gradient.directive';
-import { PhoneFormat } from '../../../../enums/PhoneFormat';
+import { PhoneFormatPipe } from '../../../../shared/pipes/phone-format.pipe';
+import { HoverBoldDirective } from '../../../../shared/directives/bold-text.directive';
+import { AnimatedGradientDirective } from '../../../../shared/directives/animated-gradient.directive';
+import { PhoneFormat } from '../../../../../enums/PhoneFormat';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
@@ -29,5 +29,5 @@ export class UserCardComponent {
   onDelete(): void {
     this.deleteUser.emit(this.user.id);
   }
-  
+
 }

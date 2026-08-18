@@ -8,10 +8,10 @@ import {
   tap,
 } from 'rxjs';
 import { UserApiService } from './user-api.service';
-import { LoaderService } from '../../core/services/loader.service';
+import { LoaderService } from '../../../core/services/loader.service';
 import { IUser } from '../interfaces/IUser';
-import { NotificationService } from '../../core/services/notification.service';
-import { LocalStorageService } from '../../core/services/local-storage.service';
+import { NotificationService } from '../../../core/services/notification.service';
+import { LocalStorageService } from '../../../core/services/local-storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -76,5 +76,5 @@ export class UserService {
       }),
     );
   }
-  
+
 }
