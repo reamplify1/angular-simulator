@@ -14,7 +14,9 @@ export class PostApiService {
   private readonly apiUrl: string = 'https://dummyjson.com/posts';
 
   getPosts(limit: number, skip: number): Observable<IPostsResponse> {
-    return this.http.get<IPostsResponse>(`${ this.apiUrl }?limit=${ limit }&skip=${ skip }`);
+    return this.http.get<IPostsResponse>(
+      `${ this.apiUrl }?limit=${ limit }&skip=${ skip }`,
+    );
   }
 
   getPostById(id: number): Observable<IPost> {

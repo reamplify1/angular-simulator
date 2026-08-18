@@ -1,4 +1,4 @@
-@use '../../assets/functions'as *;
+@use '../../assets/functions' as *;
 
 .notification-container {
   position: fixed;
@@ -17,13 +17,12 @@
   width: rem(350);
   display: flex;
   gap: rem(15);
-  background-color: #0F172A99;
-  color: #E8E9EB;
+  background-color: #0f172a99;
+  color: #e8e9eb;
   line-height: rem(20);
-  border: rem(1) solid #FFFFFF;
+  border: rem(1) solid #ffffff;
   border-radius: 10px;
   z-index: 9999;
-
 
   .notification-description-container {
     display: flex;

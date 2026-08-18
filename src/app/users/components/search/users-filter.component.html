@@ -1,0 +1,16 @@
+<div class="filter-wrapper">
+  <div class="filter-container">
+    <img
+      src="images/icons/search-icon.svg"
+      class="search-icon"
+      [alt]="'users-filter.searchPlaceholder' | translate"
+    />
+
+    <input
+      id="user-filter"
+      class="filter-input"
+      [formControl]="filterControl"
+      [placeholder]="'users-filter.searchPlaceholder' | translate"
+    />
+  </div>
+</div>

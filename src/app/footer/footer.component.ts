@@ -1,6 +1,14 @@
 import { Component } from '@angular/core';
-import { FontAwesomeModule, IconDefinition } from '@fortawesome/angular-fontawesome';
-import { faTelegram, faVk, faPinterest, faSkype } from '@fortawesome/free-brands-svg-icons';
+import {
+  FontAwesomeModule,
+  IconDefinition,
+} from '@fortawesome/angular-fontawesome';
+import {
+  faTelegram,
+  faVk,
+  faPinterest,
+  faSkype,
+} from '@fortawesome/free-brands-svg-icons';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -11,6 +19,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   styleUrl: './footer.component.scss',
 })
 export class FooterComponent {
+  
   faTelegram: IconDefinition = faTelegram;
   faVk: IconDefinition = faVk;
   faPinterest: IconDefinition = faPinterest;

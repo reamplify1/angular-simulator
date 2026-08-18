@@ -1,4 +1,4 @@
-import { IBlogArticle } from "../interfaces/IBlogArticle";
+import { IBlogArticle } from '../interfaces/IBlogArticle';
 
 export const blogArticles: IBlogArticle[] = [
   {

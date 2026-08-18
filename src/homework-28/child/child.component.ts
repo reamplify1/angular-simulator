@@ -5,9 +5,10 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
   imports: [],
   templateUrl: './child.component.html',
   styleUrl: './child.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChildComponent {
-  @Input() userData!: { name: string; age: number };
 
+  @Input() userData!: { name: string; age: number };
+  
 }

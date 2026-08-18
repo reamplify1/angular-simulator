@@ -2,7 +2,7 @@
 
 @use '../assets/functions' as *;
 
-@import "../../node_modules/primeicons/primeicons.css";
+@import '../../node_modules/primeicons/primeicons.css';
 
 * {
   font-family: 'Nunito Sans';
@@ -20,21 +20,21 @@
   --primary-color: #ffffff;
   --secondary-color: #1a3e3e;
   --third-color: #000000;
-  --yellow-color: #F2BE22;
-  --light-background-color: #F3F5F4;
-  --light-color: #F3F5F4;
-  --header-background-color: #18121E80;
-  --navigation-item-color: #F3F5F4;
+  --yellow-color: #f2be22;
+  --light-background-color: #f3f5f4;
+  --light-color: #f3f5f4;
+  --header-background-color: #18121e80;
+  --navigation-item-color: #f3f5f4;
   --form-create-user-secondary-color: #1f2937;
-  --user-card-shadow-color: #0000000F;
-  --user-card-secondary-color: #D4A373;
+  --user-card-shadow-color: #0000000f;
+  --user-card-secondary-color: #d4a373;
   --user-form-background-color: #ebebebec;
-  --user-card-border-color: #F4F7F5;
+  --user-card-border-color: #f4f7f5;
   --filter-input-color: #00000;
   --post-detail-card-background: #f1f1f1;
   --post-detail-card-title: #1a3e3e;
   --post-detail-card-body: #555555;
-  --button-login: #2563EB;
+  --button-login: #2563eb;
   --button-login-hover: #1d55ce;
   --button-logout: #555555;
 }
@@ -44,7 +44,7 @@
   --primary-color: rgb(27, 27, 27);
   --secondary-color: #f0f0f0;
   --light-background-color: #000000d5;
-  --light-color: #F3F5F4;
+  --light-color: #f3f5f4;
   --header-background-color: #3a3a3af6;
   --form-create-user-secondary-color: #cfcfcf;
   --user-card-shadow-color: #9494942d;
@@ -55,10 +55,10 @@
   --user-card-border-color: #252525;
   --filter-input-color: #ffffff;
   --post-detail-card-background: #ececec;
-  --post-detail-card-title: #F2BE22;
+  --post-detail-card-title: #f2be22;
   --post-detail-card-body: #7e7e7e;
-  --button-login: #E5B01D;
-  --button-login-hover: #C99611;
+  --button-login: #e5b01d;
+  --button-login-hover: #c99611;
   --button-logout: rgb(27, 27, 27);
 
   .navigation__item {
@@ -78,7 +78,9 @@
   padding: rem(12) rem(24);
   border: none;
   border-radius: rem(8);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 
   &:hover {
     transform: translateY(rem(-4));
@@ -100,7 +102,9 @@
   color: var(--primary-color);
   cursor: pointer;
   width: fit-content;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 
   &:hover {
     transform: translateY(rem(-4));
@@ -160,32 +164,49 @@
 }
 
 @keyframes moveGradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 [appAnimatedGradient] {
-  border: var(--gradient-thickness, 2px) solid var(--user-card-border-color, #ccc);
+  border: var(--gradient-thickness, 2px) solid
+    var(--user-card-border-color, #ccc);
   background-clip: padding-box;
 
-  transition: border-color 0.4s ease, border-width 0.4s ease, filter 0.4s ease;
+  transition:
+    border-color 0.4s ease,
+    border-width 0.4s ease,
+    filter 0.4s ease;
 }
 
 .animated-gradient-border {
   outline: none !important;
   border: var(--gradient-thickness, 2px) solid transparent !important;
   background-image:
-    linear-gradient(var(--primary-color, #ffffff), var(--primary-color, #ffffff)),
+    linear-gradient(
+      var(--primary-color, #ffffff),
+      var(--primary-color, #ffffff)
+    ),
     linear-gradient(to right, var(--gradient-colors)) !important;
 
   background-origin: padding-box, border-box !important;
   background-clip: padding-box, border-box !important;
 
-  background-size: 100% 100%, 200% 200% !important;
+  background-size:
+    100% 100%,
+    200% 200% !important;
   background-repeat: no-repeat;
 
   animation: moveGradient 4s linear infinite;
 
-  filter: drop-shadow(0 0 5px var(--gradient-first-color, rgba(0, 0, 0, 0.15))) !important;
+  filter: drop-shadow(
+    0 0 5px var(--gradient-first-color, rgba(0, 0, 0, 0.15))
+  ) !important;
 }

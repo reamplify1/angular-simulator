@@ -1,4 +1,4 @@
-@use '../../assets/functions'as *;
+@use '../../assets/functions' as *;
 
 .loading-overlay {
   position: fixed;
@@ -31,7 +31,7 @@
 }
 
 .background-absolute {
-  position: absolute;;
+  position: absolute;
   background-image: url('/images/bg-mountains.jpg');
   top: 0;
   left: 0;
@@ -61,7 +61,6 @@
 .button--small {
   color: var(--primary-color);
   background-color: var(--secondary-color);
-
 }
 
 .navigation__wrapper {
@@ -128,7 +127,7 @@
     cursor: pointer;
 
     &:disabled {
-      color: #6FA0A0;
+      color: #6fa0a0;
       cursor: not-allowed;
     }
   }
@@ -222,7 +221,7 @@
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
-  color: var(--primary-color)
+  color: var(--primary-color);
 }
 
 .date-input-container {
@@ -319,7 +318,10 @@
   cursor: pointer;
   z-index: 1;
   border: none;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background-color 0.5s ease;
 
   &::before {
     content: '';
@@ -328,7 +330,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #138173 0%, #1A3E3E 70%);
+    background: linear-gradient(135deg, #138173 0%, #1a3e3e 70%);
     opacity: 0;
     transition: opacity 0.5s ease;
     z-index: -1;
@@ -384,7 +386,6 @@
   outline: none;
   color: var(--primary-color);
   margin-right: rem(100);
-
 }
 
 .live-output {
@@ -476,7 +477,6 @@
 .programs {
   display: flex;
   height: rem(771);
-
 }
 
 .programs__info {
@@ -537,7 +537,7 @@
     }
 
     &:hover {
-      background-color: #6FA0A0;
+      background-color: #6fa0a0;
       opacity: 1;
       transform: translateX(rem(5));
       padding: rem(3) rem(0) rem(3) rem(10);
@@ -559,7 +559,6 @@
         width: rem(50);
         height: rem(50);
       }
-
     }
   }
 
@@ -626,7 +625,7 @@
         top: rem(50);
         font-weight: 700;
         line-height: rem(18);
-        background-color: #FDFDFD66;
+        background-color: #fdfdfd66;
         padding: rem(4) rem(8) rem(4) rem(8);
         gap: rem(4);
       }
@@ -642,25 +641,26 @@
         bottom: 0;
         width: 100%;
         height: rem(90);
-        color: #FDFDFD;
+        color: #fdfdfd;
         margin: 0;
 
         backdrop-filter: blur(18px);
         -webkit-backdrop-filter: blur(18px);
 
-        background: linear-gradient(to top,
-            rgba(255, 255, 255, 0.45) 0%,
-            rgba(255, 255, 255, 0.25) 40%,
-            rgba(255, 255, 255, 0.08) 80%,
-            rgba(255, 255, 255, 0) 100%);
+        background: linear-gradient(
+          to top,
+          rgba(255, 255, 255, 0.45) 0%,
+          rgba(255, 255, 255, 0.25) 40%,
+          rgba(255, 255, 255, 0.08) 80%,
+          rgba(255, 255, 255, 0) 100%
+        );
         z-index: 1;
 
         .popular-tour-item__text {
-
           h5 {
             font-weight: 700;
             margin: 0;
-            line-height: 120%
+            line-height: 120%;
           }
 
           span {
@@ -677,12 +677,11 @@
           font-size: rem(20);
           font-weight: 700;
           line-height: rem(24);
-          background-color: #FFFFFF4D;
+          background-color: #ffffff4d;
           width: rem(86);
           height: rem(40);
           border-radius: rem(4);
         }
-
       }
     }
 
@@ -762,7 +761,7 @@
           line-height: rem(20);
 
           .blog-date {
-            color: #F2BE22;
+            color: #f2be22;
           }
 
           .blog-link {
@@ -806,7 +805,8 @@
       border-radius: rem(6);
     }
 
-    &-item1, &-item5 {
+    &-item1,
+    &-item5 {
       grid-column: span 2;
     }
   }
@@ -829,14 +829,13 @@
   gap: rem(64);
   padding: rem(40) rem(100);
   background-color: var(--primary-color);
-  box-shadow: 0px 0px 15px 0px #18121E1F;
+  box-shadow: 0px 0px 15px 0px #18121e1f;
   border-radius: rem(6);
 
   &-text {
     display: flex;
     flex-direction: column;
     gap: rem(8);
-
   }
 
   &-cta {
@@ -876,7 +875,6 @@
           width: rem(240);
         }
       }
-
     }
 
     .subscribe-cta-info {

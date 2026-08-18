@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { LocalStorageService } from '../services/local-storage.service';
+import { LocalStorageService } from '../core/services/local-storage.service';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
@@ -10,6 +10,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   styleUrl: './not-found-page.component.scss',
 })
 export class NotFoundPageComponent {
+
   localStorageService: LocalStorageService = inject(LocalStorageService);
 
   constructor() {
@@ -25,11 +26,13 @@ export class NotFoundPageComponent {
 
   saveVisitCount(): void {
     const VISIT_COUNT_KEY = 'visit-count';
-    const visits: string | null = this.localStorageService.getItem(VISIT_COUNT_KEY);
+    const visits: string | null =
+      this.localStorageService.getItem(VISIT_COUNT_KEY);
 
     let count: number = visits ? parseInt(visits) : 0;
     count++;
 
     this.localStorageService.setItem(VISIT_COUNT_KEY, count.toString());
   }
+  
 }

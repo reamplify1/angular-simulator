@@ -1,14 +1,14 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { UserService } from '../services/user.service';
+import { UserService } from './services/user.service';
 import { map, Observable, combineLatest, tap, BehaviorSubject } from 'rxjs';
-import type { IUser } from '../interfaces/IUser';
-import { UserCardComponent } from '../user-card/user-card.component';
-import { NotificationService } from '../services/notification.service';
-import { UserCreateComponent } from '../create-user/user-create.component';
-import { UsersFilterComponent } from '../search/users-filter.component';
+import type { IUser } from './interfaces/IUser';
+import { UserCardComponent } from './components/user-card/user-card.component';
+import { NotificationService } from '../core/services/notification.service';
+import { UserCreateComponent } from './components/user-create/user-create.component';
+import { UsersFilterComponent } from './components/search/users-filter.component';
 import { AsyncPipe } from '@angular/common';
-import { LoaderComponent } from '../loader/loader.component';
-import { PluralizePipe } from '../pipes/pluralize.pipe';
+import { LoaderComponent } from '../shared/components/loader/loader.component';
+import { PluralizePipe } from '../shared/pipes/pluralize.pipe';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -20,17 +20,20 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
     AsyncPipe,
     LoaderComponent,
     PluralizePipe,
-    TranslatePipe
+    TranslatePipe,
   ],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss',
 })
 export class UsersComponent implements OnInit {
+
   private notificationService: NotificationService = inject(NotificationService);
   private userService: UserService = inject(UserService);
   private translateService: TranslateService = inject(TranslateService);
 
-  private filterSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  private filterSubject: BehaviorSubject<string> = new BehaviorSubject<string>(
+    '',
+  );
 
   filteredUsers$: Observable<IUser[]> = combineLatest<[IUser[], string]>([
     this.userService.users$,
@@ -43,7 +46,9 @@ export class UsersComponent implements OnInit {
         return users;
       }
 
-      return users.filter((user: IUser) => user.name.trim().toLowerCase().includes(value));
+      return users.filter((user: IUser) =>
+        user.name.trim().toLowerCase().includes(value),
+      );
     }),
   );
 
@@ -64,7 +69,9 @@ export class UsersComponent implements OnInit {
 
   addUser(user: IUser): void {
     this.userService.addUser(user);
-    this.notificationService.showSuccess(this.translateService.instant('users.updated'));
+    this.notificationService.showSuccess(
+      this.translateService.instant('users.updated'),
+    );
     console.log(user);
   }
 
@@ -74,9 +81,12 @@ export class UsersComponent implements OnInit {
       .pipe(
         tap((users: IUser[]) => {
           this.userService.setUsers(users);
-          this.notificationService.showSuccess(this.translateService.instant('users.created'));
+          this.notificationService.showSuccess(
+            this.translateService.instant('users.created'),
+          );
         }),
       )
       .subscribe();
   }
+  
 }

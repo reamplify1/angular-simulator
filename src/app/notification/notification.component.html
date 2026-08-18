@@ -1,8 +1,11 @@
 <div class="notification-container">
-  @for (notification of notificationService.notifications$ | async; track notification.id) {
+  @for (
+    notification of notificationService.notifications$ | async;
+    track notification.id
+  ) {
     <div class="notification">
       <div class="notification-image-container">
-        <img src="images/icons/message-icon.svg" alt="message">
+        <img src="images/icons/message-icon.svg" alt="message" />
       </div>
 
       <div class="notification-description-container">
@@ -15,10 +18,7 @@
           aria-label="Close message"
           (click)="closeNotification(notification)"
         >
-          <img
-            src="images/icons/close-message-icon.svg"
-            alt=""
-          >
+          <img src="images/icons/close-message-icon.svg" alt="" />
         </button>
       </div>
     </div>

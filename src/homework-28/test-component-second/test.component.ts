@@ -1,12 +1,18 @@
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 
 @Component({
   selector: 'app-test-second',
   imports: [],
   templateUrl: './test.component.html',
   styleUrl: './test.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TestComponentSecond implements OnInit {
 
@@ -61,7 +67,8 @@ export class TestComponentSecond implements OnInit {
   }
 
   scenarioHttp() {
-    this.http.get<{ id: number }>('https://jsonplaceholder.typicode.com/todos/1')
+    this.http
+      .get<{ id: number }>('https://jsonplaceholder.typicode.com/todos/1')
       .subscribe(() => {
         this.count += 50;
         console.log('HTTP Запрос завершен, count =', this.count);
@@ -99,6 +106,5 @@ export class TestComponentSecond implements OnInit {
     console.log('Вызов reattach(): компонент вернулся в CD');
     this.cdr.reattach();
   }
-
+  
 }
-

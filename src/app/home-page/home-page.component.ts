@@ -12,9 +12,13 @@ import { advantages } from '../data/advantages';
 import { hikeLocations } from '.././data/locations';
 import { NotificationType } from '../../enums/NotificationType';
 import { blogArticles } from '.././data/blog-articles';
-import { NotificationService } from '../services/notification.service';
-import { LocalStorageService } from '../services/local-storage.service';
-import { faPlay, IconDefinition, faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { NotificationService } from '../core/services/notification.service';
+import { LocalStorageService } from '../core/services/local-storage.service';
+import {
+  faPlay,
+  IconDefinition,
+  faChevronDown,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
@@ -26,10 +30,11 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
   standalone: true,
 })
 export class HomePageComponent {
-
+  
   notificationService: NotificationService = inject(NotificationService);
   localStorageService: LocalStorageService = inject(LocalStorageService);
-  private readonly translateService: TranslateService = inject(TranslateService);
+  private readonly translateService: TranslateService =
+    inject(TranslateService);
 
   faPlay: IconDefinition = faPlay;
   faChevronDown: IconDefinition = faChevronDown;
@@ -47,8 +52,11 @@ export class HomePageComponent {
   notificationType: typeof NotificationType = NotificationType;
   tours: ITour[] = tours;
 
-  numberCollection: Collection<number> = new Collection<number>([1, 2, 3, 4, 5]);
-  stringCollection: Collection<string> = new Collection<string>(['Boston', 'London', 'Винница']);
+  numberCollection: Collection<number> = new Collection<number>([
+    1, 2, 3, 4, 5,
+  ]);
+
+  stringCollection: Collection<string> = new Collection<string>(['Boston','London','Винница',]);
 
   get iconPath(): string {
     return './images/icons/';
@@ -63,7 +71,9 @@ export class HomePageComponent {
   }
 
   showProgramPrice(): void {
-    const message: string  = this.translateService.instant('home-page.programPrice');
+    const message: string = this.translateService.instant(
+      'home-page.programPrice',
+    );
     alert(message);
   }
 
@@ -79,14 +89,14 @@ export class HomePageComponent {
 
   showInfoMessage(): void {
     const message: string = this.translateService.instant(
-      'home-page.aboutTour.infoMessage'
+      'home-page.aboutTour.infoMessage',
     );
     this.notificationService.showInfo(message);
   }
 
   showRating(): void {
     const message: string = this.translateService.instant(
-      'home-page.popularTours.rating'
+      'home-page.popularTours.rating',
     );
 
     this.notificationService.showInfo(message);
@@ -94,7 +104,7 @@ export class HomePageComponent {
 
   showOtherMaterials(): void {
     const message: string = this.translateService.instant(
-      'home-page.blog.otherMaterialsMessage'
+      'home-page.blog.otherMaterialsMessage',
     );
 
     this.notificationService.showWarn(message);

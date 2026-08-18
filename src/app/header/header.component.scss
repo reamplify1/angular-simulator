@@ -1,4 +1,4 @@
-@use '../../assets/functions'as *;
+@use '../../assets/functions' as *;
 
 // :host ::ng-deep .language-select .p-select-label {
 //   font-size: 12px;
@@ -118,7 +118,7 @@
 }
 
 .fa-sun-icon {
-  color: var(--primary-color)
+  color: var(--primary-color);
 }
 
 .button-login {

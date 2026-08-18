@@ -1,5 +1,5 @@
-import { LoaderService } from './../../services/loader.service';
-import { NotificationService } from './../../services/notification.service';
+import { LoaderService } from '../../core/services/loader.service';
+import { NotificationService } from '../../core/services/notification.service';
 import { inject, Injectable } from '@angular/core';
 import { PostApiService } from './post-api.service';
 import { BehaviorSubject, delay, finalize, Observable, tap } from 'rxjs';
@@ -59,7 +59,9 @@ export class PostService {
     return this.postApiService.deletePost(id).pipe(
       tap(() => {
         const currentPosts: IPost[] = this.postsSubject.getValue();
-        this.postsSubject.next(currentPosts.filter((post: IPost) => post.id !== id));
+        this.postsSubject.next(
+          currentPosts.filter((post: IPost) => post.id !== id),
+        );
 
         this.notificationService.showSuccess(
           this.translateService.instant('posts.notifications.deleted'),

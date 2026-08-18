@@ -8,16 +8,27 @@
       <span class="fs-16">{{ 'footer.emailLabel' | translate }}</span>
       <div class="subscribe-cta-content">
         <div class="subscribe-input">
-          <input id="input-subscribe" type="text" placeholder="name@domain.com">
+          <input
+            id="input-subscribe"
+            type="text"
+            placeholder="name@domain.com"
+          />
         </div>
         <div class="subscribe-button">
-          <button id="button-subscribe" class="button button--subscribe">{{ 'footer.subscribe' | translate }}</button>
+          <button id="button-subscribe" class="button button--subscribe">
+            {{ 'footer.subscribe' | translate }}
+          </button>
         </div>
       </div>
       <div class="subscribe-cta-info">
-        <span>{{ 'footer.agreement' | translate }}</span><span id="personal-data-span"
-            class="span-underline">{{ 'footer.personalData' | translate }}</span> {{ 'footer.and' | translate }} <span
-            id="advertising-mailing-span" class="span-underline">{{ 'footer.advertising' | translate }}</span>
+        <span>{{ 'footer.agreement' | translate }}</span
+        ><span id="personal-data-span" class="span-underline">{{
+          'footer.personalData' | translate
+        }}</span>
+        {{ 'footer.and' | translate }}
+        <span id="advertising-mailing-span" class="span-underline">{{
+          'footer.advertising' | translate
+        }}</span>
       </div>
     </div>
   </div>
@@ -41,17 +52,17 @@
       @for (service of servicesInfo; track $index; let i = $index) {
         <div class="footer-section-service">
           <fa-icon [icon]="faAngleRight" class="fa-angle-right"></fa-icon>
-          <span>{{ service | translate}}</span>
+          <span>{{ service | translate }}</span>
         </div>
       }
     </div>
     <div class="footer-section-important-info">
       <h4>{{ 'footer.travelInfo' | translate }}</h4>
       @for (info of travelInfo; track $index; let i = $index) {
-    <div class="footer-section-important-info-item">
-      <fa-icon [icon]="faAngleRight" class="fa-angle-right"></fa-icon>
-      <span>{{ info | translate }}</span>
-    </div>
+        <div class="footer-section-important-info-item">
+          <fa-icon [icon]="faAngleRight" class="fa-angle-right"></fa-icon>
+          <span>{{ info | translate }}</span>
+        </div>
       }
     </div>
   </div>

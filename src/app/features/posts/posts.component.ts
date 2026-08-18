@@ -1,5 +1,14 @@
 import { PostService } from './post.service';
-import { catchError, EMPTY, finalize, map, Observable, switchMap, take, throwError } from 'rxjs';
+import {
+  catchError,
+  EMPTY,
+  finalize,
+  map,
+  Observable,
+  switchMap,
+  take,
+  throwError,
+} from 'rxjs';
 import { Component, inject, OnInit } from '@angular/core';
 import { IPost } from './interfaces/IPost';
 import { TableModule, TablePageEvent } from 'primeng/table';
@@ -9,12 +18,12 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { Router, RouterLink } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
-import { PostEditDialogComponent } from './post-edit-dialog/post-edit-dialog.component';
+import { PostEditDialogComponent } from './components/post-edit-dialog/post-edit-dialog.component';
 import { ContextMenuModule } from 'primeng/contextmenu'; // Импортируем модуль меню
 import { MenuItem } from 'primeng/api';
 import { IPostEditRequest } from './interfaces/IPostEditRequest';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { NotificationService } from '../../services/notification.service';
+import { NotificationService } from '../../core/services/notification.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { IContextMenuTranslations } from '../../interfaces/IContextMenu';
@@ -31,13 +40,14 @@ import { DatePickerModule } from 'primeng/datepicker';
     InputNumberModule,
     ButtonModule,
     TranslatePipe,
-    DatePickerModule
+    DatePickerModule,
   ],
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.scss',
   providers: [DialogService],
 })
 export class PostsComponent implements OnInit {
+
   private router: Router = inject(Router);
   private postService: PostService = inject(PostService);
   private dialogService: DialogService = inject(DialogService);
@@ -111,16 +121,14 @@ export class PostsComponent implements OnInit {
 
     const postId: number = post.id;
 
-    const ref: DynamicDialogRef<PostEditDialogComponent> | null = this.dialogService.open(
-      PostEditDialogComponent,
-      {
+    const ref: DynamicDialogRef<PostEditDialogComponent> | null =
+      this.dialogService.open(PostEditDialogComponent, {
         data: { post },
         header: this.translateService.instant('posts.edit.title'),
         width: '700px',
         closable: true,
         dismissableMask: true,
-      },
-    );
+      });
 
     if (!ref) return;
 
@@ -160,4 +168,5 @@ export class PostsComponent implements OnInit {
     this.first = event.first;
     this.loadPosts(this.rows, this.first);
   }
+  
 }

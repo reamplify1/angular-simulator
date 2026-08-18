@@ -1,4 +1,4 @@
-import { ITour } from "../interfaces/ITour";
+import { ITour } from '../interfaces/ITour';
 
 export const tours: ITour[] = [
   {

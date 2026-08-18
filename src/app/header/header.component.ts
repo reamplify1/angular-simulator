@@ -1,34 +1,50 @@
-import { LocalStorageService } from './../services/local-storage.service';
-import { NotificationService } from './../services/notification.service';
+import { LocalStorageService } from '../core/services/local-storage.service';
+import { NotificationService } from '../core/services/notification.service';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { INavigation } from '../interfaces/INavigation';
 import { DarkModeToggleComponent } from '../toggle-theme-color.component/dark-mode-toggle';
-import { faSun, faMoon, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import {
+  faSun,
+  faMoon,
+  IconDefinition,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ThemeComponent } from '../theme-switcher/theme.component';
-import { ThemeService } from '../services/theme.service';
+import { ThemeService } from '../core/services/theme.service';
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { Observable } from 'rxjs';
 import { AppTheme } from '../../enums/AppTheme';
-import { AuthService } from '../features/auth/services/auth.service';
-import { DATE_FORMAT } from '../tokens/date-format.token';
-import { APP_CONFIG } from '../tokens/app-config.token';
+import { AuthService } from '../core/auth/auth.service';
+import { DATE_FORMAT } from '../core/tokens/date-format.token';
+import { APP_CONFIG } from '../core/tokens/app-config.token';
 import { IAppConfig } from '../interfaces/IAppConfig';
 import { TranslatePipe } from '@ngx-translate/core';
-import { LanguageService } from '../services/language.service';
+import { LanguageService } from '../core/services/language.service';
 import { SelectModule } from 'primeng/select';
 import { ILanguage } from '../features/auth/interfaces/ILanguage';
 
 @Component({
   selector: 'app-header',
-  imports: [FormsModule, RouterLink, AsyncPipe, DatePipe ,RouterLinkActive, SelectModule ,ThemeComponent, DarkModeToggleComponent, FontAwesomeModule, TranslatePipe],
+  imports: [
+    FormsModule,
+    RouterLink,
+    AsyncPipe,
+    DatePipe,
+    RouterLinkActive,
+    SelectModule,
+    ThemeComponent,
+    DarkModeToggleComponent,
+    FontAwesomeModule,
+    TranslatePipe,
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   standalone: true,
 })
 export class HeaderComponent implements OnInit {
+  
   themeService: ThemeService = inject(ThemeService);
   notificationService: NotificationService = inject(NotificationService);
   localStorageService: LocalStorageService = inject(LocalStorageService);
@@ -54,7 +70,8 @@ export class HeaderComponent implements OnInit {
   }
 
   private getLastLoginDate(): Date | null {
-    const date: string | null = this.localStorageService.getItem<string>('last-login');
+    const date: string | null =
+      this.localStorageService.getItem<string>('last-login');
     const result: Date | null = date ? new Date(date) : null;
     return result;
   }

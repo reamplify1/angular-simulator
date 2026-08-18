@@ -1,9 +1,6 @@
 <div class="login-page">
-
   <section class="hero">
-
     <div class="hero-content">
-
       <i class="pi pi-compass hero-icon"></i>
 
       <h1>{{ 'login.hero.title' | translate }}</h1>
@@ -13,7 +10,6 @@
       </p>
 
       <div class="features">
-
         <div class="feature">
           <i class="pi pi-check-circle"></i>
           <span>{{ 'login.hero.features.routes' | translate }}</span>
@@ -28,35 +24,22 @@
           <i class="pi pi-check-circle"></i>
           <span>{{ 'login.hero.features.adventures' | translate }}</span>
         </div>
-
       </div>
-
     </div>
-
   </section>
 
   <section class="login-side">
-
     <p-card class="login-card">
-
       <ng-template pTemplate="header">
-
         <div class="header">
-
           <h2>{{ 'login.form.title' | translate }}</h2>
 
           <p>{{ 'login.form.subtitle' | translate }}</p>
-
         </div>
-
       </ng-template>
 
-      <form
-        [formGroup]="loginForm"
-        (ngSubmit)="onSubmit()">
-
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="field">
-
           <label for="username">
             {{ 'login.form.username' | translate }}
           </label>
@@ -69,13 +52,12 @@
               id="username"
               class="w-full"
               formControlName="username"
-              [placeholder]="'login.form.usernamePlaceholder' | translate">
+              [placeholder]="'login.form.usernamePlaceholder' | translate"
+            />
           </span>
-
         </div>
 
         <div class="field">
-
           <label for="password">
             {{ 'login.form.password' | translate }}
           </label>
@@ -89,9 +71,9 @@
               type="password"
               class="w-full"
               formControlName="password"
-              [placeholder]="'login.form.passwordPlaceholder' | translate">
+              [placeholder]="'login.form.passwordPlaceholder' | translate"
+            />
           </span>
-
         </div>
 
         <p-button
@@ -99,13 +81,10 @@
           label="Войти"
           icon="pi pi-sign-in"
           styleClass="w-full"
-          [disabled]="loginForm.invalid">
+          [disabled]="loginForm.invalid"
+        >
         </p-button>
-
       </form>
-
     </p-card>
-
   </section>
-
 </div>
