@@ -1,9 +1,9 @@
 <div class="user-form-container">
   <form [formGroup]="userForm" class="user-form">
-    <h2 class="form-title">Регистрация</h2>
+    <h2 class="form-title">{{ 'userForm.form.registration' | translate }}</h2>
     <div class="form-section">
       <label>
-        Имя
+        {{ 'userForm.form.name' | translate }}
         <input
           id="name"
           type="text"
@@ -17,67 +17,67 @@
         >
       </label>
       <label>
-        Username
+        {{ 'userForm.form.username' | translate }}
         <input id="username" type="text" formControlName="username" appAnimatedGradient>
       </label>
       <label>
-        Email
+        {{ 'userForm.form.email' | translate }}
         <input id="email" type="email" formControlName="email" appAnimatedGradient>
       </label>
       <label>
-        Телефон
+        {{ 'userForm.form.phone' | translate }}
         <input id="telephone" type="text" formControlName="phone" appAnimatedGradient>
       </label>
       <label>
-        Website
+        {{ 'userForm.form.website' | translate }}
         <input id="website" type="text" formControlName="website" appAnimatedGradient>
       </label>
     </div>
 
     <div formGroupName="address" class="form-section">
-      <h3>Адрес</h3>
+      <h3>{{ 'userForm.form.address.title' | translate }}</h3>
       <label>
-        Город
+        {{ 'userForm.form.address.city' | translate }}
         <input id="address-city" type="text" formControlName="city" appAnimatedGradient>
       </label>
       <label>
-        Улица
+        {{ 'userForm.form.address.street' | translate }}
         <input id="address-street" type="text" formControlName="street" appAnimatedGradient>
       </label>
       <label>
-        Офис
+        {{ 'userForm.form.address.office' | translate }}
         <input id="address-office" type="text" formControlName="suite" appAnimatedGradient>
       </label>
       <label>
-        Индекс
+        {{ 'userForm.form.address.zipcode' | translate }}
         <input id="address-index" type="text" formControlName="zipcode" appAnimatedGradient>
       </label>
 
       <div formGroupName="geo">
-        <h4>Координаты</h4>
+        <h4>{{ 'userForm.form.address.coordinates' | translate }}</h4>
         <label>
-          Geo latitude
+          {{ 'userForm.form.address.latitude' | translate }}
           <input id="latitude" type="text" formControlName="lat" appAnimatedGradient>
         </label>
         <label>
-          Geo longitude
+          {{ 'userForm.form.address.longitude' | translate }}
           <input id="longitude" type="text" formControlName="lng" appAnimatedGradient>
         </label>
       </div>
     </div>
 
     <div formGroupName="company" class="form-section">
-      <h3>Компания</h3>
+      <h3>{{ 'userForm.form.company.title' | translate }}</h3>
       <label>
-        Название
+        {{ 'userForm.form.company.name' | translate }}
         <input id="company-name" type="text" formControlName="name" appAnimatedGradient>
       </label>
       <label>
-        Миссия
+        {{ 'userForm.form.company.mission' | translate }}
         <input id="company-mission" type="text" formControlName="catchPhrase" appAnimatedGradient>
       </label>
       <label>
-        Специализация
+        {{ 'userForm.form.company.specialization' | translate }}
         <input id="company-specialization" type="text" formControlName="bs" appAnimatedGradient>
       </label>
     </div>
@@ -89,7 +89,7 @@
       [disabled]="userForm.invalid"
       appHoverBold
     >
-      Сохранить
+      {{ 'userForm.form.save' | translate }}
     </button>
   </form>
 

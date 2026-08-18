@@ -34,6 +34,6 @@ export class AuthApiService {
   }
 
   getCurrentUser(): Observable<IAuthUser> {
-    return this.http.get<IAuthUser>(`${this.url}/me`);
+    return this.http.get<IAuthUser>(`${ this.url }/me`);
   }
 }

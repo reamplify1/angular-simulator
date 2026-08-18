@@ -5,10 +5,11 @@ import { IUser } from '../interfaces/IUser';
 import type { ToFormControls } from '../types/ToFormControls';
 import { HoverBoldDirective } from '../directives/bold-text.directive';
 import { AnimatedGradientDirective } from '../directives/animated-gradient.directive';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-create',
-  imports: [ReactiveFormsModule, HoverBoldDirective, AnimatedGradientDirective],
+  imports: [ReactiveFormsModule, HoverBoldDirective, AnimatedGradientDirective, TranslatePipe],
   templateUrl: './user-create.component.html',
   styleUrl: './user-create.component.scss',
 })

@@ -3,35 +3,35 @@
   <span class="user-card-name">{{ user.name | uppercase }}</span>
   <span class="user-card-username">@{{ user.username }}</span>
 
-  <span class="user-card__section-title">Контакты</span>
+  <span class="user-card__section-title">{{ 'users.card.contacts' | translate }}</span>
   <div class="user-card__contacts">
     <div class="user-card__info">
-      <span class="user-card__key">Эл.почта:</span>
-      <span class="user-card__key">Телефон:</span>
-      <span class="user-card__key">Веб-сайт:</span>
+      <span class="user-card__key">{{ 'users.card.email' | translate }}</span>
+      <span class="user-card__key">{{ 'users.card.phone' | translate }}</span>
+      <span class="user-card__key">{{ 'users.card.website' | translate }}</span>
     </div>
 
     <div class="user-card__values">
       <span class="user-card__value secondary-color">{{ user.email }}</span>
       <span class="user-card__value">{{ user.phone | phoneFormat : phoneFormat.MASKED }}</span>
-      <span class="user-card__value secondary-color">{{ user.website || 'Неизвестно' }}</span>
+      <span class="user-card__value secondary-color">{{ user.website || ('users.card.unknown' | translate) }}</span>
     </div>
   </div>
 
-  <span class="user-card__section-title">Адрес проживания</span>
+  <span class="user-card__section-title">{{ 'users.card.address' | translate }}</span>
   <div class="user-card__address">
     <div class="user-card__info">
-      <span class="user-card__key">Город:</span>
-      <span class="user-card__key">Улица:</span>
-      <span class="user-card__key">Офис:</span>
-      <span class="user-card__key">Индекс:</span>
-      <span class="user-card__key">Координаты:</span>
+      <span class="user-card__key">{{ 'users.card.city' | translate }}</span>
+      <span class="user-card__key">{{ 'users.card.street' | translate }}</span>
+      <span class="user-card__key">{{ 'users.card.office' | translate }}</span>
+      <span class="user-card__key">{{ 'users.card.zipcode' | translate }}</span>
+      <span class="user-card__key">{{ 'users.card.coordinates' | translate }}</span>
     </div>
 
     <div class="user-card__values">
       <span class="user-card__value">{{ user.address.city }}</span>
       <span class="user-card__value">{{ user.address.street }}</span>
-      <span class="user-card__value">{{ user.address.suite || 'Неизвестно' }}</span>
+      <span class="user-card__value">{{ user.address.suite || ('users.card.unknown' | translate) }}</span>
       <span class="user-card__value">{{ user.address.zipcode }}</span>
 
       <div class="user-card__values-coordinates">
@@ -45,28 +45,28 @@
     </div>
   </div>
 
-  <span class="user-card__section-title">Место работы</span>
+  <span class="user-card__section-title">{{ 'users.card.work' | translate }}</span>
   <div class="user-card__job">
     <div class="user-card__info">
-      <span class="user-card__key">Компания:</span>
-      <span class="user-card__key">Миссия:</span>
+      <span class="user-card__key">{{ 'users.card.company' | translate }}</span>
+      <span class="user-card__key">{{ 'users.card.mission' | translate }}</span>
     </div>
 
     <div class="user-card__values">
       <span class="user-card__value">{{ user.company.name }}</span>
       <span class="user-card__value text-italic">
-        {{ user.company.catchPhrase || 'Неизвестно' }}
+        {{ user.company.catchPhrase || ('users.card.unknown' | translate) }}
       </span>
     </div>
   </div>
 
   <div class="user-card__spec">
     <div class="user-card__info">
-      <span class="user-card__key">Специализация</span>
+      <span class="user-card__key">{{ 'users.card.specialization' | translate }}</span>
     </div>
 
     <div class="user-card__values">
-      <span class="user-card__value">{{ user.company.bs || 'Неизвестно' }}</span>
+      <span class="user-card__value">{{ user.company.bs || ('users.card.unknown' | translate) }}</span>
     </div>
   </div>
   <button
@@ -75,6 +75,6 @@
     (click)="onDelete()"
     appHoverBold
   >
-    Удалить пользователя
+    {{ 'users.card.delete' | translate }}
   </button>
 </div>

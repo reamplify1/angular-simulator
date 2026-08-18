@@ -1,31 +1,30 @@
 <footer class="footer">
   <div class="subscribe">
     <div class="subscribe-text">
-      <span class="section-label">актуально</span>
-      <h2 class="section-title">Получайте полезные рассылки о путешествиях</h2>
+      <span class="section-label">{{ 'footer.label' | translate }}</span>
+      <h2 class="section-title">{{ 'footer.title' | translate }}</h2>
     </div>
     <div class="subscribe-cta">
-      <span class="fs-16">Введите e-mail адрес</span>
+      <span class="fs-16">{{ 'footer.emailLabel' | translate }}</span>
       <div class="subscribe-cta-content">
         <div class="subscribe-input">
           <input id="input-subscribe" type="text" placeholder="name@domain.com">
         </div>
         <div class="subscribe-button">
-          <button id="button-subscribe" class="button button--subscribe">Подписаться на новости</button>
+          <button id="button-subscribe" class="button button--subscribe">{{ 'footer.subscribe' | translate }}</button>
         </div>
       </div>
       <div class="subscribe-cta-info">
-        <span>подписываясь на новости, вы автоматически соглашаетесь с </span><span id="personal-data-span"
-            class="span-underline">условиями обработки персональных данных</span> и <span
-            id="advertising-mailing-span" class="span-underline">правилами рекламных рассылок</span>
+        <span>{{ 'footer.agreement' | translate }}</span><span id="personal-data-span"
+            class="span-underline">{{ 'footer.personalData' | translate }}</span> {{ 'footer.and' | translate }} <span
+            id="advertising-mailing-span" class="span-underline">{{ 'footer.advertising' | translate }}</span>
       </div>
     </div>
   </div>
   <div class="footer-main">
     <div class="footer-section-company">
-      <h4>Компания «РумТибет»</h4>
-      <p>Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард
-        МакКлинток, профессор латыни из колледжа Hampden-Sydney.</p>
+      <h4>{{ 'footer.company' | translate }}</h4>
+      <p>{{ 'footer.companyDescription' | translate }}</p>
       <div class="footer-section-company-contacts">
         <a id="contact-email" class="fs-14">info@domain.com</a>
         <a id="contact-number" class="fs-14">+7 (123) 456-78-90</a>
@@ -38,28 +37,28 @@
       </div>
     </div>
     <div class="footer-section-services">
-      <h4>Наши услуги</h4>
+      <h4>{{ 'footer.services' | translate }}</h4>
       @for (service of servicesInfo; track $index; let i = $index) {
         <div class="footer-section-service">
           <fa-icon [icon]="faAngleRight" class="fa-angle-right"></fa-icon>
-          <span>{{ service }}</span>
+          <span>{{ service | translate}}</span>
         </div>
       }
     </div>
     <div class="footer-section-important-info">
-      <h4>Важно для путешествий</h4>
+      <h4>{{ 'footer.travelInfo' | translate }}</h4>
       @for (info of travelInfo; track $index; let i = $index) {
     <div class="footer-section-important-info-item">
       <fa-icon [icon]="faAngleRight" class="fa-angle-right"></fa-icon>
-      <span>{{ info }}</span>
+      <span>{{ info | translate }}</span>
     </div>
       }
     </div>
   </div>
   <div class="footer-bottom-wrapper">
     <div class="footer-bottom fs-14 container">
-      <span>ИП Константинопольский К.К., 2023</span>
-      <span>Политика обработки персональных данных</span>
+      <span>{{ 'footer.copyright' | translate }}</span>
+      <span>{{ 'footer.privacy' | translate }}</span>
     </div>
   </div>
 </footer>

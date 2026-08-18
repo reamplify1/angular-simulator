@@ -4,31 +4,31 @@
     class="edit-form"
   >
     <div class="field">
-      <label for="title">Заголовок</label>
+      <label for="title">{{ 'posts.edit.titleLabel' | translate }}</label>
       <input
         class="edit-input"
         pInputText
         id="title"
         type="text"
         formControlName="title"
-        placeholder="Введите заголовок поста"
+        [placeholder]="'posts.edit.titlePlaceholder' | translate"
       />
     </div>
 
     <div class="field">
-      <label for="tags">Теги</label>
+      <label for="tags">{{ 'posts.edit.tags' | translate }}</label>
       <input
         class="edit-input"
         pInputText
         id="tags"
         type="text"
         formControlName="tags"
-        placeholder="news, coding, ideas"
+        [placeholder]="'posts.edit.tagsPlaceholder' | translate"
       />
     </div>
 
     <div class="field">
-      <label for="views">Просмотры</label>
+      <label for="views">{{ 'posts.edit.views' | translate }}</label>
 
       <p-inputNumber
         class="edit-input-views"
@@ -46,7 +46,7 @@
 
     <div class="dialog-actions">
       <p-button
-        label="Отмена"
+        [label]="'posts.edit.cancel' | translate"
         severity="secondary"
         [outlined]="true"
         type="button"
@@ -54,7 +54,7 @@
       ></p-button>
 
       <p-button
-        label="Сохранить"
+        [label]="'posts.edit.save' | translate"
         icon="pi pi-check"
         type="submit"
         [disabled]="editForm.invalid"

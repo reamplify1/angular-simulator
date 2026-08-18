@@ -1,28 +1,30 @@
-export const tours = [
+import { ITour } from "../interfaces/ITour";
+
+export const tours: ITour[] = [
   {
     id: 1,
-    title: 'Озеро возле гор',
-    preview: 'романтическое приключение',
+    title: 'home-page.tours.lakeNearMountains.title',
+    preview: 'home-page.tours.lakeNearMountains.preview',
     img: 'popular_tour1',
-    text: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+    text: 'home-page.tours.lakeNearMountains.text',
     price: 480,
     rating: 4.9,
   },
   {
     id: 2,
-    title: 'Ночь в горах',
-    preview: 'в компании друзей',
+    title: 'home-page.tours.nightInMountains.title',
+    preview: 'home-page.tours.nightInMountains.preview',
     img: 'popular_tour2',
-    text: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+    text: 'home-page.tours.nightInMountains.text',
     price: 500,
     rating: 4.5,
   },
   {
     id: 3,
-    title: 'Растяжка в горах',
-    preview: 'для тех, кто заботится о себе',
+    title: 'home-page.tours.mountainStretching.title',
+    preview: 'home-page.tours.mountainStretching.preview',
     img: 'popular_tour3',
-    text: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+    text: 'home-page.tours.mountainStretching.text',
     price: 230,
     rating: 5.0,
   },

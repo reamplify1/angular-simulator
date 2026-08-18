@@ -22,6 +22,9 @@ import { Observable } from 'rxjs';
 import { IAuthUser } from './features/auth/interfaces/IAuthUser';
 import { DATE_FORMAT } from './tokens/date-format.token';
 import { APP_CONFIG } from './tokens/app-config.token';
+import { provideTranslateService } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LanguageService } from './services/language.service';
 
 function getInitialTheme(): Preset {
   const savedTheme: AppTheme | null = localStorage.getItem('app-theme') as AppTheme | null;
@@ -41,9 +44,15 @@ function getInitialTheme(): Preset {
   }
 }
 
-export function initializeApp(authService: AuthService): () => Observable<IAuthUser | null> {
-  return () => authService.initAuth();
-}
+export function initializeApp(
+  authService: AuthService,
+  languageService: LanguageService
+  ): () => Observable<IAuthUser | null> {
+    return () => {
+      languageService.initLanguage();
+      return authService.initAuth();
+    };
+  }
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -51,6 +60,13 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideZoneChangeDetection(),
     provideHttpClient(withInterceptors([loggingInterceptor, errorInterceptor, authInterceptor])),
+
+    provideTranslateService({
+      loader: provideTranslateHttpLoader({
+        prefix: './i18n/',
+        suffix: '.json',
+      }),
+    }),
 
     providePrimeNG({
       theme: {
@@ -63,7 +79,7 @@ export const appConfig: ApplicationConfig = {
     {
       provide: APP_INITIALIZER,
       useFactory: initializeApp,
-      deps: [AuthService],
+      deps: [AuthService, LanguageService],
       multi: true
     },
     {
@@ -82,3 +98,4 @@ export const appConfig: ApplicationConfig = {
     }
   ]
 };
+

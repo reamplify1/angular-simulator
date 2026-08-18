@@ -1,5 +1,5 @@
 import { PostService } from './post.service';
-import { catchError, EMPTY, finalize, Observable, switchMap, take, throwError } from 'rxjs';
+import { catchError, EMPTY, finalize, map, Observable, switchMap, take, throwError } from 'rxjs';
 import { Component, inject, OnInit } from '@angular/core';
 import { IPost } from './interfaces/IPost';
 import { TableModule, TablePageEvent } from 'primeng/table';
@@ -16,7 +16,9 @@ import { IPostEditRequest } from './interfaces/IPostEditRequest';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { NotificationService } from '../../services/notification.service';
 import { HttpErrorResponse } from '@angular/common/http';
-
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { IContextMenuTranslations } from '../../interfaces/IContextMenu';
+import { DatePickerModule } from 'primeng/datepicker';
 @Component({
   selector: 'app-posts',
   imports: [
@@ -28,6 +30,8 @@ import { HttpErrorResponse } from '@angular/common/http';
     InputTextModule,
     InputNumberModule,
     ButtonModule,
+    TranslatePipe,
+    DatePickerModule
   ],
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.scss',
@@ -38,6 +42,7 @@ export class PostsComponent implements OnInit {
   private postService: PostService = inject(PostService);
   private dialogService: DialogService = inject(DialogService);
   private notificationService: NotificationService = inject(NotificationService);
+  private translateService: TranslateService = inject(TranslateService);
 
   posts$: Observable<IPost[]> = this.postService.posts$;
   totalRecords$: Observable<number> = this.postService.totalRecords$;
@@ -49,9 +54,31 @@ export class PostsComponent implements OnInit {
   contextMenuItems: MenuItem[] = [];
   skeletonRows: IPost[] = Array(16).fill({}) as IPost[];
 
+  contextMenuItems$: Observable<MenuItem[]> = this.translateService
+    .stream('posts.contextMenu')
+    .pipe(
+      map((translations: IContextMenuTranslations) => [
+        {
+          label: translations.view,
+          icon: 'pi pi-fw pi-eye',
+          command: () => this.onViewPost(this.selectedPost!.id),
+        },
+        {
+          label: translations.edit,
+          icon: 'pi pi-fw pi-pencil',
+          command: () => this.editPost(this.selectedPost),
+        },
+        {
+          label: translations.delete,
+          icon: 'pi pi-fw pi-trash',
+          styleClass: 'text-red-500',
+          command: () => this.deletePost(this.selectedPost?.id),
+        },
+      ]),
+    );
+
   ngOnInit(): void {
     this.loadPosts(this.rows, 0);
-    this.initContextMenu();
   }
 
   loadPosts(rows: number, skip = 0): void {
@@ -60,27 +87,6 @@ export class PostsComponent implements OnInit {
       .loadPosts(rows, skip)
       .pipe(finalize(() => (this.isLoading = false)))
       .subscribe();
-  }
-
-  private initContextMenu(): void {
-    this.contextMenuItems = [
-      {
-        label: 'Просмотреть',
-        icon: 'pi pi-fw pi-eye',
-        command: () => this.onViewPost(this.selectedPost!.id),
-      },
-      {
-        label: 'Редактировать',
-        icon: 'pi pi-fw pi-pencil',
-        command: () => this.editPost(this.selectedPost),
-      },
-      {
-        label: 'Удалить',
-        icon: 'pi pi-fw pi-trash',
-        styleClass: 'text-red-500',
-        command: () => this.deletePost(this.selectedPost?.id),
-      },
-    ];
   }
 
   onViewPost(id: number): void {
@@ -109,7 +115,7 @@ export class PostsComponent implements OnInit {
       PostEditDialogComponent,
       {
         data: { post },
-        header: 'Редактировать пост',
+        header: this.translateService.instant('posts.edit.title'),
         width: '700px',
         closable: true,
         dismissableMask: true,

@@ -14,19 +14,19 @@ export const advantages: IAdvantage[] = [
   {
     id: 1,
     icon: faPeople,
-    title: 'Опытный гид',
-    text: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+    title: 'home-page.advantages.experiencedGuide.title',
+    text: 'home-page.advantages.experiencedGuide.text',
   },
   {
     id: 2,
     icon: faShield,
-    title: 'Безопасный поход',
-    text: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+    title: 'home-page.advantages.safeHike.title',
+    text: 'home-page.advantages.safeHike.text',
   },
   {
     id: 3,
     icon: faDollar,
-    title: 'Лояльные цены',
-    text: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+    title: 'home-page.advantages.loyalPrices.title',
+    text: 'home-page.advantages.loyalPrices.text',
   },
 ];

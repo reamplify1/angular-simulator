@@ -1,34 +1,32 @@
-export const blogArticles = [
+import { IBlogArticle } from "../interfaces/IBlogArticle";
+
+export const blogArticles: IBlogArticle[] = [
   {
     id: 1,
-    title: 'Красивая Италия, какая она в реальности?',
+    title: 'home-page.blog.article1.title',
     img: 'traveler-blog1',
-    imgAlt: 'Город у моря',
-    text: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+    text: 'home-page.blog.article1.text',
     date: '01/04/2023',
   },
   {
     id: 2,
-    title: 'Долой сомнения! Весь мир открыт для вас!',
+    title: 'home-page.blog.article2.title',
     img: 'traveler-blog2',
-    imgAlt: 'Вид над облаками',
-    text: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации ... независимые способы реализации соответствующих условий активизации ...Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации ... независимые способы реализации соответствующих условий активизации ...',
+    text: 'home-page.blog.article2.text',
     date: '04/06/2023',
   },
   {
     id: 3,
-    title: 'Как подготовиться к путешествию в одиночку? ',
+    title: 'home-page.blog.article3.title',
     img: 'traveler-blog3',
-    imgAlt: 'Одинокий путешественник',
-    text: 'Для современного мира базовый вектор развития предполагает.',
+    text: 'home-page.blog.article3.text',
     date: '12/09/2023',
   },
   {
     id: 4,
-    title: 'Индия ... летим?',
+    title: 'home-page.blog.article3.title',
     img: 'traveler-blog4',
-    imgAlt: 'Тадж Махал в Индии',
-    text: 'Для современного мира базовый.',
+    text: 'home-page.blog.article4.text',
     date: '24/06/2023',
   },
 ];
