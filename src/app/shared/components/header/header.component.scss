@@ -1,13 +1,4 @@
-@use '../../assets/functions' as *;
-
-// :host ::ng-deep .language-select .p-select-label {
-//   font-size: 12px;
-// }
-
-// .language-select {
-//   // width: rem(85);
-//   font-size: rem(12);
-// }
+@use '../../../../assets/functions' as *;
 
 .header {
   position: static;
