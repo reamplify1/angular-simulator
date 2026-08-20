@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { LoaderService } from '../../../core/services/loader.service';
+import { LoaderService } from '../services/loader.service';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
@@ -11,5 +11,5 @@ import { AsyncPipe } from '@angular/common';
 export class LoaderComponent {
 
   loaderService: LoaderService = inject(LoaderService);
-  
+
 }

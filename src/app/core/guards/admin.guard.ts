@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { AuthService } from './auth.service';
-import { IAuthUser } from '../../features/auth/interfaces/IAuthUser';
+import { AuthService } from '../auth/auth.service';
+import { IAuthUser } from '../interfaces/IAuthUser';
 import { NotificationService } from '../services/notification.service';
 import { UserRole } from '../../../enums/UserRole';
 
@@ -20,5 +20,5 @@ export const adminGuard: CanActivateFn = () => {
     'Access denied. Administrator role is required.',
   );
   return router.createUrlTree(['/']);
-  
+
 };

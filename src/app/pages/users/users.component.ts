@@ -7,7 +7,7 @@ import { NotificationService } from '../../core/services/notification.service';
 import { UserCreateComponent } from './components/user-create/user-create.component';
 import { UsersFilterComponent } from './components/search/users-filter.component';
 import { AsyncPipe } from '@angular/common';
-import { LoaderComponent } from '../../shared/components/loader/loader.component';
+import { LoaderComponent } from '../../core/loader/loader.component';
 import { PluralizePipe } from '../../shared/pipes/pluralize.pipe';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 

@@ -7,10 +7,10 @@ import {
   HttpResponse,
 } from '@angular/common/http';
 import { tap } from 'rxjs';
-import { IRequestInfo } from '../../interfaces/IRequestInfo';
+import { IRequestInfo } from '../interfaces/IRequestInfo';
 import { APP_CONFIG } from '../tokens/app-config.token';
 import { inject } from '@angular/core';
-import { IAppConfig } from '../../interfaces/IAppConfig';
+import { IAppConfig } from '../interfaces/IAppConfig';
 
 export const loggingInterceptor: HttpInterceptorFn = (
 
@@ -31,14 +31,14 @@ export const loggingInterceptor: HttpInterceptorFn = (
         if (event instanceof HttpResponse) {
           const duration: string = (performance.now() - startTime).toFixed(2);
           console.log(
-            `[HTTP Success] ${ method }  ${ url } - Status: ${ event.status } (${ duration }ms)`,
+            `[HTTP Success] ${method}  ${url} - Status: ${event.status} (${duration}ms)`,
           );
         }
       },
       error: (error: HttpErrorResponse) => {
         const duration: string = (performance.now() - startTime).toFixed(2);
         console.error(
-          `[HTTP Error] ${ method } ${ url } - Status: ${ error.status } (${ duration }ms)`,
+          `[HTTP Error] ${method} ${url} - Status: ${error.status} (${duration}ms)`,
         );
       },
     }),

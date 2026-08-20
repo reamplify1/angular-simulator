@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { NotificationComponent } from './shared/components/notification/notification.component';
+import { NotificationComponent } from './core/notification/notification.component';
 import { LocalStorageService } from './core/services/local-storage.service';
-import { LoaderComponent } from './shared/components/loader/loader.component';
+import { LoaderComponent } from './core/loader/loader.component';
 import { LoaderService } from './core/services/loader.service';
 
 @Component({

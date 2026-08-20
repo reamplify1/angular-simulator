@@ -1,8 +1,8 @@
-import { INotification } from '../../interfaces/INotification';
+import { INotification } from '../interfaces/INotification';
 import { inject, Injectable } from '@angular/core';
 import { NotificationType } from '../../../enums/NotificationType';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { IAppConfig } from '../../interfaces/IAppConfig';
+import { IAppConfig } from '../interfaces/IAppConfig';
 import { APP_CONFIG } from '../tokens/app-config.token';
 
 @Injectable({

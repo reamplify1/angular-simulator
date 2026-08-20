@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../../../core/auth/auth.service';
-import { ILoginRequest } from '../interfaces/ILoginRequest';
+import { ILoginRequest } from '../../../core/interfaces/ILoginRequest';
 import { Router } from '@angular/router';
 import { catchError, of, tap } from 'rxjs';
 import { NotificationService } from '../../../core/services/notification.service';

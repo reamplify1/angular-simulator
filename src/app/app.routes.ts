@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { postResolver } from './features/posts/post.resolver';
+import { postResolver } from './pages/posts/post.resolver';
 import { authGuard } from './core/auth/auth.guard';
-import { adminGuard } from './core/auth/admin.guard';
+import { adminGuard } from './core/guards/admin.guard';
 
 export const routes: Routes = [
   {
@@ -22,13 +22,13 @@ export const routes: Routes = [
       {
         path: 'users',
         loadComponent: () =>
-          import('./features/users/users.component').then((m) => m.UsersComponent),
+          import('./pages/users/users.component').then((m) => m.UsersComponent),
         canActivate: [authGuard, adminGuard],
       },
       {
         path: 'posts',
         loadComponent: () =>
-          import('./features/posts/posts.component').then(
+          import('./pages/posts/posts.component').then(
             (m) => m.PostsComponent,
           ),
         canActivate: [authGuard, adminGuard],
@@ -36,7 +36,7 @@ export const routes: Routes = [
       {
         path: 'posts/create',
         loadComponent: () =>
-          import('./features/posts/components/post-create/post-create.component').then(
+          import('./pages/posts/components/post-create/post-create.component').then(
             (m) => m.PostCreateComponent,
           ),
         canActivate: [authGuard, adminGuard],
@@ -44,7 +44,7 @@ export const routes: Routes = [
       {
         path: 'posts/:id',
         loadComponent: () =>
-          import('./features/posts/components/post-detail/post-detail.component').then(
+          import('./pages/posts/components/post-detail/post-detail.component').then(
             (m) => m.PostDetailComponent,
           ),
         canActivate: [authGuard, adminGuard],

@@ -15,7 +15,7 @@ import {
   take,
   throwError,
 } from 'rxjs';
-import { IAuthResponse } from '../../features/auth/interfaces/IAuthResponse';
+import { IAuthResponse } from '../interfaces/IAuthResponse';
 
 let isRefreshing = false;
 const refreshTokenSubject: BehaviorSubject<string | null> = new BehaviorSubject<
@@ -39,7 +39,7 @@ export const authInterceptor: HttpInterceptorFn = (
   ): HttpRequest<unknown> => {
     return req.clone({
       setHeaders: {
-        Authorization: `Bearer ${ token }`,
+        Authorization: `Bearer ${token}`,
       },
     });
   };

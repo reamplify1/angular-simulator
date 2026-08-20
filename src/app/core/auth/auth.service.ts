@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { AuthApiService } from './auth-api.service';
-import { ILoginRequest } from '../../features/auth/interfaces/ILoginRequest';
-import { IAuthResponse } from '../../features/auth/interfaces/IAuthResponse';
+import { ILoginRequest } from '../interfaces/ILoginRequest';
+import { IAuthResponse } from '../interfaces/IAuthResponse';
 import {
   BehaviorSubject,
   catchError,
@@ -14,8 +14,8 @@ import {
 } from 'rxjs';
 import { LocalStorageService } from '../services/local-storage.service';
 import { Router } from '@angular/router';
-import { IToken } from '../../features/auth/interfaces/IToken';
-import { IAuthUser } from '../../features/auth/interfaces/IAuthUser';
+import { IToken } from '../interfaces/IToken';
+import { IAuthUser } from '../interfaces/IAuthUser';
 
 @Injectable({
   providedIn: 'root',
@@ -113,5 +113,5 @@ export class AuthService {
     this.localStorageService.removeItem('auth_data');
     this.currentUserSubject.next(null);
   }
-  
+
 }

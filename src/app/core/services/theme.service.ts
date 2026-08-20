@@ -3,7 +3,7 @@ import { PrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import Lara from '@primeuix/themes/lara';
 import Nora from '@primeuix/themes/nora';
-import { customIndigoPreset } from '../../presets/indigo-preset';
+import { customIndigoPreset } from '../presets/indigo-preset';
 import { usePreset } from '@primeuix/themes';
 import { AppTheme } from '../../../enums/AppTheme';
 import { LocalStorageService } from './local-storage.service';
@@ -97,5 +97,5 @@ export class ThemeService {
     this.isDarkModeSubject.next(isDark);
     this.localStorageService.setItem('dark-mode', isDark);
   }
-  
+
 }

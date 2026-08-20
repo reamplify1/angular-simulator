@@ -26,7 +26,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { NotificationService } from '../../core/services/notification.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { IContextMenuTranslations } from '../../interfaces/IContextMenu';
+import { IContextMenuTranslations } from './interfaces/IContextMenu';
 import { DatePickerModule } from 'primeng/datepicker';
 @Component({
   selector: 'app-posts',
@@ -168,5 +168,5 @@ export class PostsComponent implements OnInit {
     this.first = event.first;
     this.loadPosts(this.rows, this.first);
   }
-  
+
 }

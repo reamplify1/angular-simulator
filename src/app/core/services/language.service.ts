@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { TranslateService, Translation } from '@ngx-translate/core';
 import { Language } from '../../../enums/Language';
 import { PrimeNG } from 'primeng/config';
-import { tap } from 'rxjs';
+import { switchMap, tap } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
@@ -19,7 +19,12 @@ export class LanguageService {
 
   constructor() {
     this.translateService.onLangChange
-      .pipe(tap(() => this.setPrimeNgTranslation()))
+      .pipe(
+        switchMap(() => this.translateService.get('primeng')),
+        tap((translations: Translation) => {
+          this.primeng.setTranslation(translations);
+        }),
+      )
       .subscribe();
   }
 
@@ -52,10 +57,4 @@ export class LanguageService {
     this.translateService.use(language);
   }
 
-  private setPrimeNgTranslation(): void {
-    const translations: Translation = this.translateService.instant('primeng');
-
-    this.primeng.setTranslation(translations);
-  }
-  
 }

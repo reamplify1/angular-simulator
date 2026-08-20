@@ -1,10 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { SelectButtonModule } from 'primeng/selectbutton';
-import { ThemeService } from '../../../core/services/theme.service';
-import { AppTheme } from '../../../../enums/AppTheme';
-import type { ITheme } from '../../../interfaces/ITheme';
-
+import { ThemeService } from '../services/theme.service';
+import { AppTheme } from '../../../enums/AppTheme';
+import type { ITheme } from './interfaces/ITheme';
 @Component({
   selector: 'app-theme',
   standalone: true,
