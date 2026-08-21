@@ -1,5 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, DoCheck, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DoCheck,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { tap } from 'rxjs';
 
 @Component({
@@ -7,7 +13,7 @@ import { tap } from 'rxjs';
   imports: [],
   templateUrl: './test.component.html',
   styleUrl: './test.component.scss',
-  changeDetection: ChangeDetectionStrategy.Default
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class TestComponent implements DoCheck, OnInit {
 
@@ -39,11 +45,12 @@ export class TestComponent implements DoCheck, OnInit {
   scenarioHttp() {
     console.log('Сценарий 4: HttpClient');
 
-    this.http.get<{ id: number }>('https://jsonplaceholder.typicode.com/todos/1')
+    this.http
+      .get<{ id: number }>('https://jsonplaceholder.typicode.com/todos/1')
       .pipe(
         tap(() => {
           this.count += 7;
-        })
+        }),
       )
       .subscribe();
   }
@@ -73,6 +80,5 @@ export class TestComponent implements DoCheck, OnInit {
       this.count += 100;
     }, 0);
   }
-
+  
 }
-

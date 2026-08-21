@@ -1,0 +1,109 @@
+import { LocalStorageService } from '../services/local-storage.service';
+import { NotificationService } from '../services/notification.service';
+import { Component, inject, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { INavigation } from './interfaces/INavigation';
+import { DarkModeToggleComponent } from '../toggle-theme-color.component/dark-mode-toggle';
+import {
+  faSun,
+  faMoon,
+  IconDefinition,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ThemeComponent } from '../theme-switcher/theme.component';
+import { ThemeService } from '../services/theme.service';
+import { AsyncPipe, DatePipe } from '@angular/common';
+import { Observable } from 'rxjs';
+import { AppTheme } from '../../../enums/AppTheme';
+import { AuthService } from '../auth/auth.service';
+import { DATE_FORMAT } from '../tokens/date-format.token';
+import { APP_CONFIG } from '../tokens/app-config.token';
+import { IAppConfig } from '../interfaces/IAppConfig';
+import { TranslatePipe } from '@ngx-translate/core';
+import { LanguageService } from '../services/language.service';
+import { SelectModule } from 'primeng/select';
+import { ILanguage } from '../interfaces/ILanguage';
+
+@Component({
+  selector: 'app-header',
+  imports: [
+    FormsModule,
+    RouterLink,
+    AsyncPipe,
+    DatePipe,
+    RouterLinkActive,
+    SelectModule,
+    ThemeComponent,
+    DarkModeToggleComponent,
+    FontAwesomeModule,
+    TranslatePipe,
+  ],
+  templateUrl: './header.component.html',
+  styleUrl: './header.component.scss',
+  standalone: true,
+})
+export class HeaderComponent implements OnInit {
+
+  themeService: ThemeService = inject(ThemeService);
+  notificationService: NotificationService = inject(NotificationService);
+  localStorageService: LocalStorageService = inject(LocalStorageService);
+  private authService: AuthService = inject(AuthService);
+  readonly dateFormat: string = inject(DATE_FORMAT);
+  readonly lastLogin: Date | null = this.getLastLoginDate();
+  readonly appConfig: IAppConfig = inject(APP_CONFIG);
+  readonly languageService: LanguageService = inject(LanguageService);
+
+  readonly companyName: string = this.appConfig.companyName;
+  isDarkMode$: Observable<boolean> = this.themeService.isDarkMode$;
+  faMoon: IconDefinition = faMoon;
+  faSun: IconDefinition = faSun;
+  dateNow: string = new Date().toLocaleString();
+  isDisplayTime = true;
+  clickerCounter = 0;
+
+  isLogged$: Observable<boolean> = this.authService.isAuthenticated$;
+
+  ngOnInit(): void {
+    const theme: AppTheme = this.themeService.getTheme();
+    this.themeService.setTheme(theme);
+  }
+
+  private getLastLoginDate(): Date | null {
+    const date: string | null =
+      this.localStorageService.getItem<string>('last-login');
+    const result: Date | null = date ? new Date(date) : null;
+    return result;
+  }
+
+  onLogout(): void {
+    this.authService.logout();
+  }
+
+  toggleDate(): void {
+    this.isDisplayTime = !this.isDisplayTime;
+  }
+
+  increaseCounter(): void {
+    this.clickerCounter++;
+  }
+
+  decreaseCounter(): void {
+    if (this.clickerCounter > 0) {
+      this.clickerCounter--;
+    }
+  }
+
+  navigation: INavigation[] = [
+    { id: 'main-page', label: 'header.navigation.home', link: '' },
+    { id: 'guide-page', label: 'header.navigation.users', link: 'users' },
+    { id: 'posts-page', label: 'header.navigation.posts', link: 'posts' },
+  ];
+
+  languages: ILanguage[] = [
+    { code: 'ru', label: 'RU' },
+    { code: 'en', label: 'EN' },
+    { code: 'kk', label: 'KZ' },
+  ];
+
+}

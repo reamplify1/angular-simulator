@@ -1,0 +1,336 @@
+<div class="header-hero-wrapper">
+  <div class="background-absolute"></div>
+  <div class="hero__wrapper">
+    <div class="hero__block">
+      <div class="hero__block-title container">
+        <p>{{ 'home-page.heroTitle' | translate }}</p>
+        <p>{{ 'home-page.heroSubtitle' | translate }}</p>
+      </div>
+
+      <div class="hero__filters-wrapper container">
+        <div class="hero__filters">
+          <div class="hero__filters-item">
+            <div class="hero__filters-title fs-16">
+              <select
+                id="hero-select-location"
+                class="location__dropdown"
+                name="location"
+                required
+                [(ngModel)]="location"
+              >
+                <option value="" disabled selected hidden>
+                  {{ 'home-page.tourLocation' | translate }}
+                </option>
+                @for (location of hikeLocations; track location.id) {
+                  <option class="location__dropdown-option">
+                    {{ location.name }}
+                  </option>
+                }
+              </select>
+              <fa-icon [icon]="faChevronDown" class="fa-chevron-down"></fa-icon>
+            </div>
+            <div class="hero__filters-description">
+              <span>{{ 'home-page.selectFromList' | translate }}</span>
+            </div>
+          </div>
+          <div class="hero__filters-item">
+            <div class="hero__filters-title fs-16">
+              <div class="date-input-container">
+                <input
+                  id="hero-date-input"
+                  type="date"
+                  class="date-input"
+                  [class.date-input--transparent]="!date"
+                  name="date"
+                  [placeholder]="'home-page.hikeDate' | translate"
+                  [(ngModel)]="date"
+                  required
+                />
+                @if (!date) {
+                  <span class="date-placeholder-cover">{{
+                    'home-page.hikeDate' | translate
+                  }}</span>
+                }
+              </div>
+            </div>
+            <div class="hero__filters-description">
+              <span>{{ 'home-page.specifyRange' | translate }}</span>
+            </div>
+          </div>
+          <div class="hero__filters-item">
+            <div class="hero__filters-title fs-16">
+              <select
+                id="hero-select-participants"
+                class="location__dropdown"
+                name="participants"
+                required
+                [(ngModel)]="participants"
+              >
+                <option value="" disabled selected hidden>
+                  {{ 'home-page.participants' | translate }}
+                </option>
+                <option value="4" class="location__dropdown-option">4</option>
+                <option value="5" class="location__dropdown-option">5</option>
+                <option value="6+" class="location__dropdown-option">
+                  {{ 'home-page.sixOrMore' | translate }}
+                </option>
+              </select>
+              <fa-icon [icon]="faChevronDown" class="fa-chevron-down"></fa-icon>
+            </div>
+            <div class="hero__filters-description">
+              <span>{{ 'home-page.selectFromList' | translate }}</span>
+            </div>
+          </div>
+          <div class="hero__button-container">
+            <button
+              id="hero-button-search-program"
+              class="hero__button fs-16"
+              (click)="showProgramPrice()"
+              [disabled]="!isFormValid()"
+            >
+              {{ 'home-page.findProgram' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="live-input-container container">
+        <input
+          id="hero-live-input"
+          class="live-input"
+          maxlength="45"
+          type="text"
+          [placeholder]="'home-page.inputPlaceholder' | translate"
+          [(ngModel)]="liveInputText"
+        />
+        <span class="live-output">{{ liveInputText }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="about-tour">
+  <div class="about-tour__img-container">
+    <img
+      id="about-tour__image--main"
+      class="about-tour__image about-tour__image--main"
+      src="images/about-tour2.png"
+      alt="tour picture"
+    />
+    <div class="about-tour__image--overlay">
+      <img
+        id="about-tour__image--secondary"
+        class="about-tour__image about-tour__image--secondary"
+        src="images/about-tour1.png"
+        alt="tour picture"
+      />
+      <div class="about-tour__play-icon">
+        <fa-icon class="fs-22" [icon]="faPlay" />
+      </div>
+    </div>
+  </div>
+  <div class="about-tour__info">
+    <span class="section-label">{{
+      'home-page.aboutTour.label' | translate
+    }}</span>
+    <h2 class="section-title fs-32">
+      {{ 'home-page.aboutTour.title' | translate }}
+    </h2>
+    <p class="section-text fs-18">
+      {{ 'home-page.aboutTour.description' | translate }}
+    </p>
+    <button
+      id="about-tour-program-button"
+      class="button--green"
+      (click)="showInfoMessage()"
+    >
+      {{ 'home-page.aboutTour.programButton' | translate }}
+    </button>
+  </div>
+</section>
+
+<section class="programs-wrapper">
+  <div class="programs container">
+    <div class="programs__info">
+      <span class="programs__info-label section-label">{{
+        'home-page.programs.label' | translate
+      }}</span>
+      <h2 class="programs__info-title section-title fs-32">
+        {{ 'home-page.programs.title' | translate }}
+      </h2>
+      <p class="programs__info-text section-text fs-18">
+        {{ 'home-page.programs.description' | translate }}
+      </p>
+      <div class="programs__info-advantages">
+        <div class="programs__info-advantages-list fs-18">
+          @for (advantage of advantages; track advantage.id) {
+            <div
+              [id]="'advantage-item-' + advantage.id"
+              class="programs__info-advantages-item"
+            >
+              <div class="programs__info-advantages-item-img">
+                <fa-icon class="fs-32" [icon]="advantage.icon" />
+              </div>
+              <div class="programs__info-advantages-item-description fs-18">
+                <span class="programs__info-advantages-item-description-title">
+                  {{ advantage.title | translate }}
+                </span>
+                <p class="programs__info-advantages-item-description-text">
+                  {{ advantage.text | translate }}
+                </p>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+      <button
+        id="programs-price-button"
+        class="button button--green"
+        (click)="showSuccessMessage()"
+      >
+        {{ 'home-page.programCost' | translate }}
+      </button>
+    </div>
+    <div class="programs__images">
+      <img
+        src="images/info-program-img1.png"
+        [alt]="'home-page.images.teaInMountains' | translate"
+      />
+      <img
+        src="images/info-program-img2.png"
+        [alt]="'home-page.images.touristOnMountain' | translate"
+      />
+      <img
+        src="images/info-program-img3.png"
+        [alt]="'home-page.images.snowmobile' | translate"
+      />
+      <img
+        src="images/info-program-img4.png"
+        [alt]="'home-page.images.riverInMountains' | translate"
+      />
+    </div>
+  </div>
+</section>
+
+<section class="popular-tour-wrapper">
+  <span class="section-label">{{
+    'home-page.popularTours.label' | translate
+  }}</span>
+  <h2 class="popular_tour-label section-title">
+    {{ 'home-page.popularTours.title' | translate }}
+  </h2>
+  <div class="popular-tour-container container">
+    @for (tour of tours; track tour.id) {
+      <div [id]="'popular-tour-item-' + tour.id" class="popular-tour-item">
+        <div class="popular-tour-item__rating fs-14">
+          <img
+            [src]="iconPath + 'rating-star-icon' + '.svg'"
+            [alt]="'home-page.ratingStar' | translate"
+          />
+          <span>{{ tour.rating.toFixed(1) }}</span>
+        </div>
+        <img
+          class="popular-tour-item-img"
+          [src]="imgPath + tour.img + '.png'"
+          [alt]="tour.title"
+        />
+        <div class="popular-tour-item__overlay">
+          <div class="popular-tour-item__text">
+            <h5 class="fs-24">{{ tour.title | translate }}</h5>
+            <span class="fs-14">{{ tour.preview | translate }}</span>
+          </div>
+          <div class="popular-tour-item__price">
+            <span>{{ tour.price }} &#36;</span>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+  <button
+    id="popular-tour-button"
+    class="popular-tour-button button button--green"
+    (click)="showRating()"
+  >
+    {{ 'home-page.popularTours.rating' | translate }}
+  </button>
+</section>
+
+<section class="traveler-blog-wrapper">
+  <span class="section-label">{{ 'home-page.blog.label' | translate }}</span>
+  <h2 class="traveler-blog-label section-title">
+    {{ 'home-page.blog.title' | translate }}
+  </h2>
+  <div class="traveler-blog-container container">
+    @for (article of articles; track article.id) {
+      <div [id]="'traveler-blog-' + article.id" class="traveler-blog-item">
+        <div class="traveler-blog-img-wrapper">
+          <img [src]="'images/' + article.img + '.png'" [alt]="article.title" />
+        </div>
+        <div class="blog-info">
+          <a class="blog-info__title fs-24">{{ article.title | translate }}</a>
+          <p class="blog-info__description">
+            {{
+              (article.text | translate).length > 200
+                ? (article.text | translate | slice: 0 : 200) + '...'
+                : (article.text | translate)
+            }}
+          </p>
+          <div class="blog-info__addition">
+            <span class="blog-date">{{ article.date }}</span>
+            <a class="blog-link">{{
+              'home-page.blog.readArticle' | translate
+            }}</a>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+  <button
+    id="traveler-blog-button"
+    class="traveler-blog-button button button--green"
+    (click)="showOtherMaterials()"
+  >
+    {{ 'home-page.blog.otherMaterials' | translate }}
+  </button>
+</section>
+
+<section class="photo-report-wrapper">
+  <div class="photo-report">
+    <span class="section-label">{{
+      'home-page.photoReport.label' | translate
+    }}</span>
+    <h2 class="section-title fs-32">
+      {{ 'home-page.photoReport.title' | translate }}
+    </h2>
+  </div>
+  <div class="photos">
+    <img
+      class="photos-item1"
+      src="images/photo-blog-balloons.png"
+      [alt]="'home-page.photoReport.images.balloons' | translate"
+    />
+    <img
+      src="images/photo-blog-boat.png"
+      [alt]="'home-page.photoReport.images.boat' | translate"
+    />
+    <img
+      src="images/photo-blog-map.png"
+      [alt]="'home-page.photoReport.images.map' | translate"
+    />
+    <img
+      src="images/photo-blog-ocean.png"
+      [alt]="'home-page.photoReport.images.ocean' | translate"
+    />
+    <img
+      class="photos-item5"
+      src="images/photo-blog-canyon.png"
+      [alt]="'home-page.photoReport.images.canyon' | translate"
+    />
+    <img
+      src="images/photo-blog-table.png"
+      [alt]="'home-page.photoReport.images.table' | translate"
+    />
+  </div>
+  <button id="button-pinterest" class="pinterest-button button button--green">
+    {{ 'home-page.photoReport.pinterest' | translate }}
+  </button>
+</section>

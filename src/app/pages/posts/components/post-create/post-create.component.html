@@ -1,0 +1,108 @@
+<div class="create-post-container">
+  <div class="navigation-bar mb-3">
+    <button
+      pButton
+      type="button"
+      [label]="'posts.backAriaLabel' | translate"
+      icon="pi pi-arrow-left"
+      routerLink="/posts"
+      class="p-button-text p-button-secondary"
+      [attr.aria-label]="'posts.backAriaLabel' | translate"
+    ></button>
+  </div>
+
+  <div class="create-post-card p-4">
+    <h2 class="mt-0 mb-4">{{ 'posts.createLabel' | translate }}</h2>
+
+    <form
+      [formGroup]="postForm"
+      (ngSubmit)="onSubmit()"
+      class="flex flex-column gap-3"
+    >
+      <div class="form-field flex flex-column gap-2">
+        <label for="title">{{ 'posts.form.title' | translate }}</label>
+        <input
+          pInputText
+          id="title"
+          formControlName="title"
+          [placeholder]="'posts.form.titlePlaceholder' | translate"
+        />
+      </div>
+
+      <div class="form-field flex flex-column gap-2">
+        <label for="body">{{ 'posts.form.body' | translate }}</label>
+        <textarea
+          pInputTextarea
+          id="body"
+          formControlName="body"
+          rows="6"
+          [placeholder]="'posts.form.bodyPlaceholder' | translate"
+        ></textarea>
+      </div>
+
+      <div class="form-field flex flex-column gap-2">
+        <label for="userId">{{ 'posts.form.userId' | translate }}</label>
+        <input
+          pInputText
+          id="userId"
+          type="number"
+          formControlName="userId"
+          [placeholder]="'posts.form.userIdPlaceholder' | translate"
+        />
+      </div>
+
+      <div class="form-field flex flex-column gap-2">
+        <label for="tags">{{ 'posts.form.tags' | translate }}</label>
+        <input
+          pInputText
+          id="tags"
+          formControlName="tags"
+          [placeholder]="'posts.form.tagsPlaceholder' | translate"
+          я
+        />
+      </div>
+
+      <div class="form-field flex flex-column gap-2">
+        <label for="views">{{ 'posts.form.views' | translate }}</label>
+        <input
+          pInputText
+          id="views"
+          type="number"
+          formControlName="views"
+          [placeholder]="'posts.form.viewsPlaceholder' | translate"
+        />
+      </div>
+
+      <div
+        formGroupName="reactions"
+        class="reactions p-3 surface-ground border-round flex gap-3"
+      >
+        <div class="form-field flex-1 flex flex-column gap-2">
+          <label for="likes">{{ 'posts.form.likes' | translate }}</label>
+          <input pInputText id="likes" type="number" formControlName="likes" />
+        </div>
+
+        <div class="form-field flex-1 flex flex-column gap-2">
+          <label for="dislikes">{{ 'posts.form.dislikes' | translate }}</label>
+          <input
+            pInputText
+            id="dislikes"
+            type="number"
+            formControlName="dislikes"
+          />
+        </div>
+      </div>
+
+      <div class="flex justify-content-end mt-3">
+        <button
+          pButton
+          type="submit"
+          [label]="'posts.form.create' | translate"
+          icon="pi pi-check"
+          [disabled]="postForm.invalid"
+          [attr.aria-label]="'posts.form.createAria' | translate"
+        ></button>
+      </div>
+    </form>
+  </div>
+</div>

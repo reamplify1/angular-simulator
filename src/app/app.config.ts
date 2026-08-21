@@ -10,24 +10,26 @@ import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import Nora from '@primeuix/themes/nora';
 import Lara from '@primeuix/themes/lara';
-import { customIndigoPreset } from './presets/indigo-preset';
+import { customIndigoPreset } from './core/presets/indigo-preset';
 import { Preset } from '@primeuix/themes/types';
 import { AppTheme } from '../enums/AppTheme';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { loggingInterceptor } from './interceptors/logging.interceptor';
-import { errorInterceptor } from './interceptors/error.interceptor';
-import { authInterceptor } from './features/auth/auth.interceptor';
-import { AuthService } from './features/auth/services/auth.service';
+import { loggingInterceptor } from './core/interceptors/logging.interceptor';
+import { errorInterceptor } from './core/interceptors/error.interceptor';
+import { authInterceptor } from './core/auth/auth.interceptor';
+import { AuthService } from './core/auth/auth.service';
 import { Observable } from 'rxjs';
-import { IAuthUser } from './features/auth/interfaces/IAuthUser';
-import { DATE_FORMAT } from './tokens/date-format.token';
-import { APP_CONFIG } from './tokens/app-config.token';
+import { IAuthUser } from './core/interfaces/IAuthUser';
+import { DATE_FORMAT } from './core/tokens/date-format.token';
+import { APP_CONFIG } from './core/tokens/app-config.token';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
-import { LanguageService } from './services/language.service';
+import { LanguageService } from './core/services/language.service';
 
 function getInitialTheme(): Preset {
-  const savedTheme: AppTheme | null = localStorage.getItem('app-theme') as AppTheme | null;
+  const savedTheme: AppTheme | null = localStorage.getItem(
+    'app-theme',
+  ) as AppTheme | null;
 
   switch (savedTheme) {
     case AppTheme.LARA:
@@ -46,20 +48,22 @@ function getInitialTheme(): Preset {
 
 export function initializeApp(
   authService: AuthService,
-  languageService: LanguageService
-  ): () => Observable<IAuthUser | null> {
-    return () => {
-      languageService.initLanguage();
-      return authService.initAuth();
-    };
-  }
+  languageService: LanguageService,
+): () => Observable<IAuthUser | null> {
+  return () => {
+    languageService.initLanguage();
+    return authService.initAuth();
+  };
+}
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideZoneChangeDetection(),
-    provideHttpClient(withInterceptors([loggingInterceptor, errorInterceptor, authInterceptor])),
+    provideHttpClient(
+      withInterceptors([loggingInterceptor, errorInterceptor, authInterceptor]),
+    ),
 
     provideTranslateService({
       loader: provideTranslateHttpLoader({
@@ -80,11 +84,11 @@ export const appConfig: ApplicationConfig = {
       provide: APP_INITIALIZER,
       useFactory: initializeApp,
       deps: [AuthService, LanguageService],
-      multi: true
+      multi: true,
     },
     {
       provide: DATE_FORMAT,
-      useValue: 'dd.MM.yyyy HH:mm'
+      useValue: 'dd.MM.yyyy HH:mm',
     },
     {
       provide: APP_CONFIG,
@@ -93,9 +97,8 @@ export const appConfig: ApplicationConfig = {
         enableLogs: true,
         enableNotifications: true,
         enableTheming: true,
-        sessionTimeout: 30
-      }
-    }
-  ]
+        sessionTimeout: 30,
+      },
+    },
+  ],
 };
-

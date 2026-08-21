@@ -1,10 +1,15 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
-import { ILoginRequest } from '../interfaces/ILoginRequest';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { AuthService } from '../../../core/auth/auth.service';
+import { ILoginRequest } from '../../../core/interfaces/ILoginRequest';
 import { Router } from '@angular/router';
 import { catchError, of, tap } from 'rxjs';
-import { NotificationService } from '../../../services/notification.service';
+import { NotificationService } from '../../../core/services/notification.service';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -22,7 +27,7 @@ import { TranslatePipe } from '@ngx-translate/core';
     InputTextModule,
     IconFieldModule,
     InputIconModule,
-    TranslatePipe
+    TranslatePipe,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -31,7 +36,8 @@ export class LoginComponent {
   private authService: AuthService = inject(AuthService);
   private fb: FormBuilder = inject(FormBuilder);
   private router: Router = inject(Router);
-  private notificationService: NotificationService = inject(NotificationService);
+  private notificationService: NotificationService =
+    inject(NotificationService);
 
   loginForm: FormGroup = this.fb.group({
     username: ['', [Validators.required]],

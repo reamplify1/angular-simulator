@@ -1,15 +1,15 @@
 // @ts-check
 
-const eslint = require("@eslint/js");
-const { defineConfig } = require("eslint/config");
-const tseslint = require("typescript-eslint");
-const angular = require("angular-eslint");
+const eslint = require('@eslint/js');
+const { defineConfig } = require('eslint/config');
+const tseslint = require('typescript-eslint');
+const angular = require('angular-eslint');
 
-const eslintConfigPrettier = require("eslint-config-prettier");
+const eslintConfigPrettier = require('eslint-config-prettier');
 
 module.exports = defineConfig([
   {
-    files: ["**/*.ts"],
+    files: ['**/*.ts'],
 
     extends: [
       eslint.configs.recommended,
@@ -21,90 +21,81 @@ module.exports = defineConfig([
     processor: angular.processInlineTemplates,
 
     rules: {
-      "@angular-eslint/directive-selector": [
-        "error",
+      '@angular-eslint/directive-selector': [
+        'error',
         {
-          type: "attribute",
-          prefix: "app",
-          style: "camelCase",
+          type: 'attribute',
+          prefix: 'app',
+          style: 'camelCase',
         },
       ],
 
-      "@angular-eslint/component-selector": [
-        "error",
+      '@angular-eslint/component-selector': [
+        'error',
         {
-          type: "element",
-          prefix: "app",
-          style: "kebab-case",
+          type: 'element',
+          prefix: 'app',
+          style: 'kebab-case',
         },
       ],
 
-      "no-console": [
-        "warn",
+      'no-console': [
+        'warn',
         {
-          allow: ["warn", "error"],
+          allow: ['warn', 'error'],
         },
       ],
 
       quotes: [
-        "warn",
-        "single",
+        'warn',
+        'single',
         {
           avoidEscape: true,
         },
       ],
 
-      "object-curly-spacing": [
-        "warn",
-        "always",
-      ],
+      'object-curly-spacing': ['warn', 'always'],
 
-      "template-curly-spacing": [
-        "warn",
-        "always",
-      ],
+      'template-curly-spacing': ['warn', 'always'],
 
-      semi: [
-        "warn",
-        "always",
-      ],
+      semi: ['warn', 'always'],
 
-      "lines-between-class-members": [
-        "error",
-        "always",
+      'lines-between-class-members': [
+        'error',
+        'always',
         {
           exceptAfterSingleLine: true,
         },
       ],
 
-      "@typescript-eslint/explicit-member-accessibility": [
-        "error",
+      '@typescript-eslint/explicit-member-accessibility': [
+        'error',
         {
-          accessibility: "no-public",
+          accessibility: 'no-public',
         },
       ],
 
-      "@typescript-eslint/naming-convention": [
-        "error",
+      '@typescript-eslint/naming-convention': [
+        'error',
         {
-          selector: "interface",
-          format: ["PascalCase"],
+          selector: 'interface',
+          format: ['PascalCase'],
           custom: {
-            regex: "^I[A-Z]",
+            regex: '^I[A-Z]',
             match: true,
           },
         },
 
         {
-          selector: "enumMember",
-          format: ["UPPER_CASE"],
+          selector: 'enumMember',
+          format: ['UPPER_CASE'],
         },
       ],
     },
   },
 
   {
-    files: ["**/*.html"],
+    files: ['**/*.html'],
 
     extends: [
       angular.configs.templateRecommended,
@@ -112,9 +103,9 @@ module.exports = defineConfig([
     ],
 
     rules: {
-      "@angular-eslint/template/banana-in-box": "error",
+      '@angular-eslint/template/banana-in-box': 'error',
 
-      "@angular-eslint/template/eqeqeq": "warn",
+      '@angular-eslint/template/eqeqeq': 'warn',
     },
   },
 ]);

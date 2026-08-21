@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ChildComponent } from '../child/child.component';
 
-
 @Component({
   selector: 'app-parent',
   imports: [ChildComponent],
@@ -9,17 +8,17 @@ import { ChildComponent } from '../child/child.component';
   styleUrl: './parent.component.scss',
 })
 export class ParentComponent {
-
+  
   user = {
     name: 'Alex',
-    age: 20
+    age: 20,
   };
 
-// чтобы OnPush в дочернем компоненте заметил изменения, передаем новый объект
+  // чтобы OnPush в дочернем компоненте заметил изменения, передаем новый объект
   changeName() {
     this.user = {
       ...this.user,
-      name: 'Eugene'
+      name: 'Eugene',
     };
   }
 

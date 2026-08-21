@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { NotificationComponent } from './notification/notification.component';
-import { LocalStorageService } from './services/local-storage.service';
-import { LoaderComponent } from './loader/loader.component';
-import { LoaderService } from './services/loader.service';
+import { NotificationComponent } from './core/notification/notification.component';
+import { LocalStorageService } from './core/services/local-storage.service';
+import { LoaderComponent } from './core/loader/loader.component';
+import { LoaderService } from './core/services/loader.service';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +12,7 @@ import { LoaderService } from './services/loader.service';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+
   localStorageService: LocalStorageService = inject(LocalStorageService);
 
   private router: Router = inject(Router);
@@ -30,11 +31,13 @@ export class AppComponent {
 
   saveVisitCount(): void {
     const VISIT_COUNT_KEY = 'visit-count';
-    const visits: string | null = this.localStorageService.getItem(VISIT_COUNT_KEY);
+    const visits: string | null =
+      this.localStorageService.getItem(VISIT_COUNT_KEY);
 
     let count: number = visits ? parseInt(visits) : 0;
     count++;
 
     this.localStorageService.setItem(VISIT_COUNT_KEY, count.toString());
   }
+
 }

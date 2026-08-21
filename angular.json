@@ -4,9 +4,7 @@
   "cli": {
     "packageManager": "npm",
     "analytics": "b1ba38d3-571e-4272-9796-cce7e82bac60",
-    "schematicCollections": [
-      "angular-eslint"
-    ]
+    "schematicCollections": ["angular-eslint"]
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -62,13 +60,8 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles/_normalize.css",
-              "src/styles/styles.scss"
-            ],
-            "polyfills": [
-              "zone.js"
-            ]
+            "styles": ["src/styles/_normalize.css", "src/styles/styles.scss"],
+            "polyfills": ["zone.js"]
           },
           "configurations": {
             "production": {
@@ -112,10 +105,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         }
       }
