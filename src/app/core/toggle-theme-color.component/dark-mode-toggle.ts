@@ -21,4 +21,5 @@ export class DarkModeToggleComponent {
     this.themeService.toggleDarkMode(isDark);
 
   }
+
 }

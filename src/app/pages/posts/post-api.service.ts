@@ -9,6 +9,7 @@ import { IPostEditRequest } from './interfaces/IPostEditRequest';
   providedIn: 'root',
 })
 export class PostApiService {
+
   private http: HttpClient = inject(HttpClient);
 
   private readonly apiUrl: string = 'https://dummyjson.com/posts';
@@ -34,4 +35,5 @@ export class PostApiService {
   deletePost(id: number): Observable<IPost> {
     return this.http.delete<IPost>(`${ this.apiUrl }/${ id }`);
   }
+
 }

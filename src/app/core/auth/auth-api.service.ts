@@ -17,21 +17,21 @@ export class AuthApiService {
   private readonly appConfig: IAppConfig = inject(APP_CONFIG);
 
   login(credentials: ILoginRequest): Observable<IAuthResponse> {
-    return this.http.post<IAuthResponse>(`${this.url}login`, {
+    return this.http.post<IAuthResponse>(`${ this.url }login`, {
       ...credentials,
       expiresInMins: this.appConfig.sessionTimeout,
     });
   }
 
   refreshToken(refreshToken: string): Observable<IAuthResponse> {
-    return this.http.post<IAuthResponse>(`${this.url}refresh`, {
+    return this.http.post<IAuthResponse>(`${ this.url }refresh`, {
       refreshToken,
       expiresInMins: this.appConfig.sessionTimeout,
     });
   }
 
   getCurrentUser(): Observable<IAuthUser> {
-    return this.http.get<IAuthUser>(`${this.url}/me`);
+    return this.http.get<IAuthUser>(`${ this.url }/me`);
   }
 
 }

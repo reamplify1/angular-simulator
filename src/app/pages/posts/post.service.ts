@@ -12,6 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
   providedIn: 'root',
 })
 export class PostService {
+
   private postApiService: PostApiService = inject(PostApiService);
   private notificationService: NotificationService = inject(NotificationService);
   private loaderService: LoaderService = inject(LoaderService);
@@ -69,4 +70,5 @@ export class PostService {
       }),
     );
   }
+
 }

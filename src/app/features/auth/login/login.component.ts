@@ -33,6 +33,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
+
   private authService: AuthService = inject(AuthService);
   private fb: FormBuilder = inject(FormBuilder);
   private router: Router = inject(Router);
@@ -62,4 +63,5 @@ export class LoginComponent {
       )
       .subscribe();
   }
+
 }

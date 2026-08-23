@@ -21,6 +21,8 @@ module.exports = defineConfig([
     processor: angular.processInlineTemplates,
 
     rules: {
+      'padded-blocks': ['error', { classes: 'always' }],
+
       '@angular-eslint/directive-selector': [
         'error',
         {
