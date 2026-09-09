@@ -3,7 +3,8 @@
     "navigation": {
       "home": "Home",
       "users": "Users",
-      "posts": "Posts"
+      "posts": "Posts",
+      "products": "Products"
     },
     "consultation": "Consultation",
     "login": "Log in",
@@ -344,5 +345,72 @@
 
     "firstDayOfWeek": 0,
     "dateFormat": "mm/dd/yy"
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "backToShopping": "Back to shopping",
+
+    "empty": {
+      "title": "Your cart is empty",
+      "description": "Add some products to your cart."
+    },
+
+    "summary": {
+      "title": "Order Summary",
+      "items": "Items",
+      "subtotal": "Subtotal",
+      "tax": "Tax",
+      "total": "Total"
+    },
+
+    "checkout": "Checkout",
+    "clear": "Clear cart",
+
+    "notifications": {
+      "checkoutSuccess": "Order placed successfully",
+      "addedToCart": "\"{{title}}\" successfully added to cart"
+    }
+  },
+  "productDetails": {
+    "backToProducts": "Back to products",
+    "goToCart": "Go to cart",
+    "loading": "Loading product...",
+    "error": {
+      "title": "Something went wrong",
+      "description": "Unable to load this product."
+    },
+    "brand": "Brand",
+    "inStock": "In stock",
+    "addToCart": "Add to cart",
+    "addedToCart": "Product \"{{ title }}\" was successfully added to cart"
+  },
+  "products": {
+    "title": "Products",
+    "cart": "Cart",
+    "search": "Search products",
+    "sortBy": "Sort by",
+    "resetFilters": "Reset filters",
+    "somethingWentWrong": "Something went wrong",
+    "loadError": "Unable to load products. Please try again.",
+    "notFound": "Products not found",
+    "changeSearch": "Try changing your search or filters",
+    "totalProducts": "Total products",
+
+    "filters": {
+      "allCategories": "All categories",
+      "ascending": "Ascending",
+      "descending": "Descending",
+      "title": "Title",
+      "price": "Price",
+      "rating": "Rating",
+      "stock": "Stock"
+    }
+  },
+  "notifications": {
+    "success": "Success",
+    "error": "Error",
+    "warn": "Warning",
+    "info": "Info",
+    "checkoutSuccess": "Order placed successfully"
   }
 }

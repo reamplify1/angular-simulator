@@ -3,7 +3,8 @@
     "navigation": {
       "home": "Басты бет",
       "users": "Пайдаланушылар",
-      "posts": "Посттар"
+      "posts": "Посттар",
+      "products": "Өнімдер"
     },
     "consultation": "Кеңес алу",
     "login": "Кіру",
@@ -345,5 +346,72 @@
 
     "firstDayOfWeek": 1,
     "dateFormat": "dd.mm.yy"
+  },
+  "cart": {
+    "title": "Себет",
+    "backToShopping": "Сатып алуға оралу",
+
+    "empty": {
+      "title": "Себет бос",
+      "description": "Себетке тауарлар қосыңыз."
+    },
+
+    "summary": {
+      "title": "Тапсырыс қорытындысы",
+      "items": "Тауарлар",
+      "subtotal": "Аралық сома",
+      "tax": "Салық",
+      "total": "Барлығы"
+    },
+
+    "checkout": "Тапсырыс беру",
+    "clear": "Себетті тазалау",
+
+    "notifications": {
+      "checkoutSuccess": "Тапсырыс сәтті рәсімделді",
+      "addedToCart": "«{{title}}» себетке сәтті қосылды"
+    }
+  },
+  "productDetails": {
+    "backToProducts": "Тауарларға оралу",
+    "goToCart": "Себетке өту",
+    "loading": "Тауар жүктелуде...",
+    "error": {
+      "title": "Бірдеңе дұрыс болмады",
+      "description": "Бұл тауарды жүктеу мүмкін болмады."
+    },
+    "brand": "Бренд",
+    "inStock": "Қоймада бар",
+    "addToCart": "Себетке қосу",
+    "addedToCart": "«{{title}}» тауары себетке сәтті қосылды"
+  },
+  "products": {
+    "title": "Тауарлар",
+    "cart": "Себет",
+    "search": "Тауарларды іздеу",
+    "sortBy": "Сұрыптау",
+    "resetFilters": "Сүзгілерді тазалау",
+    "somethingWentWrong": "Бірдеңе дұрыс болмады",
+    "loadError": "Тауарларды жүктеу мүмкін болмады. Қайталап көріңіз.",
+    "notFound": "Тауарлар табылмады",
+    "changeSearch": "Іздеу немесе сүзгілерді өзгертіп көріңіз",
+    "totalProducts": "Барлық тауарлар",
+
+    "filters": {
+      "allCategories": "Барлық санаттар",
+      "ascending": "Өсу бойынша",
+      "descending": "Кему бойынша",
+      "title": "Атауы",
+      "price": "Бағасы",
+      "rating": "Рейтинг",
+      "stock": "Қоймадағы саны"
+    }
+  },
+  "notifications": {
+    "success": "Сәтті",
+    "error": "Қате",
+    "warn": "Ескерту",
+    "info": "Ақпарат",
+    "checkoutSuccess": "Тапсырыс сәтті рәсімделді"
   }
 }

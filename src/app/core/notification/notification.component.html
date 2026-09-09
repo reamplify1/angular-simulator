@@ -9,7 +9,9 @@
       </div>
 
       <div class="notification-description-container">
-        <h4 class="fs-16">{{ notification.type }}</h4>
+        <h4 class="fs-16">
+          {{ 'notifications.' + notification.type.toLowerCase() | translate }}
+        </h4>
         <span class="fs-14">{{ notification.text }}</span>
       </div>
       <div class="close-message-icon-container">

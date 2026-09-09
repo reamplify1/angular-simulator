@@ -1,0 +1,84 @@
+<div class="products">
+  <h1>{{ 'products.title' | translate }}</h1>
+
+  <p-button
+    [label]="'products.cart' | translate"
+    icon="pi pi-shopping-cart"
+    (onClick)="goToCart()"
+  />
+
+  <div class="search-filter-group">
+    <input
+      pInputText
+      type="text"
+      [placeholder]="'products.search' | translate"
+      (input)="onSearch($event)"
+    />
+
+    <p-select
+      [ngModel]="category()"
+      [options]="categoryOptions()"
+      optionLabel="name"
+      optionValue="slug"
+      (onChange)="onCategoryChange($event)"
+    />
+
+    <p-select
+      [options]="sortOptions()"
+      [ngModel]="sortBy()"
+      optionLabel="label"
+      optionValue="value"
+      [placeholder]="'products.sortBy' | translate"
+      (onChange)="onSortByChange($event)"
+    />
+
+    <p-select
+      [options]="sortOrderOptions()"
+      [ngModel]="sortOrder()"
+      optionLabel="label"
+      optionValue="value"
+      (onChange)="onSortOrderChange($event)"
+    ></p-select>
+
+    <p-button
+      [label]="'products.resetFilters' | translate"
+      (onClick)="onResetFilters()"
+    />
+
+  </div>
+
+  <div class="products-grid">
+    @if (loading()) {
+      @for (item of skeletonItems; track $index) {
+        <app-product-card-skeleton />
+      }
+    } @else if (error()) {
+      <div class="products-empty">
+        <h2>{{ 'products.somethingWentWrong' | translate }}</h2>
+        <p>{{ 'products.loadError' | translate }}</p>
+      </div>
+    } @else if (products().length === 0) {
+      <div class="products-empty">
+        <h2>{{ 'products.notFound' | translate }}</h2>
+        <p>{{ 'products.changeSearch' | translate }}</p>
+      </div>
+    } @else {
+      @for (product of products(); track product.id) {
+        <app-product-card [product]="product" />
+      }
+    }
+  </div>
+
+  <p-paginator
+    [first]="(page() - 1) * limit()"
+    [rows]="limit()"
+    [totalRecords]="totalProducts()"
+    [rowsPerPageOptions]="[5, 10, 20]"
+    (onPageChange)="onPageChange($event)"
+  ></p-paginator>
+
+  <p class="products-count">
+    {{ 'products.totalProducts' | translate }}: {{ totalProducts() }}
+  </p>
+
+</div>
