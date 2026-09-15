@@ -1,4 +1,4 @@
-export interface IProductsFilters {
+export interface IProductsState {
   category: string;
   sortBy: string;
   sortOrder: 'asc' | 'desc';

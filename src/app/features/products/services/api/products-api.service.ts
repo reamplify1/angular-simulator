@@ -15,15 +15,27 @@ export class ProductsApiService {
   private readonly apiUrl: string = 'https://dummyjson.com/products';
 
   getProducts(params: IProductsParams): Observable<IProductsResponse> {
+  const url: string = this.getProductsUrl(params);
+  const httpParams: HttpParams = this.getProductsParams(params);
 
-    let url: string = this.apiUrl;
+  return this.http.get<IProductsResponse>(url, {
+    params: httpParams,
+  });
+}
 
+  private getProductsUrl(params: IProductsParams): string {
     if (params.search) {
-      url = `${ this.apiUrl }/search`;
-    } else if (params.category) {
-      url = `${ this.apiUrl }/category/${ params.category }`;
+      return `${ this.apiUrl }/search`;
     }
 
+    if (params.category) {
+      return `${ this.apiUrl }/category/${ params.category }`;
+    }
+
+    return this.apiUrl;
+  }
+
+  private getProductsParams(params: IProductsParams): HttpParams {
     let httpParams: HttpParams = new HttpParams()
       .set('limit', params.limit)
       .set('skip', params.skip);
@@ -33,13 +45,12 @@ export class ProductsApiService {
     }
 
     if (params.sortBy) {
-      httpParams = httpParams.set('sortBy', params.sortBy);
-      httpParams = httpParams.set('order', params.sortOrder);
+      httpParams = httpParams
+        .set('sortBy', params.sortBy)
+        .set('order', params.sortOrder);
     }
 
-    return this.http.get<IProductsResponse>(url, {
-      params: httpParams,
-    });
+    return httpParams;
   }
 
   getProductById(id: number): Observable<IProduct> {
@@ -51,7 +62,3 @@ export class ProductsApiService {
   }
 
 }
-
-//search → /products/search?q=...
-//category → /products/category/...
-//обычный список → /products

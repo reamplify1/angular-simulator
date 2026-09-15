@@ -1,5 +1,5 @@
 import { FormsModule } from '@angular/forms';
-import { Component, computed, inject, Signal } from '@angular/core';
+import { Component, computed, inject, ResourceRef, Signal } from '@angular/core';
 import { ProductsService } from '../services/products.service';
 import { IProduct } from '../interfaces/IProduct';
 import { TableModule } from 'primeng/table';
@@ -15,6 +15,7 @@ import { ProductCardSkeletonComponent } from '../product-card-skeleton/product-c
 import { Router } from '@angular/router';
 import { LangChangeEvent, TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { IProductsResponse } from '../interfaces/IProductResponse';
 
 @Component({
   selector: 'app-products-list',
@@ -32,21 +33,29 @@ export class ProductsListComponent {
 
   readonly products: Signal<IProduct[]> = this.productsService.products;
 
+  readonly productsResource: ResourceRef<IProductsResponse | undefined> = this.productsService.productsResource;
+
   readonly page: Signal<number> = this.productsService.page;
   readonly limit: Signal<number> = this.productsService.limit;
   readonly totalProducts: Signal<number> = this.productsService.totalProducts;
   readonly categories: Signal<ICategory[]> = this.productsService.categories;
-  readonly loading: Signal<boolean> = this.productsService.loading;
+  readonly search: Signal<string> = this.productsService.search;
+  readonly sortBy: Signal<string> = this.productsService.sortBy;
+  readonly sortOrder: Signal<'asc' | 'desc'> = this.productsService.sortOrder;
 
   readonly skeletonItems: unknown[] = Array.from({ length: 10 });
-  readonly error: Signal<boolean> = this.productsService.error;
 
   readonly currentLanguage: Signal<LangChangeEvent | undefined> = toSignal(this.translateService.onLangChange);
+
+  isResetFilterButtonDisabled = computed(() => {
+    const isSortOrder = this.sortOrder() !== 'asc';
+    return !(this.search() || this.category() || isSortOrder || this.sortBy());
+  });
 
   onSearch(event: Event): void {
     const input: HTMLInputElement = event.target as HTMLInputElement;
 
-    this.productsService.setSearch(input.value);
+    this.productsService.setSearchInput(input.value);
   }
 
   onPageChange(event: PaginatorState): void {
@@ -72,7 +81,7 @@ export class ProductsListComponent {
         ),
         slug: '',
       },
-      ...this.categories().map((category) => ({
+      ...this.categories().map((category: ICategory) => ({
         name: category.name,
         slug: category.slug,
       })),
@@ -104,9 +113,6 @@ export class ProductsListComponent {
     ];
   });
 
-  readonly sortBy: Signal<string> = this.productsService.sortBy;
-  readonly sortOrder: Signal<'asc' | 'desc'> = this.productsService.sortOrder;
-
   onSortByChange(event: SelectChangeEvent): void {
     this.productsService.setSortBy(
       event.value,
@@ -114,30 +120,24 @@ export class ProductsListComponent {
     );
   }
 
-  readonly sortOrderOptions: Signal<{ label: string; value: string }[]> =
+  readonly sortOrderOptions: Signal<ISortOptions[]> =
     computed(() => {
       this.currentLanguage();
 
       return [
         {
-          label: this.translateService.instant(
-            'products.filters.ascending',
-          ),
+          label: this.translateService.instant('products.filters.ascending'),
           value: 'asc',
         },
         {
-          label: this.translateService.instant(
-            'products.filters.descending',
-          ),
+          label: this.translateService.instant('products.filters.descending'),
           value: 'desc',
         },
       ];
     });
 
   onSortOrderChange(event: SelectChangeEvent): void {
-    this.productsService.setSortBy(this.sortBy(),
-      event.value
-    );
+    this.productsService.setSortBy(this.sortBy(), event.value);
   }
 
   onResetFilters(): void {
@@ -148,4 +148,4 @@ export class ProductsListComponent {
     this.router.navigate(['/products/cart']);
   }
 
-  }
+}

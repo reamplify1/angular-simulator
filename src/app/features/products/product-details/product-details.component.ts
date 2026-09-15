@@ -24,6 +24,7 @@ export class ProductDetailsComponent {
 
   readonly Math: Math = Math;
   readonly product: IProduct = this.route.snapshot.data['product'];
+
   readonly selectedImage: WritableSignal<string> = signal<string>('');
 
   readonly mainImage: Signal<string> = computed(() => {

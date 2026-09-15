@@ -7,6 +7,4 @@ import { SkeletonModule } from 'primeng/skeleton';
   templateUrl: './product-card-skeleton.component.html',
   styleUrl: './product-card-skeleton.component.scss',
 })
-export class ProductCardSkeletonComponent {
-
-}
+export class ProductCardSkeletonComponent {}

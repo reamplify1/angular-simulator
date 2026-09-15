@@ -395,6 +395,8 @@
     "notFound": "Products not found",
     "changeSearch": "Try changing your search or filters",
     "totalProducts": "Total products",
+    "inStock": "In Stock",
+    "outOfStock": "Out of Stock",
 
     "filters": {
       "allCategories": "All categories",

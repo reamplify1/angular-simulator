@@ -1,13 +1,13 @@
-import { computed, inject, Injectable, signal, Signal, WritableSignal } from '@angular/core';
+import { computed, inject, Injectable, ResourceRef, signal, Signal, WritableSignal } from '@angular/core';
 import { IProduct } from '../interfaces/IProduct';
 import { ProductsApiService } from './api/products-api.service';
 import { IProductsParams } from '../interfaces/IProductParams';
-import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { catchError, combineLatest, debounceTime, finalize, map, Observable, of, switchMap, tap } from 'rxjs';
+import { rxResource, toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { catchError, debounceTime, distinctUntilChanged, of, switchMap } from 'rxjs';
 import { IProductsResponse } from '../interfaces/IProductResponse';
 import { ICategory } from '../interfaces/ICategory';
+import { IProductsState } from '../interfaces/IProductsState';
 import { HttpErrorResponse } from '@angular/common/http';
-import { IProductsFilters } from '../interfaces/IProductFilters';
 
 @Injectable({
   providedIn: 'root',
@@ -15,115 +15,87 @@ import { IProductsFilters } from '../interfaces/IProductFilters';
 export class ProductsService {
 
   private readonly productsApiService: ProductsApiService = inject(ProductsApiService);
-  private readonly _loading: WritableSignal<boolean> = signal(true);
-  readonly loading: Signal<boolean> = this._loading.asReadonly();
-  private readonly _error: WritableSignal<boolean> = signal(false);
-  readonly error: Signal<boolean> = this._error.asReadonly();
-
-  private readonly _filters: WritableSignal<IProductsFilters> = signal({
-    category: '',
-    sortBy: '',
-    sortOrder: 'asc',
-    limit: 20,
-    page: 1,
-  });
-
-  readonly filters$: Observable<IProductsFilters> = toObservable(this._filters);
-
-  readonly category: Signal<string> = computed(() => this._filters().category);
-  readonly sortBy: Signal<string> = computed(() => this._filters().sortBy);
-
-  readonly sortOrder: Signal<'asc' | 'desc'> = computed(
-    () => this._filters().sortOrder,
-  );
-
-  readonly limit: Signal<number> = computed(() => this._filters().limit);
-  readonly page: Signal<number> = computed(() => this._filters().page);
-  readonly skip: Signal<number> = computed(
-    () => (this.page() - 1) * this.limit(),
-  );
 
   private readonly _searchInput: WritableSignal<string> = signal('');
 
-  readonly searchInput$: Observable<string> = toObservable(
-    this._searchInput,
-  ).pipe(
-    debounceTime(300),
-  );
+  private readonly _state: WritableSignal<IProductsState> = signal<IProductsState>({
+      category: '',
+      sortBy: '',
+      sortOrder: 'asc',
+      limit: 20,
+      page: 1,
+    });
 
-  readonly params$: Observable<IProductsParams> = combineLatest([
-    this.searchInput$,
-    this.filters$,
-  ]).pipe(
-    map(([search, filters]) => ({
-      search,
-      category: filters.category,
-      sortBy: filters.sortBy,
-      sortOrder: filters.sortOrder,
-      limit: filters.limit,
-      skip: (filters.page - 1) * filters.limit,
-    })),
-  );
-
-  readonly productsResponse: Signal<IProductsResponse> = toSignal(
-    this.params$.pipe(
-      tap(() => {
-        this._loading.set(true);
-        this._error.set(false);
-      }),
-
-      switchMap((params: IProductsParams) => {
-        return this.productsApiService.getProducts(params).pipe(
-          catchError((error: HttpErrorResponse) => {
-            console.error('Products request error:', error);
-            this._error.set(true);
-
-            return of({
-              products: [],
-              total: 0,
-              skip: 0,
-              limit: params.limit,
-            });
-          }),
-
-          finalize(() => this._loading.set(false)),
-        );
-      }),
+  readonly debouncedSearch: Signal<string> = toSignal(
+    toObservable(this._searchInput).pipe(
+      switchMap((search) =>
+        search === ''
+          ? of('')
+          : of(search).pipe(debounceTime(300)),
+      ),
+      distinctUntilChanged(),
     ),
-    {
-      initialValue: {
-        products: [],
-        total: 0,
-        skip: 0,
-        limit: 10,
-      },
-    },
+    { initialValue: '' },
   );
+
+  readonly category: Signal<string> = computed(() => this._state().category);
+
+  readonly sortBy: Signal<string> = computed(() => this._state().sortBy);
+
+  readonly sortOrder: Signal<'asc' | 'desc'> = computed(() => this._state().sortOrder);
+
+  readonly limit: Signal<number> = computed(() => this._state().limit);
+
+  readonly page: Signal<number> = computed(() => this._state().page);
+
+  readonly search: Signal<string> = this._searchInput.asReadonly();
+
+  readonly skip: Signal<number> = computed(() => (this.page() - 1) * this.limit());
+
+  readonly params: Signal<IProductsParams> = computed(() => {
+    const state: IProductsState = this._state();
+
+    return {
+      search: this.debouncedSearch(),
+      category: state.category,
+      sortBy: state.sortBy,
+      sortOrder: state.sortOrder,
+      limit: state.limit,
+      skip: (state.page - 1) * state.limit,
+    };
+  });
+
+  readonly productsResource: ResourceRef<IProductsResponse | undefined> = rxResource({
+    params: () => this.params(),
+
+    stream: ({ params }) => {
+      return this.productsApiService.getProducts(params);
+    },
+  });
 
   readonly products: Signal<IProduct[]> = computed(
-    () => this.productsResponse().products,
+    () => this.productsResource.value()?.products ?? [],
   );
-
 
   readonly totalProducts: Signal<number> = computed(
-    () => this.productsResponse().total,
+    () => this.productsResource.value()?.total ?? 0,
   );
 
-  setSearch(search: string): void {
+  setSearchInput(search: string): void {
     this._searchInput.set(search);
   }
 
   setCategory(category: string): void {
-    this._filters.update((filters: IProductsFilters) => ({
-      ...filters,
+    this._state.update((state: IProductsState) => ({
+      ...state,
       category,
       page: 1,
     }));
   }
 
   setSortBy(sortBy: string, sortOrder: 'asc' | 'desc'): void {
-    this._filters.update((filters: IProductsFilters) => ({
-      ...filters,
+    this._state.update((state: IProductsState) => ({
+      ...state,
       sortBy,
       sortOrder,
       page: 1,
@@ -131,15 +103,15 @@ export class ProductsService {
   }
 
   setPage(page: number): void {
-    this._filters.update((filters: IProductsFilters) => ({
-      ...filters,
+    this._state.update((state: IProductsState) => ({
+      ...state,
       page,
     }));
   }
 
   setLimit(limit: number): void {
-    this._filters.update((filters: IProductsFilters) => ({
-      ...filters,
+    this._state.update((state: IProductsState) => ({
+      ...state,
       limit,
       page: 1,
     }));
@@ -147,7 +119,7 @@ export class ProductsService {
 
   readonly categories: Signal<ICategory[]> = toSignal(
     this.productsApiService.getCategories().pipe(
-      catchError((error) => {
+      catchError((error: HttpErrorResponse) => {
         console.error('Categories request error:', error);
         return of([]);
       }),
@@ -158,15 +130,15 @@ export class ProductsService {
   );
 
   resetFilters(): void {
-    this._filters.set({
+    this._searchInput.set('');
+
+    this._state.set({
       category: '',
       sortBy: '',
       sortOrder: 'asc',
       limit: 10,
       page: 1,
     });
-
-    this._searchInput.set('');
   }
 
 }

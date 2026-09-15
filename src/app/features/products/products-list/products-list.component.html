@@ -1,14 +1,12 @@
 <div class="products">
   <h1>{{ 'products.title' | translate }}</h1>
 
-  <p-button
-    [label]="'products.cart' | translate"
-    icon="pi pi-shopping-cart"
-    (onClick)="goToCart()"
-  />
+  <p-button id="go-to-cart" [label]="'products.cart' | translate" icon="pi pi-shopping-cart" (onClick)="goToCart()" />
 
   <div class="search-filter-group">
     <input
+      id="product-search"
+      [value]="search()"
       pInputText
       type="text"
       [placeholder]="'products.search' | translate"
@@ -16,6 +14,7 @@
     />
 
     <p-select
+      id="category-filter"
       [ngModel]="category()"
       [options]="categoryOptions()"
       optionLabel="name"
@@ -24,6 +23,7 @@
     />
 
     <p-select
+      id="sort-by"
       [options]="sortOptions()"
       [ngModel]="sortBy()"
       optionLabel="label"
@@ -33,6 +33,7 @@
     />
 
     <p-select
+      id="sort-order"
       [options]="sortOrderOptions()"
       [ngModel]="sortOrder()"
       optionLabel="label"
@@ -40,19 +41,15 @@
       (onChange)="onSortOrderChange($event)"
     ></p-select>
 
-    <p-button
-      [label]="'products.resetFilters' | translate"
-      (onClick)="onResetFilters()"
-    />
-
+    <p-button id="reset-filters" [disabled]="isResetFilterButtonDisabled()" [label]="'products.resetFilters' | translate" (onClick)="onResetFilters()" />
   </div>
 
   <div class="products-grid">
-    @if (loading()) {
+    @if (productsResource.isLoading()) {
       @for (item of skeletonItems; track $index) {
         <app-product-card-skeleton />
       }
-    } @else if (error()) {
+    } @else if (productsResource.error()) {
       <div class="products-empty">
         <h2>{{ 'products.somethingWentWrong' | translate }}</h2>
         <p>{{ 'products.loadError' | translate }}</p>
@@ -70,15 +67,14 @@
   </div>
 
   <p-paginator
+    id="products-paginator"
     [first]="(page() - 1) * limit()"
     [rows]="limit()"
     [totalRecords]="totalProducts()"
     [rowsPerPageOptions]="[5, 10, 20]"
     (onPageChange)="onPageChange($event)"
-  ></p-paginator>
+  >
+  </p-paginator>
 
-  <p class="products-count">
-    {{ 'products.totalProducts' | translate }}: {{ totalProducts() }}
-  </p>
-
+  <p class="products-count">{{ 'products.totalProducts' | translate }}: {{ totalProducts() }}</p>
 </div>

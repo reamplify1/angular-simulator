@@ -15,9 +15,7 @@ export class CartApiService {
   private readonly apiUrl: string = 'https://dummyjson.com/carts';
 
   getCartByUser(userId: number): Observable<ICartsResponse> {
-    return this.http.get<ICartsResponse>(
-      `${ this.apiUrl }/user/${ userId }`,
-    );
+    return this.http.get<ICartsResponse>(`${ this.apiUrl }/user/${ userId }`);
   }
 
   createCart(userId: number, products: ICartProduct[]): Observable<ICart> {

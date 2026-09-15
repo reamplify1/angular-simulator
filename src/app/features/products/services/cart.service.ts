@@ -61,7 +61,8 @@ export class CartService {
       ...items,
       {
         product,
-        quantity: 1,     },
+        quantity: 1
+      }
     ]);
   }
 
@@ -83,7 +84,7 @@ export class CartService {
   decreaseQuantity(productId: number): void {
     this._items.update((items: ICartItem[]) => {
       return items
-        .map((item) => {
+        .map((item: ICartItem) => {
           if (item.product.id === productId) {
             return {
               ...item,

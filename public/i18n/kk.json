@@ -396,6 +396,8 @@
     "notFound": "Тауарлар табылмады",
     "changeSearch": "Іздеу немесе сүзгілерді өзгертіп көріңіз",
     "totalProducts": "Барлық тауарлар",
+    "inStock": "Қоймада бар",
+    "outOfStock": "Қоймада жоқ",
 
     "filters": {
       "allCategories": "Барлық санаттар",

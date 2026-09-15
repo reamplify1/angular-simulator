@@ -147,3 +147,11 @@
     }
   }
 }
+
+.product-card__stock {
+  font-size: 0.875rem;
+}
+
+.product-card__stock--out {
+  opacity: 0.6;
+}

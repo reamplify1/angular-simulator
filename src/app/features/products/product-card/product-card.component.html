@@ -1,4 +1,5 @@
 <a
+  [id]="'product-card-' + product().id"
   class="product-card"
   [routerLink]="['/products', product().id]"
 >
@@ -28,6 +29,16 @@
       <span class="product-card__price">
         ${{ product().price }}
       </span>
+
+      @if (product().stock > 0) {
+        <span class="product-card__stock">
+          {{ 'products.inStock' | translate }}
+        </span>
+      } @else {
+        <span class="product-card__stock product-card__stock--out">
+          {{ 'products.outOfStock' | translate }}
+        </span>
+      }
     </div>
   </div>
 </a>

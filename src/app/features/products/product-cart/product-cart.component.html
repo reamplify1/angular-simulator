@@ -5,6 +5,7 @@
 
   <div class="cart-page__back-wrapper">
     <p-button
+      id="back-to-shopping"
       [label]="'cart.backToShopping' | translate"
       icon="pi pi-arrow-left"
       severity="secondary"
@@ -31,10 +32,7 @@
         @for (item of items(); track item.product.id) {
           <article class="cart-item">
             <div class="cart-item__image">
-              <img
-                [src]="item.product.thumbnail"
-                [alt]="item.product.title"
-              />
+              <img [src]="item.product.thumbnail" [alt]="item.product.title" />
             </div>
 
             <div class="cart-item__content">
@@ -46,13 +44,12 @@
                 {{ item.product.title }}
               </h2>
 
-              <span class="cart-item__price">
-                ${{ item.product.price | number: '1.2-2' }}
-              </span>
+              <span class="cart-item__price"> ${{ item.product.price | number: '1.2-2' }} </span>
             </div>
 
             <div class="cart-item__quantity">
               <p-button
+                [id]="'decrease-quantity-' + item.product.id"
                 icon="pi pi-minus"
                 severity="secondary"
                 [text]="true"
@@ -64,6 +61,7 @@
               </span>
 
               <p-button
+                [id]="'increase-quantity-' + item.product.id"
                 icon="pi pi-plus"
                 severity="secondary"
                 [text]="true"
@@ -71,14 +69,10 @@
               />
             </div>
 
-            <div class="cart-item__total">
-              ${{
-                item.product.price * item.quantity
-                  | number: '1.2-2'
-              }}
-            </div>
+            <div class="cart-item__total">${{ item.product.price * item.quantity | number: '1.2-2' }}</div>
 
             <p-button
+              [id]="'remove-from-cart-' + item.product.id"
               icon="pi pi-trash"
               severity="danger"
               [text]="true"
@@ -108,9 +102,7 @@
             {{ 'cart.summary.subtotal' | translate }}
           </span>
 
-          <span>
-            ${{ subtotal() | number: '1.2-2' }}
-          </span>
+          <span> ${{ subtotal() | number: '1.2-2' }} </span>
         </div>
 
         <div class="cart-summary__row">
@@ -118,9 +110,7 @@
             {{ 'cart.summary.tax' | translate }}
           </span>
 
-          <span>
-            ${{ tax() | number: '1.2-2' }}
-          </span>
+          <span> ${{ tax() | number: '1.2-2' }} </span>
         </div>
 
         <div class="cart-summary__divider"></div>
@@ -130,13 +120,12 @@
             {{ 'cart.summary.total' | translate }}
           </span>
 
-          <strong>
-            ${{ total() | number: '1.2-2' }}
-          </strong>
+          <strong> ${{ total() | number: '1.2-2' }} </strong>
         </div>
 
         <div class="cart-summary__actions">
           <p-button
+            id="checkout"
             [label]="'cart.checkout' | translate"
             icon="pi pi-credit-card"
             styleClass="cart-summary__checkout"
@@ -144,6 +133,7 @@
           />
 
           <p-button
+            id="clear-cart"
             [label]="'cart.clear' | translate"
             icon="pi pi-trash"
             severity="danger"

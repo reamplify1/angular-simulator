@@ -395,6 +395,8 @@
     "notFound": "Товары не найдены",
     "changeSearch": "Попробуйте изменить поиск или фильтры",
     "totalProducts": "Всего товаров",
+    "inStock": "В наличии",
+    "outOfStock": "Нет в наличии",
 
     "filters": {
       "allCategories": "Все категории",
