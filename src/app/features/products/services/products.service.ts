@@ -3,7 +3,7 @@ import { IProduct } from '../interfaces/IProduct';
 import { ProductsApiService } from './api/products-api.service';
 import { IProductsParams } from '../interfaces/IProductParams';
 import { rxResource, toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { catchError, debounceTime, distinctUntilChanged, of, switchMap } from 'rxjs';
+import { catchError, distinctUntilChanged, of, switchMap } from 'rxjs';
 import { IProductsResponse } from '../interfaces/IProductResponse';
 import { ICategory } from '../interfaces/ICategory';
 import { IProductsState } from '../interfaces/IProductsState';
@@ -17,40 +17,31 @@ export class ProductsService {
   private readonly productsApiService: ProductsApiService = inject(ProductsApiService);
 
   private readonly _searchInput: WritableSignal<string> = signal('');
+  readonly search: Signal<string> = this._searchInput.asReadonly();
 
   private readonly _state: WritableSignal<IProductsState> = signal<IProductsState>({
-      category: '',
-      sortBy: '',
-      sortOrder: 'asc',
-      limit: 20,
-      page: 1,
-    });
+    category: '',
+    sortBy: '',
+    sortOrder: 'asc',
+    limit: 20,
+    page: 1,
+  });
 
   readonly debouncedSearch: Signal<string> = toSignal(
     toObservable(this._searchInput).pipe(
-      switchMap((search) =>
-        search === ''
-          ? of('')
-          : of(search).pipe(debounceTime(300)),
-      ),
+      switchMap((search: string) =>
+        search === '' ? of('') : of(search)),
       distinctUntilChanged(),
     ),
     { initialValue: '' },
   );
 
   readonly category: Signal<string> = computed(() => this._state().category);
-
   readonly sortBy: Signal<string> = computed(() => this._state().sortBy);
-
   readonly sortOrder: Signal<'asc' | 'desc'> = computed(() => this._state().sortOrder);
-
   readonly limit: Signal<number> = computed(() => this._state().limit);
-
   readonly page: Signal<number> = computed(() => this._state().page);
-
-  readonly search: Signal<string> = this._searchInput.asReadonly();
-
-  readonly skip: Signal<number> = computed(() => (this.page() - 1) * this.limit());
+  readonly skip: Signal<number> = computed(() => (this._state().page - 1) * this._state().limit);
 
   readonly params: Signal<IProductsParams> = computed(() => {
     const state: IProductsState = this._state();

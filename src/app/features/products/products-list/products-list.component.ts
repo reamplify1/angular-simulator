@@ -1,5 +1,5 @@
 import { FormsModule } from '@angular/forms';
-import { Component, computed, inject, ResourceRef, Signal } from '@angular/core';
+import { Component, computed, inject, Signal } from '@angular/core';
 import { ProductsService } from '../services/products.service';
 import { IProduct } from '../interfaces/IProduct';
 import { TableModule } from 'primeng/table';
@@ -15,7 +15,6 @@ import { ProductCardSkeletonComponent } from '../product-card-skeleton/product-c
 import { Router } from '@angular/router';
 import { LangChangeEvent, TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { IProductsResponse } from '../interfaces/IProductResponse';
 
 @Component({
   selector: 'app-products-list',
@@ -29,11 +28,8 @@ export class ProductsListComponent {
   private readonly router: Router = inject(Router);
   private readonly translateService: TranslateService = inject(TranslateService);
 
-  readonly skip: Signal<number> = this.productsService.skip;
-
   readonly products: Signal<IProduct[]> = this.productsService.products;
-
-  readonly productsResource: ResourceRef<IProductsResponse | undefined> = this.productsService.productsResource;
+  readonly productsResource = this.productsService.productsResource;
 
   readonly page: Signal<number> = this.productsService.page;
   readonly limit: Signal<number> = this.productsService.limit;
@@ -42,6 +38,7 @@ export class ProductsListComponent {
   readonly search: Signal<string> = this.productsService.search;
   readonly sortBy: Signal<string> = this.productsService.sortBy;
   readonly sortOrder: Signal<'asc' | 'desc'> = this.productsService.sortOrder;
+  readonly category: Signal<string> = this.productsService.category;
 
   readonly skeletonItems: unknown[] = Array.from({ length: 10 });
 
@@ -49,6 +46,7 @@ export class ProductsListComponent {
 
   isResetFilterButtonDisabled = computed(() => {
     const isSortOrder = this.sortOrder() !== 'asc';
+
     return !(this.search() || this.category() || isSortOrder || this.sortBy());
   });
 
@@ -87,8 +85,6 @@ export class ProductsListComponent {
       })),
     ];
   });
-
-  readonly category: Signal<string> = this.productsService.category;
 
   readonly sortOptions: Signal<ISortOptions[]> = computed(() => {
     this.currentLanguage();
@@ -148,4 +144,4 @@ export class ProductsListComponent {
     this.router.navigate(['/products/cart']);
   }
 
-}
+  }
