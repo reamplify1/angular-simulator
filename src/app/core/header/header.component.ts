@@ -2,7 +2,7 @@ import { LocalStorageService } from '../services/local-storage.service';
 import { NotificationService } from '../services/notification.service';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { INavigation } from './interfaces/INavigation';
 import { DarkModeToggleComponent } from '../toggle-theme-color.component/dark-mode-toggle';
 import {
@@ -53,6 +53,7 @@ export class HeaderComponent implements OnInit {
   readonly lastLogin: Date | null = this.getLastLoginDate();
   readonly appConfig: IAppConfig = inject(APP_CONFIG);
   readonly languageService: LanguageService = inject(LanguageService);
+  readonly router: Router = inject(Router);
 
   readonly companyName: string = this.appConfig.companyName;
   isDarkMode$: Observable<boolean> = this.themeService.isDarkMode$;
@@ -98,6 +99,7 @@ export class HeaderComponent implements OnInit {
     { id: 'main-page', label: 'header.navigation.home', link: '' },
     { id: 'guide-page', label: 'header.navigation.users', link: 'users' },
     { id: 'posts-page', label: 'header.navigation.posts', link: 'posts' },
+    { id: 'products', label: 'header.navigation.products', link: '/products', },
   ];
 
   languages: ILanguage[] = [

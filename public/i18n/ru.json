@@ -3,7 +3,8 @@
     "navigation": {
       "home": "Главная",
       "users": "Пользователи",
-      "posts": "Посты"
+      "posts": "Посты",
+      "products": "Товары"
     },
     "consultation": "Консультация",
     "login": "Войти",
@@ -344,5 +345,74 @@
 
     "firstDayOfWeek": 1,
     "dateFormat": "dd.mm.yy"
+  },
+  "cart": {
+    "title": "Корзина",
+    "backToShopping": "Вернуться к покупкам",
+
+    "empty": {
+      "title": "Корзина пуста",
+      "description": "Добавьте товары в корзину."
+    },
+
+    "summary": {
+      "title": "Итог заказа",
+      "items": "Товары",
+      "subtotal": "Подытог",
+      "tax": "Налог",
+      "total": "Итого"
+    },
+
+    "checkout": "Оформить заказ",
+    "clear": "Очистить корзину",
+
+    "notifications": {
+      "checkoutSuccess": "Заказ успешно оформлен",
+      "addedToCart": "«{{title}}» успешно добавлен в корзину"
+    }
+  },
+  "productDetails": {
+    "backToProducts": "Вернуться к товарам",
+    "goToCart": "Перейти в корзину",
+    "loading": "Загрузка товара...",
+    "error": {
+      "title": "Что-то пошло не так",
+      "description": "Не удалось загрузить этот товар."
+    },
+    "brand": "Бренд",
+    "inStock": "В наличии",
+    "addToCart": "Добавить в корзину",
+    "addedToCart": "Товар «{{title}}» успешно добавлен в корзину"
+  },
+  "products": {
+    "title": "Товары",
+    "cart": "Корзина",
+    "search": "Поиск товаров",
+    "sortBy": "Сортировать по",
+    "resetFilters": "Сбросить фильтры",
+    "somethingWentWrong": "Что-то пошло не так",
+    "loadError": "Не удалось загрузить товары. Попробуйте еще раз.",
+    "notFound": "Товары не найдены",
+    "changeSearch": "Попробуйте изменить поиск или фильтры",
+    "totalProducts": "Всего товаров",
+    "inStock": "В наличии",
+    "outOfStock": "Нет в наличии",
+
+    "filters": {
+      "allCategories": "Все категории",
+      "ascending": "По возрастанию",
+      "descending": "По убыванию",
+      "title": "Название",
+      "price": "Цена",
+      "rating": "Рейтинг",
+      "stock": "Количество на складе"
+    }
+  },
+  "notifications": {
+    "success": "Успешно",
+    "error": "Ошибка",
+    "warn": "Предупреждение",
+    "info": "Информация",
+    "checkoutSuccess": "Заказ успешно оформлен"
   }
 }

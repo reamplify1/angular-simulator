@@ -1,0 +1,44 @@
+<a
+  [id]="'product-card-' + product().id"
+  class="product-card"
+  [routerLink]="['/products', product().id]"
+>
+  <div class="product-card__image-wrapper">
+    <img
+      class="product-card__image"
+      [src]="product().thumbnail"
+      [alt]="product().title"
+    />
+  </div>
+
+  <div class="product-card__content">
+    <span class="product-card__category">
+      {{ product().category }}
+    </span>
+
+    <h2 class="product-card__title">
+      {{ product().title }}
+    </h2>
+
+    <div class="product-card__rating">
+      <span>★</span>
+      <span>{{ product().rating }}</span>
+    </div>
+
+    <div class="product-card__footer">
+      <span class="product-card__price">
+        ${{ product().price }}
+      </span>
+
+      @if (product().stock > 0) {
+        <span class="product-card__stock">
+          {{ 'products.inStock' | translate }}
+        </span>
+      } @else {
+        <span class="product-card__stock product-card__stock--out">
+          {{ 'products.outOfStock' | translate }}
+        </span>
+      }
+    </div>
+  </div>
+</a>

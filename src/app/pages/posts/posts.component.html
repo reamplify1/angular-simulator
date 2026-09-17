@@ -28,7 +28,7 @@
       </div>
     </div>
 
-    <p-datepicker [showIcon]="true" [showButtonBar]="true"> </p-datepicker>
+    <p-datepicker class="date-picker" [showIcon]="true" [showButtonBar]="true"> </p-datepicker>
 
     <p-table
       [value]="isLoading ? skeletonRows : (posts$ | async) || []"

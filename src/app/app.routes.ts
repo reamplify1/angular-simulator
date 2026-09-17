@@ -52,6 +52,13 @@ export const routes: Routes = [
           postData: postResolver,
         },
       },
+      {
+        path: 'products',
+        loadChildren: () =>
+          import('./features/products/products.routes').then(
+            (m) => m.PRODUCTS_ROUTES,
+          ),
+      },
     ],
   },
 

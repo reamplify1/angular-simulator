@@ -1,0 +1,93 @@
+<div class="product-details-page">
+  <div class="product-details-back-wrapper">
+    <p-button
+      id="back-to-products"
+      styleClass="product-details-back"
+      [label]="'productDetails.backToProducts' | translate"
+      icon="pi pi-arrow-left"
+      severity="secondary"
+      [text]="true"
+      (onClick)="goBack()"
+    />
+
+    <p-button
+      id="go-to-cart"
+      [label]="'productDetails.goToCart' | translate"
+      icon="pi pi-shopping-cart"
+      (onClick)="goToCart()"
+    />
+  </div>
+
+  <div class="product-details">
+    <div class="product-details__gallery">
+      <div class="product-details__image">
+        <img [src]="mainImage()" [alt]="product.title" />
+      </div>
+
+      <div class="product-details__thumbnails">
+        @for (image of product.images; track image) {
+          <button
+            [id]="'product-thumbnail-' + $index"
+            class="product-details__thumbnail"
+            type="button"
+            (click)="selectImage(image)"
+            [class.product-details__thumbnail--active]="mainImage() === image"
+          >
+            <img [src]="image" [alt]="product.title" />
+          </button>
+        }
+      </div>
+    </div>
+
+    <div class="product-details__content">
+      <span class="product-details__category">
+        {{ product.category }}
+      </span>
+
+      <h1 class="product-details__title">
+        {{ product.title }}
+      </h1>
+
+      <div class="product-details__rating">
+        @for (star of [1, 2, 3, 4, 5]; track star) {
+          <i class="pi" [class.pi-star-fill]="star <= ratingStars()" [class.pi-star]="star > ratingStars()"></i>
+        }
+
+        <span>{{ product.rating }}</span>
+      </div>
+
+      <div class="product-details__meta">
+        <div>
+          <span class="product-details__label">
+            {{ 'productDetails.brand' | translate }}
+          </span>
+          <span>{{ product.brand }}</span>
+        </div>
+
+        <div>
+          <span class="product-details__label">
+            {{ 'productDetails.inStock' | translate }}
+          </span>
+          <span>{{ product.stock }}</span>
+        </div>
+      </div>
+
+      <p class="product-details__description">
+        {{ product.description }}
+      </p>
+
+      <div class="product-details__footer">
+        <span class="product-details__price"> ${{ product.price }} </span>
+
+        <span class="product-details__discount"> -{{ product.discountPercentage }}% </span>
+
+        <p-button
+          id="add-to-cart"
+          [label]="'productDetails.addToCart' | translate"
+          icon="pi pi-shopping-cart"
+          (onClick)="addToCart()"
+        />
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+.product-card-skeleton {
+  height: 374px;
+  overflow: hidden;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    padding: 16px;
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 8px;
+  }
+}

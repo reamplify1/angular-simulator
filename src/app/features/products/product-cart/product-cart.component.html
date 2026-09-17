@@ -1,0 +1,147 @@
+<div class="cart-page">
+  <h1 class="cart-page__title">
+    {{ 'cart.title' | translate }}
+  </h1>
+
+  <div class="cart-page__back-wrapper">
+    <p-button
+      id="back-to-shopping"
+      [label]="'cart.backToShopping' | translate"
+      icon="pi pi-arrow-left"
+      severity="secondary"
+      [text]="true"
+      (onClick)="goToProducts()"
+    />
+  </div>
+
+  @if (items().length === 0) {
+    <div class="cart-empty">
+      <i class="pi pi-shopping-cart"></i>
+
+      <h2>
+        {{ 'cart.empty.title' | translate }}
+      </h2>
+
+      <p>
+        {{ 'cart.empty.description' | translate }}
+      </p>
+    </div>
+  } @else {
+    <div class="cart">
+      <div class="cart__items">
+        @for (item of items(); track item.product.id) {
+          <article class="cart-item">
+            <div class="cart-item__image">
+              <img [src]="item.product.thumbnail" [alt]="item.product.title" />
+            </div>
+
+            <div class="cart-item__content">
+              <span class="cart-item__category">
+                {{ item.product.category }}
+              </span>
+
+              <h2 class="cart-item__title">
+                {{ item.product.title }}
+              </h2>
+
+              <span class="cart-item__price"> ${{ item.product.price | number: '1.2-2' }} </span>
+            </div>
+
+            <div class="cart-item__quantity">
+              <p-button
+                [id]="'decrease-quantity-' + item.product.id"
+                icon="pi pi-minus"
+                severity="secondary"
+                [text]="true"
+                (onClick)="decreaseQuantity(item.product.id)"
+              />
+
+              <span class="cart-item__quantity-value">
+                {{ item.quantity }}
+              </span>
+
+              <p-button
+                [id]="'increase-quantity-' + item.product.id"
+                icon="pi pi-plus"
+                severity="secondary"
+                [text]="true"
+                (onClick)="increaseQuantity(item.product.id)"
+              />
+            </div>
+
+            <div class="cart-item__total">${{ item.product.price * item.quantity | number: '1.2-2' }}</div>
+
+            <p-button
+              [id]="'remove-from-cart-' + item.product.id"
+              icon="pi pi-trash"
+              severity="danger"
+              [text]="true"
+              (onClick)="removeFromCart(item.product.id)"
+            />
+          </article>
+        }
+      </div>
+
+      <aside class="cart-summary">
+        <h2 class="cart-summary__title">
+          {{ 'cart.summary.title' | translate }}
+        </h2>
+
+        <div class="cart-summary__row">
+          <span>
+            {{ 'cart.summary.items' | translate }}
+          </span>
+
+          <span>
+            {{ itemsCount() }}
+          </span>
+        </div>
+
+        <div class="cart-summary__row">
+          <span>
+            {{ 'cart.summary.subtotal' | translate }}
+          </span>
+
+          <span> ${{ subtotal() | number: '1.2-2' }} </span>
+        </div>
+
+        <div class="cart-summary__row">
+          <span>
+            {{ 'cart.summary.tax' | translate }}
+          </span>
+
+          <span> ${{ tax() | number: '1.2-2' }} </span>
+        </div>
+
+        <div class="cart-summary__divider"></div>
+
+        <div class="cart-summary__total">
+          <span>
+            {{ 'cart.summary.total' | translate }}
+          </span>
+
+          <strong> ${{ total() | number: '1.2-2' }} </strong>
+        </div>
+
+        <div class="cart-summary__actions">
+          <p-button
+            id="checkout"
+            [label]="'cart.checkout' | translate"
+            icon="pi pi-credit-card"
+            styleClass="cart-summary__checkout"
+            (onClick)="checkout()"
+          />
+
+          <p-button
+            id="clear-cart"
+            [label]="'cart.clear' | translate"
+            icon="pi pi-trash"
+            severity="danger"
+            [outlined]="true"
+            (onClick)="clearCart()"
+          />
+        </div>
+      </aside>
+    </div>
+  }
+</div>

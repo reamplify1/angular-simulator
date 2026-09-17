@@ -2,16 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { AuthApiService } from './auth-api.service';
 import { ILoginRequest } from '../interfaces/ILoginRequest';
 import { IAuthResponse } from '../interfaces/IAuthResponse';
-import {
-  BehaviorSubject,
-  catchError,
-  map,
-  Observable,
-  of,
-  switchMap,
-  tap,
-  throwError,
-} from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of, switchMap, tap, throwError, } from 'rxjs';
 import { LocalStorageService } from '../services/local-storage.service';
 import { Router } from '@angular/router';
 import { IToken } from '../interfaces/IToken';
