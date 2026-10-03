@@ -3,6 +3,7 @@ import {
   ApplicationConfig,
   provideBrowserGlobalErrorListeners,
   provideZoneChangeDetection,
+  isDevMode
 } from '@angular/core';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { routes } from './app.routes';
@@ -25,6 +26,11 @@ import { APP_CONFIG } from './core/tokens/app-config.token';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LanguageService } from './core/services/language.service';
+import { provideStore } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { recipesReducer } from './pages/recipes/store/recipes.reducer';
+import { RecipesEffects } from './pages/recipes/store/recipes.effects';
 
 function getInitialTheme(): Preset {
   const savedTheme: AppTheme | null = localStorage.getItem(
@@ -69,6 +75,13 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(
       withInterceptors([loggingInterceptor, errorInterceptor, authInterceptor]),
     ),
+
+    provideStore({ recipes: recipesReducer }),
+    provideEffects(RecipesEffects),
+    provideStoreDevtools({
+      maxAge: 25,
+      logOnly: !isDevMode(),
+    }),
 
     provideTranslateService({
       loader: provideTranslateHttpLoader({

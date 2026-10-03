@@ -53,6 +53,13 @@ export const routes: Routes = [
         },
       },
       {
+        path: 'recipes',
+        loadComponent: () =>
+          import('./pages/recipes/recipes.component').then(
+            (m) => m.RecipesComponent,
+          ),
+      },
+      {
         path: 'products',
         loadChildren: () =>
           import('./features/products/products.routes').then(
