@@ -1,0 +1,36 @@
+<div class="recipes">
+  <div class="recipes__header">
+    <h2 class="recipes__title">{{ 'recipes.title' | translate }}</h2>
+
+    <button pButton type="button" (click)="onReload()">
+      <i class="pi pi-refresh" pButtonIcon></i>
+      <span pButtonLabel>{{ 'recipes.reload' | translate }}</span>
+    </button>
+  </div>
+
+  @if (loading$ | async) {
+    <p class="recipes__message">{{ 'recipes.loading' | translate }}</p>
+  }
+
+  @if (error$ | async; as error) {
+    <p class="recipes__message recipes__message--error">
+      {{ 'recipes.error' | translate: { error: error } }}
+    </p>
+  }
+
+  <div class="recipes__list">
+    @for (recipe of (recipes$ | async) ?? []; track recipe.id) {
+      <div class="recipe-card">
+        <h3 class="recipe-card__name">{{ recipe.name }}</h3>
+        <p>{{ 'recipes.cuisine' | translate }}: {{ recipe.cuisine }}</p>
+        <p>
+          {{
+            'recipes.cookingTime'
+              | translate: { minutes: getTotalTime(recipe) }
+          }}
+        </p>
+        <p>{{ 'recipes.rating' | translate }}: {{ recipe.rating }}</p>
+      </div>
+    }
+  </div>
+</div>

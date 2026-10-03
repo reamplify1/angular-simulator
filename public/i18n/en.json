@@ -4,7 +4,8 @@
       "home": "Home",
       "users": "Users",
       "posts": "Posts",
-      "products": "Products"
+      "products": "Products",
+      "recipes": "Recipes"
     },
     "consultation": "Consultation",
     "login": "Log in",
@@ -414,5 +415,14 @@
     "warn": "Warning",
     "info": "Info",
     "checkoutSuccess": "Order placed successfully"
+  },
+  "recipes": {
+    "title": "Recipes",
+    "reload": "Reload recipes",
+    "loading": "Loading...",
+    "error": "Error: {{ error }}",
+    "cuisine": "Cuisine",
+    "cookingTime": "Cooking time: {{ minutes }} min",
+    "rating": "Rating"
   }
 }
