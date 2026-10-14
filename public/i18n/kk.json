@@ -5,8 +5,7 @@
       "users": "Пайдаланушылар",
       "posts": "Посттар",
       "products": "Өнімдер",
-      "recipes": "Рецептер",
-      "quotes": "Дәйексөздер"
+      "recipes": "Рецептер"
     },
     "consultation": "Кеңес алу",
     "login": "Кіру",
@@ -426,19 +425,5 @@
     "cuisine": "Асхана",
     "cookingTime": "Дайындау уақыты: {{ minutes }} мин",
     "rating": "Рейтинг"
-  },
-  "quotes": {
-    "title": "Дәйексөздер",
-    "loading": "Дәйексөздер жүктелуде...",
-    "error": "Дәйексөздерді жүктеу мүмкін болмады",
-    "retry": "Қайталау",
-    "addToFavorites": "Таңдаулыға қосу",
-    "removeFromFavorites": "Таңдаулыдан алып тастау",
-    "favoritesCount": "Таңдаулылар: {{ count }}",
-    "authorsCount": "Авторлар: {{ count }}",
-    "filterAll": "Барлығы",
-    "filterFavorites": "Таңдаулылар",
-    "randomQuoteButton": "Кездейсоқ дәйексөз",
-    "randomQuoteTitle": "Кездейсоқ дәйексөз"
   }
 }
