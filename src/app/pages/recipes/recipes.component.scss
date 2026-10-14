@@ -1,0 +1,42 @@
+.recipes {
+  padding: 24px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  &__title {
+    margin: 0;
+  }
+
+  &__message {
+    margin-bottom: 16px;
+
+    &--error {
+      color: #e53935;
+    }
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+}
+
+.recipe-card {
+  padding: 16px;
+  border: 1px solid var(--p-content-border-color, #ddd);
+  border-radius: 8px;
+
+  &__name {
+    margin: 0 0 12px;
+  }
+
+  p {
+    margin: 4px 0;
+  }
+}

@@ -100,6 +100,8 @@ export class HeaderComponent implements OnInit {
     { id: 'guide-page', label: 'header.navigation.users', link: 'users' },
     { id: 'posts-page', label: 'header.navigation.posts', link: 'posts' },
     { id: 'products', label: 'header.navigation.products', link: '/products', },
+    { id: 'recipes-page', label: 'header.navigation.recipes', link: 'recipes' },
+    { id: 'quotes-page', label: 'header.navigation.quotes', link: 'quotes' },
   ];
 
   languages: ILanguage[] = [
