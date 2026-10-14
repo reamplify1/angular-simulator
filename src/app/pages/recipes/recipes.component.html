@@ -24,10 +24,7 @@
         <h3 class="recipe-card__name">{{ recipe.name }}</h3>
         <p>{{ 'recipes.cuisine' | translate }}: {{ recipe.cuisine }}</p>
         <p>
-          {{
-            'recipes.cookingTime'
-              | translate: { minutes: getTotalTime(recipe) }
-          }}
+          {{ 'recipes.cookingTime' | translate: { minutes: getTotalTime(recipe) } }}
         </p>
         <p>{{ 'recipes.rating' | translate }}: {{ recipe.rating }}</p>
       </div>

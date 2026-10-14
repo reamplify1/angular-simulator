@@ -5,7 +5,8 @@
       "users": "Пользователи",
       "posts": "Посты",
       "products": "Товары",
-      "recipes": "Рецепты"
+      "recipes": "Рецепты",
+      "quotes": "Цитаты"
     },
     "consultation": "Консультация",
     "login": "Войти",
@@ -424,5 +425,19 @@
     "cuisine": "Кухня",
     "cookingTime": "Время приготовления: {{ minutes }} мин",
     "rating": "Рейтинг"
+  },
+  "quotes": {
+    "title": "Цитаты",
+    "loading": "Загрузка цитат...",
+    "error": "Не удалось загрузить цитаты",
+    "retry": "Повторить",
+    "addToFavorites": "Добавить в избранное",
+    "removeFromFavorites": "Убрать из избранного",
+    "favoritesCount": "Избранное: {{ count }}",
+    "authorsCount": "Авторы: {{ count }}",
+    "filterAll": "Все",
+    "filterFavorites": "Избранное",
+    "randomQuoteButton": "Случайная цитата",
+    "randomQuoteTitle": "Случайная цитата"
   }
 }
