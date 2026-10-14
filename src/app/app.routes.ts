@@ -60,13 +60,6 @@ export const routes: Routes = [
           ),
       },
       {
-        path: 'quotes',
-        loadComponent: () =>
-          import('./pages/quotes/quotes.component').then(
-            (m) => m.QuotesComponent,
-          ),
-      },
-      {
         path: 'products',
         loadChildren: () =>
           import('./features/products/products.routes').then(
