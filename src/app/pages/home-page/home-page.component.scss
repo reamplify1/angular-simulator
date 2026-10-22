@@ -32,7 +32,6 @@
 
 .background-absolute {
   position: absolute;
-  background-image: url('/images/bg-mountains.jpg');
   top: 0;
   left: 0;
   width: 100%;
@@ -250,7 +249,6 @@
   outline: none;
   color: var(--primary-color);
   font-weight: 700;
-  background-image: url('/images/icons/calendar-icon.svg');
   background-repeat: no-repeat;
   background-position: right rem(16) center;
   background-size: rem(20);
