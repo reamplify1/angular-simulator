@@ -1,0 +1,96 @@
+<div class="quotes">
+  <h2 class="quotes__title">{{ 'quotes.title' | translate }}</h2>
+
+  <div class="quotes__stats">
+    <span>
+      {{ 'quotes.favoritesCount' | translate: { count: store.favoritesCount() } }}
+    </span>
+    <span>
+      {{ 'quotes.authorsCount' | translate: { count: store.authorsCount() } }}
+    </span>
+  </div>
+
+  <div class="quotes__filter">
+    <button
+      pButton
+      type="button"
+      [severity]="store.filter() === QuotesFilter.ALL ? 'primary' : 'secondary'"
+      (click)="onSetFilter(QuotesFilter.ALL)"
+    >
+      <span pButtonLabel>{{ 'quotes.filterAll' | translate }}</span>
+    </button>
+
+    <button
+      pButton
+      type="button"
+      [severity]="
+        store.filter() === QuotesFilter.FAVORITES ? 'primary' : 'secondary'
+      "
+      (click)="onSetFilter(QuotesFilter.FAVORITES)"
+    >
+      <span pButtonLabel>{{ 'quotes.filterFavorites' | translate }}</span>
+    </button>
+  </div>
+
+  <div class="quotes__random">
+    <button
+      pButton
+      type="button"
+      [disabled]="store.quotes().length === 0"
+      (click)="onPickRandomQuote()"
+    >
+      <span pButtonLabel>{{ 'quotes.randomQuoteButton' | translate }}</span>
+    </button>
+
+    @if (store.randomQuote(); as randomQuote) {
+      <div class="random-quote">
+        <h3 class="random-quote__title">
+          {{ 'quotes.randomQuoteTitle' | translate }}
+        </h3>
+        <p class="random-quote__text">"{{ randomQuote.quote }}"</p>
+        <p class="random-quote__author">— {{ randomQuote.author }}</p>
+      </div>
+    }
+  </div>
+
+  @if (store.loading()) {
+    <p class="quotes__message">{{ 'quotes.loading' | translate }}</p>
+  }
+
+  @if (store.error()) {
+    <div class="quotes__error">
+      <p>{{ 'quotes.error' | translate }}</p>
+      <button pButton type="button" (click)="onRetry()">
+        <span pButtonLabel>{{ 'quotes.retry' | translate }}</span>
+      </button>
+    </div>
+  }
+
+  <div class="quotes__list">
+    @for (item of store.filteredQuotes(); track item.id) {
+      <blockquote class="quote-card">
+        <p class="quote-card__text">"{{ item.quote }}"</p>
+        <footer class="quote-card__author">— {{ item.author }}</footer>
+
+        <div class="quote-card__actions">
+          <button
+            pButton
+            type="button"
+            [severity]="isFavorite(item.id) ? 'secondary' : 'primary'"
+            (click)="onToggleFavorite(item.id)"
+          >
+            <span pButtonLabel>
+              {{ isFavorite(item.id) ? '★' : '☆' }}
+              {{
+                (isFavorite(item.id)
+                  ? 'quotes.removeFromFavorites'
+                  : 'quotes.addToFavorites'
+                ) | translate
+              }}
+            </span>
+          </button>
+        </div>
+      </blockquote>
+    }
+  </div>
+</div>
