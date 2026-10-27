@@ -1,5 +1,8 @@
+import { ViewportScroller } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { filter, map, pairwise } from 'rxjs';
 import { NotificationComponent } from './core/notification/notification.component';
 import { LocalStorageService } from './core/services/local-storage.service';
 import { LoaderComponent } from './core/loader/loader.component';
@@ -17,10 +20,12 @@ export class AppComponent {
 
   private router: Router = inject(Router);
   private loader: LoaderService = inject(LoaderService);
+  private viewportScroller: ViewportScroller = inject(ViewportScroller);
 
   constructor() {
     this.saveLastVisit();
     this.saveVisitCount();
+    this.scrollToTopOnPageChange();
   }
 
   saveLastVisit(): void {
@@ -38,6 +43,18 @@ export class AppComponent {
     count++;
 
     this.localStorageService.setItem(VISIT_COUNT_KEY, count.toString());
+  }
+
+  scrollToTopOnPageChange(): void {
+    this.router.events
+      .pipe(
+        filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+        map((event: NavigationEnd) => event.urlAfterRedirects.split(/[?#]/)[0]),
+        pairwise(),
+        filter(([previousPath, currentPath]: [string, string]) => previousPath !== currentPath),
+        takeUntilDestroyed(),
+      )
+      .subscribe(() => this.viewportScroller.scrollToPosition([0, 0]));
   }
 
 }

@@ -9,11 +9,11 @@
 
 <app-user-create (createUser)="addUser($event)" />
 
-<app-users-filter (filterUser)="onSearch($event)" />
+<app-users-filter [search]="store.search()" (filterUser)="onSearch($event)" />
 
-@let users = filteredUsers$ | async;
+@let users = store.filteredUsers();
 
-@if (users && users.length > 0) {
+@if (users.length > 0) {
   <p class="users-count">
     {{ 'users.found' | translate }}
     <span class="users-count__text">

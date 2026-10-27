@@ -164,6 +164,7 @@
     "user": "user",
     "usersFew": "users",
     "usersMany": "users",
+    "loadError": "Failed to load users",
     "empty": "No users to display",
     "card": {
       "contacts": "Contacts",
