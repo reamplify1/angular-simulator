@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [master, feature/homework-31-signal-store]
+    branches: [master, feature/homework-31-signal-store, feature/homework-31.3]
   workflow_dispatch:
 
 permissions:
